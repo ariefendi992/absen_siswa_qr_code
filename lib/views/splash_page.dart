@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:absen_siswa_qr_code/utils/secure_storage.dart';
 import 'package:absen_siswa_qr_code/utils/theme.dart';
 import 'package:flutter/material.dart';
 
@@ -11,18 +12,28 @@ class SplashPage extends StatefulWidget {
 }
 
 class _SplashPageState extends State<SplashPage> {
+  late String id;
+  late String group;
+
   @override
   void initState() {
     super.initState();
     setState(() {
       Timer(Duration(seconds: 3), () {
-        forwardPage();
+        autoSkipLogin();
       });
     });
   }
 
-  void forwardPage() async {
-    Navigator.pushNamed(context, '/auth');
+  void autoSkipLogin() async {
+    group = await CustomStorage().getStorage('group');
+
+    if (group == 'siswa') {
+      Navigator.pushNamedAndRemoveUntil(
+          context, '/mainSiswa', (route) => false);
+    } else {
+      Navigator.pushNamed(context, '/auth');
+    }
   }
 
   @override

@@ -5,8 +5,6 @@ import 'package:absen_siswa_qr_code/views/siswa/profil_siswa_page.dart';
 import 'package:absen_siswa_qr_code/views/siswa/qr_siswa_page.dart';
 import 'package:absen_siswa_qr_code/views/widgets/button_bottom_app_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class MainSiswaPage extends StatelessWidget {

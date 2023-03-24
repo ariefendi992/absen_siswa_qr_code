@@ -7,6 +7,7 @@ Color kBlackColor = Colors.black;
 Color kGreyBackgroundColor = Color(0XFFF1F2F6);
 Color kGreyTextColor = Color(0XFFA4B0BE);
 Color kGreyColor = Color(0XFF747D8C);
+Color kErrorColor = Color(0XFFFF4040);
 
 FontWeight light = FontWeight.w300;
 FontWeight regular = FontWeight.w400;

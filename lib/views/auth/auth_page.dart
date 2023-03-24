@@ -1,7 +1,8 @@
+import 'package:absen_siswa_qr_code/cubit/auth/auth_cubit.dart';
 import 'package:absen_siswa_qr_code/utils/theme.dart';
 import 'package:absen_siswa_qr_code/views/widgets/button_widget.dart';
-import 'package:absen_siswa_qr_code/views/widgets/form_input_with_icon_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AuthPage extends StatefulWidget {
   const AuthPage({super.key});
@@ -11,7 +12,7 @@ class AuthPage extends StatefulWidget {
 }
 
 class _AuthPageState extends State<AuthPage> {
-  final _formKey = GlobalKey<FormState>();
+  // final _formKey = GlobalKey<FormState>();
   final usernameController = TextEditingController();
   final passwordController = TextEditingController();
   bool passToggle = true;
@@ -108,49 +109,160 @@ class _AuthPageState extends State<AuthPage> {
                           topLeft: Radius.circular(60),
                         ),
                       ),
-                      child: Form(
-                        key: _formKey,
-                        child: Container(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              FormInputWithIconWidget(
-                                controller: usernameController,
-                                title: 'Nama Pengguna',
-                                hintText: 'NISN / NIP',
-                                icons: Icons.person,
-                                onTap: () {},
-                                validator: (value) {
-                                  return value!;
-                                },
-                              ),
-                              SizedBox(height: 20),
-                              FormInputWithIconWidget(
-                                validator: (value) => value!,
-                                passToggle: passToggle,
-                                obsecureText: passToggle,
-                                controller: passwordController,
-                                title: 'Kata Sandi',
-                                hintText: 'Kata Sandi',
-                                icons: Icons.lock,
-                                isSuffix: true,
-                                onTap: () {
-                                  setState(() {
-                                    passToggle = !passToggle;
-                                  });
-                                },
-                              ),
-                              SizedBox(height: 32),
-                              ButtonWidget(
-                                title: 'Masuk',
-                                height: 50,
-                                onTap: () {
-                                  Navigator.pushNamed(context, '/mainSiswa');
-                                },
-                              ),
-                              // SizedBox(height: 40),
-                            ],
-                          ),
+                      child: Container(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Nama Pengguna',
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: bold,
+                                    color: kBlackColor.withOpacity(0.6),
+                                  ),
+                                ),
+                                SizedBox(height: 8),
+                                Container(
+                                  height: 65,
+                                  padding: EdgeInsets.only(right: 12),
+                                  alignment: Alignment.centerLeft,
+                                  decoration: BoxDecoration(
+                                    color: kGreyBackgroundColor,
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                  child: TextFormField(
+                                    controller: usernameController,
+                                    decoration: InputDecoration(
+                                      border: InputBorder.none,
+                                      hintText: 'NISN / NIP',
+                                      hintStyle: TextStyle(
+                                        fontWeight: medium,
+                                        color: kGreyTextColor,
+                                        fontSize: 14,
+                                      ),
+                                      prefixIcon: Icon(Icons.person),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            SizedBox(height: 20),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Kata Sandi',
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: bold,
+                                    color: kBlackColor.withOpacity(0.6),
+                                  ),
+                                ),
+                                SizedBox(height: 8),
+                                Container(
+                                  height: 65,
+                                  padding: EdgeInsets.only(right: 12),
+                                  alignment: Alignment.centerLeft,
+                                  decoration: BoxDecoration(
+                                    color: kGreyBackgroundColor,
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                  child: TextFormField(
+                                    obscureText: passToggle,
+                                    controller: passwordController,
+                                    decoration: InputDecoration(
+                                      border: InputBorder.none,
+                                      hintText: 'Kata Sandi',
+                                      hintStyle: TextStyle(
+                                        fontWeight: medium,
+                                        color: kGreyTextColor,
+                                        fontSize: 14,
+                                      ),
+                                      prefixIcon: Icon(Icons.person),
+                                      suffixIcon: true
+                                          ? InkWell(
+                                              onTap: () {
+                                                setState(() {
+                                                  passToggle = !passToggle;
+                                                });
+                                              },
+                                              child: Icon(passToggle
+                                                  ? Icons.visibility
+                                                  : Icons.visibility_off),
+                                            )
+                                          // ignore: dead_code
+                                          : null,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            // FormInputWithIconWidget(
+                            //   controller: usernameController,
+                            //   title: 'Nama Pengguna',
+                            //   hintText: 'NISN / NIP',
+                            //   icons: Icons.person,
+                            //   onTap: () {},
+                            //   validator: (value) {
+                            //     return value!;
+                            //   },
+                            // ),
+                            // SizedBox(height: 20),
+                            // FormInputWithIconWidget(
+                            //   validator: (value) => value!,
+                            //   passToggle: passToggle,
+                            //   obsecureText: passToggle,
+                            //   controller: passwordController,
+                            //   title: 'Kata Sandi',
+                            //   hintText: 'Kata Sandi',
+                            //   icons: Icons.lock,
+                            //   isSuffix: true,
+                            //   onTap: () {
+                            //     setState(() {
+                            //       passToggle = !passToggle;
+                            //     });
+                            //   },
+                            // ),
+                            SizedBox(height: 32),
+                            BlocConsumer<AuthCubit, AuthState>(
+                              listener: (context, state) {
+                                if (state is AuthSuccess) {
+                                  // if (state.userAuth.group == 'siswa') {
+                                  Navigator.pushReplacementNamed(
+                                      context, '/mainSiswa');
+                                  // }
+                                } else if (state is AuthFailed) {
+                                  print(state.error);
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      backgroundColor: kErrorColor,
+                                      content: Text(
+                                        state.error,
+                                        style: TextStyle(fontWeight: medium),
+                                      ),
+                                    ),
+                                  );
+                                }
+                              },
+                              builder: (context, state) {
+                                return ButtonWidget(
+                                  title: 'Masuk',
+                                  height: 50,
+                                  onTap: () {
+                                    print(usernameController.text);
+                                    context.read<AuthCubit>().login(
+                                          username: usernameController.text,
+                                          password: passwordController.text,
+                                        );
+                                  },
+                                );
+                              },
+                            ),
+                            // SizedBox(height: 40),
+                          ],
                         ),
                       ),
                     ),

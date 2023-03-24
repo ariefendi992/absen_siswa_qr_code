@@ -1,8 +1,8 @@
 import 'dart:convert';
 import 'package:absen_siswa_qr_code/models/auth_model.dart';
+import 'package:absen_siswa_qr_code/utils/secure_storage.dart';
 import 'package:absen_siswa_qr_code/utils/url.dart';
 import 'package:http/http.dart' as http;
-import 'package:absen_siswa_qr_code/utils/shared_preferences.dart';
 
 class AuthService {
   Future<AuthModel> login({String? username, String? password}) async {
@@ -19,16 +19,26 @@ class AuthService {
       headers: headers,
       body: data,
     );
+
     final jsonResp = jsonDecode(response.body);
 
+    print(jsonResp.toString());
     if (response.statusCode == 200) {
-      await CustomPreferenses().setString('id', jsonResp['id']);
+      await CustomStorage().setStorage('id', jsonResp['id'].toString());
+      await CustomStorage().setStorage('group', jsonResp['group']);
       AuthModel auth = AuthModel.fromJson(jsonResp);
 
       return auth;
     } else {
-      final jsonResp = jsonDecode(response.body);
       throw (jsonResp['msg']);
+    }
+  }
+
+  Future logOut() async {
+    try {
+      await CustomStorage().deleteAllKey();
+    } catch (e) {
+      rethrow;
     }
   }
 }
