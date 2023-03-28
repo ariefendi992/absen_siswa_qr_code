@@ -16,20 +16,8 @@ class HomeSiswaPage extends StatefulWidget {
 
 class _HomeSiswaPageState extends State<HomeSiswaPage> {
   @override
-  void initState() {
-    super.initState();
-    getUserById();
-  }
-
-  void getUserById() async {
-    final id = await CustomStorage().getStorage('id');
-    if (id != null) {
-      context.read<UserSiswaCubit>().getCurrentUser(id: id!);
-    }
-  }
-
-  @override
   Widget build(BuildContext context) {
+    // NOTE : HEADER
     Widget header(UserSiswaModel user) {
       return Container(
         padding: EdgeInsets.only(left: 20, right: 20, bottom: 25),
@@ -146,6 +134,7 @@ class _HomeSiswaPageState extends State<HomeSiswaPage> {
       );
     }
 
+    // NOTE: CONTENT
     Widget content() {
       return Container(
         padding: EdgeInsets.only(

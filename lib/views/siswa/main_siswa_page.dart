@@ -1,4 +1,6 @@
 import 'package:absen_siswa_qr_code/cubit/page/page_cubit.dart';
+import 'package:absen_siswa_qr_code/cubit/user/user_siswa_cubit.dart';
+import 'package:absen_siswa_qr_code/utils/secure_storage.dart';
 import 'package:absen_siswa_qr_code/utils/theme.dart';
 import 'package:absen_siswa_qr_code/views/siswa/menu/daftar_siswa.dart';
 import 'package:absen_siswa_qr_code/views/siswa/menu/home_siswa_page.dart';
@@ -8,8 +10,28 @@ import 'package:absen_siswa_qr_code/views/widgets/button_bottom_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class MainSiswaPage extends StatelessWidget {
+class MainSiswaPage extends StatefulWidget {
   const MainSiswaPage({super.key});
+
+  @override
+  State<MainSiswaPage> createState() => _MainSiswaPageState();
+}
+
+class _MainSiswaPageState extends State<MainSiswaPage> {
+  String? id;
+
+  @override
+  void initState() {
+    super.initState();
+    getUserById();
+  }
+
+  void getUserById() async {
+    final id = await CustomStorage().getStorage('id');
+    if (id != null) {
+      context.read<UserSiswaCubit>().getCurrentUser(id: id!);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
