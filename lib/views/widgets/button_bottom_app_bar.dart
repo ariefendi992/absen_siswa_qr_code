@@ -5,13 +5,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ButtonAppBarWidget extends StatelessWidget {
   final String title;
-  final IconData icons;
+  final IconData iconPrimary;
+  final IconData iconSecondary;
   final int index;
 
   const ButtonAppBarWidget({
     super.key,
     required this.title,
-    required this.icons,
+    required this.iconPrimary,
+    required this.iconSecondary,
     required this.index,
   });
 
@@ -36,19 +38,21 @@ class ButtonAppBarWidget extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Icon(
-                    icons,
+                    context.read<PageCubit>().state == index
+                        ? iconPrimary
+                        : iconSecondary,
                     color: context.read<PageCubit>().state == index
                         ? kPrimaryColor
                         : kGreyColor,
-                    size: 28,
+                    size: 24,
                   ),
                   SizedBox(
-                    height: 4,
+                    height: 2,
                   ),
                   Text(
                     title,
                     style: TextStyle(
-                      fontSize: 14,
+                      fontSize: 13,
                       fontWeight: medium,
                       color: context.read<PageCubit>().state == index
                           ? kPrimaryColor

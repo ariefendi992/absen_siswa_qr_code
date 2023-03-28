@@ -13,7 +13,7 @@ class SplashPage extends StatefulWidget {
 
 class _SplashPageState extends State<SplashPage> {
   late String id;
-  late String group;
+  String? group;
 
   @override
   void initState() {
@@ -27,12 +27,16 @@ class _SplashPageState extends State<SplashPage> {
 
   void autoSkipLogin() async {
     group = await CustomStorage().getStorage('group');
+    final username = await CustomStorage().getStorage('username');
+    final password = await CustomStorage().getStorage('password');
+
+    print('$username and $password');
 
     if (group == 'siswa') {
       Navigator.pushNamedAndRemoveUntil(
           context, '/mainSiswa', (route) => false);
     } else {
-      Navigator.pushNamed(context, '/auth');
+      Navigator.pushNamedAndRemoveUntil(context, '/auth', (route) => false);
     }
   }
 

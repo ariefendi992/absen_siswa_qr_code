@@ -1,8 +1,9 @@
 import 'package:absen_siswa_qr_code/cubit/page/page_cubit.dart';
 import 'package:absen_siswa_qr_code/utils/theme.dart';
-import 'package:absen_siswa_qr_code/views/siswa/home_siswa_page.dart';
-import 'package:absen_siswa_qr_code/views/siswa/profil_siswa_page.dart';
-import 'package:absen_siswa_qr_code/views/siswa/qr_siswa_page.dart';
+import 'package:absen_siswa_qr_code/views/siswa/menu/daftar_siswa.dart';
+import 'package:absen_siswa_qr_code/views/siswa/menu/home_siswa_page.dart';
+import 'package:absen_siswa_qr_code/views/siswa/menu/profil_siswa_page.dart';
+import 'package:absen_siswa_qr_code/views/siswa/menu/riwayat_absen.dart';
 import 'package:absen_siswa_qr_code/views/widgets/button_bottom_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -18,8 +19,10 @@ class MainSiswaPage extends StatelessWidget {
           return HomeSiswaPage();
 
         case 1:
-          return QrSiswaPage();
+          return RiwayatAbsensiSiswaPage();
         case 2:
+          return DaftarKelasSiswaPage();
+        case 3:
           return ProfilSiswaPage();
 
         default:
@@ -29,7 +32,7 @@ class MainSiswaPage extends StatelessWidget {
 
     Widget bottomNavigationBar() {
       return Container(
-        height: 83,
+        height: 55,
         child: Container(
           alignment: Alignment.center,
           child: Row(
@@ -37,18 +40,27 @@ class MainSiswaPage extends StatelessWidget {
             children: [
               ButtonAppBarWidget(
                 index: 0,
-                title: 'Home',
-                icons: Icons.home,
+                title: 'Beranda',
+                iconPrimary: Icons.home,
+                iconSecondary: Icons.home_outlined,
               ),
               ButtonAppBarWidget(
                 index: 1,
-                title: 'QR Code',
-                icons: Icons.qr_code,
+                title: 'Riwayat',
+                iconPrimary: Icons.history,
+                iconSecondary: Icons.history_outlined,
               ),
               ButtonAppBarWidget(
                 index: 2,
+                title: 'DaftarKelas',
+                iconPrimary: Icons.people,
+                iconSecondary: Icons.people_outline,
+              ),
+              ButtonAppBarWidget(
+                index: 3,
                 title: 'Akun',
-                icons: Icons.account_circle,
+                iconPrimary: Icons.account_circle,
+                iconSecondary: Icons.account_circle_outlined,
               ),
             ],
           ),

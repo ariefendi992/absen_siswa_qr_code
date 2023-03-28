@@ -22,7 +22,6 @@ class AuthService {
 
     final jsonResp = jsonDecode(response.body);
 
-    print(jsonResp.toString());
     if (response.statusCode == 200) {
       await CustomStorage().setStorage('id', jsonResp['id'].toString());
       await CustomStorage().setStorage('group', jsonResp['group']);
@@ -36,7 +35,8 @@ class AuthService {
 
   Future logOut() async {
     try {
-      await CustomStorage().deleteAllKey();
+      await CustomStorage().deleteKey('group');
+      await CustomStorage().deleteKey('id');
     } catch (e) {
       rethrow;
     }
