@@ -1,8 +1,10 @@
 import 'dart:async';
 
+import 'package:absen_siswa_qr_code/cubit/user/user_siswa_cubit.dart';
 import 'package:absen_siswa_qr_code/utils/secure_storage.dart';
 import 'package:absen_siswa_qr_code/utils/theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({super.key});
@@ -18,23 +20,22 @@ class _SplashPageState extends State<SplashPage> {
   @override
   void initState() {
     super.initState();
-    setState(() {
-      Timer(Duration(seconds: 3), () {
-        autoSkipLogin();
-      });
+    Timer(Duration(seconds: 3), () {
+      autoSkipLogin();
     });
   }
 
   void autoSkipLogin() async {
+    // final password = await CustomStorage().getStorage('password');
+    // final username = await CustomStorage().getStorage('username');
+    // print('$username and $password');
     group = await CustomStorage().getStorage('group');
-    final username = await CustomStorage().getStorage('username');
-    final password = await CustomStorage().getStorage('password');
-
-    print('$username and $password');
+    id = await CustomStorage().getStorage('id');
 
     if (group == 'siswa') {
       Navigator.pushNamedAndRemoveUntil(
           context, '/mainSiswa', (route) => false);
+      context.read<UserSiswaCubit>().getCurrentUser(id: id);
     } else {
       Navigator.pushNamedAndRemoveUntil(context, '/auth', (route) => false);
     }

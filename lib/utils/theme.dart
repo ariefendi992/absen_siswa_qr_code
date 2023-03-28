@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 Color kBackgorundScaffold = Color(0XFFFFFFFF);
 // Color kPrimaryColor = Color(0XFF674AEF);
+// Color kPrimaryColor = Color(0XFF0603A0);
 Color kPrimaryColor = Color(0XFF0429B3);
 Color kWhiteColor = Color(0XFFFFFFFF);
 Color kBlackColor = Color(0XFF1E272E);
