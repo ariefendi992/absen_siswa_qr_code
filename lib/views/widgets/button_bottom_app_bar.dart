@@ -27,10 +27,10 @@ class ButtonAppBarWidget extends StatelessWidget {
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
           ),
-          child: ClipRect(
-            clipBehavior: Clip.hardEdge,
+          child: ClipOval(
+            clipBehavior: Clip.antiAlias,
             child: InkWell(
-              borderRadius: BorderRadius.circular(20),
+              borderRadius: BorderRadius.circular(32),
               onTap: () {
                 context.read<PageCubit>().setPage(index);
               },
@@ -52,7 +52,7 @@ class ButtonAppBarWidget extends StatelessWidget {
                   Text(
                     title,
                     style: TextStyle(
-                      fontSize: 13,
+                      fontSize: 12,
                       fontWeight: medium,
                       color: context.read<PageCubit>().state == index
                           ? kPrimaryColor

@@ -1,4 +1,5 @@
 import 'package:absen_siswa_qr_code/cubit/auth/auth_cubit.dart';
+import 'package:absen_siswa_qr_code/cubit/master/siswa_mapel_cubit.dart';
 import 'package:absen_siswa_qr_code/cubit/page/page_cubit.dart';
 import 'package:absen_siswa_qr_code/cubit/user/user_siswa_cubit.dart';
 import 'package:absen_siswa_qr_code/utils/theme.dart';
@@ -24,6 +25,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => AuthCubit()),
         BlocProvider(create: (context) => PageCubit()),
         BlocProvider(create: (context) => UserSiswaCubit()),
+        BlocProvider(create: (context) => SiswaMapelCubit()),
       ],
       child: MaterialApp(
         theme: ThemeData(

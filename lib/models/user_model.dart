@@ -2,6 +2,7 @@ import 'package:equatable/equatable.dart';
 
 class UserSiswaModel extends Equatable {
   final int id;
+  final int kelasId;
   final String firstName;
   final String lastName;
   final String kelas;
@@ -13,6 +14,7 @@ class UserSiswaModel extends Equatable {
     required this.firstName,
     required this.lastName,
     required this.kelas,
+    required this.kelasId,
     required this.nisn,
     required this.gender,
   });
@@ -22,6 +24,7 @@ class UserSiswaModel extends Equatable {
       id: json['id'],
       firstName: json['first_name'],
       lastName: json['last_name'],
+      kelasId: json['kelas_id'],
       kelas: json['kelas'],
       nisn: json['nisn'],
       gender: json['gender'],
@@ -29,5 +32,13 @@ class UserSiswaModel extends Equatable {
   }
 
   @override
-  List<Object> get props => [id, firstName, lastName, kelas, nisn, gender];
+  List<Object> get props => [
+        id,
+        firstName,
+        lastName,
+        kelas,
+        nisn,
+        gender,
+        kelasId,
+      ];
 }

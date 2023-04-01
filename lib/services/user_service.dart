@@ -11,8 +11,6 @@ class UserService {
 
     final jsonResp = jsonDecode(response.body);
 
-    print(jsonResp);
-
     if (response.statusCode == 200) {
       UserSiswaModel userSiswa = UserSiswaModel.fromJson(jsonResp);
       return userSiswa;

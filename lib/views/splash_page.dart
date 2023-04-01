@@ -14,7 +14,7 @@ class SplashPage extends StatefulWidget {
 }
 
 class _SplashPageState extends State<SplashPage> {
-  late String id;
+  String? id;
   String? group;
 
   @override
@@ -32,10 +32,12 @@ class _SplashPageState extends State<SplashPage> {
     group = await CustomStorage().getStorage('group');
     id = await CustomStorage().getStorage('id');
 
+    if (group != null) {}
+
     if (group == 'siswa') {
       Navigator.pushNamedAndRemoveUntil(
           context, '/mainSiswa', (route) => false);
-      context.read<UserSiswaCubit>().getCurrentUser(id: id);
+      context.read<UserSiswaCubit>().getCurrentUser(id: id!);
     } else {
       Navigator.pushNamedAndRemoveUntil(context, '/auth', (route) => false);
     }

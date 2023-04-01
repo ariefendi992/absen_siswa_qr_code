@@ -74,7 +74,7 @@ class _MainSiswaPageState extends State<MainSiswaPage> {
               ),
               ButtonAppBarWidget(
                 index: 2,
-                title: 'DaftarKelas',
+                title: 'DaftarSiswa',
                 iconPrimary: Icons.people,
                 iconSecondary: Icons.people_outline,
               ),

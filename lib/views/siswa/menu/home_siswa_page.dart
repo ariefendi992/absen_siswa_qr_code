@@ -1,10 +1,10 @@
 import 'package:absen_siswa_qr_code/models/user_model.dart';
 import 'package:absen_siswa_qr_code/utils/secure_storage.dart';
 import 'package:absen_siswa_qr_code/utils/theme.dart';
+import 'package:absen_siswa_qr_code/views/siswa/sub_menu/mapel_page.dart';
 import 'package:absen_siswa_qr_code/views/siswa/sub_menu/qr_siswa_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import '../../../cubit/user/user_siswa_cubit.dart';
 
 class HomeSiswaPage extends StatefulWidget {
@@ -15,13 +15,33 @@ class HomeSiswaPage extends StatefulWidget {
 }
 
 class _HomeSiswaPageState extends State<HomeSiswaPage> {
+  List catNames = ['MataPelajaran', 'Absensi', 'Jadwal'];
+
+  List<Icon> catIcons = [
+    Icon(
+      Icons.menu_book,
+      color: kWhiteColor,
+      size: 28,
+    ),
+    Icon(
+      Icons.list,
+      color: kWhiteColor,
+      size: 28,
+    ),
+    Icon(
+      Icons.more_time,
+      color: kWhiteColor,
+      size: 28,
+    ),
+  ];
+
   @override
   Widget build(BuildContext context) {
     // NOTE : HEADER
     Widget header(UserSiswaModel user) {
       return Container(
-        padding: EdgeInsets.only(left: 20, right: 20, bottom: 25),
-        height: MediaQuery.of(context).size.height / 4.5,
+        padding: EdgeInsets.only(left: 20, right: 20, bottom: 25, top: 20),
+        // height: MediaQuery.of(context).size.height / 4.5,
         decoration: BoxDecoration(
           color: kPrimaryColor,
           borderRadius: BorderRadius.only(
@@ -59,7 +79,7 @@ class _HomeSiswaPageState extends State<HomeSiswaPage> {
                 Text(
                   'Hai,',
                   style: TextStyle(
-                    fontSize: 24,
+                    fontSize: 22,
                     fontWeight: regular,
                     wordSpacing: 1,
                     color: kWhiteColor,
@@ -77,7 +97,7 @@ class _HomeSiswaPageState extends State<HomeSiswaPage> {
                             : user.lastName
                         : user.firstName,
                     style: TextStyle(
-                      fontSize: 24,
+                      fontSize: 22,
                       fontWeight: medium,
                       wordSpacing: 1,
                       color: kWhiteColor,
@@ -135,18 +155,131 @@ class _HomeSiswaPageState extends State<HomeSiswaPage> {
     }
 
     // NOTE: CONTENT
-    Widget content() {
+    Widget content(String kelasId) {
       return Container(
+        margin: EdgeInsets.only(top: 20),
         padding: EdgeInsets.only(
           left: 20,
           right: 20,
-          top: 20,
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Kategori Menu',
+              'Menu',
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: bold,
+              ),
+            ),
+            SizedBox(height: 4),
+            GridView.count(
+              crossAxisCount: 3,
+              physics: NeverScrollableScrollPhysics(),
+              shrinkWrap: true,
+              childAspectRatio: 1.2,
+              children: [
+                InkWell(
+                  borderRadius: BorderRadius.circular(28),
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => MapelPage(kelasId)),
+                    );
+                  },
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Container(
+                        height: 55,
+                        width: 55,
+                        decoration: BoxDecoration(
+                          color: catColors[0],
+                          shape: BoxShape.circle,
+                        ),
+                        child: Center(
+                          child: catIcons[0],
+                        ),
+                      ),
+                      SizedBox(height: 10),
+                      Text(
+                        catNames[0],
+                        style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: medium,
+                          color: Colors.black.withOpacity(0.6),
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+                InkWell(
+                  borderRadius: BorderRadius.circular(28),
+                  onTap: () {},
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Container(
+                        height: 55,
+                        width: 55,
+                        decoration: BoxDecoration(
+                          color: catColors[1],
+                          shape: BoxShape.circle,
+                        ),
+                        child: Center(
+                          child: catIcons[1],
+                        ),
+                      ),
+                      SizedBox(height: 10),
+                      Text(
+                        catNames[1],
+                        style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: medium,
+                          color: Colors.black.withOpacity(0.6),
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+                InkWell(
+                  borderRadius: BorderRadius.circular(28),
+                  onTap: () {},
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Container(
+                        height: 55,
+                        width: 55,
+                        decoration: BoxDecoration(
+                          color: catColors[2],
+                          shape: BoxShape.circle,
+                        ),
+                        child: Center(
+                          child: catIcons[2],
+                        ),
+                      ),
+                      SizedBox(height: 10),
+                      Text(
+                        catNames[2],
+                        style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: medium,
+                          color: Colors.black.withOpacity(0.6),
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(height: 8),
+            Text(
+              'Daftar Pelanggar',
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: bold,
@@ -170,7 +303,7 @@ class _HomeSiswaPageState extends State<HomeSiswaPage> {
             child: ListView(
               children: [
                 header(user),
-                content(),
+                content(user.kelasId.toString()),
               ],
             ),
           );
