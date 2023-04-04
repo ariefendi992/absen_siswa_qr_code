@@ -69,21 +69,34 @@ class _QrSiswaPageState extends State<QrSiswaPage> {
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(12),
                                 border: Border.all(
-                                  color: kPrimaryColor.withOpacity(0.2),
+                                  color: kPrimaryColor.withOpacity(0.15),
                                   style: BorderStyle.solid,
                                   width: 5,
                                 ),
                               ),
-                              child: ClipRRect(
-                                borderRadius:
-                                    BorderRadius.circular(defaultRadius),
-                                child: SizedBox.fromSize(
-                                  size: const Size.fromRadius(100),
-                                  child: Image.network(
-                                    '$baseUrl/${state.userSiswa.qrCode}',
-                                    fit: BoxFit.cover,
+                              child: Column(
+                                children: [
+                                  ClipRRect(
+                                    borderRadius:
+                                        BorderRadius.circular(defaultRadius),
+                                    child: SizedBox.fromSize(
+                                      size: const Size.fromRadius(100),
+                                      child: Image.network(
+                                        '$baseUrl/${state.userSiswa.qrCode}',
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ),
                                   ),
-                                ),
+                                  Text(
+                                    '${state.userSiswa.nisn.toString()}',
+                                    style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: medium,
+                                      color: kBlackColor.withOpacity(0.7),
+                                    ),
+                                  ),
+                                  SizedBox(height: 2),
+                                ],
                               ),
                             ),
                           )
