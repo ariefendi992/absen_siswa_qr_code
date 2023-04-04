@@ -38,16 +38,18 @@ class _QrSiswaPageState extends State<QrSiswaPage> {
                 bottomRight: Radius.circular(30),
               ),
             ),
-            leading: Builder(builder: (BuildContext context) {
-              return IconButton(
-                  onPressed: () {
-                    context.read<PageCubit>().setPage(0);
-                    Navigator.pushReplacementNamed(context, '/mainSiswa');
-                  },
-                  icon: Icon(
-                    Icons.arrow_back_ios_new,
-                  ));
-            }),
+            leading: Builder(
+              builder: (BuildContext context) {
+                return IconButton(
+                    onPressed: () {
+                      context.read<PageCubit>().setPage(0);
+                      Navigator.pushReplacementNamed(context, '/mainSiswa');
+                    },
+                    icon: Icon(
+                      Icons.arrow_back_ios_new,
+                    ));
+              },
+            ),
           ),
         ),
         body: Align(
@@ -59,16 +61,28 @@ class _QrSiswaPageState extends State<QrSiswaPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     state.userSiswa.qrCode != null
-                        ? Container(
-                            padding: const EdgeInsets.all(8),
-                            child: ClipRRect(
-                              borderRadius:
-                                  BorderRadius.circular(defaultRadius),
-                              child: SizedBox.fromSize(
-                                size: const Size.fromRadius(86),
-                                child: Image.network(
-                                  '$baseUrl/${state.userSiswa.qrCode}',
-                                  fit: BoxFit.cover,
+                        ? Material(
+                            borderRadius: BorderRadius.circular(12),
+                            elevation: 8,
+                            child: Container(
+                              // padding: const EdgeInsets.all(2),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(12),
+                                border: Border.all(
+                                  color: kPrimaryColor.withOpacity(0.2),
+                                  style: BorderStyle.solid,
+                                  width: 5,
+                                ),
+                              ),
+                              child: ClipRRect(
+                                borderRadius:
+                                    BorderRadius.circular(defaultRadius),
+                                child: SizedBox.fromSize(
+                                  size: const Size.fromRadius(100),
+                                  child: Image.network(
+                                    '$baseUrl/${state.userSiswa.qrCode}',
+                                    fit: BoxFit.cover,
+                                  ),
                                 ),
                               ),
                             ),
@@ -86,6 +100,19 @@ class _QrSiswaPageState extends State<QrSiswaPage> {
                               fontSize: 18,
                             ),
                           ),
+                    state.userSiswa.qrCode != null
+                        ? Container(
+                            margin: EdgeInsets.only(top: 12),
+                            child: Text(
+                              'SCAN ME!',
+                              style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: bold,
+                                color: kBlackColor.withOpacity(0.7),
+                              ),
+                            ),
+                          )
+                        : SizedBox(),
                   ],
                 );
               } else if (state is UserSiswaFailed) {

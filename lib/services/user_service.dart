@@ -22,8 +22,8 @@ class UserSiswaService {
 
   Future<UserSiswaModel> genereteQrcode({required String id}) async {
     final url = '$baseUrl/api/v2/student/generate-qc?id=$id';
-    // final headers = {'Content-Type': 'application/json'};
-    final response = await http.put(Uri.parse(url));
+    final headers = {'Content-Type': 'application/json'};
+    final response = await http.put(Uri.parse(url), headers: headers);
 
     final jsonResp = jsonDecode(response.body);
     print(jsonResp);
