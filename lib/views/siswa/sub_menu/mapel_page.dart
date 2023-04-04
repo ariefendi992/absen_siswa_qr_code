@@ -34,22 +34,23 @@ class _MapelPageState extends State<MapelPage> {
       extendBodyBehindAppBar: true,
       backgroundColor: kBackgorundScaffold,
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(70),
+        preferredSize: Size.fromHeight(60),
         child: AppBar(
-          foregroundColor: kWhiteBlueColor,
-          backgroundColor: kPrimaryColor,
-          elevation: 0,
+          foregroundColor: kBlackColor,
+          backgroundColor: kBackgorundScaffold,
+          elevation: 6,
           title: Text(
             'Daftar MataPelajaran',
             style: TextStyle(
-              fontSize: 18,
-              fontWeight: medium,
+              fontWeight: bold,
             ),
           ),
           centerTitle: true,
           shape: RoundedRectangleBorder(
-              borderRadius:
-                  BorderRadius.only(bottomRight: Radius.circular(30))),
+            borderRadius: BorderRadius.only(
+              bottomRight: Radius.circular(30),
+            ),
+          ),
         ),
       ),
       body: Material(
@@ -57,8 +58,8 @@ class _MapelPageState extends State<MapelPage> {
         child: Padding(
           padding: EdgeInsets.only(
             top: 20,
-            left: defaultPadding,
-            right: defaultPadding,
+            left: 10,
+            right: 10,
             bottom: 10,
           ),
           child: BlocConsumer<SiswaMapelCubit, SiswaMapelState>(

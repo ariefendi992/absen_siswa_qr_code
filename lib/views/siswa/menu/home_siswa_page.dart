@@ -1,3 +1,4 @@
+import 'package:absen_siswa_qr_code/cubit/user/siswa/user_siswa_cubit.dart';
 import 'package:absen_siswa_qr_code/models/user_model.dart';
 import 'package:absen_siswa_qr_code/utils/secure_storage.dart';
 import 'package:absen_siswa_qr_code/utils/theme.dart';
@@ -5,42 +6,16 @@ import 'package:absen_siswa_qr_code/views/siswa/sub_menu/mapel_page.dart';
 import 'package:absen_siswa_qr_code/views/siswa/sub_menu/qr_siswa_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../cubit/user/user_siswa_cubit.dart';
 
-class HomeSiswaPage extends StatefulWidget {
+class HomeSiswaPage extends StatelessWidget {
   const HomeSiswaPage({super.key});
-
-  @override
-  State<HomeSiswaPage> createState() => _HomeSiswaPageState();
-}
-
-class _HomeSiswaPageState extends State<HomeSiswaPage> {
-  List catNames = ['MataPelajaran', 'Absensi', 'Jadwal'];
-
-  List<Icon> catIcons = [
-    Icon(
-      Icons.menu_book,
-      color: kWhiteColor,
-      size: 28,
-    ),
-    Icon(
-      Icons.list,
-      color: kWhiteColor,
-      size: 28,
-    ),
-    Icon(
-      Icons.more_time,
-      color: kWhiteColor,
-      size: 28,
-    ),
-  ];
 
   @override
   Widget build(BuildContext context) {
     // NOTE : HEADER
     Widget header(UserSiswaModel user) {
       return Container(
-        padding: EdgeInsets.only(left: 20, right: 20, bottom: 25, top: 20),
+        padding: EdgeInsets.only(left: 20, right: 20, bottom: 25, top: 10),
         // height: MediaQuery.of(context).size.height / 4.5,
         decoration: BoxDecoration(
           color: kPrimaryColor,
@@ -89,16 +64,16 @@ class _HomeSiswaPageState extends State<HomeSiswaPage> {
                 SizedBox(width: 4),
                 Container(
                   child: Text(
-                    user.firstName.length < 3
-                        ? user.lastName.split(' ').length > 1
-                            ? user.lastName.split(' ')[0] +
+                    user.firstName.toString().length < 3
+                        ? user.lastName.toString().split(' ').length > 1
+                            ? user.lastName.toString().split(' ')[0] +
                                 ' ' +
-                                user.lastName.split(' ')[1]
-                            : user.lastName
-                        : user.firstName,
+                                user.lastName.toString().split(' ')[1]
+                            : user.lastName.toString()
+                        : user.firstName.toString(),
                     style: TextStyle(
-                      fontSize: 22,
-                      fontWeight: medium,
+                      fontSize: 25,
+                      fontWeight: semiBold,
                       wordSpacing: 1,
                       color: kWhiteColor,
                     ),
@@ -157,21 +132,21 @@ class _HomeSiswaPageState extends State<HomeSiswaPage> {
     // NOTE: CONTENT
     Widget content(String kelasId) {
       return Container(
-        margin: EdgeInsets.only(top: 20),
+        margin: EdgeInsets.only(top: 15),
         padding: EdgeInsets.only(
-          left: 20,
-          right: 20,
+          left: 15,
+          right: 15,
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              'Menu',
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: bold,
-              ),
-            ),
+            // Text(
+            //   'Menu',
+            //   style: TextStyle(
+            //     fontSize: 16,
+            //     fontWeight: bold,
+            //   ),
+            // ),
             SizedBox(height: 4),
             GridView.count(
               crossAxisCount: 3,
@@ -200,12 +175,16 @@ class _HomeSiswaPageState extends State<HomeSiswaPage> {
                           shape: BoxShape.circle,
                         ),
                         child: Center(
-                          child: catIcons[0],
+                          child: Icon(
+                            Icons.menu_book,
+                            color: kWhiteColor,
+                            size: 28,
+                          ),
                         ),
                       ),
                       SizedBox(height: 10),
                       Text(
-                        catNames[0],
+                        'MataPelajaran',
                         style: TextStyle(
                           fontSize: 14,
                           fontWeight: medium,
@@ -230,12 +209,16 @@ class _HomeSiswaPageState extends State<HomeSiswaPage> {
                           shape: BoxShape.circle,
                         ),
                         child: Center(
-                          child: catIcons[1],
+                          child: Icon(
+                            Icons.list,
+                            color: kWhiteColor,
+                            size: 28,
+                          ),
                         ),
                       ),
                       SizedBox(height: 10),
                       Text(
-                        catNames[1],
+                        'Absensi',
                         style: TextStyle(
                           fontSize: 14,
                           fontWeight: medium,
@@ -260,12 +243,16 @@ class _HomeSiswaPageState extends State<HomeSiswaPage> {
                           shape: BoxShape.circle,
                         ),
                         child: Center(
-                          child: catIcons[2],
+                          child: Icon(
+                            Icons.more_time,
+                            color: kWhiteColor,
+                            size: 28,
+                          ),
                         ),
                       ),
                       SizedBox(height: 10),
                       Text(
-                        catNames[2],
+                        'Jadwal',
                         style: TextStyle(
                           fontSize: 14,
                           fontWeight: medium,
@@ -319,11 +306,13 @@ class _HomeSiswaPageState extends State<HomeSiswaPage> {
                 Container(
                   height: MediaQuery.of(context).size.height,
                   alignment: Alignment.center,
-                  child: Text(
-                    state.error,
-                    style: TextStyle(
-                      fontWeight: medium,
-                      fontSize: 15,
+                  child: Center(
+                    child: Text(
+                      state.error,
+                      style: TextStyle(
+                        fontWeight: medium,
+                        fontSize: 15,
+                      ),
                     ),
                   ),
                 ),

@@ -24,7 +24,8 @@ class MapelCardWiget extends StatelessWidget {
           children: [
             Container(
               alignment: Alignment.centerLeft,
-              margin: EdgeInsets.only(top: 5, left: 20, right: 20, bottom: 5),
+              margin:
+                  EdgeInsets.only(top: 5.5, left: 20, right: 20, bottom: 5.5),
               child: Text(
                 'Mata Pelajaran',
                 style: TextStyle(
@@ -71,7 +72,7 @@ class MapelCardWiget extends StatelessWidget {
                     endIndent: 2,
                     height: 2,
                     thickness: 1,
-                    color: kBlackColor.withOpacity(0.5),
+                    color: kBlackColor.withOpacity(0.4),
                   ),
                   SizedBox(height: 1),
                   Divider(
@@ -79,7 +80,7 @@ class MapelCardWiget extends StatelessWidget {
                     endIndent: 2,
                     height: 2,
                     thickness: 2.0,
-                    color: kBlackColor.withOpacity(0.5),
+                    color: kBlackColor.withOpacity(0.4),
                   ),
                   SizedBox(height: 5),
                   // Text(
@@ -100,7 +101,7 @@ class MapelCardWiget extends StatelessWidget {
                   Text(
                     '${mapels.namaGuru}',
                     style: TextStyle(
-                        fontSize: 18,
+                        fontSize: 20,
                         fontWeight: semiBold,
                         color: kBlackColor,
                         letterSpacing: 0.4),

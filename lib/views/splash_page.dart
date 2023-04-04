@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:absen_siswa_qr_code/cubit/user/user_siswa_cubit.dart';
+import 'package:absen_siswa_qr_code/cubit/user/siswa/user_siswa_cubit.dart';
 import 'package:absen_siswa_qr_code/utils/secure_storage.dart';
 import 'package:absen_siswa_qr_code/utils/theme.dart';
 import 'package:flutter/material.dart';

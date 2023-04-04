@@ -1,5 +1,5 @@
 import 'package:absen_siswa_qr_code/cubit/page/page_cubit.dart';
-import 'package:absen_siswa_qr_code/cubit/user/user_siswa_cubit.dart';
+import 'package:absen_siswa_qr_code/cubit/user/siswa/user_siswa_cubit.dart';
 import 'package:absen_siswa_qr_code/utils/secure_storage.dart';
 import 'package:absen_siswa_qr_code/utils/theme.dart';
 import 'package:absen_siswa_qr_code/views/siswa/menu/daftar_siswa.dart';
@@ -29,7 +29,7 @@ class _MainSiswaPageState extends State<MainSiswaPage> {
   void getUserById() async {
     final id = await CustomStorage().getStorage('id');
     if (id != null) {
-      context.read<UserSiswaCubit>().getCurrentUser(id: id!);
+      context.read<UserSiswaCubit>().getCurrentUser(id: id.toString());
     }
   }
 

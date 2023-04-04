@@ -1,13 +1,14 @@
 import 'package:equatable/equatable.dart';
 
 class UserSiswaModel extends Equatable {
-  final int id;
-  final int kelasId;
-  final String firstName;
-  final String lastName;
-  final String kelas;
-  final String nisn;
-  final String gender;
+  final int? id;
+  final int? kelasId;
+  final String? firstName;
+  final String? lastName;
+  final String? kelas;
+  final String? nisn;
+  final String? gender;
+  final String? qrCode;
 
   const UserSiswaModel({
     required this.id,
@@ -17,6 +18,7 @@ class UserSiswaModel extends Equatable {
     required this.kelasId,
     required this.nisn,
     required this.gender,
+    required this.qrCode,
   });
 
   factory UserSiswaModel.fromJson(Map<String, dynamic> json) {
@@ -28,17 +30,11 @@ class UserSiswaModel extends Equatable {
       kelas: json['kelas'],
       nisn: json['nisn'],
       gender: json['gender'],
+      qrCode: json['qr_code'],
     );
   }
 
   @override
-  List<Object> get props => [
-        id,
-        firstName,
-        lastName,
-        kelas,
-        nisn,
-        gender,
-        kelasId,
-      ];
+  List<Object?> get props =>
+      [id, firstName, lastName, kelas, nisn, gender, kelasId, qrCode];
 }
