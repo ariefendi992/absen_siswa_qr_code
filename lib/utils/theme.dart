@@ -24,6 +24,29 @@ List<Color> catColors = [
   Color(0XFF78E667),
 ];
 
+Color c1 = Colors.pink.shade500;
+Color c2 = Colors.amber.shade500;
+Color c3 = Colors.lightGreen.shade500;
+Color c4 = Colors.deepPurple.shade500;
+
+List<Color> allColor = [
+  Colors.amber.shade400,
+  Colors.amberAccent.shade400,
+  Colors.blue.shade400,
+  Colors.brown.shade400,
+  Colors.cyan.shade700,
+  Colors.deepOrange.shade500,
+  Colors.cyan.shade500,
+  Colors.indigo.shade600,
+  Colors.orangeAccent.shade100,
+  Colors.pink,
+  Colors.red.shade600,
+  Colors.green.shade400,
+  Colors.greenAccent.shade200,
+  Colors.tealAccent.shade200,
+  Colors.lightBlue.shade500,
+];
+
 FontWeight light = FontWeight.w300;
 FontWeight regular = FontWeight.w400;
 FontWeight medium = FontWeight.w500;

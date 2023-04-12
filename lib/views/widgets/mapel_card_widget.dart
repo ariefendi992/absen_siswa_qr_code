@@ -26,10 +26,16 @@ class MapelCardWiget extends StatelessWidget {
               alignment: Alignment.centerLeft,
               margin:
                   EdgeInsets.only(top: 5.5, left: 20, right: 20, bottom: 5.5),
-              child: Text(
-                'Mata Pelajaran',
-                style: TextStyle(
-                    color: kWhiteColor, fontWeight: bold, letterSpacing: 0.8),
+              child: Row(
+                children: [
+                  Text(
+                    'Mata Pelajaran',
+                    style: TextStyle(
+                        color: kWhiteColor,
+                        fontWeight: bold,
+                        letterSpacing: 0.8),
+                  ),
+                ],
               ),
             ),
             Container(

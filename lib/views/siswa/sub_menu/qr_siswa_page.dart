@@ -43,7 +43,9 @@ class _QrSiswaPageState extends State<QrSiswaPage> {
                 return IconButton(
                     onPressed: () {
                       context.read<PageCubit>().setPage(0);
-                      Navigator.pushReplacementNamed(context, '/mainSiswa');
+                      // Navigator.pushReplacementNamed(context, '/mainSiswa');
+                      Navigator.pushNamedAndRemoveUntil(
+                          context, '/mainSiswa', (route) => false);
                     },
                     icon: Icon(
                       Icons.arrow_back_ios_new,

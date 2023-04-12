@@ -1,4 +1,5 @@
 import 'package:absen_siswa_qr_code/cubit/master/siswa_mapel_cubit.dart';
+import 'package:absen_siswa_qr_code/cubit/page/page_cubit.dart';
 import 'package:absen_siswa_qr_code/models/master_model.dart';
 import 'package:absen_siswa_qr_code/utils/theme.dart';
 import 'package:absen_siswa_qr_code/views/widgets/mapel_card_widget.dart';
@@ -51,6 +52,15 @@ class _MapelPageState extends State<MapelPage> {
               bottomRight: Radius.circular(30),
             ),
           ),
+          leading: Builder(builder: (context) {
+            return IconButton(
+              onPressed: () {
+                context.read<PageCubit>().setPage(0);
+                Navigator.pushReplacementNamed(context, '/mainSiswa');
+              },
+              icon: Icon(Icons.arrow_back_ios_new),
+            );
+          }),
         ),
       ),
       body: Material(

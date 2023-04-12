@@ -2,6 +2,7 @@ import 'package:absen_siswa_qr_code/cubit/user/siswa/user_siswa_cubit.dart';
 import 'package:absen_siswa_qr_code/models/user_model.dart';
 import 'package:absen_siswa_qr_code/utils/secure_storage.dart';
 import 'package:absen_siswa_qr_code/utils/theme.dart';
+import 'package:absen_siswa_qr_code/views/siswa/sub_menu/jadwal_page.dart';
 import 'package:absen_siswa_qr_code/views/siswa/sub_menu/mapel_page.dart';
 import 'package:absen_siswa_qr_code/views/siswa/sub_menu/qr_siswa_page.dart';
 import 'package:flutter/material.dart';
@@ -15,13 +16,13 @@ class HomeSiswaPage extends StatelessWidget {
     // NOTE : HEADER
     Widget header(UserSiswaModel user) {
       return Container(
-        padding: EdgeInsets.only(left: 20, right: 20, bottom: 25, top: 10),
+        padding: EdgeInsets.only(left: 20, right: 20, bottom: 15, top: 10),
         // height: MediaQuery.of(context).size.height / 4.5,
         decoration: BoxDecoration(
           color: kPrimaryColor,
           borderRadius: BorderRadius.only(
-            bottomLeft: Radius.circular(defaultRadius),
-            bottomRight: Radius.circular(defaultRadius),
+            bottomLeft: Radius.circular(32),
+            bottomRight: Radius.circular(32),
           ),
         ),
         child: Column(
@@ -48,7 +49,7 @@ class HomeSiswaPage extends StatelessWidget {
                   fontWeight: medium,
                   letterSpacing: 0.2),
             ),
-            SizedBox(height: 10),
+            SizedBox(height: 4),
             Row(
               children: [
                 Text(
@@ -171,7 +172,7 @@ class HomeSiswaPage extends StatelessWidget {
                         height: 55,
                         width: 55,
                         decoration: BoxDecoration(
-                          color: catColors[0],
+                          color: allColor[4],
                           shape: BoxShape.circle,
                         ),
                         child: Center(
@@ -205,7 +206,7 @@ class HomeSiswaPage extends StatelessWidget {
                         height: 55,
                         width: 55,
                         decoration: BoxDecoration(
-                          color: catColors[1],
+                          color: allColor[6],
                           shape: BoxShape.circle,
                         ),
                         child: Center(
@@ -230,7 +231,20 @@ class HomeSiswaPage extends StatelessWidget {
                 ),
                 InkWell(
                   borderRadius: BorderRadius.circular(28),
-                  onTap: () {},
+                  onTap: () {
+                    // Navigator.pushReplacement(context,
+                    //     MaterialPageRoute(builder: (context) {
+                    //   return JadwalPageSiswa();
+                    // }));
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) {
+                          return JadwalPageSiswa();
+                        },
+                      ),
+                    );
+                  },
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
