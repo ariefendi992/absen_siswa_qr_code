@@ -6,9 +6,7 @@ import 'package:absen_siswa_qr_code/views/siswa/menu/daftar_siswa.dart';
 import 'package:absen_siswa_qr_code/views/siswa/menu/home_siswa_page.dart';
 import 'package:absen_siswa_qr_code/views/siswa/menu/profil_siswa_page.dart';
 import 'package:absen_siswa_qr_code/views/siswa/menu/riwayat_absen.dart';
-import 'package:absen_siswa_qr_code/views/siswa/sub_menu/qr_siswa_page.dart';
 import 'package:absen_siswa_qr_code/views/widgets/button_bottom_app_bar.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -54,49 +52,11 @@ class _MainSiswaPageState extends State<MainSiswaPage> {
       }
     }
 
-    // Widget bottomNavigationBar() {
-    //   return Container(
-    //     height: 65,
-    //     child: Container(
-    //       alignment: Alignment.center,
-    //       child: Row(
-    //         mainAxisAlignment: MainAxisAlignment.spaceAround,
-    //         children: [
-    //           ButtonAppBarWidget(
-    //             index: 0,
-    //             title: 'Beranda',
-    //             iconPrimary: Icons.home,
-    //             iconSecondary: Icons.home_outlined,
-    //           ),
-    //           ButtonAppBarWidget(
-    //             index: 1,
-    //             title: 'Riwayat',
-    //             iconPrimary: Icons.history,
-    //             iconSecondary: Icons.history_outlined,
-    //           ),
-    //           ButtonAppBarWidget(
-    //             index: 2,
-    //             title: 'DaftarSiswa',
-    //             iconPrimary: Icons.people,
-    //             iconSecondary: Icons.people_outline,
-    //           ),
-    //           ButtonAppBarWidget(
-    //             index: 3,
-    //             title: 'Akun',
-    //             iconPrimary: Icons.account_circle,
-    //             iconSecondary: Icons.account_circle_outlined,
-    //           ),
-    //         ],
-    //       ),
-    //     ),
-    //   );
-    // }
-
-    Widget newBottomNavigationBar() {
+    Widget bottomNavigationBar() {
       return Container(
-        height: 58,
+        height: 55,
         child: Container(
-          // alignment: Alignment.center,
+          alignment: Alignment.center,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
@@ -107,7 +67,16 @@ class _MainSiswaPageState extends State<MainSiswaPage> {
                 iconSecondary: Icons.home_outlined,
               ),
               ButtonAppBarWidget(
-                title: 'QR Code',
+                index: 1,
+                title: 'Riwayat',
+                iconPrimary: Icons.history,
+                iconSecondary: Icons.history_outlined,
+              ),
+              ButtonAppBarWidget(
+                index: 2,
+                title: 'DaftarSiswa',
+                iconPrimary: Icons.people,
+                iconSecondary: Icons.people_outline,
               ),
               ButtonAppBarWidget(
                 index: 3,
@@ -130,26 +99,11 @@ class _MainSiswaPageState extends State<MainSiswaPage> {
             clipBehavior: Clip.hardEdge,
             color: kWhiteColor,
             child: IconTheme(
-              data: IconThemeData(
-                color: Theme.of(context).colorScheme.onPrimary,
-              ),
-              child: newBottomNavigationBar(),
-            ),
+                data: IconThemeData(
+                  color: Theme.of(context).colorScheme.onPrimary,
+                ),
+                child: bottomNavigationBar()),
           ),
-          floatingActionButton: FloatingActionButton.small(
-            backgroundColor: kPrimaryColor,
-            onPressed: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) {
-                return QrSiswaPage();
-              }));
-            },
-            child: Icon(
-              CupertinoIcons.qrcode_viewfinder,
-              size: 26,
-            ),
-          ),
-          floatingActionButtonLocation:
-              FloatingActionButtonLocation.centerDocked,
           body: Stack(children: [
             content(currentIndex),
           ]),

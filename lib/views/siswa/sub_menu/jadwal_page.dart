@@ -9,35 +9,41 @@ class JadwalPageSiswa extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        foregroundColor: kBlackColor,
-        backgroundColor: kBackgorundScaffold,
-        elevation: 6,
-        centerTitle: true,
-        title: Text(
-          'JadwalBelajar',
-          style: TextStyle(
-            fontWeight: bold,
+        appBar: AppBar(
+          foregroundColor: kBlackColor,
+          backgroundColor: kBackgorundScaffold,
+          elevation: 6,
+          centerTitle: true,
+          title: Text(
+            'JadwalBelajar',
+            style: TextStyle(
+              fontWeight: bold,
+            ),
           ),
-        ),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.only(
-            bottomRight: Radius.circular(30),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.only(
+              bottomRight: Radius.circular(30),
+            ),
           ),
+          leading: Builder(builder: (context) {
+            return IconButton(
+              onPressed: () {
+                context.read<PageCubit>().setPage(0);
+                Navigator.pushReplacementNamed(context, '/mainSiswa');
+              },
+              icon: Icon(Icons.arrow_back_ios_new),
+            );
+          }),
         ),
-        leading: Builder(builder: (context) {
-          return IconButton(
-            onPressed: () {
-              context.read<PageCubit>().setPage(0);
-              Navigator.pushReplacementNamed(context, '/mainSiswa');
-            },
-            icon: Icon(Icons.arrow_back_ios_new),
-          );
-        }),
-      ),
-      body: Center(
-        child: Text('Halaman Jadwal Siswa'),
-      ),
-    );
+        body: Material(
+          child: Column(
+            children: [
+              GridView.count(
+                crossAxisCount: 6,
+                children: [],
+              )
+            ],
+          ),
+        ));
   }
 }

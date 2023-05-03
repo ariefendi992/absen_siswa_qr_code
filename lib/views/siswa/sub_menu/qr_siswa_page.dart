@@ -18,26 +18,26 @@ class _QrSiswaPageState extends State<QrSiswaPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        extendBodyBehindAppBar: true,
+        // extendBodyBehindAppBar: true,
         backgroundColor: kBackgorundScaffold,
         appBar: PreferredSize(
           preferredSize: Size.fromHeight(60),
           child: AppBar(
             foregroundColor: kBlackColor,
             backgroundColor: kBackgorundScaffold,
-            elevation: 6,
+            elevation: 2,
             title: Text(
-              'My QR Code',
+              'QR Code Siswa',
               style: TextStyle(
-                fontWeight: bold,
+                fontWeight: medium,
               ),
             ),
             centerTitle: true,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.only(
-                bottomRight: Radius.circular(30),
-              ),
-            ),
+            // shape: RoundedRectangleBorder(
+            //   borderRadius: BorderRadius.only(
+            //     bottomRight: Radius.circular(30),
+            //   ),
+            // ),
             leading: Builder(
               builder: (BuildContext context) {
                 return IconButton(
@@ -60,45 +60,68 @@ class _QrSiswaPageState extends State<QrSiswaPage> {
             builder: (context, state) {
               if (state is UserSiswaSuccess) {
                 return Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     state.userSiswa.qrCode != null
-                        ? Material(
-                            borderRadius: BorderRadius.circular(12),
-                            elevation: 8,
-                            child: Container(
-                              // padding: const EdgeInsets.all(2),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(12),
-                                border: Border.all(
-                                  color: kPrimaryColor.withOpacity(0.15),
-                                  style: BorderStyle.solid,
-                                  width: 5,
+                        ? Container(
+                            margin: EdgeInsets.only(
+                              left: 24,
+                              right: 24,
+                              top: 20,
+                            ),
+                            width: MediaQuery.of(context).size.width,
+                            child: Material(
+                              borderRadius: BorderRadius.circular(12),
+                              elevation: 2,
+                              child: Container(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 22,
+                                  vertical: 22,
                                 ),
-                              ),
-                              child: Column(
-                                children: [
-                                  ClipRRect(
-                                    borderRadius:
-                                        BorderRadius.circular(defaultRadius),
-                                    child: SizedBox.fromSize(
-                                      size: const Size.fromRadius(100),
-                                      child: Image.network(
-                                        '$baseUrl/${state.userSiswa.qrCode}',
-                                        fit: BoxFit.cover,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(12),
+                                  // border: Border.all(
+                                  //   color: kPrimaryColor.withOpacity(0.15),
+                                  //   style: BorderStyle.solid,
+                                  //   width: 5,
+                                  // ),
+                                ),
+                                child: Column(
+                                  children: [
+                                    Material(
+                                      elevation: 4,
+                                      borderRadius: BorderRadius.circular(12),
+                                      child: ClipRRect(
+                                        borderRadius: BorderRadius.circular(12),
+                                        child: SizedBox.fromSize(
+                                          size: const Size.fromRadius(100),
+                                          child: Image.network(
+                                            '$baseUrl/${state.userSiswa.qrCode}',
+                                            fit: BoxFit.cover,
+                                          ),
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                  Text(
-                                    '${state.userSiswa.nisn.toString()}',
-                                    style: TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: medium,
-                                      color: kBlackColor.withOpacity(0.7),
+                                    SizedBox(height: 12),
+                                    Text(
+                                      '${state.userSiswa.nisn.toString()}',
+                                      style: TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: medium,
+                                        color: kBlackColor.withOpacity(0.7),
+                                      ),
                                     ),
-                                  ),
-                                  SizedBox(height: 2),
-                                ],
+                                    SizedBox(height: 6),
+                                    Divider(
+                                      height: 2,
+                                      thickness: 1.2,
+                                    ),
+                                    SizedBox(height: 12),
+                                    Text(
+                                        'Tunjukkan QR Code ke Guru untuk melakukan absen, sebelum pelajaran')
+                                    // SizedBox(height: 2),
+                                  ],
+                                ),
                               ),
                             ),
                           )
