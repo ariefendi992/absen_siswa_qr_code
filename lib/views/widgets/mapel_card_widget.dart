@@ -17,7 +17,8 @@ class MapelCardWiget extends StatelessWidget {
     return Container(
       margin: EdgeInsets.only(bottom: 20, left: 8, right: 8),
       child: Material(
-        color: kGreenColor,
+        // color: kGreenColor,
+        color: kPrimaryColor.withOpacity(0.7),
         elevation: 6,
         borderRadius: BorderRadius.circular(18),
         child: Column(
