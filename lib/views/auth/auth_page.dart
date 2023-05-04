@@ -1,4 +1,5 @@
 import 'package:absen_siswa_qr_code/cubit/auth/auth_cubit.dart';
+import 'package:absen_siswa_qr_code/cubit/user/siswa/user_siswa_cubit.dart';
 import 'package:absen_siswa_qr_code/utils/secure_storage.dart';
 import 'package:absen_siswa_qr_code/utils/theme.dart';
 import 'package:absen_siswa_qr_code/views/widgets/button_widget.dart';
@@ -256,6 +257,7 @@ class _AuthPageState extends State<AuthPage> {
                               Navigator.pushReplacementNamed(
                                   context, '/mainSiswa');
                               // }
+                              context.read<UserSiswaCubit>().getCurrentUser();
                             } else if (state is AuthFailed) {
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(

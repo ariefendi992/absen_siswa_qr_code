@@ -20,15 +20,21 @@ class _SplashPageState extends State<SplashPage> {
   @override
   void initState() {
     super.initState();
+    // defaultToken();
     Timer(Duration(seconds: 3), () {
       autoSkipLogin();
     });
   }
 
+  // void defaultToken() async {
+  //   await CustomStorage().setStorage('token', '');
+  // }
+
   void autoSkipLogin() async {
     // final password = await CustomStorage().getStorage('password');
     // final username = await CustomStorage().getStorage('username');
     // print('$username and $password');
+    // final token = await CustomStorage().getStorage('token');
     group = await CustomStorage().getStorage('group');
     id = await CustomStorage().getStorage('id');
 
@@ -37,7 +43,8 @@ class _SplashPageState extends State<SplashPage> {
     if (group == 'siswa') {
       Navigator.pushNamedAndRemoveUntil(
           context, '/mainSiswa', (route) => false);
-      context.read<UserSiswaCubit>().getCurrentUser(id: id!);
+      // context.read<UserSiswaCubit>().getCurrentUser(id: id!);
+      context.read<UserSiswaCubit>().getCurrentUser();
     } else {
       Navigator.pushNamedAndRemoveUntil(context, '/auth', (route) => false);
     }

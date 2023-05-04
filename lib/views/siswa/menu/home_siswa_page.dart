@@ -1,10 +1,8 @@
 import 'package:absen_siswa_qr_code/cubit/user/siswa/user_siswa_cubit.dart';
 import 'package:absen_siswa_qr_code/models/user_model.dart';
-import 'package:absen_siswa_qr_code/utils/secure_storage.dart';
 import 'package:absen_siswa_qr_code/utils/theme.dart';
 import 'package:absen_siswa_qr_code/views/siswa/sub_menu/jadwal_page.dart';
 import 'package:absen_siswa_qr_code/views/siswa/sub_menu/mapel_page.dart';
-import 'package:absen_siswa_qr_code/views/siswa/sub_menu/qr_siswa_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -302,8 +300,9 @@ class HomeSiswaPage extends StatelessWidget {
           final user = state.userSiswa;
           return RefreshIndicator(
             onRefresh: () async {
-              final id = await CustomStorage().getStorage('id');
-              context.read<UserSiswaCubit>().getCurrentUser(id: id);
+              // final id = await CustomStorage().getStorage('id');
+              // context.read<UserSiswaCubit>().getCurrentUser(id: id);
+              context.read<UserSiswaCubit>().getCurrentUser();
             },
             color: kPrimaryColor,
             child: ListView(
@@ -316,8 +315,9 @@ class HomeSiswaPage extends StatelessWidget {
         } else if (state is UserSiswaFailed) {
           return RefreshIndicator(
             onRefresh: () async {
-              final id = await CustomStorage().getStorage('id');
-              context.read<UserSiswaCubit>().getCurrentUser(id: id);
+              // final id = await CustomStorage().getStorage('id');
+              // context.read<UserSiswaCubit>().getCurrentUser(id: id);
+              context.read<UserSiswaCubit>().getCurrentUser();
             },
             child: ListView(
               shrinkWrap: true,

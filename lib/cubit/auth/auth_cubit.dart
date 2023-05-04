@@ -1,5 +1,5 @@
 import 'package:absen_siswa_qr_code/models/auth_model.dart';
-import 'package:absen_siswa_qr_code/services/auth_service.dart';
+import 'package:absen_siswa_qr_code/services/dio_auth_service.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
 
@@ -12,7 +12,8 @@ class AuthCubit extends Cubit<AuthState> {
     try {
       emit(AuthLoading());
 
-      AuthModel userAuth = await AuthService().login(
+      // AuthModel userAuth = await AuthService().login(
+      AuthModel userAuth = await DioAuthSevice().dioLogin(
         username: username,
         password: password,
       );
@@ -26,7 +27,8 @@ class AuthCubit extends Cubit<AuthState> {
   void logOut() async {
     try {
       emit(AuthLoading());
-      await AuthService().logOut();
+      // await AuthService().logOut();
+      await DioAuthSevice().logOut();
       emit(AuthInitial());
     } catch (e) {
       emit(AuthFailed(e.toString()));

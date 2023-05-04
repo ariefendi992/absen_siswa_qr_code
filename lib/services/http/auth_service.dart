@@ -25,6 +25,9 @@ class AuthService {
     if (response.statusCode == 200) {
       await CustomStorage().setStorage('id', jsonResp['id'].toString());
       await CustomStorage().setStorage('group', jsonResp['group']);
+      await CustomStorage().setStorage('token', jsonResp['access_token']);
+      await CustomStorage()
+          .setStorage('refresh_token', jsonResp['refresh_token']);
       AuthModel auth = AuthModel.fromJson(jsonResp);
 
       return auth;
@@ -37,6 +40,8 @@ class AuthService {
     try {
       await CustomStorage().deleteKey('group');
       await CustomStorage().deleteKey('id');
+      await CustomStorage().deleteKey('token');
+      await CustomStorage().deleteKey('refresh_token');
     } catch (e) {
       rethrow;
     }

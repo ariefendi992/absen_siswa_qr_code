@@ -1,6 +1,4 @@
 import 'package:absen_siswa_qr_code/cubit/page/page_cubit.dart';
-import 'package:absen_siswa_qr_code/cubit/user/siswa/user_siswa_cubit.dart';
-import 'package:absen_siswa_qr_code/utils/secure_storage.dart';
 import 'package:absen_siswa_qr_code/utils/theme.dart';
 import 'package:absen_siswa_qr_code/views/siswa/menu/daftar_siswa.dart';
 import 'package:absen_siswa_qr_code/views/siswa/menu/home_siswa_page.dart';
@@ -22,18 +20,19 @@ class MainSiswaPage extends StatefulWidget {
 class _MainSiswaPageState extends State<MainSiswaPage> {
   String? id;
 
-  @override
-  void initState() {
-    super.initState();
-    getUserById();
-  }
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   // getUserById();
+  // }
 
-  void getUserById() async {
-    final id = await CustomStorage().getStorage('id');
-    if (id != null) {
-      context.read<UserSiswaCubit>().getCurrentUser(id: id.toString());
-    }
-  }
+  // void getUserById() async {
+  //   final id = await CustomStorage().getStorage('id');
+  //   if (id != null) {
+  //     // context.read<UserSiswaCubit>().getCurrentUser(id: id.toString());
+  //     context.read<UserSiswaCubit>().getCurrentUser();
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
