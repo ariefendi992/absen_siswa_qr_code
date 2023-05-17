@@ -1,12 +1,13 @@
 import 'package:absen_siswa_qr_code/models/auth_model.dart';
 import 'package:absen_siswa_qr_code/services/interceptor/dio_interceptor.dart';
 import 'package:absen_siswa_qr_code/utils/secure_storage.dart';
-import 'package:absen_siswa_qr_code/utils/url.dart';
 import 'package:dio/dio.dart';
 
 class DioAuthSevice {
   final Dio dio = Dio();
+  CustomStorage storage = CustomStorage();
   String? accessToken;
+  String? refreshToken;
 
   DioAuthSevice() {
     dio.interceptors.add(DioInterceptor());
@@ -17,49 +18,43 @@ class DioAuthSevice {
       'username': username,
       'password': password,
     };
-    final response = await dio.post('/api/v2/auth/login', data: loginData);
+    final response = await dio.post('auth/login', data: loginData);
 
-    final jsonResp = response.data;
+    final body = response.data;
+    print(body);
 
     if (response.statusCode == 200) {
-      await CustomStorage().setStorage('token', jsonResp['access_token']);
-      await CustomStorage()
-          .setStorage('refresh_token', jsonResp['refresh_token']);
-      await CustomStorage().setStorage('group', jsonResp['group']);
+      await storage.setStorage('id', body['id'].toString());
+      await storage.setStorage('access_token', body['access_token']);
+      await storage.setStorage('refresh_token', body['refresh_token']);
+      await storage.setStorage('group', body['group']);
+
+      DateTime setTimeString = DateTime.now().add(
+        Duration(
+          seconds: int.parse(body['jwt_refresh_token_exp']) - 60,
+        ),
+      );
+
+      await storage.setStorage('refTokenExp', setTimeString.toString());
+      // print(setTimeString.toLocal());
+
+      // print('TIME TO STRING [$setTimeString]');
       AuthModel auth = AuthModel.fromJson(response.data);
       return auth;
     } else {
-      throw (jsonResp['msg']);
+      throw (body['msg']);
     }
   }
 
   Future<void> logOut() async {
-    final response = await dio.delete('$baseUrl/api/v2/auth/logout');
+    final response = await dio.delete('auth/logout');
+    print(response.data);
 
     if (response.statusCode == 200) {
-      await CustomStorage().deleteKey('group');
-      await CustomStorage().deleteKey('id');
-      // await CustomStorage().deleteKey('token');
-      await CustomStorage().deleteKey('refresh_token');
-      print(response.data);
+      await storage.deleteKey('group');
+      await storage.deleteKey('id');
+      await storage.deleteKey('access_token');
+      await storage.deleteKey('refresh_token');
     }
   }
-
-  // Future<bool> refreshToken() async {
-  //   final refreshToken = await CustomStorage().getStorage('refresh_token');
-  //   final options = Options(headers: {'Authorization': 'Bearer $refreshToken'});
-  //   final response =
-  //       await dio.post('$baseUrl/api/v2/auth/refresh-token', options: options);
-
-  //   if (response.statusCode == 201) {
-  //     accessToken = response.data['access_token'];
-  //     await CustomStorage().setStorage('token', accessToken);
-  //     return true;
-  //   } else {
-  //     // refresh token is wrong
-  //     accessToken = null;
-  //     CustomStorage().deleteKey('token');
-  //     return false;
-  //   }
-  // }
 }

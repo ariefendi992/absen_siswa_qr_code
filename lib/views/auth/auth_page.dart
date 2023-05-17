@@ -48,6 +48,7 @@ class _AuthPageState extends State<AuthPage> {
       },
       child: Scaffold(
         body: SingleChildScrollView(
+          scrollDirection: Axis.vertical,
           child: Container(
             width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.height,

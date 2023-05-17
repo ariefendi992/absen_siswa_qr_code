@@ -3,7 +3,7 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 class CustomStorage {
   final storage = const FlutterSecureStorage();
 
-  Future setStorage(String key, value) async {
+  Future setStorage(dynamic key, value) async {
     await storage.write(key: key, value: value);
   }
 
@@ -18,5 +18,9 @@ class CustomStorage {
 
   Future deleteAllKey() async {
     await storage.deleteAll();
+  }
+
+  Future containsKey(String key) async {
+    await storage.containsKey(key: key);
   }
 }

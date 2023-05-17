@@ -313,6 +313,7 @@ class HomeSiswaPage extends StatelessWidget {
             ),
           );
         } else if (state is UserSiswaFailed) {
+          print(state.error);
           return RefreshIndicator(
             onRefresh: () async {
               // final id = await CustomStorage().getStorage('id');
@@ -338,6 +339,8 @@ class HomeSiswaPage extends StatelessWidget {
               ],
             ),
           );
+          // Navigator.pushNamedAndRemoveUntil(context, '/auth', (route) => false);
+          // return ;
         } else {
           return Center(
             child: CircularProgressIndicator(),

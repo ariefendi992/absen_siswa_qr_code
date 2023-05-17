@@ -10,7 +10,7 @@ class ApiUserSiswa {
   }
 
   Future<UserSiswaModel> getCurrentSiswa() async {
-    final response = await dio.get('/api/v2/student/single');
+    final response = await dio.get('student/single');
 
     final jsonResp = response.data;
     // print('dio getCurrentSiswa === ${jsonResp.toString()}');

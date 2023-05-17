@@ -1,10 +1,10 @@
 import 'package:absen_siswa_qr_code/cubit/page/page_cubit.dart';
 import 'package:absen_siswa_qr_code/utils/theme.dart';
-import 'package:absen_siswa_qr_code/views/siswa/menu/daftar_siswa.dart';
 import 'package:absen_siswa_qr_code/views/siswa/menu/home_siswa_page.dart';
 import 'package:absen_siswa_qr_code/views/siswa/menu/profil_siswa_page.dart';
-import 'package:absen_siswa_qr_code/views/siswa/menu/riwayat_absen.dart';
-import 'package:absen_siswa_qr_code/views/siswa/sub_menu/qr_siswa_page.dart';
+import 'package:absen_siswa_qr_code/views/siswa/menu/qr_siswa_page.dart';
+import 'package:absen_siswa_qr_code/views/siswa/sub_menu/daftar_siswa.dart';
+import 'package:absen_siswa_qr_code/views/siswa/sub_menu/riwayat_absen.dart';
 import 'package:absen_siswa_qr_code/views/widgets/button_bottom_app_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

@@ -39,7 +39,7 @@ class _MapelPageState extends State<MapelPage> {
         child: AppBar(
           foregroundColor: kBlackColor,
           backgroundColor: kBackgorundScaffold,
-          elevation: 6,
+          elevation: 2,
           title: Text(
             'Daftar MataPelajaran',
             style: TextStyle(
@@ -47,11 +47,11 @@ class _MapelPageState extends State<MapelPage> {
             ),
           ),
           centerTitle: true,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.only(
-              bottomRight: Radius.circular(30),
-            ),
-          ),
+          // shape: RoundedRectangleBorder(
+          //   borderRadius: BorderRadius.only(
+          //     bottomRight: Radius.circular(30),
+          //   ),
+          // ),
           leading: Builder(builder: (context) {
             return IconButton(
               onPressed: () {

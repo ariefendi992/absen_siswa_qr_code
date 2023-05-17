@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:absen_siswa_qr_code/cubit/page/page_cubit.dart';
 import 'package:absen_siswa_qr_code/cubit/user/siswa/user_siswa_cubit.dart';
 import 'package:absen_siswa_qr_code/utils/secure_storage.dart';
 import 'package:absen_siswa_qr_code/utils/theme.dart';
@@ -16,37 +17,65 @@ class SplashPage extends StatefulWidget {
 class _SplashPageState extends State<SplashPage> {
   String? id;
   String? group;
+  String? accessToken;
+  String? refTokenExp;
+  DateTime? stringToDateTime;
+  final DateTime now = DateTime.now();
+  CustomStorage storage = CustomStorage();
 
   @override
   void initState() {
     super.initState();
     // defaultToken();
+    autoLogout();
     Timer(Duration(seconds: 3), () {
       autoSkipLogin();
     });
   }
 
   // void defaultToken() async {
-  //   await CustomStorage().setStorage('token', '');
+  //   await storage.setStorage('token', '');
   // }
 
   void autoSkipLogin() async {
-    // final password = await CustomStorage().getStorage('password');
-    // final username = await CustomStorage().getStorage('username');
+    // final password = await storage.getStorage('password');
+    // final username = await storage.getStorage('username');
     // print('$username and $password');
-    // final token = await CustomStorage().getStorage('token');
-    group = await CustomStorage().getStorage('group');
-    id = await CustomStorage().getStorage('id');
+    final token = await storage.getStorage('access_token');
+    group = await storage.getStorage('group');
+    id = await storage.getStorage('id');
 
-    if (group != null) {}
-
-    if (group == 'siswa') {
-      Navigator.pushNamedAndRemoveUntil(
-          context, '/mainSiswa', (route) => false);
-      // context.read<UserSiswaCubit>().getCurrentUser(id: id!);
-      context.read<UserSiswaCubit>().getCurrentUser();
+    if (token != null && token.toString().isNotEmpty) {
+      if (group == 'siswa') {
+        Navigator.pushNamedAndRemoveUntil(
+            context, '/mainSiswa', (route) => false);
+        // context.read<UserSiswaCubit>().getCurrentUser(id: id!);
+        context.read<UserSiswaCubit>().getCurrentUser();
+      }
     } else {
       Navigator.pushNamedAndRemoveUntil(context, '/auth', (route) => false);
+    }
+  }
+
+  void autoLogout() async {
+    refTokenExp = await storage.getStorage('refTokenExp');
+
+    print(refTokenExp);
+
+    stringToDateTime = DateTime.tryParse(refTokenExp!);
+
+    // print(now.isAfter(stringToDateTime!.toUtc()));
+
+    if (refTokenExp != null && refTokenExp!.toString().isNotEmpty) {
+      if (now.isAfter(stringToDateTime!.toUtc())) {
+        setState(() {
+          storage.deleteKey('id');
+          storage.deleteKey('access_token');
+          storage.deleteKey('refresh_token');
+          context.read<PageCubit>().setPage(0);
+          // Navigator.pushNamedAndRemoveUntil(context, '/auth', (route) => false);
+        });
+      }
     }
   }
 

@@ -38,10 +38,10 @@ class JadwalPageSiswa extends StatelessWidget {
         body: Material(
           child: Column(
             children: [
-              GridView.count(
-                crossAxisCount: 6,
-                children: [],
-              )
+              // GridView.count(
+              //   crossAxisCount: 6,
+              //   children: [],
+              // )
             ],
           ),
         ));

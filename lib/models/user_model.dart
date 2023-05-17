@@ -9,6 +9,7 @@ class UserSiswaModel extends Equatable {
   final String? nisn;
   final String? gender;
   final String? qrCode;
+  final String? statusLoggedIn;
 
   const UserSiswaModel({
     required this.id,
@@ -19,6 +20,7 @@ class UserSiswaModel extends Equatable {
     required this.nisn,
     required this.gender,
     required this.qrCode,
+    this.statusLoggedIn,
   });
 
   factory UserSiswaModel.fromJson(Map<String, dynamic> json) {
@@ -31,6 +33,7 @@ class UserSiswaModel extends Equatable {
       nisn: json['nisn'],
       gender: json['gender'],
       qrCode: json['qr_code'],
+      statusLoggedIn: json['status_logged_in'],
     );
   }
 
