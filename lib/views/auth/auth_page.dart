@@ -254,10 +254,13 @@ class _AuthPageState extends State<AuthPage> {
                         BlocConsumer<AuthCubit, AuthState>(
                           listener: (context, state) {
                             if (state is AuthSuccess) {
-                              // if (state.userAuth.group == 'siswa') {
-                              Navigator.pushReplacementNamed(
-                                  context, '/mainSiswa');
-                              // }
+                              if (state.userAuth.group == 'siswa') {
+                                Navigator.pushReplacementNamed(
+                                    context, '/mainSiswa');
+                              } else if (state.userAuth.group == 'guru') {
+                                Navigator.pushNamedAndRemoveUntil(
+                                    context, '/mainGuru', (route) => false);
+                              }
                               context.read<UserSiswaCubit>().getCurrentUser();
                             } else if (state is AuthFailed) {
                               ScaffoldMessenger.of(context).showSnackBar(

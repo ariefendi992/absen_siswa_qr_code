@@ -33,14 +33,7 @@ class _SplashPageState extends State<SplashPage> {
     });
   }
 
-  // void defaultToken() async {
-  //   await storage.setStorage('token', '');
-  // }
-
   void autoSkipLogin() async {
-    // final password = await storage.getStorage('password');
-    // final username = await storage.getStorage('username');
-    // print('$username and $password');
     final token = await storage.getStorage('access_token');
     group = await storage.getStorage('group');
     id = await storage.getStorage('id');
@@ -49,7 +42,6 @@ class _SplashPageState extends State<SplashPage> {
       if (group == 'siswa') {
         Navigator.pushNamedAndRemoveUntil(
             context, '/mainSiswa', (route) => false);
-        // context.read<UserSiswaCubit>().getCurrentUser(id: id!);
         context.read<UserSiswaCubit>().getCurrentUser();
       }
     } else {
@@ -60,11 +52,7 @@ class _SplashPageState extends State<SplashPage> {
   void autoLogout() async {
     refTokenExp = await storage.getStorage('refTokenExp');
 
-    print(refTokenExp);
-
     stringToDateTime = DateTime.tryParse(refTokenExp!);
-
-    // print(now.isAfter(stringToDateTime!.toUtc()));
 
     if (refTokenExp != null && refTokenExp!.toString().isNotEmpty) {
       if (now.isAfter(stringToDateTime!.toUtc())) {
@@ -73,7 +61,6 @@ class _SplashPageState extends State<SplashPage> {
           storage.deleteKey('access_token');
           storage.deleteKey('refresh_token');
           context.read<PageCubit>().setPage(0);
-          // Navigator.pushNamedAndRemoveUntil(context, '/auth', (route) => false);
         });
       }
     }

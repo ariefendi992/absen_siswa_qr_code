@@ -36,16 +36,16 @@ class DioInterceptor extends QueuedInterceptorsWrapper {
 
   @override
   Future<void> onResponse(response, handler) async {
-    print(
-        'RESPONSE[${response.statusCode}] => PATH: ${response.requestOptions.path}');
+    // print(
+    //     'RESPONSE[${response.statusCode}] => PATH: ${response.requestOptions.path}');
     super.onResponse(response, handler);
   }
 
   @override
   Future<void> onError(error, handler) async {
     if (error.response != null) {
-      // print(
-      //     'ERROR[${error.response?.statusCode}] => PATH: ${error.requestOptions.path}');
+      print(
+          'ERROR[${error.response?.statusCode}] => PATH: ${error.requestOptions.path}');
 
       if (error.response!.statusCode == 401) {
         // print('The token has been expire');
@@ -87,8 +87,8 @@ class DioInterceptor extends QueuedInterceptorsWrapper {
             DioError(requestOptions: options),
           );
         } on DioError catch (e) {
+          print(e.toString());
           throw e.toString();
-          // print(e.toString());
           // if (error.response?.statusCode == 401) {}
           // print('Response ===> ${e.response?.statusCode}');
         }

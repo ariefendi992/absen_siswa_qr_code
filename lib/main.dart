@@ -4,6 +4,7 @@ import 'package:absen_siswa_qr_code/cubit/page/page_cubit.dart';
 import 'package:absen_siswa_qr_code/cubit/user/siswa/user_siswa_cubit.dart';
 import 'package:absen_siswa_qr_code/utils/theme.dart';
 import 'package:absen_siswa_qr_code/views/auth/auth_page.dart';
+import 'package:absen_siswa_qr_code/views/guru/main_guru_page.dart';
 import 'package:absen_siswa_qr_code/views/siswa/main_siswa_page.dart';
 import 'package:absen_siswa_qr_code/views/siswa/sub_menu/daftar_siswa.dart';
 import 'package:absen_siswa_qr_code/views/siswa/sub_menu/riwayat_absen.dart';
@@ -41,6 +42,8 @@ class MyApp extends StatelessWidget {
           '/mainSiswa': (context) => const MainSiswaPage(),
           '/riwayat': (context) => const RiwayatAbsensiSiswaPage(),
           '/daftarSiswa': (context) => const DaftarKelasSiswaPage(),
+          // MAIN MENU GURU
+          '/mainGuru': (context) => const MainGuruPage(),
         },
       ),
     );

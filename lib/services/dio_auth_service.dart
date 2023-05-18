@@ -1,6 +1,7 @@
 import 'package:absen_siswa_qr_code/models/auth_model.dart';
 import 'package:absen_siswa_qr_code/services/interceptor/dio_interceptor.dart';
 import 'package:absen_siswa_qr_code/utils/secure_storage.dart';
+import 'package:absen_siswa_qr_code/utils/url.dart';
 import 'package:dio/dio.dart';
 
 class DioAuthSevice {
@@ -18,10 +19,11 @@ class DioAuthSevice {
       'username': username,
       'password': password,
     };
-    final response = await dio.post('auth/login', data: loginData);
+    final response =
+        await dio.post('$baseUrl/api/v2/auth/login', data: loginData);
 
     final body = response.data;
-    print(body);
+    // print(body);
 
     if (response.statusCode == 200) {
       await storage.setStorage('id', body['id'].toString());

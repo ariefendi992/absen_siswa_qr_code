@@ -1,5 +1,6 @@
 import 'package:absen_siswa_qr_code/models/auth_model.dart';
 import 'package:absen_siswa_qr_code/services/dio_auth_service.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
 
@@ -19,8 +20,8 @@ class AuthCubit extends Cubit<AuthState> {
       );
 
       emit(AuthSuccess(userAuth));
-    } catch (e) {
-      emit(AuthFailed(e.toString()));
+    } on DioError catch (e) {
+      emit(AuthFailed('${e.response?.data["msg"]}'));
     }
   }
 
