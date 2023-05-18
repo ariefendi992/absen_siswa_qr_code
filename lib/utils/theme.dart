@@ -4,6 +4,16 @@ Color kBackgorundScaffold = Color(0XFFFFFFFF);
 Color kPrimaryColor = Color(0XFF674AEF);
 // Color kPrimaryColor = Color(0XFF0603A0);
 // Color kPrimaryColor = Color(0XFF0429B3);
+Color primary = Color(0xFF266EF1);
+Color primarySoft = Color(0xFF548DF3);
+Color primaryExtraSoft = Color(0xFFEFF3FC);
+Color secondary = Color(0xFF1B1F24);
+Color secondarySoft = Color(0xFF9D9D9D);
+Color secondaryExtraSoft = Color(0xFFE9E9E9);
+Color error = Color(0xFFD00E0E);
+Color success = Color(0xFF16AE26);
+Color warning = Color(0xFFEB8600);
+
 Color kWhiteColor = Color(0XFFFFFFFF);
 Color kBlackColor = Color(0XFF1E272E);
 Color kGreyBackgroundColor = Color(0XFFF1F2F6);
@@ -51,7 +61,7 @@ FontWeight light = FontWeight.w300;
 FontWeight regular = FontWeight.w400;
 FontWeight medium = FontWeight.w500;
 FontWeight semiBold = FontWeight.w600;
-FontWeight bold = FontWeight.bold;
+FontWeight bold = FontWeight.w700;
 
 double defaultRadius = 20;
 double defaultPadding = 20;

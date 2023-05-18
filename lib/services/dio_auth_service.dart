@@ -31,6 +31,8 @@ class DioAuthSevice {
       await storage.setStorage('refresh_token', body['refresh_token']);
       await storage.setStorage('group', body['group']);
 
+      print(response.data);
+
       DateTime setTimeString = DateTime.now().add(
         Duration(
           seconds: int.parse(body['jwt_refresh_token_exp']) - 60,

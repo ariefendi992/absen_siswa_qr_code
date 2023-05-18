@@ -11,6 +11,7 @@ import 'package:absen_siswa_qr_code/views/siswa/sub_menu/riwayat_absen.dart';
 import 'package:absen_siswa_qr_code/views/splash_page.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
+// import 'package:google_fonts/google_fonts.dart';
 
 void main() {
   // final CustomStorage storage = CustomStorage();
@@ -24,6 +25,8 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // final textTheme = Theme.of(context).textTheme;
+
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (context) => AuthCubit()),
@@ -33,8 +36,13 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         theme: ThemeData(
-            scaffoldBackgroundColor: kBackgorundScaffold,
-            fontFamily: 'GoogleSans'),
+          scaffoldBackgroundColor: kBackgorundScaffold,
+          fontFamily: 'GoogleSans',
+          // fontFamily: GoogleFonts.poppins().fontFamily,
+          // fontFamily: 'Poppins',
+          // textTheme: GoogleFonts.poppinsTextTheme(textTheme).copyWith(
+          //     bodyText2: GoogleFonts.poppins(textStyle: textTheme.bodyText2)),
+        ),
         debugShowCheckedModeBanner: false,
         routes: {
           '/': (context) => const SplashPage(),

@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:absen_siswa_qr_code/cubit/page/page_cubit.dart';
 import 'package:absen_siswa_qr_code/cubit/user/siswa/user_siswa_cubit.dart';
 import 'package:absen_siswa_qr_code/utils/secure_storage.dart';
@@ -21,7 +20,7 @@ class _SplashPageState extends State<SplashPage> {
   String? refTokenExp;
   DateTime? stringToDateTime;
   final DateTime now = DateTime.now();
-  CustomStorage storage = CustomStorage();
+  final storage = CustomStorage();
 
   @override
   void initState() {
@@ -36,6 +35,7 @@ class _SplashPageState extends State<SplashPage> {
   void autoSkipLogin() async {
     final token = await storage.getStorage('access_token');
     group = await storage.getStorage('group');
+    print(token);
     id = await storage.getStorage('id');
 
     if (token != null && token.toString().isNotEmpty) {
@@ -55,9 +55,8 @@ class _SplashPageState extends State<SplashPage> {
   void autoLogout() async {
     refTokenExp = await storage.getStorage('refTokenExp');
 
-    stringToDateTime = DateTime.tryParse(refTokenExp!);
-
     if (refTokenExp != null && refTokenExp!.toString().isNotEmpty) {
+      stringToDateTime = DateTime.tryParse(refTokenExp!);
       if (now.isAfter(stringToDateTime!.toUtc())) {
         setState(() {
           storage.deleteKey('id');

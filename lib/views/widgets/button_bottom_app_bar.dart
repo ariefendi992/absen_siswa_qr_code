@@ -7,14 +7,16 @@ class ButtonAppBarWidget extends StatelessWidget {
   final String title;
   final IconData? iconPrimary;
   final IconData? iconSecondary;
+  final Color? colors;
   final int? index;
 
-  const ButtonAppBarWidget({
+  ButtonAppBarWidget({
     super.key,
     required this.title,
     this.iconPrimary,
     this.iconSecondary,
     this.index,
+    this.colors,
   });
 
   @override
@@ -33,7 +35,9 @@ class ButtonAppBarWidget extends StatelessWidget {
             //   borderRadius: BorderRadius.circular(32),
             child: GestureDetector(
               onTap: () {
-                context.read<PageCubit>().setPage(index!);
+                index != null
+                    ? context.read<PageCubit>().setPage(index!)
+                    : null;
               },
               child: Container(
                 decoration: BoxDecoration(
@@ -47,7 +51,9 @@ class ButtonAppBarWidget extends StatelessWidget {
                           ? iconPrimary
                           : iconSecondary,
                       color: context.read<PageCubit>().state == index
-                          ? kPrimaryColor
+                          ? colors == null
+                              ? kPrimaryColor
+                              : colors
                           : kGreyColor,
                       size: 26,
                     ),
@@ -60,7 +66,9 @@ class ButtonAppBarWidget extends StatelessWidget {
                         fontSize: 12,
                         fontWeight: medium,
                         color: context.read<PageCubit>().state == index
-                            ? kPrimaryColor
+                            ? colors == null
+                                ? kPrimaryColor
+                                : colors
                             : kGreyColor,
                       ),
                     )
