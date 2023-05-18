@@ -43,6 +43,9 @@ class _SplashPageState extends State<SplashPage> {
         Navigator.pushNamedAndRemoveUntil(
             context, '/mainSiswa', (route) => false);
         context.read<UserSiswaCubit>().getCurrentUser();
+      } else if (group == 'guru') {
+        Navigator.pushNamedAndRemoveUntil(
+            context, '/mainGuru', (route) => false);
       }
     } else {
       Navigator.pushNamedAndRemoveUntil(context, '/auth', (route) => false);
