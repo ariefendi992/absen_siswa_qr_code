@@ -178,7 +178,7 @@ class _GuruScanPageState extends State<GuruScanPage> {
                             ),
                           ),
                           Text(
-                            torchOn ? 'Front Camera' : 'Rear Camera',
+                            frontCamera ? 'Front Camera' : 'Rear Camera',
                             style: TextStyle(
                               color: kWhiteColor,
                             ),
