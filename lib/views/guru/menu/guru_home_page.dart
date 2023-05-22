@@ -1,5 +1,7 @@
+import 'package:absen_siswa_qr_code/cubit/user/guru/user_guru_cubit.dart';
 import 'package:absen_siswa_qr_code/utils/theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 // import 'package:google_fonts/google_fonts.dart';
 
 class GuruHomePage extends StatelessWidget {
@@ -7,11 +9,11 @@ class GuruHomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      extendBody: true,
-      body: ListView(
+    /// * START --> SUCCESS STATE
+    Widget successState(state) {
+      return ListView(
         shrinkWrap: true,
-        physics: BouncingScrollPhysics(),
+        // physics: BouncingScrollPhysics(),
         padding: EdgeInsets.symmetric(horizontal: 20, vertical: 36),
         children: [
           SizedBox(height: 16),
@@ -20,40 +22,42 @@ class GuruHomePage extends StatelessWidget {
             width: MediaQuery.of(context).size.width,
             child: Row(
               children: [
-                ClipOval(
-                  child: Container(
-                    width: 42,
-                    height: 42,
-                    child: Container(
-                      color: primary,
-                      child: Center(
-                        child: Text(
-                          'AE',
-                          style: TextStyle(
-                              color: kWhiteColor,
-                              fontSize: 20,
-                              fontWeight: medium),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-                SizedBox(width: 24),
+                // ClipOval(
+                //   child: Container(
+                //     width: 42,
+                //     height: 42,
+                //     child: Container(
+                //       color: primary,
+                //       child: Center(
+                //         child: Text(
+                //           '${state.userGuru.firstName}',
+                //           style: TextStyle(
+                //               color: kWhiteColor,
+                //               fontSize: 20,
+                //               fontWeight: medium),
+                //         ),
+                //       ),
+                //     ),
+                //   ),
+                // ),
+                // SizedBox(width: 24),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
                       'selamat datang',
                       style: TextStyle(
-                        fontSize: 12,
+                        fontSize: 14,
                         color: secondarySoft,
                       ),
                     ),
                     SizedBox(height: 4),
                     Text(
-                      'Ari Efendi',
+                      '${state.userGuru.firstName} ${state.userGuru.lastName}',
                       style: TextStyle(
                         fontWeight: medium,
+                        fontSize: 17,
+                        letterSpacing: 0.5,
                       ),
                     )
                   ],
@@ -64,13 +68,13 @@ class GuruHomePage extends StatelessWidget {
           Container(
             decoration: BoxDecoration(
               color: primary,
-              borderRadius: BorderRadius.circular(8),
+              borderRadius: BorderRadius.circular(18),
               image: DecorationImage(
                 image: AssetImage('assets/images/pattern-1.png'),
                 fit: BoxFit.cover,
               ),
             ),
-            padding: EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -83,7 +87,7 @@ class GuruHomePage extends StatelessWidget {
                 ),
                 SizedBox(height: 4),
                 Text(
-                  '196204141987032019',
+                  '${state.userGuru.nip}',
                   style: TextStyle(
                     fontSize: 18,
                     color: kWhiteColor,
@@ -104,11 +108,14 @@ class GuruHomePage extends StatelessWidget {
                         child: Column(
                           children: [
                             Text(
-                              'Pendidikan Jasmani, Olahraga & Kesehatan',
+                              '${state.userGuru.mapel}',
                               style: TextStyle(
-                                fontSize: 14,
+                                fontSize: 16,
                                 color: kWhiteColor,
+                                fontWeight: medium,
+                                letterSpacing: 1,
                               ),
+                              textAlign: TextAlign.center,
                             )
                           ],
                         ),
@@ -120,6 +127,60 @@ class GuruHomePage extends StatelessWidget {
             ),
           ),
         ],
+      );
+    }
+
+    /// * END --> SUCCESS STATE
+
+    /// * START --> FAIL STATE
+    Widget failedState(state) {
+      return ListView(
+        children: [
+          Container(
+            height: MediaQuery.of(context).size.height,
+            alignment: Alignment.center,
+            child: Center(
+              child: Text(
+                state.error,
+                style: TextStyle(
+                  fontWeight: medium,
+                  fontSize: 15,
+                ),
+              ),
+            ),
+          ),
+        ],
+      );
+    }
+
+    return Scaffold(
+      extendBody: true,
+      body: BlocBuilder<UserGuruCubit, UserGuruState>(
+        builder: (context, state) {
+          /// * SUCCESS STATE
+          if (state is UserGuruSuccess) {
+            return RefreshIndicator(
+              onRefresh: () async {
+                context.read<UserGuruCubit>().currenUserGuru();
+              },
+              child: successState(state),
+            );
+          }
+
+          /// * FAILED STATE
+          else if (state is UserGuruFailed) {
+            return RefreshIndicator(
+              onRefresh: () async {
+                context.read<UserGuruCubit>().currenUserGuru();
+              },
+              child: failedState(state),
+            );
+          } else {
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+        },
       ),
     );
   }

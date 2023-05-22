@@ -23,15 +23,12 @@ class DioAuthSevice {
         await dio.post('$baseUrl/api/v2/auth/login', data: loginData);
 
     final body = response.data;
-    // print(body);
 
     if (response.statusCode == 200) {
       await storage.setStorage('id', body['id'].toString());
       await storage.setStorage('access_token', body['access_token']);
       await storage.setStorage('refresh_token', body['refresh_token']);
       await storage.setStorage('group', body['group']);
-
-      print(response.data);
 
       DateTime setTimeString = DateTime.now().add(
         Duration(
@@ -40,9 +37,7 @@ class DioAuthSevice {
       );
 
       await storage.setStorage('refTokenExp', setTimeString.toString());
-      // print(setTimeString.toLocal());
 
-      // print('TIME TO STRING [$setTimeString]');
       AuthModel auth = AuthModel.fromJson(response.data);
       return auth;
     } else {
@@ -52,13 +47,13 @@ class DioAuthSevice {
 
   Future<void> logOut() async {
     final response = await dio.delete('auth/logout');
-    print(response.data);
 
     if (response.statusCode == 200) {
       await storage.deleteKey('group');
       await storage.deleteKey('id');
       await storage.deleteKey('access_token');
       await storage.deleteKey('refresh_token');
+      await storage.deleteKey('today');
     }
   }
 }

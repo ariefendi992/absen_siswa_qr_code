@@ -1,4 +1,5 @@
 import 'package:absen_siswa_qr_code/cubit/auth/auth_cubit.dart';
+import 'package:absen_siswa_qr_code/cubit/user/guru/user_guru_cubit.dart';
 import 'package:absen_siswa_qr_code/cubit/user/siswa/user_siswa_cubit.dart';
 import 'package:absen_siswa_qr_code/utils/secure_storage.dart';
 import 'package:absen_siswa_qr_code/utils/theme.dart';
@@ -261,6 +262,7 @@ class _AuthPageState extends State<AuthPage> {
                               } else if (state.userAuth.group == 'guru') {
                                 Navigator.pushNamedAndRemoveUntil(
                                     context, '/mainGuru', (route) => false);
+                                context.read<UserGuruCubit>().currenUserGuru();
                               }
                             } else if (state is AuthFailed) {
                               ScaffoldMessenger.of(context).showSnackBar(

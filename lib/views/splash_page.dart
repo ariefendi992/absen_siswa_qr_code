@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:absen_siswa_qr_code/cubit/page/page_cubit.dart';
+import 'package:absen_siswa_qr_code/cubit/user/guru/user_guru_cubit.dart';
 import 'package:absen_siswa_qr_code/cubit/user/siswa/user_siswa_cubit.dart';
 import 'package:absen_siswa_qr_code/utils/secure_storage.dart';
 import 'package:absen_siswa_qr_code/utils/theme.dart';
@@ -35,9 +36,7 @@ class _SplashPageState extends State<SplashPage> {
   void autoSkipLogin() async {
     final token = await storage.getStorage('access_token');
     group = await storage.getStorage('group');
-    // print(token);
     id = await storage.getStorage('id');
-
     if (token != null && token.toString().isNotEmpty) {
       if (group == 'siswa') {
         Navigator.pushNamedAndRemoveUntil(
@@ -46,6 +45,7 @@ class _SplashPageState extends State<SplashPage> {
       } else if (group == 'guru') {
         Navigator.pushNamedAndRemoveUntil(
             context, '/mainGuru', (route) => false);
+        context.read<UserGuruCubit>().currenUserGuru();
       }
     } else {
       Navigator.pushNamedAndRemoveUntil(context, '/auth', (route) => false);

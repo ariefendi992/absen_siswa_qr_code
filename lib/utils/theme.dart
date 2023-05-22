@@ -10,8 +10,12 @@ Color primaryExtraSoft = Color(0xFFEFF3FC);
 Color secondary = Color(0xFF1B1F24);
 Color secondarySoft = Color(0xFF9D9D9D);
 Color secondaryExtraSoft = Color(0xFFE9E9E9);
-Color error = Color(0xFFD00E0E);
-Color success = Color(0xFF16AE26);
+Color errorPrimary = Color(0xFFD00E0E);
+Color errorSoft = Color(0xFFE34648);
+Color errorExtraSoft = Color(0xFFFFD9D8);
+Color successPrimary = Color(0xFF16AE26);
+Color successSoft = Color(0xFF21B69D);
+Color successExtraSoft = Color(0xFFD6F8F1);
 Color warning = Color(0xFFEB8600);
 
 Color kWhiteColor = Color(0XFFFFFFFF);

@@ -12,6 +12,7 @@ class UserSiswaModel extends Equatable {
   final String? statusLoggedIn;
   final String? picture;
   final String? semester;
+  final String? today;
 
   const UserSiswaModel({
     required this.id,
@@ -25,6 +26,7 @@ class UserSiswaModel extends Equatable {
     this.statusLoggedIn,
     this.picture,
     this.semester,
+    this.today,
   });
 
   factory UserSiswaModel.fromJson(Map<String, dynamic> json) {
@@ -40,10 +42,62 @@ class UserSiswaModel extends Equatable {
       picture: json['picture'],
       semester: json['semester'],
       statusLoggedIn: json['status_logged_in'],
+      today: json['today'],
     );
   }
 
   @override
   List<Object?> get props =>
       [id, firstName, lastName, kelas, nisn, gender, kelasId, qrCode];
+}
+
+class UserGuruModel extends Equatable {
+  final int? id;
+  final String? nip;
+  final String? firstName;
+  final String? lastName;
+  final String? gender;
+  final String? agama;
+  final String? alamat;
+  final String? telp;
+  final String? mapel;
+
+  const UserGuruModel({
+    required this.id,
+    required this.nip,
+    required this.firstName,
+    required this.lastName,
+    required this.gender,
+    this.agama,
+    this.alamat,
+    this.telp,
+    this.mapel,
+  });
+
+  factory UserGuruModel.fromJson(Map<String, dynamic> json) {
+    return UserGuruModel(
+      id: json['id'],
+      nip: json['nip'],
+      firstName: json['first_name'],
+      lastName: json['last_name'],
+      gender: json['gender'],
+      agama: json['agama'],
+      alamat: json['alamat'],
+      telp: json['telp'],
+      mapel: json['mapel'],
+    );
+  }
+
+  @override
+  List<Object?> get props => [
+        id,
+        nip,
+        firstName,
+        lastName,
+        gender,
+        agama,
+        alamat,
+        telp,
+        mapel,
+      ];
 }
