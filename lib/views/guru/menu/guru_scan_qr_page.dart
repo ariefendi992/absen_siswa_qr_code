@@ -1,8 +1,7 @@
-import 'package:absen_siswa_qr_code/cubit/page/page_cubit.dart';
 import 'package:absen_siswa_qr_code/utils/theme.dart';
+import 'package:absen_siswa_qr_code/views/guru/sub_menu/guru_result_scan_page.dart';
 import 'package:absen_siswa_qr_code/views/widgets/screen_cam_overlay.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 
 class GuruScanPage extends StatefulWidget {
@@ -24,19 +23,31 @@ class _GuruScanPageState extends State<GuruScanPage> {
 
     if (!cameraOpened)
       for (final barcode in barcodes) {
-        print('Barcode ===> [$barcode]');
-        print(barcode.rawValue);
-        // cameraOpened = true;
-        final String code = barcode.rawValue ?? '___';
-        debugPrint(code);
-
-        // setState(() {});
+        cameraOpened = true;
+        final String username = barcode.rawValue ?? '___';
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) {
+              return GuruResultScanPage(
+                username: username,
+                closeCameraScreen: closeCameraScreen,
+              );
+            },
+          ),
+        );
       }
+  }
+
+  void closeCameraScreen() {
+    cameraOpened = false;
   }
 
   @override
   void initState() {
     super.initState();
+    cameraOpened = false;
+    cameraController.stop();
   }
 
   @override
@@ -48,6 +59,7 @@ class _GuruScanPageState extends State<GuruScanPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: kBlackColor,
       extendBodyBehindAppBar: true,
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(60),
@@ -67,12 +79,11 @@ class _GuruScanPageState extends State<GuruScanPage> {
             builder: (context) {
               return IconButton(
                 onPressed: () {
-                  context.read<PageCubit>().setPage(0);
-                  Navigator.pushNamedAndRemoveUntil(
-                      context, '/mainGuru', (route) => false);
+                  // context.read<PageCubit>().setPage(0);
+
+                  Navigator.pop(context);
                   setState(() {
                     cameraOpened = false;
-                    print(cameraOpened);
                   });
                   cameraController.stop();
                 },

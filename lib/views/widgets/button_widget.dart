@@ -8,6 +8,8 @@ class ButtonWidget extends StatelessWidget {
   final double fontSize;
   final margin;
   final Function() onTap;
+  final Color? colors;
+  final double borderRadiusCircular;
 
   const ButtonWidget({
     super.key,
@@ -17,13 +19,15 @@ class ButtonWidget extends StatelessWidget {
     this.width = double.infinity,
     this.fontSize = 22,
     this.margin = EdgeInsets.zero,
+    this.colors,
+    this.borderRadiusCircular = 10,
   });
 
   @override
   Widget build(BuildContext context) {
     return Material(
-      borderRadius: BorderRadius.circular(10),
-      color: kPrimaryColor,
+      borderRadius: BorderRadius.circular(borderRadiusCircular),
+      color: colors == null ? kPrimaryColor : colors,
       child: InkWell(
         onTap: onTap,
         child: Container(
@@ -35,8 +39,8 @@ class ButtonWidget extends StatelessWidget {
               style: TextStyle(
                 fontSize: fontSize,
                 color: kWhiteColor,
-                fontWeight: bold,
-                letterSpacing: 0.6,
+                fontWeight: medium,
+                letterSpacing: 1,
               ),
             ),
           ),

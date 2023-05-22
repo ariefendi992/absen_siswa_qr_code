@@ -21,4 +21,20 @@ class ApiUserSiswa {
       throw (jsonResp['msg']);
     }
   }
+
+  Future<UserSiswaModel> getSiswaByUsername({required String username}) async {
+    final response = await dio.get('/student/single-siswa?nisn=$username');
+
+    final body = response.data;
+
+    print('PRINT FROM DIO USER SERVICE BY NISN ==>> $body');
+
+    if (response.statusCode == 200) {
+      UserSiswaModel userSiswa = UserSiswaModel.fromJson(body);
+
+      return userSiswa;
+    } else {
+      throw (body['msg'].toString());
+    }
+  }
 }

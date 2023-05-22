@@ -35,7 +35,7 @@ class _SplashPageState extends State<SplashPage> {
   void autoSkipLogin() async {
     final token = await storage.getStorage('access_token');
     group = await storage.getStorage('group');
-    print(token);
+    // print(token);
     id = await storage.getStorage('id');
 
     if (token != null && token.toString().isNotEmpty) {
