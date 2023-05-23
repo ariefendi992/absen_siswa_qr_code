@@ -263,24 +263,24 @@ class _GuruResultScanPageState extends State<GuruResultScanPage> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
-                              ButtonKeterangan(
+                              ButtonMenuKeterangan(
                                 icons: Icons.check,
                                 iconColors: successPrimary,
                                 title: 'Siswa Hadir',
                               ),
-                              ButtonKeterangan(
+                              ButtonMenuKeterangan(
                                 icons: Icons.close,
                                 iconColors: kErrorColor,
                                 bgColors: errorExtraSoft,
                                 title: 'Siswa Absen',
                               ),
-                              ButtonKeterangan(
+                              ButtonMenuKeterangan(
                                 icons: Icons.notes,
                                 iconColors: primary,
                                 bgColors: primaryExtraSoft,
                                 title: 'Siswa Izin',
                               ),
-                              ButtonKeterangan(
+                              ButtonMenuKeterangan(
                                 icons: Icons.add_box,
                                 iconColors: successSoft,
                                 bgColors: successExtraSoft,

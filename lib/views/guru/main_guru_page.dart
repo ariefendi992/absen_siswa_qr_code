@@ -38,7 +38,7 @@ class MainGuruPage extends StatelessWidget {
               iconSecondary: Icons.home_outlined,
               colors: primary,
             ),
-            ButtonAppBarWidget(title: 'Absen QR'),
+            ButtonAppBarWidget(title: 'Scan QR'),
             ButtonAppBarWidget(
               title: 'Akun',
               index: 1,

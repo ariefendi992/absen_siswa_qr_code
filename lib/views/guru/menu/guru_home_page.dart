@@ -1,5 +1,6 @@
 import 'package:absen_siswa_qr_code/cubit/user/guru/user_guru_cubit.dart';
 import 'package:absen_siswa_qr_code/utils/theme.dart';
+import 'package:absen_siswa_qr_code/views/widgets/button_keterangan.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 // import 'package:google_fonts/google_fonts.dart';
@@ -126,6 +127,87 @@ class GuruHomePage extends StatelessWidget {
               ],
             ),
           ),
+          Container(
+            margin: EdgeInsets.only(top: 18),
+            width: MediaQuery.of(context).size.height,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Pilihan',
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: secondary,
+                    fontWeight: medium,
+                  ),
+                ),
+                SizedBox(height: 4),
+                Container(
+                  width: MediaQuery.of(context).size.width,
+                  margin: EdgeInsets.only(top: 4),
+                  padding: EdgeInsets.symmetric(horizontal: 10, vertical: 12),
+                  decoration: BoxDecoration(
+                      color: secondaryExtraSoft.withAlpha(100),
+                      borderRadius: BorderRadius.circular(18),
+                      boxShadow: [
+                        BoxShadow(
+                          color: secondaryExtraSoft.withAlpha(120),
+                          blurRadius: 6,
+                          offset: Offset(2, 2),
+                        )
+                      ]),
+                  child: Container(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        ButtonMenuKeterangan(
+                          icons: Icons.calendar_month_rounded,
+                          iconColors: errorSoft,
+                          height: 56,
+                          width: 56,
+                          iconSize: 32,
+                          title: 'JadwalMengajar',
+                        ),
+                        ButtonMenuKeterangan(
+                          icons: Icons.people_alt_rounded,
+                          iconColors: allColor[1],
+                          height: 56,
+                          width: 56,
+                          iconSize: 32,
+                          title: 'DaftarKelas',
+                        ),
+                        ButtonMenuKeterangan(
+                          icons: Icons.history_edu_rounded,
+                          iconColors: allColor[4],
+                          height: 56,
+                          width: 56,
+                          iconSize: 32,
+                          title: 'RiwayatAbsen',
+                        ),
+                      ],
+                    ),
+                  ),
+                )
+              ],
+            ),
+          ),
+          Container(
+            margin: EdgeInsets.only(top: 18),
+            width: MediaQuery.of(context).size.width,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Jadwal hari ini',
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: secondary,
+                    fontWeight: medium,
+                  ),
+                ),
+              ],
+            ),
+          )
         ],
       );
     }

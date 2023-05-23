@@ -26,7 +26,7 @@ class ApiUserSiswa {
   }
 
   Future<UserSiswaModel> getSiswaByUsername({required String username}) async {
-    final response = await dio.get('/student/single-siswa?nisn=$username');
+    final response = await dio.get('/guru/single-siswa?nisn=$username');
 
     final body = response.data;
 

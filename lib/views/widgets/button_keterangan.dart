@@ -1,20 +1,32 @@
 import 'package:absen_siswa_qr_code/utils/theme.dart';
 import 'package:flutter/material.dart';
 
-class ButtonKeterangan extends StatelessWidget {
+class ButtonMenuKeterangan extends StatelessWidget {
   final IconData icons;
   final Color iconColors;
   final Color? bgColors;
   final Function()? onTap;
   final String? title;
+  final double? width;
+  final double? height;
+  final double? iconSize;
+  final double? fontSize;
+  final FontWeight? fontWeight;
+  final Color? fontColor;
 
-  const ButtonKeterangan({
+  const ButtonMenuKeterangan({
     super.key,
+    this.bgColors,
+    this.fontColor,
+    this.fontWeight,
+    this.fontSize = 14,
+    this.height = 40,
     required this.icons,
     required this.iconColors,
-    this.bgColors,
+    this.iconSize = 26,
     this.onTap,
     this.title = 'title',
+    this.width = 40,
   });
 
   @override
@@ -25,8 +37,8 @@ class ButtonKeterangan extends StatelessWidget {
         children: [
           ClipOval(
             child: Container(
-              width: 40,
-              height: 40,
+              width: width,
+              height: height,
               padding: EdgeInsets.all(1.8),
               color: iconColors,
               child: ClipOval(
@@ -35,7 +47,7 @@ class ButtonKeterangan extends StatelessWidget {
                   child: Icon(
                     icons,
                     color: iconColors,
-                    size: 26,
+                    size: iconSize,
                   ),
                 ),
               ),
@@ -45,9 +57,9 @@ class ButtonKeterangan extends StatelessWidget {
           Text(
             '$title',
             style: TextStyle(
-              fontSize: 14,
-              fontWeight: medium,
-              color: secondary.withOpacity(0.7),
+              fontSize: fontSize,
+              fontWeight: fontWeight ?? medium,
+              color: fontColor ?? secondary.withOpacity(0.7),
             ),
           )
         ],
