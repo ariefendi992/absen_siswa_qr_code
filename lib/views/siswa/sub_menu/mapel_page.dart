@@ -1,4 +1,4 @@
-import 'package:absen_siswa_qr_code/cubit/master/siswa_mapel_cubit.dart';
+import 'package:absen_siswa_qr_code/cubit/master/jadwal_mapel_cubit.dart';
 import 'package:absen_siswa_qr_code/cubit/page/page_cubit.dart';
 import 'package:absen_siswa_qr_code/models/master_model.dart';
 import 'package:absen_siswa_qr_code/utils/theme.dart';
@@ -19,7 +19,7 @@ class _MapelPageState extends State<MapelPage> {
   @override
   void initState() {
     super.initState();
-    context.read<SiswaMapelCubit>().getMapelByKelasId(id: widget.id);
+    context.read<JadwalMapelCubit>().getMapelByKelasId(id: widget.id);
   }
 
   @override
@@ -72,9 +72,9 @@ class _MapelPageState extends State<MapelPage> {
             right: 10,
             bottom: 10,
           ),
-          child: BlocConsumer<SiswaMapelCubit, SiswaMapelState>(
+          child: BlocConsumer<JadwalMapelCubit, JadwalMapelState>(
             listener: (context, state) {
-              if (state is SiswaMapelFailed) {
+              if (state is JadwalMapelFailed) {
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
                     content: Text(state.error),
@@ -83,10 +83,10 @@ class _MapelPageState extends State<MapelPage> {
               }
             },
             builder: (context, state) {
-              if (state is SiswaMapelSuccess) {
+              if (state is JadwalMapelSuccess) {
                 return ListView(
                   children: [
-                    mapel(state.mapels),
+                    mapel(state.mapels!),
                     Container(
                       margin: EdgeInsets.only(
                         bottom: 30,
@@ -139,7 +139,7 @@ class _MapelPageState extends State<MapelPage> {
                                       ),
                                       SizedBox(width: 7),
                                       Text(
-                                        '${state.mapels.length}',
+                                        '${state.mapels!.length}',
                                         style: TextStyle(
                                             fontSize: 18,
                                             color: kWhiteColor,

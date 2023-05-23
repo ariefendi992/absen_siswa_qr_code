@@ -1,3 +1,4 @@
+import 'package:absen_siswa_qr_code/models/master_model.dart';
 import 'package:absen_siswa_qr_code/models/user_model.dart';
 import 'package:absen_siswa_qr_code/services/interceptor/dio_interceptor.dart';
 import 'package:absen_siswa_qr_code/utils/secure_storage.dart';
@@ -63,6 +64,24 @@ class ApiUserGuru {
       UserGuruModel userGuru = UserGuruModel.fromJson(body);
 
       return userGuru;
+    } else {
+      throw (body['msg'].toString());
+    }
+  }
+
+  Future<List<JadwalMengajarHarianModel>> getJadwalMengajarHarian() async {
+    final response = await dio.get('/guru/jadwal-harian');
+
+    final body = response.data['data'];
+
+    print(body);
+
+    if (response.statusCode == 200) {
+      final jadwal = List.from(body).map((e) {
+        return JadwalMengajarHarianModel.fromJson(e);
+      }).toList();
+
+      return jadwal;
     } else {
       throw (body['msg'].toString());
     }
