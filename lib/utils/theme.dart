@@ -44,21 +44,29 @@ Color c3 = Colors.lightGreen.shade500;
 Color c4 = Colors.deepPurple.shade500;
 
 List<Color> allColor = [
-  Colors.amber.shade400,
-  Colors.amberAccent.shade400,
-  Colors.blue.shade400,
-  Colors.brown.shade400,
+  Colors.amber.shade400, //0
+  Colors.amberAccent.shade400, //1
+  Colors.blue.shade400, //2
+  Colors.brown.shade400, //3
+  Colors.cyan.shade700, //4
+  Colors.deepOrange.shade500, //5
+  Colors.cyan.shade500, //6
+  Colors.indigo.shade600, //7
+  Colors.orangeAccent.shade100, //8
+  Colors.pink, //9
+  Colors.red.shade600, //10
+  Colors.green.shade400, //11
+  Colors.greenAccent.shade200, //12
+  Colors.tealAccent.shade200, //14
+  Colors.lightBlue.shade500, //14
+];
+
+List<Color> newColorList = [
+  Colors.lightBlue.shade500, //14
   Colors.cyan.shade700,
-  Colors.deepOrange.shade500,
-  Colors.cyan.shade500,
-  Colors.indigo.shade600,
-  Colors.orangeAccent.shade100,
-  Colors.pink,
-  Colors.red.shade600,
-  Colors.green.shade400,
-  Colors.greenAccent.shade200,
-  Colors.tealAccent.shade200,
-  Colors.lightBlue.shade500,
+  Colors.cyan.shade500, //6
+  Colors.indigo.shade600, //7
+  Colors.blue.shade400,
 ];
 
 FontWeight light = FontWeight.w300;

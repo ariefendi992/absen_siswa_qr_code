@@ -1,0 +1,325 @@
+import 'package:absen_siswa_qr_code/cubit/master/jadwal_mapel_cubit.dart';
+import 'package:absen_siswa_qr_code/cubit/user/guru/user_guru_cubit.dart';
+import 'package:absen_siswa_qr_code/models/user_model.dart';
+import 'package:absen_siswa_qr_code/utils/theme.dart';
+import 'package:absen_siswa_qr_code/views/widgets/button_keterangan.dart';
+import 'package:absen_siswa_qr_code/views/widgets/jadwal_mapel_card.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+// import 'package:google_fonts/google_fonts.dart';
+
+class GuruHomePage extends StatefulWidget {
+  const GuruHomePage({super.key});
+
+  @override
+  State<GuruHomePage> createState() => _GuruHomePageState();
+}
+
+class _GuruHomePageState extends State<GuruHomePage> {
+  @override
+  void initState() {
+    super.initState();
+    context.read<JadwalMapelCubit>().getJadwalMengajarHarian();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    Widget header() {
+      // * HEADER VIEW
+      Widget headerView(UserGuruModel userGuru) {
+        return Container(
+          margin: EdgeInsets.only(bottom: 16, top: 10),
+          width: MediaQuery.of(context).size.width,
+          child: Row(
+            children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'selamat datang',
+                    style: TextStyle(
+                      fontSize: 14,
+                      color: secondarySoft,
+                    ),
+                  ),
+                  SizedBox(height: 4),
+                  Text(
+                    '${userGuru.firstName} ${userGuru.lastName}',
+                    style: TextStyle(
+                      fontWeight: medium,
+                      fontSize: 17,
+                      letterSpacing: 0.5,
+                    ),
+                  )
+                ],
+              ),
+            ],
+          ),
+        );
+      }
+
+      //* CARD HEADER VIEW
+      Widget cardHeaderView(UserGuruModel userGuru) {
+        return Container(
+          decoration: BoxDecoration(
+            color: primary,
+            borderRadius: BorderRadius.circular(18),
+            image: DecorationImage(
+              image: AssetImage('assets/images/pattern-1.png'),
+              fit: BoxFit.cover,
+            ),
+          ),
+          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Guru Mata Pelajaran',
+                style: TextStyle(
+                  color: kWhiteColor,
+                  fontWeight: medium,
+                ),
+              ),
+              SizedBox(height: 4),
+              Text(
+                '${userGuru.nip}',
+                style: TextStyle(
+                  fontSize: 18,
+                  color: kWhiteColor,
+                  fontWeight: bold,
+                  letterSpacing: 1.5,
+                ),
+              ),
+              Container(
+                margin: EdgeInsets.only(top: 12),
+                padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                decoration: BoxDecoration(
+                  color: primarySoft,
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Column(
+                        children: [
+                          Text(
+                            '${userGuru.mapel}',
+                            style: TextStyle(
+                              fontSize: 16,
+                              color: kWhiteColor,
+                              fontWeight: medium,
+                              letterSpacing: 1,
+                            ),
+                            textAlign: TextAlign.center,
+                          )
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              )
+            ],
+          ),
+        );
+      }
+
+      return BlocBuilder<UserGuruCubit, UserGuruState>(
+        builder: (context, state) {
+          if (state is UserGuruSuccess) {
+            return Column(
+              children: [
+                headerView(state.userGuru),
+                cardHeaderView(state.userGuru),
+              ],
+            );
+          } else {
+            return SizedBox();
+          }
+        },
+      );
+    }
+
+    //* PILIHAN MENU VIEW
+    Widget menuView() {
+      return Container(
+        margin: EdgeInsets.only(top: 18),
+        width: MediaQuery.of(context).size.height,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Pilihan',
+              style: TextStyle(
+                fontSize: 16,
+                color: secondary,
+                fontWeight: medium,
+              ),
+            ),
+            Container(
+              width: MediaQuery.of(context).size.width,
+              margin: EdgeInsets.only(top: 8),
+              padding: EdgeInsets.symmetric(horizontal: 10, vertical: 12),
+              decoration: BoxDecoration(
+                  color: secondaryExtraSoft.withAlpha(100),
+                  borderRadius: BorderRadius.circular(18),
+                  boxShadow: [
+                    BoxShadow(
+                      color: secondaryExtraSoft.withAlpha(120),
+                      blurRadius: 6,
+                      offset: Offset(2, 2),
+                    )
+                  ]),
+              child: Container(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    ButtonMenuKeterangan(
+                      icons: Icons.calendar_month_rounded,
+                      iconColors: errorSoft,
+                      height: 56,
+                      width: 56,
+                      iconSize: 32,
+                      title: 'JadwalMengajar',
+                    ),
+                    ButtonMenuKeterangan(
+                      icons: Icons.people_alt_rounded,
+                      iconColors: allColor[1],
+                      height: 56,
+                      width: 56,
+                      iconSize: 32,
+                      title: 'DaftarKelas',
+                    ),
+                    ButtonMenuKeterangan(
+                      icons: Icons.history_edu_rounded,
+                      iconColors: allColor[4],
+                      height: 56,
+                      width: 56,
+                      iconSize: 32,
+                      title: 'RiwayatAbsen',
+                    ),
+                  ],
+                ),
+              ),
+            )
+          ],
+        ),
+      );
+    }
+
+    // * JADWAL MENGAJAR VIEW
+    Widget jadwalView() {
+      return Container(
+        margin: EdgeInsets.only(top: 18),
+        width: MediaQuery.of(context).size.width,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Jadwal mengajar hari ini',
+              style: TextStyle(
+                fontSize: 16,
+                color: secondary,
+                fontWeight: medium,
+              ),
+            ),
+            SizedBox(height: 10),
+            JadwalMapelCard(),
+            JadwalMapelCard(),
+          ],
+        ),
+      );
+    }
+
+    Widget notJadwalView() {
+      return Container(
+        width: MediaQuery.of(context).size.width,
+        margin: EdgeInsets.only(top: 18),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Jadwal mengajar hari ini',
+              style: TextStyle(
+                fontSize: 16,
+                color: secondary,
+                fontWeight: medium,
+              ),
+            ),
+            Container(
+              height: MediaQuery.of(context).size.height / 3,
+              width: double.infinity,
+              // color: errorPrimary,
+              alignment: Alignment.center,
+              child: Text(
+                'Tidak Ada Jadwal Hari Ini',
+                style: TextStyle(
+                  fontSize: 16,
+                  color: secondary.withOpacity(0.5),
+                  fontWeight: medium,
+                ),
+              ),
+            ),
+          ],
+        ),
+      );
+    }
+
+    /// * START --> FAIL STATE
+    Widget failedState(state) {
+      return ListView(
+        children: [
+          Container(
+            height: MediaQuery.of(context).size.height,
+            alignment: Alignment.center,
+            child: Center(
+              child: Text(
+                state.error,
+                style: TextStyle(
+                  fontWeight: medium,
+                  fontSize: 15,
+                ),
+              ),
+            ),
+          ),
+        ],
+      );
+    }
+    //* END --> FAIL STATE
+
+    return BlocConsumer<JadwalMapelCubit, JadwalMapelState>(
+      listener: (context, state) {
+        /// * FAILED STATE
+        if (state is JadwalMapelFailed) {
+          RefreshIndicator(
+            onRefresh: () async {
+              context.read<UserGuruCubit>().currenUserGuru();
+            },
+            child: failedState(state),
+          );
+        }
+      },
+      builder: (context, state) {
+        if (state is JadwalMapelSuccess) {
+          return RefreshIndicator(
+            onRefresh: () async {
+              context.read<UserGuruCubit>().currenUserGuru();
+            },
+            child: ListView(
+              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 36),
+              shrinkWrap: true,
+              children: [
+                header(),
+                menuView(),
+                notJadwalView(),
+              ],
+            ),
+          );
+        } else {
+          return Center(
+            child: CircularProgressIndicator(),
+          );
+        }
+      },
+    );
+  }
+}

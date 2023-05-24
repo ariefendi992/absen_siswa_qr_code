@@ -34,6 +34,7 @@ class JadwalMengajarHarianModel extends Equatable {
   final String semester;
   final String kelas;
   final String hari;
+  final String? today;
 
   const JadwalMengajarHarianModel({
     required this.id,
@@ -46,6 +47,7 @@ class JadwalMengajarHarianModel extends Equatable {
     required this.semester,
     required this.kelas,
     required this.hari,
+    this.today,
   });
 
   factory JadwalMengajarHarianModel.fromJson(Map<String, dynamic> json) {
@@ -60,6 +62,7 @@ class JadwalMengajarHarianModel extends Equatable {
       semester: json['semester'],
       kelas: json['kelas'],
       hari: json['hari'],
+      today: json['today'],
     );
   }
 

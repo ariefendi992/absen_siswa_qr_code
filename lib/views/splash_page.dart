@@ -27,6 +27,7 @@ class _SplashPageState extends State<SplashPage> {
   void initState() {
     super.initState();
     // defaultToken();
+    // context.read<JadwalMapelCubit>().getJadwalMengajarHarian();
     autoLogout();
     Timer(Duration(seconds: 3), () {
       autoSkipLogin();

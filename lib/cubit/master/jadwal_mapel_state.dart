@@ -13,15 +13,15 @@ class JadwalMapelLoading extends JadwalMapelState {}
 
 class JadwalMapelSuccess extends JadwalMapelState {
   final List<MapelSiswaModel>? mapels;
-  final List<JadwalMengajarHarianModel>? jadwalMapel;
+  final List<JadwalMengajarHarianModel>? jadwal;
 
   const JadwalMapelSuccess({
     this.mapels,
-    this.jadwalMapel,
+    this.jadwal,
   });
 
   @override
-  List<Object> get props => [mapels!, jadwalMapel!];
+  List<Object> get props => [mapels!, jadwal!];
 }
 
 class JadwalMapelFailed extends JadwalMapelState {

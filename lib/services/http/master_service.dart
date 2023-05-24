@@ -11,7 +11,7 @@ class MasterService {
       final response = await http.get(Uri.parse(url));
       final jsonResp = jsonDecode(response.body);
 
-      // print(jsonResp);
+      // print('PRINT DATA FROM HTTP MASTER SERVICE ==> [$jsonResp]');
 
       if (response.statusCode == 200) {
         List<MapelSiswaModel> mapels = List.from(jsonResp).map((e) {
