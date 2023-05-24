@@ -23,8 +23,8 @@ class JadwalMapelCard extends StatelessWidget {
             child: Container(
               width: MediaQuery.of(context).size.width,
               padding: EdgeInsets.symmetric(
-                vertical: 10,
-                horizontal: 10,
+                vertical: 12,
+                horizontal: 14,
               ),
               decoration: BoxDecoration(
                 color: colors ?? primary,

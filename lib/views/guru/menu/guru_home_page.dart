@@ -187,7 +187,7 @@ class _GuruHomePageState extends State<GuruHomePage> {
                 child: Container(
                   padding: EdgeInsets.symmetric(horizontal: 10, vertical: 12),
                   decoration: BoxDecoration(
-                    color: secondaryExtraSoft.withAlpha(100),
+                    color: kBackgorundScaffold.withAlpha(20),
                     borderRadius: BorderRadius.circular(18),
                   ),
                   child: Row(

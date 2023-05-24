@@ -17,6 +17,7 @@ class _GuruScanPageState extends State<GuruScanPage> {
   bool torchOn = false;
   bool frontCamera = false;
   bool cameraOpened = false;
+  bool shouldPop = true;
 
   void onCamera(capture) {
     List<Barcode> barcodes = capture.barcodes;
@@ -95,114 +96,119 @@ class _GuruScanPageState extends State<GuruScanPage> {
           ),
         ),
       ),
-      body: Stack(
-        children: [
-          MobileScanner(
-            controller: cameraController,
-            onDetect: onCamera,
-            fit: BoxFit.cover,
-            startDelay: true,
-          ),
-          QRScannerOverlay(
-            overlayColour: Colors.transparent.withOpacity(0.6),
-          ),
-          Column(
-            children: [
-              Expanded(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Container(
-                      margin: EdgeInsets.only(
-                          bottom: MediaQuery.of(context).size.height / 6.0),
-                      child: Text(
-                        'Scan QR Code di sini',
-                        style: TextStyle(
-                          color: kWhiteColor,
-                          fontSize: 16,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Expanded(
-                child: Container(),
-              ),
-              Expanded(
-                flex: 1,
-                child: Container(
-                  margin: EdgeInsets.only(top: 10),
-
-                  // alignment: Alignment.center,
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.center,
+      body: WillPopScope(
+        onWillPop: () async {
+          return shouldPop;
+        },
+        child: Stack(
+          children: [
+            MobileScanner(
+              controller: cameraController,
+              onDetect: onCamera,
+              fit: BoxFit.cover,
+              startDelay: true,
+            ),
+            QRScannerOverlay(
+              overlayColour: Colors.transparent.withOpacity(0.6),
+            ),
+            Column(
+              children: [
+                Expanded(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      Column(
-                        children: [
-                          IconButton(
-                            onPressed: !frontCamera
-                                ? () {
-                                    setState(() {
-                                      torchOn = !torchOn;
-                                    });
-
-                                    cameraController.toggleTorch();
-                                  }
-                                : () {},
-                            icon: Icon(
-                              torchOn == false
-                                  ? Icons.flash_on_rounded
-                                  : Icons.flash_off_rounded,
-                              color: !frontCamera
-                                  ? kWhiteColor
-                                  : kWhiteColor.withOpacity(0.5),
-                              size: 36,
-                            ),
+                      Container(
+                        margin: EdgeInsets.only(
+                            bottom: MediaQuery.of(context).size.height / 6.0),
+                        child: Text(
+                          'Scan QR Code di sini',
+                          style: TextStyle(
+                            color: kWhiteColor,
+                            fontSize: 16,
                           ),
-                          Text(
-                            torchOn ? 'Flash OFF' : 'Flash ON',
-                            style: TextStyle(
-                              color: kWhiteColor,
-                            ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(width: 32),
-                      Column(
-                        children: [
-                          IconButton(
-                            onPressed: () {
-                              setState(() {
-                                frontCamera = !frontCamera;
-                              });
-
-                              cameraController.switchCamera();
-                            },
-                            icon: Icon(
-                              frontCamera == false
-                                  ? Icons.camera_front_rounded
-                                  : Icons.camera_rear_rounded,
-                              color: kWhiteColor,
-                              size: 36,
-                            ),
-                          ),
-                          Text(
-                            frontCamera ? 'Front Camera' : 'Rear Camera',
-                            style: TextStyle(
-                              color: kWhiteColor,
-                            ),
-                          ),
-                        ],
+                        ),
                       ),
                     ],
                   ),
                 ),
-              ),
-            ],
-          ),
-        ],
+                Expanded(
+                  child: Container(),
+                ),
+                Expanded(
+                  flex: 1,
+                  child: Container(
+                    margin: EdgeInsets.only(top: 10),
+
+                    // alignment: Alignment.center,
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Column(
+                          children: [
+                            IconButton(
+                              onPressed: !frontCamera
+                                  ? () {
+                                      setState(() {
+                                        torchOn = !torchOn;
+                                      });
+
+                                      cameraController.toggleTorch();
+                                    }
+                                  : () {},
+                              icon: Icon(
+                                torchOn == false
+                                    ? Icons.flash_on_rounded
+                                    : Icons.flash_off_rounded,
+                                color: !frontCamera
+                                    ? kWhiteColor
+                                    : kWhiteColor.withOpacity(0.5),
+                                size: 36,
+                              ),
+                            ),
+                            Text(
+                              torchOn ? 'Flash OFF' : 'Flash ON',
+                              style: TextStyle(
+                                color: kWhiteColor,
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(width: 32),
+                        Column(
+                          children: [
+                            IconButton(
+                              onPressed: () {
+                                setState(() {
+                                  frontCamera = !frontCamera;
+                                });
+
+                                cameraController.switchCamera();
+                              },
+                              icon: Icon(
+                                frontCamera == false
+                                    ? Icons.camera_front_rounded
+                                    : Icons.camera_rear_rounded,
+                                color: kWhiteColor,
+                                size: 36,
+                              ),
+                            ),
+                            Text(
+                              frontCamera ? 'Front Camera' : 'Rear Camera',
+                              style: TextStyle(
+                                color: kWhiteColor,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }

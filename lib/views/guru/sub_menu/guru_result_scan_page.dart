@@ -23,6 +23,7 @@ class GuruResultScanPage extends StatefulWidget {
 
 class _GuruResultScanPageState extends State<GuruResultScanPage> {
   CustomStorage storage = CustomStorage();
+  bool shouldPop = true;
 
   @override
   void initState() {
@@ -224,143 +225,150 @@ class _GuruResultScanPageState extends State<GuruResultScanPage> {
           }),
         ),
       ),
-      body: BlocBuilder<UserSiswaCubit, UserSiswaState>(
-        builder: (context, state) {
-          if (state is UserSiswaSuccess) {
-            return RefreshIndicator(
-              onRefresh: () async {
-                context
-                    .read<UserSiswaCubit>()
-                    .getSiswaByUsername(username: widget.username);
-              },
-              child: ListView(
-                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-                shrinkWrap: true,
-                // physics: BouncingScrollPhysics(),
+      body: WillPopScope(
+        onWillPop: () async {
+          widget.closeCameraScreen();
+          return shouldPop;
+        },
+        child: BlocBuilder<UserSiswaCubit, UserSiswaState>(
+          builder: (context, state) {
+            if (state is UserSiswaSuccess) {
+              return RefreshIndicator(
+                onRefresh: () async {
+                  context
+                      .read<UserSiswaCubit>()
+                      .getSiswaByUsername(username: widget.username);
+                },
+                child: ListView(
+                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+                  shrinkWrap: true,
+                  // physics: BouncingScrollPhysics(),
+                  children: [
+                    /// * NOTE: CARD WIDGET
+                    cardWidget(state),
+                    Container(
+                      margin: EdgeInsets.only(top: 20),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Keterangan Kehadiran',
+                            style: TextStyle(
+                              fontWeight: medium,
+                              fontSize: 15,
+                              letterSpacing: 0.5,
+                            ),
+                          ),
+                          Container(
+                            margin: EdgeInsets.only(top: 6),
+                            padding: EdgeInsets.symmetric(vertical: 10),
+                            decoration: BoxDecoration(
+                              color: primaryExtraSoft,
+                              borderRadius: BorderRadius.circular(18),
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                ButtonMenuKeterangan(
+                                  icons: Icons.check,
+                                  iconColors: successPrimary,
+                                  title: 'Siswa Hadir',
+                                ),
+                                ButtonMenuKeterangan(
+                                  icons: Icons.close,
+                                  iconColors: kErrorColor,
+                                  bgColors: errorExtraSoft,
+                                  title: 'Siswa Absen',
+                                ),
+                                ButtonMenuKeterangan(
+                                  icons: Icons.notes,
+                                  iconColors: primary,
+                                  bgColors: primaryExtraSoft,
+                                  title: 'Siswa Izin',
+                                ),
+                                ButtonMenuKeterangan(
+                                  icons: Icons.add_box,
+                                  iconColors: successSoft,
+                                  bgColors: successExtraSoft,
+                                  title: 'Siswa Sakit',
+                                ),
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
+                    )
+                  ],
+                ),
+              );
+            } else if (state is UserSiswaFailed) {
+              ///
+              /// * NOTE: ERROR VIEW ON PAGE
+              ///
+              return ListView(
+                // mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  /// * NOTE: CARD WIDGET
-                  cardWidget(state),
                   Container(
-                    margin: EdgeInsets.only(top: 20),
+                    margin: EdgeInsets.only(
+                        bottom: 80,
+                        top: MediaQuery.of(context).size.height / 6),
+                    width: double.infinity,
+                    child: Container(
+                      alignment: Alignment.center,
+                      width: 48,
+                      height: 48,
+                      child: Icon(
+                        Icons.qr_code_scanner,
+                        size: 100,
+                        color: kGreyColor,
+                      ),
+                    ),
+                  ),
+                  Container(
+                    padding: EdgeInsets.symmetric(horizontal: 20),
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Keterangan Kehadiran',
+                          'QR Code tidak sah',
                           style: TextStyle(
+                            fontSize: 24,
                             fontWeight: medium,
-                            fontSize: 15,
-                            letterSpacing: 0.5,
                           ),
                         ),
-                        Container(
-                          margin: EdgeInsets.only(top: 6),
-                          padding: EdgeInsets.symmetric(vertical: 10),
-                          decoration: BoxDecoration(
-                            color: primaryExtraSoft,
-                            borderRadius: BorderRadius.circular(18),
+                        SizedBox(height: 14),
+                        Text(
+                          '${state.error}',
+                          style: TextStyle(
+                            color: kGreyColor,
+                            fontSize: 16,
+                            fontWeight: medium,
                           ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              ButtonMenuKeterangan(
-                                icons: Icons.check,
-                                iconColors: successPrimary,
-                                title: 'Siswa Hadir',
-                              ),
-                              ButtonMenuKeterangan(
-                                icons: Icons.close,
-                                iconColors: kErrorColor,
-                                bgColors: errorExtraSoft,
-                                title: 'Siswa Absen',
-                              ),
-                              ButtonMenuKeterangan(
-                                icons: Icons.notes,
-                                iconColors: primary,
-                                bgColors: primaryExtraSoft,
-                                title: 'Siswa Izin',
-                              ),
-                              ButtonMenuKeterangan(
-                                icons: Icons.add_box,
-                                iconColors: successSoft,
-                                bgColors: successExtraSoft,
-                                title: 'Siswa Sakit',
-                              ),
-                            ],
-                          ),
-                        )
+                        ),
+                        SizedBox(height: 18),
+                        ButtonWidget(
+                          title: 'Scan Ulang',
+                          onTap: () {
+                            widget.closeCameraScreen();
+                            Navigator.pop(context);
+                          },
+                          height: 44,
+                          width: MediaQuery.of(context).size.width / 1.5,
+                          colors: primary,
+                          fontSize: 20,
+                          borderRadiusCircular: 12,
+                        ),
                       ],
                     ),
                   )
                 ],
-              ),
-            );
-          } else if (state is UserSiswaFailed) {
-            ///
-            /// * NOTE: ERROR VIEW ON PAGE
-            ///
-            return ListView(
-              // mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Container(
-                  margin: EdgeInsets.only(
-                      bottom: 80, top: MediaQuery.of(context).size.height / 6),
-                  width: double.infinity,
-                  child: Container(
-                    alignment: Alignment.center,
-                    width: 48,
-                    height: 48,
-                    child: Icon(
-                      Icons.qr_code_scanner,
-                      size: 100,
-                      color: kGreyColor,
-                    ),
-                  ),
-                ),
-                Container(
-                  padding: EdgeInsets.symmetric(horizontal: 20),
-                  child: Column(
-                    children: [
-                      Text(
-                        'QR Code tidak sah',
-                        style: TextStyle(
-                          fontSize: 24,
-                          fontWeight: medium,
-                        ),
-                      ),
-                      SizedBox(height: 14),
-                      Text(
-                        '${state.error}',
-                        style: TextStyle(
-                          color: kGreyColor,
-                          fontSize: 16,
-                          fontWeight: medium,
-                        ),
-                      ),
-                      SizedBox(height: 18),
-                      ButtonWidget(
-                        title: 'Scan Ulang',
-                        onTap: () {
-                          widget.closeCameraScreen();
-                          Navigator.pop(context);
-                        },
-                        height: 44,
-                        width: MediaQuery.of(context).size.width / 1.5,
-                        colors: primary,
-                        fontSize: 20,
-                        borderRadiusCircular: 12,
-                      ),
-                    ],
-                  ),
-                )
-              ],
-            );
-          } else {
-            return Center(
-              child: CircularProgressIndicator(),
-            );
-          }
-        },
+              );
+            } else {
+              return Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+          },
+        ),
       ),
     );
   }
