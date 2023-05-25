@@ -72,12 +72,12 @@ class ApiUserGuru {
   Future<List<JadwalMengajarHarianModel>> getJadwalMengajarHarian() async {
     final response = await dio.get('/guru/jadwal-harian');
 
-    final body = response.data['data'];
+    final body = response.data;
 
     // print(body);
 
     if (response.statusCode == 200) {
-      final jadwal = List.from(body).map((e) {
+      final jadwal = List.from(body['data']).map((e) {
         return JadwalMengajarHarianModel.fromJson(e);
       }).toList();
 
@@ -87,20 +87,21 @@ class ApiUserGuru {
     }
   }
 
-  Future<List<JadwalMengajarHarianModel>> getJadwalMengajarByHari(
-      {required String hari}) async {
+  Future<List<JadwalMengajarHariModel>> getJadwalMengajarByHari(
+      String hari) async {
     final response = await dio.get('/guru/jadwal-hari?hari=$hari');
 
-    final body = response.data['data'];
+    final body = response.data;
 
     print(body);
 
     if (response.statusCode == 200) {
-      final jadwal = List.from(body).map((e) {
-        return JadwalMengajarHarianModel.fromJson(e);
-      }).toList();
-
-      return jadwal;
+      final jadwalSenin = List.from(body['data'])
+          .map(
+            (e) => JadwalMengajarHariModel.fromJson(e),
+          )
+          .toList();
+      return jadwalSenin;
     } else {
       throw (body['msg'].toString());
     }
