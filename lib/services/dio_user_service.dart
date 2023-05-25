@@ -31,7 +31,7 @@ class ApiUserSiswa {
 
     final body = response.data;
 
-    print('PRINT FROM DIO USER SERVICE BY NISN ==>> $body');
+    // print('PRINT FROM DIO USER SERVICE BY NISN ==>> $body');
 
     await storage.setStorage('today', body['today']);
 
@@ -58,7 +58,7 @@ class ApiUserGuru {
     final response = await dio.get('/guru/single-guru');
 
     final body = response.data;
-    print('PRINT FROM APIUSER GURU SERVICE ==> [$body]');
+    // print('PRINT FROM APIUSER GURU SERVICE ==> [$body]');
 
     if (response.statusCode == 200) {
       UserGuruModel userGuru = UserGuruModel.fromJson(body);
@@ -71,6 +71,25 @@ class ApiUserGuru {
 
   Future<List<JadwalMengajarHarianModel>> getJadwalMengajarHarian() async {
     final response = await dio.get('/guru/jadwal-harian');
+
+    final body = response.data['data'];
+
+    // print(body);
+
+    if (response.statusCode == 200) {
+      final jadwal = List.from(body).map((e) {
+        return JadwalMengajarHarianModel.fromJson(e);
+      }).toList();
+
+      return jadwal;
+    } else {
+      throw (body['msg'].toString());
+    }
+  }
+
+  Future<List<JadwalMengajarHarianModel>> getJadwalMengajarByHari(
+      {required String hari}) async {
+    final response = await dio.get('/guru/jadwal-hari?hari=$hari');
 
     final body = response.data['data'];
 

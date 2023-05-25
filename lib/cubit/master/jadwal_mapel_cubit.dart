@@ -34,4 +34,16 @@ class JadwalMapelCubit extends Cubit<JadwalMapelState> {
       emit(JadwalMapelFailed(e.response?.data['msg']));
     }
   }
+
+  Future<void> getJadwalMengajarByHari({required String hari}) async {
+    try {
+      emit(JadwalMapelLoading());
+
+      final jadwal = await ApiUserGuru().getJadwalMengajarByHari(hari: hari);
+
+      emit(JadwalMapelSuccess(jadwal: jadwal));
+    } on DioError catch (e) {
+      emit(JadwalMapelFailed(e.response?.data['msg']));
+    }
+  }
 }

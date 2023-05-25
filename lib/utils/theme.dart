@@ -17,6 +17,7 @@ Color successPrimary = Color(0xFF16AE26);
 Color successSoft = Color(0xFF21B69D);
 Color successExtraSoft = Color(0xFFD6F8F1);
 Color warning = Color(0xFFEB8600);
+Color greyExtraSoft = Color(0xfffcf9f5);
 
 Color kWhiteColor = Color(0XFFFFFFFF);
 Color kBlackColor = Color(0XFF1E272E);
