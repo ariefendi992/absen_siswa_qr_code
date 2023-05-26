@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:absen_siswa_qr_code/models/master_model.dart';
 import 'package:absen_siswa_qr_code/models/user_model.dart';
 import 'package:absen_siswa_qr_code/services/interceptor/dio_interceptor.dart';
@@ -87,23 +89,126 @@ class ApiUserGuru {
     }
   }
 
-  Future<List<JadwalMengajarHariModel>> getJadwalMengajarByHari(
-      String hari) async {
-    final response = await dio.get('/guru/jadwal-hari?hari=$hari');
+  Future<List<JadwalMengajarSeninModel>> getJadwalMengajarBySenin() async {
+    final response = await dio.get('/guru/jadwal-hari?hari=senin');
 
     final body = response.data;
 
-    print(body);
+    // print(body['data']);
 
     if (response.statusCode == 200) {
-      final jadwalSenin = List.from(body['data'])
-          .map(
-            (e) => JadwalMengajarHariModel.fromJson(e),
-          )
-          .toList();
-      return jadwalSenin;
+      // final jadwalSenin = List.from(body['data'])
+      //     .map(
+      //       (e) => JadwalMengajarHariModel.fromJson(e),
+      //     )
+      //     .toList();
+      // return jadwalSenin;
+      List<JadwalMengajarSeninModel> hari = List<JadwalMengajarSeninModel>.from(
+        body['data'].map((json) {
+          return JadwalMengajarSeninModel.fromJson(json);
+        }),
+      ).toList();
+
+      return hari;
     } else {
       throw (body['msg'].toString());
+    }
+  }
+
+  Future<List<JadwalMengajarSelasaModel>> getJadwalMengajarBySelasa() async {
+    final response = await dio.get('/guru/jadwal-hari?hari=selasa');
+
+    final body = response.data;
+
+    if (response.statusCode == 200) {
+      List<JadwalMengajarSelasaModel> hari =
+          List<JadwalMengajarSelasaModel>.from(
+        body['data'].map((json) {
+          return JadwalMengajarSelasaModel.fromJson(json);
+        }),
+      ).toList();
+
+      return hari;
+    } else {
+      throw (body['msg'].toString());
+    }
+  }
+
+  Future<List<JadwalMengajarRabuModel>> getJadwalMengajarByRabu() async {
+    final response = await dio.get('/guru/jadwal-hari?hari=rabu');
+
+    final body = response.data;
+
+    if (response.statusCode == 200) {
+      final hari = List.from(body['data'])
+          .map(
+            (e) => JadwalMengajarRabuModel.fromJson(e),
+          )
+          .toList();
+
+      return hari;
+    } else {
+      throw (body['msg'].toString());
+    }
+  }
+
+  Future<List<JadwalMengajarKamisModel>> getJadwalMengajarByKamis() async {
+    final response = await dio.get('/guru/jadwal-hari?hari=kamis');
+
+    final body = response.data;
+
+    if (response.statusCode == 200) {
+      final hari = List.from(body['data'])
+          .map(
+            (e) => JadwalMengajarKamisModel.fromJson(e),
+          )
+          .toList();
+
+      return hari;
+    } else {
+      throw (body['msg'].toString());
+    }
+  }
+
+  Future<List<JadwalMengajarJumatModel>> getJadwalMengajarByJumat() async {
+    final response = await dio.get('/guru/jadwal-hari?hari=jumat');
+
+    final body = response.data;
+
+    if (response.statusCode == 200) {
+      final hari = List.from(body['data'])
+          .map(
+            (e) => JadwalMengajarJumatModel.fromJson(e),
+          )
+          .toList();
+
+      return hari;
+    } else {
+      throw (body['msg'].toString());
+    }
+  }
+
+  /// * UNTUK MENCARI DATA
+  Future<List<JadwalMengajarSepekanModel>> getJadwalMengajarSepekan(
+      String query) async {
+    final response = await dio.get('/guru/jadwal-sepekan');
+
+    final body = response.data;
+
+    if (response.statusCode == 200) {
+      final jadwal = List.from(body['data']).map((e) {
+        return JadwalMengajarSepekanModel.fromJson(e);
+      }).where((json) {
+        // print(json.hari);
+        final hari = json.hari!;
+        final hariLower = json.hari!.toLowerCase();
+        // print(hari);
+        return hari.contains(query) || hariLower.contains(query);
+      }).toList();
+
+      return jadwal;
+    } else {
+      throw Exception();
     }
   }
 }

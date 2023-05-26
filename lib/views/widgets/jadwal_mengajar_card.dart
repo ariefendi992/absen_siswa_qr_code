@@ -2,16 +2,20 @@ import 'package:absen_siswa_qr_code/utils/theme.dart';
 import 'package:flutter/material.dart';
 
 class JadwalMengajarCard extends StatelessWidget {
-  final String kelas;
-  final String mapel;
+  // final JadwalMengajarHariModel? jadwalHari;
+  // final JadwalMengajarSelasaModel? jadwalSelasa;
+  final String hari;
   final String jamMulai;
   final String jamSelesai;
+  final String kelas;
+  final String mapel;
   JadwalMengajarCard({
     super.key,
-    required this.kelas,
-    required this.mapel,
+    required this.hari,
     required this.jamMulai,
     required this.jamSelesai,
+    required this.kelas,
+    required this.mapel,
   });
 
   @override
@@ -19,7 +23,6 @@ class JadwalMengajarCard extends StatelessWidget {
     final lines = [20.0, 30.0, 40.0, 10.0];
 
     return Container(
-      height: 100,
       margin: EdgeInsets.only(bottom: 16),
       child: Row(
         children: [
@@ -66,6 +69,13 @@ class JadwalMengajarCard extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      Text(
+                        '${hari.toUpperCase()}',
+                        style: TextStyle(
+                          fontWeight: medium,
+                        ),
+                      ),
+                      SizedBox(height: 4),
                       IntrinsicHeight(
                         child: Row(
                           children: [

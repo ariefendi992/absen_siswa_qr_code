@@ -1,6 +1,11 @@
 import 'package:absen_siswa_qr_code/cubit/auth/auth_cubit.dart';
+import 'package:absen_siswa_qr_code/cubit/master/jadwal/jumat/jadwal_jumat_cubit.dart';
+import 'package:absen_siswa_qr_code/cubit/master/jadwal/kamis/jadwal_kamis_cubit.dart';
+import 'package:absen_siswa_qr_code/cubit/master/jadwal/rabu/jadwal_rabu_cubit.dart';
+import 'package:absen_siswa_qr_code/cubit/master/jadwal/selasa/jadwal_selasa_cubit.dart';
+import 'package:absen_siswa_qr_code/cubit/master/jadwal/senin/jadwal_senin_cubit.dart';
+import 'package:absen_siswa_qr_code/cubit/master/jadwal/sepekan/jadwal_sepekan_cubit.dart';
 import 'package:absen_siswa_qr_code/cubit/master/jadwal_mapel_cubit.dart';
-import 'package:absen_siswa_qr_code/cubit/master/jadwal_mengajar_cubit.dart';
 import 'package:absen_siswa_qr_code/cubit/page/page_cubit.dart';
 import 'package:absen_siswa_qr_code/cubit/user/guru/user_guru_cubit.dart';
 import 'package:absen_siswa_qr_code/cubit/user/siswa/user_siswa_cubit.dart';
@@ -35,7 +40,18 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => PageCubit()),
         BlocProvider(create: (context) => UserSiswaCubit()),
         BlocProvider(create: (context) => JadwalMapelCubit()),
-        BlocProvider(create: (context) => JadwalMengajarCubit()),
+        BlocProvider(
+            create: (context) => JadwalSeninCubit()..getJadwalMengajarSenin()),
+        BlocProvider(
+            create: (context) =>
+                JadwalSelasaCubit()..getJadwalMengajarSelasa()),
+        BlocProvider(
+            create: (context) => JadwalRabuCubit()..getJadwalMengajarRabu()),
+        BlocProvider(
+            create: (context) => JadwalKamisCubit()..getJadwalMengajarKamis()),
+        BlocProvider(
+            create: (context) => JadwalJumatCubit()..getJadwalMengajarJumat()),
+        BlocProvider(create: (context) => JadwalSepekanCubit()),
         BlocProvider(create: (context) => UserGuruCubit()),
       ],
       child: MaterialApp(

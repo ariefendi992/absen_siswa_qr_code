@@ -31,7 +31,7 @@ class JadwalMapelCubit extends Cubit<JadwalMapelState> {
       final jadwal = await ApiUserGuru().getJadwalMengajarHarian();
       emit(JadwalMapelSuccess(jadwal: jadwal));
     } on DioError catch (e) {
-      emit(JadwalMapelFailed(e.response?.data['msg']));
+      emit(JadwalMapelFailed('${e.response?.data['msg']}'));
     }
   }
 }
