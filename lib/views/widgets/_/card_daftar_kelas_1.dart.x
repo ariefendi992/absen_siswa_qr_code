@@ -11,28 +11,23 @@ class CardDaftarKelasWidget extends StatelessWidget {
       child: Material(
         elevation: 6,
         borderRadius: BorderRadius.circular(18),
-        shadowColor: primary,
+        shadowColor: allColor[6],
         child: Container(
           width: MediaQuery.of(context).size.width,
           decoration: BoxDecoration(
-              color: primary,
-              borderRadius: BorderRadius.circular(18),
-              image: DecorationImage(
-                image: AssetImage('assets/images/pattern-1.png'),
-                alignment: Alignment.topCenter,
-                fit: BoxFit.cover,
-              )
-              // gradient: LinearGradient(
-              //   colors: [
-              //     allColor[4],
-              //     allColor[4],
-              //     allColor[6],
-              //   ],
-              //   begin: Alignment.bottomLeft,
-              //   end: Alignment.topRight,
-              //   tileMode: TileMode.clamp,
-              // ),
-              ),
+            color: newColorList[2],
+            borderRadius: BorderRadius.circular(18),
+            gradient: LinearGradient(
+              colors: [
+                allColor[4],
+                allColor[4],
+                allColor[6],
+              ],
+              begin: Alignment.bottomLeft,
+              end: Alignment.topRight,
+              tileMode: TileMode.clamp,
+            ),
+          ),
           padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
           child: Row(
             children: [

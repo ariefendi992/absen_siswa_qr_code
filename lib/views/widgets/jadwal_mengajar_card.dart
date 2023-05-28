@@ -48,7 +48,9 @@ class JadwalMengajarCard extends StatelessWidget {
               child: Container(
                 // height: 100,
                 decoration: BoxDecoration(
-                    color: primary, borderRadius: BorderRadius.circular(18)),
+                  color: primaryExtraSoft,
+                  borderRadius: BorderRadius.circular(18),
+                ),
                 child: Container(
                   margin: EdgeInsets.only(left: 4),
                   padding: EdgeInsets.only(
@@ -58,7 +60,11 @@ class JadwalMengajarCard extends StatelessWidget {
                     bottom: 24,
                   ),
                   decoration: BoxDecoration(
-                    color: primaryExtraSoft,
+                    color: primary,
+                    image: DecorationImage(
+                      image: AssetImage('assets/images/pattern-2.png'),
+                      fit: BoxFit.cover,
+                    ),
                     borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(14),
                       topRight: Radius.circular(18),
@@ -73,6 +79,7 @@ class JadwalMengajarCard extends StatelessWidget {
                         '${hari.toUpperCase()}',
                         style: TextStyle(
                           fontWeight: medium,
+                          color: kWhiteColor,
                         ),
                       ),
                       SizedBox(height: 4),
@@ -84,6 +91,7 @@ class JadwalMengajarCard extends StatelessWidget {
                               style: TextStyle(
                                 fontSize: 16,
                                 fontWeight: medium,
+                                color: kWhiteColor,
                               ),
                             ),
                             VerticalDivider(
@@ -98,6 +106,7 @@ class JadwalMengajarCard extends StatelessWidget {
                               style: TextStyle(
                                 fontSize: 16,
                                 fontWeight: medium,
+                                color: kWhiteColor,
                               ),
                             ),
                           ],
@@ -113,6 +122,7 @@ class JadwalMengajarCard extends StatelessWidget {
                                 fontSize: 18.5,
                                 fontWeight: bold,
                                 letterSpacing: 0.3,
+                                color: kWhiteColor,
                               ),
                               textAlign: TextAlign.left,
                             ),
