@@ -1,8 +1,10 @@
+import 'package:absen_siswa_qr_code/models/master_model.dart';
 import 'package:absen_siswa_qr_code/utils/theme.dart';
 import 'package:flutter/material.dart';
 
 class CardDaftarKelasWidget extends StatelessWidget {
-  const CardDaftarKelasWidget({super.key});
+  final DaftarKelasAjarModel daftarKelas;
+  const CardDaftarKelasWidget(this.daftarKelas, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -83,7 +85,7 @@ class CardDaftarKelasWidget extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'VIII-3',
+                        '${daftarKelas.kelas}',
                         style: TextStyle(
                             color: kWhiteColor,
                             fontSize: 16,
@@ -91,7 +93,7 @@ class CardDaftarKelasWidget extends StatelessWidget {
                       ),
                       SizedBox(height: 2),
                       Text(
-                        'St. Nurbaya, S.Pd., M.Pd.',
+                        '${daftarKelas.waliKelas}',
                         style: TextStyle(
                             color: kWhiteColor,
                             fontSize: 18,

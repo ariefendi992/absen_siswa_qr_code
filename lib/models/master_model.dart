@@ -432,9 +432,9 @@ class DaftarKelasAjarModel extends Equatable {
         kelasId: json['kelas_id'],
         kelas: json['kelas'],
         semester: json['semester'],
-        waliKelas: json['waliKelas'],
+        waliKelas: json['wali_kelas'],
       );
 
   @override
-  List<Object?> get props => [mengajarId, kelasId, kelas, semester, waliKelas];
+  List<Object> get props => [mengajarId, kelasId, kelas, semester, waliKelas];
 }
