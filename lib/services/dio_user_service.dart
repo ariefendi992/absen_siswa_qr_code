@@ -6,6 +6,7 @@ import 'package:absen_siswa_qr_code/services/interceptor/dio_interceptor.dart';
 import 'package:absen_siswa_qr_code/utils/secure_storage.dart';
 import 'package:dio/dio.dart';
 
+/// * API USER SISWA
 class ApiUserSiswa {
   final Dio dio = Dio();
 
@@ -47,6 +48,8 @@ class ApiUserSiswa {
   }
 }
 
+// *
+/// * API GURU
 class ApiUserGuru {
   final Dio dio = Dio();
 
@@ -185,6 +188,24 @@ class ApiUserGuru {
       return hari;
     } else {
       throw (body['msg'].toString());
+    }
+  }
+
+  ///* GET DAFTAR SISWA KELAS AJAR DENGA NAMA WALI KELAS
+  Future<List<DaftarKelasAjarModel>> getDaftarKelasAjar() async {
+    final response = await dio.get('/guru/daftar-kelas-ajar');
+
+    final body = response.data;
+    print(body);
+
+    if (response.statusCode == 200) {
+      final daftarKelas = List.from(body['data'])
+          .map((e) => DaftarKelasAjarModel.fromJson(e))
+          .toList();
+
+      return daftarKelas;
+    } else {
+      throw Exception('${body["msg"]}');
     }
   }
 

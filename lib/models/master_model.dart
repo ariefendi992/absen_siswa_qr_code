@@ -410,3 +410,31 @@ class JadwalMengajarSepekanModel extends Equatable {
         hari,
       ];
 }
+
+class DaftarKelasAjarModel extends Equatable {
+  final int mengajarId;
+  final int kelasId;
+  final String kelas;
+  final String semester;
+  final String waliKelas;
+
+  const DaftarKelasAjarModel({
+    required this.mengajarId,
+    required this.kelasId,
+    required this.kelas,
+    required this.semester,
+    required this.waliKelas,
+  });
+
+  factory DaftarKelasAjarModel.fromJson(Map<String, dynamic> json) =>
+      DaftarKelasAjarModel(
+        mengajarId: json['mengajar_id'],
+        kelasId: json['kelas_id'],
+        kelas: json['kelas'],
+        semester: json['semester'],
+        waliKelas: json['waliKelas'],
+      );
+
+  @override
+  List<Object?> get props => [mengajarId, kelasId, kelas, semester, waliKelas];
+}
