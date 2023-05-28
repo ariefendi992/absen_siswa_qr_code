@@ -97,6 +97,7 @@ class DioInterceptor extends QueuedInterceptorsWrapper {
           print(error.response?.data);
         } on DioError catch (e) {
           print(e.toString());
+
         }
       }
     }
