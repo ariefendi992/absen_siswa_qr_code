@@ -14,7 +14,7 @@ class JadwalMapelCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(bottom: 12),
+      margin: EdgeInsets.only(bottom: 16),
       child: Column(
         children: [
           Material(

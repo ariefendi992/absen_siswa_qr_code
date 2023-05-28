@@ -56,7 +56,7 @@ class _GuruJadwalMengajarPageState extends State<GuruJadwalMengajarPage> {
                 'SENIN',
                 style: TextStyle(
                   fontWeight: bold,
-                  fontSize: 16,
+                  fontSize: 18,
                 ),
               ),
               SizedBox(width: 5),
@@ -70,7 +70,7 @@ class _GuruJadwalMengajarPageState extends State<GuruJadwalMengajarPage> {
               )
             ],
           ),
-          SizedBox(height: 2),
+          SizedBox(height: 16),
           BlocBuilder<JadwalSeninCubit, JadwalSeninState>(
             builder: (context, state) {
               if (state is JadwalSeninSuccess) {
@@ -125,7 +125,7 @@ class _GuruJadwalMengajarPageState extends State<GuruJadwalMengajarPage> {
                 'SELASA',
                 style: TextStyle(
                   fontWeight: bold,
-                  fontSize: 16,
+                  fontSize: 18,
                 ),
               ),
               SizedBox(width: 5),
@@ -139,7 +139,7 @@ class _GuruJadwalMengajarPageState extends State<GuruJadwalMengajarPage> {
               )
             ],
           ),
-          SizedBox(height: 2),
+          SizedBox(height: 16),
           BlocBuilder<JadwalSelasaCubit, JadwalSelasaState>(
             builder: (context, state) {
               if (state is JadwalSelasaSuccess) {
@@ -188,7 +188,7 @@ class _GuruJadwalMengajarPageState extends State<GuruJadwalMengajarPage> {
                 'RABU',
                 style: TextStyle(
                   fontWeight: bold,
-                  fontSize: 16,
+                  fontSize: 18,
                 ),
               ),
               SizedBox(width: 5),
@@ -202,7 +202,7 @@ class _GuruJadwalMengajarPageState extends State<GuruJadwalMengajarPage> {
               )
             ],
           ),
-          SizedBox(height: 2),
+          SizedBox(height: 16),
           BlocBuilder<JadwalRabuCubit, JadwalRabuState>(
             builder: (context, state) {
               if (state is JadwalRabuSuccess) {
@@ -251,7 +251,7 @@ class _GuruJadwalMengajarPageState extends State<GuruJadwalMengajarPage> {
                 'KAMIS',
                 style: TextStyle(
                   fontWeight: bold,
-                  fontSize: 16,
+                  fontSize: 18,
                 ),
               ),
               SizedBox(width: 5),
@@ -265,7 +265,7 @@ class _GuruJadwalMengajarPageState extends State<GuruJadwalMengajarPage> {
               )
             ],
           ),
-          SizedBox(height: 2),
+          SizedBox(height: 16),
           BlocBuilder<JadwalKamisCubit, JadwalKamisState>(
             builder: (context, state) {
               if (state is JadwalKamisSuccess) {
@@ -314,7 +314,7 @@ class _GuruJadwalMengajarPageState extends State<GuruJadwalMengajarPage> {
                 'JUMAT',
                 style: TextStyle(
                   fontWeight: bold,
-                  fontSize: 16,
+                  fontSize: 18,
                 ),
               ),
               SizedBox(width: 5),
@@ -328,7 +328,7 @@ class _GuruJadwalMengajarPageState extends State<GuruJadwalMengajarPage> {
               )
             ],
           ),
-          SizedBox(height: 2),
+          SizedBox(height: 16),
           BlocBuilder<JadwalJumatCubit, JadwalJumatState>(
             builder: (context, state) {
               if (state is JadwalJumatSuccess) {
@@ -398,10 +398,15 @@ class _GuruJadwalMengajarPageState extends State<GuruJadwalMengajarPage> {
           padding: EdgeInsets.symmetric(horizontal: 20, vertical: 12),
           children: [
             hariSenin(),
+            SizedBox(height: 14),
             hariSelasa(),
+            SizedBox(height: 14),
             hariRabu(),
+            SizedBox(height: 14),
             hariKamis(),
+            SizedBox(height: 14),
             hariJumat(),
+            SizedBox(height: 14),
           ],
         ),
       ),

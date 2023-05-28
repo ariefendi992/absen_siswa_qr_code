@@ -31,7 +31,7 @@ class _GuruHomePageState extends State<GuruHomePage> {
       // * HEADER VIEW
       Widget headerView(UserGuruModel userGuru) {
         return Container(
-          margin: EdgeInsets.only(bottom: 16, top: 10),
+          margin: EdgeInsets.only(bottom: 24, top: 10),
           width: MediaQuery.of(context).size.width,
           child: Row(
             children: [
@@ -41,16 +41,15 @@ class _GuruHomePageState extends State<GuruHomePage> {
                   Text(
                     'selamat datang',
                     style: TextStyle(
-                      fontSize: 14,
+                      fontSize: 15,
                       color: secondarySoft,
                     ),
                   ),
-                  SizedBox(height: 4),
                   Text(
                     '${userGuru.firstName} ${userGuru.lastName}',
                     style: TextStyle(
                       fontWeight: medium,
-                      fontSize: 17,
+                      fontSize: 20,
                       letterSpacing: 0.5,
                     ),
                   )
@@ -63,68 +62,71 @@ class _GuruHomePageState extends State<GuruHomePage> {
 
       //* CARD HEADER VIEW
       Widget cardHeaderView(UserGuruModel userGuru) {
-        return Material(
-          elevation: 5,
-          borderRadius: BorderRadius.circular(18),
-          child: Container(
-            decoration: BoxDecoration(
-              color: primary,
-              borderRadius: BorderRadius.circular(18),
-              image: DecorationImage(
-                image: AssetImage('assets/images/pattern-1.png'),
-                fit: BoxFit.cover,
+        return Container(
+          margin: EdgeInsets.only(bottom: 24),
+          child: Material(
+            elevation: 5,
+            borderRadius: BorderRadius.circular(18),
+            child: Container(
+              decoration: BoxDecoration(
+                color: primary,
+                borderRadius: BorderRadius.circular(18),
+                image: DecorationImage(
+                  image: AssetImage('assets/images/pattern-1.png'),
+                  fit: BoxFit.cover,
+                ),
               ),
-            ),
-            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Guru Mata Pelajaran',
-                  style: TextStyle(
-                    color: kWhiteColor,
-                    fontWeight: medium,
+              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Guru Mata Pelajaran',
+                    style: TextStyle(
+                      color: kWhiteColor,
+                      fontWeight: medium,
+                    ),
                   ),
-                ),
-                SizedBox(height: 4),
-                Text(
-                  '${userGuru.nip}',
-                  style: TextStyle(
-                    fontSize: 18,
-                    color: kWhiteColor,
-                    fontWeight: bold,
-                    letterSpacing: 1.5,
+                  SizedBox(height: 4),
+                  Text(
+                    '${userGuru.nip}',
+                    style: TextStyle(
+                      fontSize: 18,
+                      color: kWhiteColor,
+                      fontWeight: bold,
+                      letterSpacing: 1.5,
+                    ),
                   ),
-                ),
-                Container(
-                  margin: EdgeInsets.only(top: 12),
-                  padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-                  decoration: BoxDecoration(
-                    color: primarySoft,
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: Column(
-                          children: [
-                            Text(
-                              '${userGuru.mapel}',
-                              style: TextStyle(
-                                fontSize: 16,
-                                color: kWhiteColor,
-                                fontWeight: medium,
-                                letterSpacing: 1,
-                              ),
-                              textAlign: TextAlign.center,
-                            )
-                          ],
+                  Container(
+                    margin: EdgeInsets.only(top: 12),
+                    padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                    decoration: BoxDecoration(
+                      color: primarySoft,
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: Column(
+                            children: [
+                              Text(
+                                '${userGuru.mapel}',
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  color: kWhiteColor,
+                                  fontWeight: medium,
+                                  letterSpacing: 1,
+                                ),
+                                textAlign: TextAlign.center,
+                              )
+                            ],
+                          ),
                         ),
-                      ),
-                    ],
-                  ),
-                )
-              ],
+                      ],
+                    ),
+                  )
+                ],
+              ),
             ),
           ),
         );
@@ -167,7 +169,7 @@ class _GuruHomePageState extends State<GuruHomePage> {
     //* PILIHAN MENU VIEW
     Widget menuView() {
       return Container(
-        margin: EdgeInsets.only(top: 18),
+        margin: EdgeInsets.only(bottom: 24),
         width: MediaQuery.of(context).size.height,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -175,7 +177,7 @@ class _GuruHomePageState extends State<GuruHomePage> {
             Text(
               'Pilihan',
               style: TextStyle(
-                fontSize: 16,
+                fontSize: 18,
                 color: secondary,
                 fontWeight: medium,
               ),
@@ -250,7 +252,7 @@ class _GuruHomePageState extends State<GuruHomePage> {
         builder: (context, state) {
           if (state is JadwalMapelSuccess) {
             return Container(
-              margin: EdgeInsets.only(top: 8),
+              margin: EdgeInsets.only(top: 16),
               width: MediaQuery.of(context).size.width,
               child: ListView.builder(
                   padding: EdgeInsets.all(0),
@@ -319,16 +321,15 @@ class _GuruHomePageState extends State<GuruHomePage> {
         context.read<JadwalMapelCubit>().getJadwalMengajarHarian();
       },
       child: ListView(
-        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 36),
+        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 30),
         shrinkWrap: true,
         children: [
           header(),
           menuView(),
-          SizedBox(height: 18),
           Text(
             'Jadwal mengajar hari ini',
             style: TextStyle(
-              fontSize: 16,
+              fontSize: 18,
               color: secondary,
               fontWeight: medium,
             ),
