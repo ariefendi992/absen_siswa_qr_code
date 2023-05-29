@@ -102,6 +102,12 @@ class _GuruGetSiswaKelasState extends State<GuruGetSiswaKelas> {
               ),
             ],
           );
+        } else if (state is KelasAjarLoading) {
+          return Container(
+            height: MediaQuery.of(context).size.height / 3,
+            alignment: Alignment.bottomCenter,
+            child: CircularProgressIndicator(),
+          );
         }
         return Center(
           child: CircularProgressIndicator(),
