@@ -1,9 +1,13 @@
+import 'package:absen_siswa_qr_code/cubit/master/daftar_siswa_cubit.dart';
+import 'package:absen_siswa_qr_code/models/master_model.dart';
 import 'package:absen_siswa_qr_code/utils/theme.dart';
 import 'package:absen_siswa_qr_code/views/widgets/card_daftar_siswa.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class GuruGetDaftarSiswa extends StatefulWidget {
-  const GuruGetDaftarSiswa({super.key});
+  final DaftarKelasAjarModel kelas;
+  const GuruGetDaftarSiswa(this.kelas, {super.key});
 
   @override
   State<GuruGetDaftarSiswa> createState() => _GuruGetDaftarSiswaState();
@@ -11,6 +15,14 @@ class GuruGetDaftarSiswa extends StatefulWidget {
 
 class _GuruGetDaftarSiswaState extends State<GuruGetDaftarSiswa> {
   bool searchActive = false;
+
+  @override
+  void initState() {
+    super.initState();
+    context.read<DaftarSiswaCubit>()
+      ..getDataSiswa(kelasId: widget.kelas.kelasId);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,60 +59,67 @@ class _GuruGetDaftarSiswaState extends State<GuruGetDaftarSiswa> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              cardHeader(context),
-              Container(
-                margin: EdgeInsets.only(top: 8),
-                child: Material(
-                  elevation: 6,
-                  borderRadius: BorderRadius.circular(18),
-                  child: AnimatedContainer(
-                    width:
-                        !searchActive ? 50 : MediaQuery.of(context).size.width,
-                    duration: Duration(milliseconds: 2000),
-                    decoration: BoxDecoration(
-                      color: primarySoft,
-                      borderRadius: BorderRadius.circular(18),
-                    ),
-                    child: Row(
-                      children: [
-                        // IconButton(
-                        //   onPressed: () {
-                        //     setState(() {
-                        //       searchActive = !searchActive;
-                        //     });
-                        //   },
-                        //   icon: Icon(
-                        //     Icons.search_rounded,
-                        //   ),
-                        // )
+              cardHeader(),
 
-                        GestureDetector(
-                          onTap: () {
-                            setState(() {
-                              searchActive = !searchActive;
-                            });
-                          },
-                          child: Container(
-                            padding: EdgeInsets.all(8),
-                            child: Icon(
-                              Icons.search_rounded,
-                              color: secondary,
-                            ),
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                ),
-              ),
+              ///* SEARCH BUTTON AND FIELD
+              // Container(
+              //   margin: EdgeInsets.only(top: 8),
+              //   child: Material(
+              //     elevation: 6,
+              //     borderRadius: BorderRadius.circular(18),
+              //     child: AnimatedContainer(
+              //       width:
+              //           !searchActive ? 50 : MediaQuery.of(context).size.width,
+              //       duration: Duration(milliseconds: 2000),
+              //       decoration: BoxDecoration(
+              //         color: primarySoft,
+              //         borderRadius: BorderRadius.circular(18),
+              //       ),
+              //       child: Row(
+              //         children: [
+              // GestureDetector(
+              //   onTap: () {
+              //     setState(() {
+              //       searchActive = !searchActive;
+              //     });
+              //   },
+              //   child: Container(
+              //     padding: EdgeInsets.all(8),
+              //     child: Icon(
+              //       Icons.search_rounded,
+              //       color: secondary,
+              //     ),
+              //   ),
+              // )
+              //     ],
+              //   ),
+              // ),
+              // ),
+              // ),
+              ///* END SEARCH FIELD
+
               SizedBox(height: 16),
               Expanded(
-                child: ListView(
-                  shrinkWrap: true,
-                  children: [
-                    CardDaftarSiswaWidget(),
-                    CardDaftarSiswaWidget(),
-                  ],
+                child: BlocBuilder<DaftarSiswaCubit, DaftarSiswaSate>(
+                  builder: (context, state) {
+                    if (state is DaftarSiswaSuccess) {
+                      return ListView(
+                        shrinkWrap: true,
+                        children: state.daftarSiswa
+                            .map((e) => CardDaftarSiswaWidget(
+                                  daftarSiswa: e,
+                                ))
+                            .toList(),
+                      );
+                    } else if (state is DaftarSiswaFailure) {
+                      return Center(
+                        child: Text('${state.error}'),
+                      );
+                    }
+                    return Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  },
                 ),
               )
             ],
@@ -110,14 +129,14 @@ class _GuruGetDaftarSiswaState extends State<GuruGetDaftarSiswa> {
     );
   }
 
-  Widget cardHeader(context) {
+  Widget cardHeader() {
     return Material(
       elevation: 6,
       borderRadius: BorderRadius.circular(14),
       child: Container(
         width: MediaQuery.of(context).size.width,
         padding: EdgeInsets.symmetric(
-          vertical: 10,
+          vertical: 14,
           horizontal: 16,
         ),
         decoration: BoxDecoration(
@@ -135,7 +154,7 @@ class _GuruGetDaftarSiswaState extends State<GuruGetDaftarSiswa> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'VIII-1',
+                  '${widget.kelas.kelas}',
                   style: TextStyle(
                     fontSize: 14,
                     fontWeight: bold,
@@ -145,7 +164,7 @@ class _GuruGetDaftarSiswaState extends State<GuruGetDaftarSiswa> {
                 ),
                 SizedBox(height: 2),
                 Text(
-                  'Dra. Haslinda',
+                  '${widget.kelas.waliKelas}',
                   style: TextStyle(
                     fontSize: 20,
                     fontWeight: bold,
@@ -157,7 +176,7 @@ class _GuruGetDaftarSiswaState extends State<GuruGetDaftarSiswa> {
             ),
             Spacer(),
             Container(
-              margin: EdgeInsets.only(right: 24),
+              margin: EdgeInsets.only(right: 1),
               child: Icon(
                 Icons.class_rounded,
                 size: 48,

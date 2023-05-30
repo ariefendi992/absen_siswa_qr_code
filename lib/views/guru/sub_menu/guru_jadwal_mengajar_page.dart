@@ -272,11 +272,11 @@ class _GuruJadwalMengajarPageState extends State<GuruJadwalMengajarPage> {
                 return Column(
                   children: state.jadwal.map((e) {
                     return JadwalMengajarCard(
-                      hari: e.hari!,
-                      jamMulai: e.jamMulai!,
-                      jamSelesai: e.jamSelesai!,
-                      kelas: e.kelas!,
-                      mapel: e.mapel!,
+                      hari: e.hari,
+                      jamMulai: e.jamMulai,
+                      jamSelesai: e.jamSelesai,
+                      kelas: e.kelas,
+                      mapel: e.mapel,
                     );
                   }).toList(),
                 );

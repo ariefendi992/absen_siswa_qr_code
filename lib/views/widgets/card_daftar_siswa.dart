@@ -1,8 +1,10 @@
+import 'package:absen_siswa_qr_code/models/master_model.dart';
 import 'package:absen_siswa_qr_code/utils/theme.dart';
 import 'package:flutter/material.dart';
 
 class CardDaftarSiswaWidget extends StatelessWidget {
-  const CardDaftarSiswaWidget({super.key});
+  final DaftarSiswaModel daftarSiswa;
+  const CardDaftarSiswaWidget({super.key, required this.daftarSiswa});
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +35,7 @@ class CardDaftarSiswaWidget extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Rijal Dhaffa Nugraha',
+                  '${daftarSiswa.firstName} ${daftarSiswa.lastName}',
                   style: TextStyle(
                     fontWeight: bold,
                     fontSize: 17,
@@ -43,7 +45,7 @@ class CardDaftarSiswaWidget extends StatelessWidget {
                 ),
                 SizedBox(height: 2),
                 Text(
-                  'VIII-1',
+                  '${daftarSiswa.kelas}',
                   style: TextStyle(
                       fontWeight: medium,
                       fontSize: 14,

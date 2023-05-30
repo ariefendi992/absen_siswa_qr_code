@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:equatable/equatable.dart';
 
 class MapelSiswaModel extends Equatable {
@@ -248,28 +250,56 @@ class JadwalMengajarRabuModel extends Equatable {
 
 class JadwalMengajarKamisModel extends Equatable {
   final int id;
-  final String? firstName;
-  final String? lastName;
-  final String? kodeMengajar;
-  final String? mapel;
-  final String? jamMulai;
-  final String? jamSelesai;
-  final String? semester;
-  final String? kelas;
-  final String? hari;
+  final String firstName;
+  final String lastName;
+  final String kodeMengajar;
+  final String mapel;
+  final String jamMulai;
+  final String jamSelesai;
+  final String semester;
+  final String kelas;
+  final String hari;
 
   const JadwalMengajarKamisModel({
     required this.id,
-    this.firstName,
-    this.lastName,
-    this.kodeMengajar,
-    this.mapel,
-    this.jamMulai,
-    this.jamSelesai,
-    this.semester,
-    this.kelas,
-    this.hari,
+    required this.firstName,
+    required this.lastName,
+    required this.kodeMengajar,
+    required this.mapel,
+    required this.jamMulai,
+    required this.jamSelesai,
+    required this.semester,
+    required this.kelas,
+    required this.hari,
   });
+
+  JadwalMengajarKamisModel copyWith({
+    int? id,
+    String? firstName,
+    String? lastName,
+    String? kodeMengajar,
+    String? mapel,
+    String? jamMulai,
+    String? jamSelesai,
+    String? semester,
+    String? kelas,
+    String? hari,
+  }) =>
+      JadwalMengajarKamisModel(
+        id: id ?? this.id,
+        firstName: firstName ?? this.firstName,
+        lastName: lastName ?? this.lastName,
+        kodeMengajar: kodeMengajar ?? this.kodeMengajar,
+        mapel: mapel ?? this.mapel,
+        jamMulai: jamMulai ?? this.jamMulai,
+        jamSelesai: jamSelesai ?? this.jamSelesai,
+        semester: semester ?? this.semester,
+        kelas: kelas ?? this.kelas,
+        hari: hari ?? this.hari,
+      );
+
+  factory JadwalMengajarKamisModel.fromRawJson(String str) =>
+      JadwalMengajarKamisModel.fromJson(jsonDecode(str));
 
   factory JadwalMengajarKamisModel.fromJson(Map<String, dynamic> json) {
     return JadwalMengajarKamisModel(
@@ -437,4 +467,54 @@ class DaftarKelasAjarModel extends Equatable {
 
   @override
   List<Object> get props => [mengajarId, kelasId, kelas, semester, waliKelas];
+}
+
+class DaftarSiswaModel extends Equatable {
+  final int siswaId;
+  final String firstName;
+  final String lastName;
+  final String kelasId;
+  final String kelas;
+  final String? waliKelas;
+
+  const DaftarSiswaModel({
+    required this.siswaId,
+    required this.firstName,
+    required this.lastName,
+    required this.kelasId,
+    required this.kelas,
+    this.waliKelas,
+  });
+
+  DaftarSiswaModel copyWith({
+    int? siswaId,
+    String? firstName,
+    String? lastName,
+    String? kelasId,
+    String? kelas,
+    String? waliKelas,
+  }) =>
+      DaftarSiswaModel(
+        siswaId: siswaId ?? this.siswaId,
+        firstName: firstName ?? this.firstName,
+        lastName: lastName ?? this.lastName,
+        kelasId: kelasId ?? this.kelasId,
+        kelas: kelas ?? this.kelas,
+      );
+
+  factory DaftarSiswaModel.rawFromJson(String str) =>
+      DaftarSiswaModel.fromJson(json.decode(str));
+
+  factory DaftarSiswaModel.fromJson(Map<String, dynamic> json) =>
+      DaftarSiswaModel(
+          siswaId: json['siswa_id'],
+          firstName: json['first_name'],
+          lastName: json['last_name'],
+          kelasId: json['kelas_id'].toString(),
+          kelas: json['kelas'],
+          waliKelas: json['wali_kelas']);
+
+  @override
+  List<Object?> get props =>
+      [siswaId, firstName, lastName, kelasId, kelas, waliKelas];
 }

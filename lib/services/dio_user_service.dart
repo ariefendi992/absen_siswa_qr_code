@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:absen_siswa_qr_code/models/master_model.dart';
 import 'package:absen_siswa_qr_code/models/user_model.dart';
 import 'package:absen_siswa_qr_code/services/interceptor/dio_interceptor.dart';
@@ -196,7 +195,7 @@ class ApiUserGuru {
     final response = await dio.get('/guru/daftar-kelas-ajar');
 
     final body = response.data;
-    print(body);
+    // print(body);
 
     if (response.statusCode == 200) {
       final daftarKelas = List.from(body['data'])
@@ -230,6 +229,25 @@ class ApiUserGuru {
       return jadwal;
     } else {
       throw Exception();
+    }
+  }
+
+  ///* GET DAFTAR SISWA
+  Future<List<DaftarSiswaModel>> getDaftarSiswa(kelasId) async {
+    final response = await dio.get('/guru/siswa-kelas?kelas_id=$kelasId');
+
+    final body = response.data;
+    // print(body['data']['siswa']);
+
+    if (response.statusCode == 200) {
+      final daftarSiswa = List<DaftarSiswaModel>.from(
+        body['data']['siswa'].map(
+          (json) => DaftarSiswaModel.fromJson(json),
+        ),
+      );
+      return daftarSiswa;
+    } else {
+      throw Exception('$body["msg"], status code : ${response.statusCode}');
     }
   }
 }

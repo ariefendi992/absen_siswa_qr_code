@@ -110,7 +110,7 @@ class CardDaftarKelasWidget extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => const GuruGetDaftarSiswa(),
+                      builder: (context) => GuruGetDaftarSiswa(daftarKelas),
                     ),
                   );
                 },
