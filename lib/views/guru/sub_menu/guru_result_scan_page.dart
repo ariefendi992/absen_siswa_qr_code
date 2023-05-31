@@ -21,6 +21,8 @@ class GuruResultScanPage extends StatefulWidget {
   State<GuruResultScanPage> createState() => _GuruResultScanPageState();
 }
 
+enum keteranganHadir { H, I, S, A }
+
 class _GuruResultScanPageState extends State<GuruResultScanPage> {
   CustomStorage storage = CustomStorage();
   bool shouldPop = true;

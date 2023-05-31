@@ -250,4 +250,26 @@ class ApiUserGuru {
       throw Exception('$body["msg"], status code : ${response.statusCode}');
     }
   }
+
+  Future<AbsenSiswaModel> absenSiswaGuruMapel(
+      {mengajarID, siswaID, keterangan}) async {
+    Map<String, dynamic> data = {
+      'mengajar_id': mengajarID,
+      'siswa_id': siswaID,
+      'keterangan': keterangan
+    };
+
+    final response = await dio.post('/guru/absen-siswa', data: data);
+
+    final body = response.data;
+
+    if (response.statusCode == 201) {
+      AbsenSiswaModel absen = AbsenSiswaModel.fromJson(body);
+
+      return absen;
+    } else {
+      throw Exception(
+          'msg ==> $body["msg"].\n status code ==> ${response.statusCode}');
+    }
+  }
 }
