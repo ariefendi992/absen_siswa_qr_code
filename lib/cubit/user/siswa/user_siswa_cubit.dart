@@ -19,8 +19,8 @@ class UserSiswaCubit extends Cubit<UserSiswaState> {
           // await UserSiswaService().getCurrentUserSiswa();
           await ApiUserSiswa().getCurrentSiswa();
       emit(UserSiswaSuccess(user));
-    } catch (e) {
-      emit(UserSiswaFailed(e.toString()));
+    } on DioError catch (e) {
+      emit(UserSiswaFailed('${e.response?.data["msg"]}'));
     }
   }
 
@@ -30,19 +30,8 @@ class UserSiswaCubit extends Cubit<UserSiswaState> {
       UserSiswaModel userSiswa =
           await UserSiswaService().genereteQrcode(id: id);
       emit(UserSiswaSuccess(userSiswa));
-    } catch (e) {
-      emit(UserSiswaFailed(e.toString()));
-    }
-  }
-
-  void getSiswaByUsername({required String username}) async {
-    try {
-      emit(UserSiswaLoading());
-      UserSiswaModel userSiswa =
-          await ApiUserSiswa().getSiswaByUsername(username: username);
-      emit(UserSiswaSuccess(userSiswa));
     } on DioError catch (e) {
-      emit(UserSiswaFailed('${e.response?.data['msg'].toString()}'));
+      emit(UserSiswaFailed('${e.response?.data["msg"]}'));
     }
   }
 }

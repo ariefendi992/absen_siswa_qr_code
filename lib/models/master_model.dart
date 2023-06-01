@@ -519,35 +519,4 @@ class DaftarSiswaModel extends Equatable {
       [siswaId, firstName, lastName, kelasId, kelas, waliKelas];
 }
 
-class AbsenSiswaModel extends Equatable {
-  final int? id;
-  final int? mengajarID;
-  final int? siswaID;
-  final String? tglAbsen;
-  final String? keterangan;
 
-  const AbsenSiswaModel({
-    this.id,
-    this.mengajarID,
-    this.siswaID,
-    this.keterangan,
-    this.tglAbsen,
-  });
-
-  factory AbsenSiswaModel.fromJson(Map<String, dynamic> json) =>
-      AbsenSiswaModel(
-          id: json['id'] ?? null,
-          mengajarID: json['mengajar_id'],
-          siswaID: json['siswa_id'],
-          keterangan: json['keterangan'],
-          tglAbsen: json['tgl_absen']);
-
-  Map<String, dynamic> toJson() => {
-        'mengajar_id': mengajarID,
-        'siswa_id': siswaID,
-        'keterangan': keterangan,
-      };
-
-  @override
-  List<Object> get props => [];
-}

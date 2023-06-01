@@ -1,4 +1,4 @@
-import 'package:absen_siswa_qr_code/models/master_model.dart';
+import 'package:absen_siswa_qr_code/models/absensi_siswa_model.dart';
 import 'package:absen_siswa_qr_code/services/dio_user_service.dart';
 import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';

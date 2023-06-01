@@ -1,4 +1,5 @@
-import 'package:absen_siswa_qr_code/cubit/user/siswa/user_siswa_cubit.dart';
+import 'package:absen_siswa_qr_code/cubit/user/guru/scan_siswa_cubit.dart';
+import 'package:absen_siswa_qr_code/models/absensi_siswa_model.dart';
 import 'package:absen_siswa_qr_code/utils/secure_storage.dart';
 import 'package:absen_siswa_qr_code/utils/theme.dart';
 import 'package:absen_siswa_qr_code/views/widgets/button_keterangan.dart';
@@ -26,11 +27,12 @@ enum keteranganHadir { H, I, S, A }
 class _GuruResultScanPageState extends State<GuruResultScanPage> {
   CustomStorage storage = CustomStorage();
   bool shouldPop = true;
+  String ket = '';
 
   @override
   void initState() {
     super.initState();
-    context.read<UserSiswaCubit>().getSiswaByUsername(
+    context.read<ScanSiswaCubit>().getSiswaByUsername(
           username: widget.username,
         );
   }
@@ -38,7 +40,7 @@ class _GuruResultScanPageState extends State<GuruResultScanPage> {
   @override
   Widget build(BuildContext context) {
     /// * START WIDGET CARD
-    Widget cardWidget(state) {
+    Widget cardWidget(ScanSiswaModel siswaData) {
       return Container(
         width: MediaQuery.of(context).size.width,
         padding: EdgeInsets.symmetric(vertical: 18, horizontal: 18),
@@ -58,7 +60,7 @@ class _GuruResultScanPageState extends State<GuruResultScanPage> {
               margin: EdgeInsets.only(bottom: 6),
               alignment: Alignment.topRight,
               child: Text(
-                '${state.userSiswa.today}',
+                '${siswaData.additionalData!['data']['today']}',
                 style: TextStyle(
                   color: kWhiteColor,
                   fontWeight: medium,
@@ -134,7 +136,7 @@ class _GuruResultScanPageState extends State<GuruResultScanPage> {
                         ),
                       ),
                       Text(
-                        '${state.userSiswa.firstName} ${state.userSiswa.lastName}',
+                        '${siswaData.data!.firstName} ${siswaData.data!.lastName}',
                         style: TextStyle(
                           color: kWhiteColor,
                           fontWeight: medium,
@@ -156,7 +158,7 @@ class _GuruResultScanPageState extends State<GuruResultScanPage> {
                         ),
                       ),
                       Text(
-                        '${state.userSiswa.kelas}',
+                        '${siswaData.data!.kelas}',
                         style: TextStyle(
                           color: kWhiteColor,
                           fontWeight: medium,
@@ -178,7 +180,7 @@ class _GuruResultScanPageState extends State<GuruResultScanPage> {
                         ),
                       ),
                       Text(
-                        '${state.userSiswa.semester}',
+                        '${siswaData.data!.semester}',
                         style: TextStyle(
                           color: kWhiteColor,
                           fontWeight: medium,
@@ -232,13 +234,14 @@ class _GuruResultScanPageState extends State<GuruResultScanPage> {
           widget.closeCameraScreen();
           return shouldPop;
         },
-        child: BlocBuilder<UserSiswaCubit, UserSiswaState>(
+        child: BlocBuilder<ScanSiswaCubit, ScanSiswaState>(
           builder: (context, state) {
-            if (state is UserSiswaSuccess) {
+            if (state is ScanSiswaSuccess) {
+              print(state.siswaData.additionalData);
               return RefreshIndicator(
                 onRefresh: () async {
                   context
-                      .read<UserSiswaCubit>()
+                      .read<ScanSiswaCubit>()
                       .getSiswaByUsername(username: widget.username);
                 },
                 child: ListView(
@@ -247,9 +250,9 @@ class _GuruResultScanPageState extends State<GuruResultScanPage> {
                   // physics: BouncingScrollPhysics(),
                   children: [
                     /// * NOTE: CARD WIDGET
-                    cardWidget(state),
+                    cardWidget(state.siswaData),
                     Container(
-                      margin: EdgeInsets.only(top: 20),
+                      margin: EdgeInsets.only(top: 30),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -257,12 +260,11 @@ class _GuruResultScanPageState extends State<GuruResultScanPage> {
                             'Keterangan Kehadiran',
                             style: TextStyle(
                               fontWeight: medium,
-                              fontSize: 15,
-                              letterSpacing: 0.5,
+                              fontSize: 18,
                             ),
                           ),
                           Container(
-                            margin: EdgeInsets.only(top: 6),
+                            margin: EdgeInsets.only(top: 16),
                             padding: EdgeInsets.symmetric(vertical: 10),
                             decoration: BoxDecoration(
                               color: primaryExtraSoft,
@@ -275,6 +277,32 @@ class _GuruResultScanPageState extends State<GuruResultScanPage> {
                                   icons: Icons.check,
                                   iconColors: successPrimary,
                                   title: 'Siswa Hadir',
+                                  onTap: () {
+                                    // setState(() {
+                                    ket = 'H';
+                                    // });
+
+                                    print('Ket ==> $ket');
+
+                                    showDialog(
+                                      context: context,
+                                      builder: (BuildContext context) {
+                                        return AlertDialog(
+                                          title: Text('Modal Dialog'),
+                                          content:
+                                              Text('Ini adalah modal dialog'),
+                                          actions: [
+                                            TextButton(
+                                              child: Text('Tutup'),
+                                              onPressed: () {
+                                                Navigator.of(context).pop();
+                                              },
+                                            ),
+                                          ],
+                                        );
+                                      },
+                                    );
+                                  },
                                 ),
                                 ButtonMenuKeterangan(
                                   icons: Icons.close,
@@ -303,7 +331,7 @@ class _GuruResultScanPageState extends State<GuruResultScanPage> {
                   ],
                 ),
               );
-            } else if (state is UserSiswaFailed) {
+            } else if (state is ScanSiswaFailure) {
               ///
               /// * NOTE: ERROR VIEW ON PAGE
               ///

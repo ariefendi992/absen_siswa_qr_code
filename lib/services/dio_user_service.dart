@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:absen_siswa_qr_code/models/absensi_siswa_model.dart';
 import 'package:absen_siswa_qr_code/models/master_model.dart';
 import 'package:absen_siswa_qr_code/models/user_model.dart';
 import 'package:absen_siswa_qr_code/services/interceptor/dio_interceptor.dart';
@@ -27,24 +28,6 @@ class ApiUserSiswa {
       throw (jsonResp['msg']);
     }
   }
-
-  Future<UserSiswaModel> getSiswaByUsername({required String username}) async {
-    final response = await dio.get('/guru/single-siswa?nisn=$username');
-
-    final body = response.data;
-
-    // print('PRINT FROM DIO USER SERVICE BY NISN ==>> $body');
-
-    await storage.setStorage('today', body['today']);
-
-    if (response.statusCode == 200) {
-      UserSiswaModel userSiswa = UserSiswaModel.fromJson(body);
-
-      return userSiswa;
-    } else {
-      throw (body['msg'].toString());
-    }
-  }
 }
 
 // *
@@ -68,6 +51,24 @@ class ApiUserGuru {
       UserGuruModel userGuru = UserGuruModel.fromJson(body);
 
       return userGuru;
+    } else {
+      throw (body['msg'].toString());
+    }
+  }
+
+  Future<ScanSiswaModel> getSiswaByUsername({required String username}) async {
+    final response = await dio.get('/guru/single-siswa?nisn=$username');
+
+    final body = response.data;
+
+    // print('PRINT FROM DIO USER SERVICE BY NISN ==>> $body');
+
+    await storage.setStorage('today', body['today']);
+
+    if (response.statusCode == 200) {
+      ScanSiswaModel userSiswa = ScanSiswaModel.fromJson(body);
+
+      return userSiswa;
     } else {
       throw (body['msg'].toString());
     }
