@@ -31,7 +31,7 @@ class _GuruHomePageState extends State<GuruHomePage> {
       // * HEADER VIEW
       Widget headerView(UserGuruModel userGuru) {
         return Container(
-          margin: EdgeInsets.only(bottom: 24, top: 10),
+          margin: EdgeInsets.only(bottom: 24, top: 8),
           width: MediaQuery.of(context).size.width,
           child: Row(
             children: [
@@ -320,22 +320,24 @@ class _GuruHomePageState extends State<GuruHomePage> {
         context.read<UserGuruCubit>().currenUserGuru();
         context.read<JadwalMapelCubit>().getJadwalMengajarHarian();
       },
-      child: ListView(
-        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 30),
-        shrinkWrap: true,
-        children: [
-          header(),
-          menuView(),
-          Text(
-            'Jadwal mengajar hari ini',
-            style: TextStyle(
-              fontSize: 18,
-              color: secondary,
-              fontWeight: medium,
+      child: SafeArea(
+        child: ListView(
+          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 30),
+          shrinkWrap: true,
+          children: [
+            header(),
+            menuView(),
+            Text(
+              'Jadwal mengajar hari ini',
+              style: TextStyle(
+                fontSize: 18,
+                color: secondary,
+                fontWeight: medium,
+              ),
             ),
-          ),
-          jadwalView(),
-        ],
+            jadwalView(),
+          ],
+        ),
       ),
     );
   }

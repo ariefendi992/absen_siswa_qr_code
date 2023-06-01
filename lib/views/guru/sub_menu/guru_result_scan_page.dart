@@ -1,3 +1,5 @@
+import 'package:absen_siswa_qr_code/cubit/master/absen/absen_siswa_cubit.dart';
+import 'package:absen_siswa_qr_code/cubit/page/page_cubit.dart';
 import 'package:absen_siswa_qr_code/cubit/user/guru/scan_siswa_cubit.dart';
 import 'package:absen_siswa_qr_code/models/absensi_siswa_model.dart';
 import 'package:absen_siswa_qr_code/utils/secure_storage.dart';
@@ -21,8 +23,6 @@ class GuruResultScanPage extends StatefulWidget {
   @override
   State<GuruResultScanPage> createState() => _GuruResultScanPageState();
 }
-
-enum keteranganHadir { H, I, S, A }
 
 class _GuruResultScanPageState extends State<GuruResultScanPage> {
   CustomStorage storage = CustomStorage();
@@ -237,7 +237,7 @@ class _GuruResultScanPageState extends State<GuruResultScanPage> {
         child: BlocBuilder<ScanSiswaCubit, ScanSiswaState>(
           builder: (context, state) {
             if (state is ScanSiswaSuccess) {
-              print(state.siswaData.additionalData);
+              final data = state.siswaData;
               return RefreshIndicator(
                 onRefresh: () async {
                   context
@@ -273,33 +273,56 @@ class _GuruResultScanPageState extends State<GuruResultScanPage> {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: [
-                                ButtonMenuKeterangan(
-                                  icons: Icons.check,
-                                  iconColors: successPrimary,
-                                  title: 'Siswa Hadir',
-                                  onTap: () {
-                                    // setState(() {
-                                    ket = 'H';
-                                    // });
-
-                                    print('Ket ==> $ket');
-
-                                    showDialog(
-                                      context: context,
-                                      builder: (BuildContext context) {
-                                        return AlertDialog(
-                                          title: Text('Modal Dialog'),
-                                          content:
-                                              Text('Ini adalah modal dialog'),
-                                          actions: [
-                                            TextButton(
-                                              child: Text('Tutup'),
-                                              onPressed: () {
-                                                Navigator.of(context).pop();
-                                              },
+                                BlocConsumer<AbsenSiswaCubit, AbsenSiswaState>(
+                                  listener: (context, state) {
+                                    if (state is AbsenSiswaSuccess) {
+                                      context.read<PageCubit>().setPage(0);
+                                      Navigator.pushNamedAndRemoveUntil(context,
+                                          '/mainGuru', (route) => false);
+                                    } else if (state is AbsenSiswaFailure) {
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(
+                                        SnackBar(
+                                          content: Text(
+                                            '${state.error}',
+                                            style: TextStyle(
+                                              color: secondary,
                                             ),
-                                          ],
-                                        );
+                                          ),
+                                          backgroundColor: allColor[1],
+                                          behavior: SnackBarBehavior.floating,
+                                          action: SnackBarAction(
+                                            label: 'Dismiss',
+                                            disabledTextColor: Colors.white,
+                                            textColor: secondary,
+                                            onPressed: () {
+                                              //Do whatever you want
+                                            },
+                                          ),
+                                        ),
+                                      );
+                                    }
+                                  },
+                                  builder: (context, state) {
+                                    return ButtonMenuKeterangan(
+                                      icons: Icons.check,
+                                      iconColors: successPrimary,
+                                      title: 'Siswa Hadir',
+                                      onTap: () {
+                                        setState(() {
+                                          ket = 'H';
+                                        });
+                                        context
+                                            .read<AbsenSiswaCubit>()
+                                            .absenSiswa(
+                                              mengajarID:
+                                                  data.additionalData!['data']
+                                                      ['mengajar_id'],
+                                              siswaID:
+                                                  data.additionalData!['data']
+                                                      ['siswa_id'],
+                                              keterangan: ket,
+                                            );
                                       },
                                     );
                                   },
@@ -309,6 +332,13 @@ class _GuruResultScanPageState extends State<GuruResultScanPage> {
                                   iconColors: kErrorColor,
                                   bgColors: errorExtraSoft,
                                   title: 'Siswa Absen',
+                                  onTap: () {
+                                    setState(() {
+                                      ket = 'A';
+                                    });
+
+                                    print(ket);
+                                  },
                                 ),
                                 ButtonMenuKeterangan(
                                   icons: Icons.notes,
