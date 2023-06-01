@@ -327,17 +327,59 @@ class _GuruResultScanPageState extends State<GuruResultScanPage> {
                                     );
                                   },
                                 ),
-                                ButtonMenuKeterangan(
-                                  icons: Icons.close,
-                                  iconColors: kErrorColor,
-                                  bgColors: errorExtraSoft,
-                                  title: 'Siswa Absen',
-                                  onTap: () {
-                                    setState(() {
-                                      ket = 'A';
-                                    });
-
-                                    print(ket);
+                                BlocConsumer<AbsenSiswaCubit, AbsenSiswaState>(
+                                  listener: (context, state) {
+                                    if (state is AbsenSiswaSuccess) {
+                                      context.read<PageCubit>().setPage(0);
+                                      Navigator.pushNamedAndRemoveUntil(context,
+                                          '/mainGuru', (route) => false);
+                                    } else if (state is AbsenSiswaFailure) {
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(
+                                        SnackBar(
+                                          content: Text(
+                                            '${state.error}',
+                                            style: TextStyle(
+                                              color: secondary,
+                                            ),
+                                          ),
+                                          backgroundColor: allColor[1],
+                                          behavior: SnackBarBehavior.floating,
+                                          action: SnackBarAction(
+                                            label: 'Dismiss',
+                                            disabledTextColor: Colors.white,
+                                            textColor: secondary,
+                                            onPressed: () {
+                                              //Do whatever you want
+                                            },
+                                          ),
+                                        ),
+                                      );
+                                    }
+                                  },
+                                  builder: (context, state) {
+                                    return ButtonMenuKeterangan(
+                                      icons: Icons.close,
+                                      iconColors: kErrorColor,
+                                      bgColors: errorExtraSoft,
+                                      title: 'Siswa Absen',
+                                      onTap: () {
+                                        setState(() {
+                                          ket = 'A';
+                                        });
+                                        context
+                                            .read<AbsenSiswaCubit>()
+                                            .absenSiswa(
+                                              mengajarID:
+                                                  data.additionalData!['data']
+                                                      ['mengajar_id'],
+                                              siswaID:
+                                                  data.additionalData!['data']
+                                                      ['siswa_id'],
+                                              keterangan: ket,
+                                            );
+                                      },
+                                    );
                                   },
                                 ),
                                 ButtonMenuKeterangan(
