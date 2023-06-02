@@ -28,6 +28,7 @@ class _GuruResultScanPageState extends State<GuruResultScanPage> {
   CustomStorage storage = CustomStorage();
   bool shouldPop = true;
   String ket = '';
+  bool showSnackBar = true;
 
   @override
   void initState() {
@@ -270,41 +271,42 @@ class _GuruResultScanPageState extends State<GuruResultScanPage> {
                               color: primaryExtraSoft,
                               borderRadius: BorderRadius.circular(18),
                             ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              children: [
+                            child:
                                 BlocConsumer<AbsenSiswaCubit, AbsenSiswaState>(
-                                  listener: (context, state) {
-                                    if (state is AbsenSiswaSuccess) {
-                                      context.read<PageCubit>().setPage(0);
-                                      Navigator.pushNamedAndRemoveUntil(context,
-                                          '/mainGuru', (route) => false);
-                                    } else if (state is AbsenSiswaFailure) {
-                                      ScaffoldMessenger.of(context)
-                                          .showSnackBar(
-                                        SnackBar(
-                                          content: Text(
-                                            '${state.error}',
-                                            style: TextStyle(
-                                              color: secondary,
-                                            ),
-                                          ),
-                                          backgroundColor: allColor[1],
-                                          behavior: SnackBarBehavior.floating,
-                                          action: SnackBarAction(
-                                            label: 'Dismiss',
-                                            disabledTextColor: Colors.white,
-                                            textColor: secondary,
-                                            onPressed: () {
-                                              //Do whatever you want
-                                            },
-                                          ),
+                              listener: (context, state) {
+                                if (state is AbsenSiswaSuccess) {
+                                  context.read<PageCubit>().setPage(0);
+                                  Navigator.pushNamedAndRemoveUntil(
+                                      context, '/mainGuru', (route) => false);
+                                } else if (state is AbsenSiswaFailure) {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      content: Text(
+                                        '${state.error}',
+                                        style: TextStyle(
+                                          color: secondary,
                                         ),
-                                      );
-                                    }
-                                  },
-                                  builder: (context, state) {
-                                    return ButtonMenuKeterangan(
+                                      ),
+                                      backgroundColor: allColor[1],
+                                      behavior: SnackBarBehavior.floating,
+                                      action: SnackBarAction(
+                                        label: 'Dismiss',
+                                        disabledTextColor: Colors.white,
+                                        textColor: secondary,
+                                        onPressed: () {
+                                          //Do whatever you want
+                                        },
+                                      ),
+                                    ),
+                                  );
+                                }
+                              },
+                              builder: (context, state) {
+                                return Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceAround,
+                                  children: [
+                                    ButtonMenuKeterangan(
                                       icons: Icons.check,
                                       iconColors: successPrimary,
                                       title: 'Siswa Hadir',
@@ -324,41 +326,8 @@ class _GuruResultScanPageState extends State<GuruResultScanPage> {
                                               keterangan: ket,
                                             );
                                       },
-                                    );
-                                  },
-                                ),
-                                BlocConsumer<AbsenSiswaCubit, AbsenSiswaState>(
-                                  listener: (context, state) {
-                                    if (state is AbsenSiswaSuccess) {
-                                      context.read<PageCubit>().setPage(0);
-                                      Navigator.pushNamedAndRemoveUntil(context,
-                                          '/mainGuru', (route) => false);
-                                    } else if (state is AbsenSiswaFailure) {
-                                      ScaffoldMessenger.of(context)
-                                          .showSnackBar(
-                                        SnackBar(
-                                          content: Text(
-                                            '${state.error}',
-                                            style: TextStyle(
-                                              color: secondary,
-                                            ),
-                                          ),
-                                          backgroundColor: allColor[1],
-                                          behavior: SnackBarBehavior.floating,
-                                          action: SnackBarAction(
-                                            label: 'Dismiss',
-                                            disabledTextColor: Colors.white,
-                                            textColor: secondary,
-                                            onPressed: () {
-                                              //Do whatever you want
-                                            },
-                                          ),
-                                        ),
-                                      );
-                                    }
-                                  },
-                                  builder: (context, state) {
-                                    return ButtonMenuKeterangan(
+                                    ),
+                                    ButtonMenuKeterangan(
                                       icons: Icons.close,
                                       iconColors: kErrorColor,
                                       bgColors: errorExtraSoft,
@@ -379,22 +348,54 @@ class _GuruResultScanPageState extends State<GuruResultScanPage> {
                                               keterangan: ket,
                                             );
                                       },
-                                    );
-                                  },
-                                ),
-                                ButtonMenuKeterangan(
-                                  icons: Icons.notes,
-                                  iconColors: primary,
-                                  bgColors: primaryExtraSoft,
-                                  title: 'Siswa Izin',
-                                ),
-                                ButtonMenuKeterangan(
-                                  icons: Icons.add_box,
-                                  iconColors: successSoft,
-                                  bgColors: successExtraSoft,
-                                  title: 'Siswa Sakit',
-                                ),
-                              ],
+                                    ),
+                                    ButtonMenuKeterangan(
+                                      icons: Icons.notes,
+                                      iconColors: primary,
+                                      bgColors: primaryExtraSoft,
+                                      title: 'Siswa Izin',
+                                      onTap: () {
+                                        setState(() {
+                                          ket = 'I';
+                                        });
+                                        context
+                                            .read<AbsenSiswaCubit>()
+                                            .absenSiswa(
+                                              mengajarID:
+                                                  data.additionalData!['data']
+                                                      ['mengajar_id'],
+                                              siswaID:
+                                                  data.additionalData!['data']
+                                                      ['siswa_id'],
+                                              keterangan: ket,
+                                            );
+                                      },
+                                    ),
+                                    ButtonMenuKeterangan(
+                                      icons: Icons.add_box,
+                                      iconColors: successSoft,
+                                      bgColors: successExtraSoft,
+                                      title: 'Siswa Sakit',
+                                      onTap: () {
+                                        setState(() {
+                                          ket = 'S';
+                                        });
+                                        context
+                                            .read<AbsenSiswaCubit>()
+                                            .absenSiswa(
+                                              mengajarID:
+                                                  data.additionalData!['data']
+                                                      ['mengajar_id'],
+                                              siswaID:
+                                                  data.additionalData!['data']
+                                                      ['siswa_id'],
+                                              keterangan: ket,
+                                            );
+                                      },
+                                    ),
+                                  ],
+                                );
+                              },
                             ),
                           )
                         ],
