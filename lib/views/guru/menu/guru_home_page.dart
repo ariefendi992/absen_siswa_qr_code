@@ -307,8 +307,21 @@ class _GuruHomePageState extends State<GuruHomePage> {
               ),
             );
           } else {
-            return Center(
-              child: CircularProgressIndicator(),
+            return Container(
+              width: MediaQuery.of(context).size.width,
+              margin: EdgeInsets.only(top: 8),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    height: MediaQuery.of(context).size.height / 3,
+                    width: double.infinity,
+                    // color: errorPrimary,
+                    alignment: Alignment.center,
+                    child: CircularProgressIndicator(),
+                  ),
+                ],
+              ),
             );
           }
         },

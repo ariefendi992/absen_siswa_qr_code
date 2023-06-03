@@ -87,20 +87,21 @@ class DioInterceptor extends QueuedInterceptorsWrapper {
             DioError(requestOptions: options),
           );
         } on DioError catch (e) {
-          print(e.toString());
+          // print(e.toString());
           throw e.toString();
           // if (error.response?.statusCode == 401) {}
           // print('Response ===> ${e.response?.statusCode}');
         }
       } else if (error.response?.statusCode == 404) {
         try {
-          print(error.response?.data);
+          // print(error.response?.data);
         } on DioError catch (e) {
-          print(e.toString());
+          // print(e.toString());
+          throw e.response?.data['msg'];
         }
       } else if (error.response?.statusCode == 409) {
         try {
-          print(error.response?.data);
+          // print(error.response?.data);
         } on DioError catch (e) {
           throw Exception('${e.response?.data["msg"]}');
         }
