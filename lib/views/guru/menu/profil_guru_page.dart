@@ -1,5 +1,6 @@
 import 'package:absen_siswa_qr_code/cubit/auth/auth_cubit.dart';
 import 'package:absen_siswa_qr_code/cubit/page/page_cubit.dart';
+import 'package:absen_siswa_qr_code/cubit/user/guru/user_guru_cubit.dart';
 import 'package:absen_siswa_qr_code/utils/theme.dart';
 import 'package:absen_siswa_qr_code/views/widgets/card_with_border_widget.dart';
 import 'package:flutter/material.dart';
@@ -16,13 +17,21 @@ class ProfilGuruPage extends StatelessWidget {
           if (state is AuthFailed) {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
-                backgroundColor: kErrorColor,
                 content: Text(
-                  state.error,
+                  '${state.error}',
                   style: TextStyle(
-                    fontWeight: medium,
-                    fontSize: 14,
+                    color: secondary,
                   ),
+                ),
+                backgroundColor: errorSoft,
+                behavior: SnackBarBehavior.floating,
+                action: SnackBarAction(
+                  label: 'Dismiss',
+                  disabledTextColor: Colors.white,
+                  textColor: secondary,
+                  onPressed: () {
+                    //Do whatever you want
+                  },
                 ),
               ),
             );
@@ -33,75 +42,124 @@ class ProfilGuruPage extends StatelessWidget {
           }
         },
         builder: (context, state) {
-          return Column(
-            children: [
-              Expanded(child: Container()),
-              Expanded(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
+          return BlocBuilder<UserGuruCubit, UserGuruState>(
+            builder: (context, state) {
+              if (state is UserGuruSuccess) {
+                return Column(
                   children: [
-                    Text(
-                      'Harnida, S.Pd.',
-                      style: TextStyle(
-                          fontWeight: bold, fontSize: 24, color: secondary),
-                      textAlign: TextAlign.center,
-                    ),
-                    Text(
-                      'Guru MataPelajaran :',
-                      style: TextStyle(
-                        fontSize: 16,
-                        color: secondarySoft,
+                    Expanded(
+                      child: Container(
+                        alignment: Alignment.center,
+                        padding: EdgeInsets.only(top: 50),
+                        width: MediaQuery.of(context).size.width,
+                        child: Text(
+                          'Pengaturan Akun',
+                          style: TextStyle(
+                            fontWeight: bold,
+                            fontSize: 24,
+                            color: allColor[7],
+                          ),
+                        ),
                       ),
-                      textAlign: TextAlign.center,
                     ),
-                    Text(
-                      'Pendidikan Jasmani Olahraga dan Kesehatan',
-                      style: TextStyle(
-                        fontSize: 16,
-                        color: secondarySoft,
+                    Expanded(
+                      child: Container(
+                        margin: EdgeInsets.only(bottom: 40),
+                        padding: EdgeInsets.symmetric(horizontal: 24),
+                        child: Material(
+                          borderRadius: BorderRadius.circular(18),
+                          elevation: 6,
+                          child: Container(
+                            width: MediaQuery.of(context).size.width,
+                            decoration: BoxDecoration(
+                              // color: allColor[7],
+                              gradient: LinearGradient(
+                                colors: [
+                                  // kPrimaryColor,
+                                  // primary,
+                                  allColor[7],
+                                  allColor[4],
+                                ],
+                                begin: Alignment.topLeft,
+                                end: Alignment.bottomRight,
+                              ),
+
+                              borderRadius: BorderRadius.circular(18),
+                            ),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  '${state.userGuru.firstName} ${state.userGuru.lastName}',
+                                  style: TextStyle(
+                                      fontWeight: bold,
+                                      fontSize: 24,
+                                      color: kWhiteColor),
+                                  textAlign: TextAlign.center,
+                                ),
+                                Text(
+                                  'Guru MataPelajaran :',
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    color: kWhiteColor.withAlpha(200),
+                                  ),
+                                  textAlign: TextAlign.center,
+                                ),
+                                Text(
+                                  '${state.userGuru.mapel}',
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    color: kWhiteColor.withAlpha(200),
+                                  ),
+                                  textAlign: TextAlign.center,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
                       ),
-                      textAlign: TextAlign.center,
+                    ),
+                    Expanded(
+                      flex: 3,
+                      child: Container(
+                        margin: EdgeInsets.only(bottom: 30),
+                        child: Column(
+                          children: [
+                            CardWithBorDerWidget(
+                              title: 'Perbaharui Profil',
+                              onTap: () {},
+                            ),
+                            CardWithBorDerWidget(
+                              topBorder: BorderSide.none,
+                              leftIcon: Icons.lock_reset_rounded,
+                              title: 'Ganti Kata Sandi',
+                              onTap: () {},
+                            ),
+                            CardWithBorDerWidget(
+                              title: 'Keluar',
+                              titleColor: errorSoft,
+                              topBorder: BorderSide.none,
+                              colorIcon: errorSoft,
+                              leftIcon: Icons.logout_rounded,
+                              onTap: () {
+                                context.read<AuthCubit>().logOut();
+                              },
+                            ),
+                          ],
+                        ),
+                      ),
                     ),
                   ],
-                ),
-              ),
-              Expanded(
-                flex: 3,
-                child: Container(
-                  margin: EdgeInsets.only(bottom: 30),
-                  child: Column(
-                    children: [
-                      CardWithBorDerWidget(
-                        title: 'Perbaharui Profil',
-                        onTap: () {},
-                      ),
-                      CardWithBorDerWidget(
-                        topBorder: BorderSide.none,
-                        leftIcon: Icons.lock_reset_rounded,
-                        title: 'Ganti Kata Sandi',
-                        onTap: () {},
-                      ),
-                      CardWithBorDerWidget(
-                        title: 'Keluar',
-                        titleColor: errorSoft,
-                        topBorder: BorderSide.none,
-                        colorIcon: errorSoft,
-                        leftIcon: Icons.logout_rounded,
-                        onTap: () {
-                          context.read<AuthCubit>().logOut();
-                        },
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              // ButtonWidget(
-              //   title: 'Keluar',
-              //   onTap: () {
-              //     context.read<AuthCubit>().logOut();
-              //   },
-              // ),
-            ],
+                );
+              }
+              return Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  CircularProgressIndicator(),
+                ],
+              );
+            },
           );
         },
       ),

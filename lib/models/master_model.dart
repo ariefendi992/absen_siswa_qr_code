@@ -26,7 +26,7 @@ class MapelSiswaModel extends Equatable {
 }
 
 class JadwalMengajarHarianModel extends Equatable {
-  final int id;
+  final String id;
   final String? firstName;
   final String? lastName;
   final String? kodeMengajar;
@@ -54,7 +54,7 @@ class JadwalMengajarHarianModel extends Equatable {
 
   factory JadwalMengajarHarianModel.fromJson(Map<String, dynamic> json) {
     return JadwalMengajarHarianModel(
-      id: json['id'],
+      id: json['id'].toString(),
       firstName: json['first_name'],
       lastName: json['last_name'],
       kodeMengajar: json['kode_mengajar'],
@@ -518,5 +518,3 @@ class DaftarSiswaModel extends Equatable {
   List<Object?> get props =>
       [siswaId, firstName, lastName, kelasId, kelas, waliKelas];
 }
-
-

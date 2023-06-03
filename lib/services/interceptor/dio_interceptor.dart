@@ -87,10 +87,7 @@ class DioInterceptor extends QueuedInterceptorsWrapper {
             DioError(requestOptions: options),
           );
         } on DioError catch (e) {
-          // print(e.toString());
-          throw e.toString();
-          // if (error.response?.statusCode == 401) {}
-          // print('Response ===> ${e.response?.statusCode}');
+          if (e.response?.statusCode == 422) {}
         }
       } else if (error.response?.statusCode == 404) {
         try {

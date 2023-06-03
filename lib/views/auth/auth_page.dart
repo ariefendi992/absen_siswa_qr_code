@@ -8,7 +8,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AuthPage extends StatefulWidget {
-  const AuthPage({super.key});
+  // final bool? isLogOut;
+  const AuthPage({
+    super.key,
+    // this.isLogOut = false,
+  });
 
   @override
   State<AuthPage> createState() => _AuthPageState();
@@ -27,6 +31,30 @@ class _AuthPageState extends State<AuthPage> {
   void initState() {
     super.initState();
     userPass();
+    // print('IS LOGOUT ==>> ${widget.isLogOut}');
+    // widget.isLogOut == true ? showSnackBar() : false;
+  }
+
+  void showSnackBar() {
+    final snackBar = SnackBar(
+      content: Text(
+        'Log',
+        style: TextStyle(
+          color: secondary,
+        ),
+      ),
+      backgroundColor: errorSoft,
+      behavior: SnackBarBehavior.floating,
+      action: SnackBarAction(
+        label: 'Dismiss',
+        disabledTextColor: Colors.white,
+        textColor: secondary,
+        onPressed: () {
+          //Do whatever you want
+        },
+      ),
+    );
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
 
   void userPass() async {

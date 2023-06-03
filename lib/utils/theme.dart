@@ -24,7 +24,7 @@ Color kBlackColor = Color(0XFF1E272E);
 Color kGreyBackgroundColor = Color(0XFFF1F2F6);
 Color kGreyTextColor = Color(0XFFA4B0BE);
 Color kGreyColor = Color(0XFF747D8C);
-Color kWhiteBlueColor = Color(0XFFE4DCCF);
+// Color kWhiteBlueColor = Color(0XFFE4DCCF);
 Color kErrorColor = Color(0XFFFF4040);
 Color kGreenColor = Color(0XFF03D1A0);
 

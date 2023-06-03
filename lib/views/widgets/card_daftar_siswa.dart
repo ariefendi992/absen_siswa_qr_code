@@ -55,22 +55,22 @@ class CardDaftarSiswaWidget extends StatelessWidget {
               ],
             ),
           ),
-          Container(
-            child: ClipOval(
-              child: Container(
-                alignment: Alignment.center,
-                padding: EdgeInsets.all(6),
-                decoration: BoxDecoration(
-                  color: secondaryExtraSoft,
-                ),
-                child: Icon(
-                  Icons.arrow_forward_ios_rounded,
-                  color: primary,
-                  size: 20,
-                ),
-              ),
-            ),
-          ),
+          // Container(
+          //   child: ClipOval(
+          //     child: Container(
+          //       alignment: Alignment.center,
+          //       padding: EdgeInsets.all(6),
+          //       decoration: BoxDecoration(
+          //         color: secondaryExtraSoft,
+          //       ),
+          //       child: Icon(
+          //         Icons.arrow_forward_ios_rounded,
+          //         color: primary,
+          //         size: 20,
+          //       ),
+          //     ),
+          //   ),
+          // ),
         ],
       ),
     );
