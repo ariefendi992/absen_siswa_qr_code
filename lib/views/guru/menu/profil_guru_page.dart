@@ -2,6 +2,7 @@ import 'package:absen_siswa_qr_code/cubit/auth/auth_cubit.dart';
 import 'package:absen_siswa_qr_code/cubit/page/page_cubit.dart';
 import 'package:absen_siswa_qr_code/cubit/user/guru/user_guru_cubit.dart';
 import 'package:absen_siswa_qr_code/utils/theme.dart';
+import 'package:absen_siswa_qr_code/views/guru/sub_menu/guru_update_profil_page.dart';
 import 'package:absen_siswa_qr_code/views/widgets/card_with_border_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -127,7 +128,15 @@ class ProfilGuruPage extends StatelessWidget {
                           children: [
                             CardWithBorDerWidget(
                               title: 'Perbaharui Profil',
-                              onTap: () {},
+                              onTap: () {
+                                Navigator.push(context, MaterialPageRoute(
+                                  builder: (context) {
+                                    return GuruUpdateProfilePage(
+                                      userGuru: state.userGuru,
+                                    );
+                                  },
+                                ));
+                              },
                             ),
                             CardWithBorDerWidget(
                               topBorder: BorderSide.none,
@@ -156,7 +165,7 @@ class ProfilGuruPage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  CircularProgressIndicator(),
+                  Center(child: CircularProgressIndicator()),
                 ],
               );
             },

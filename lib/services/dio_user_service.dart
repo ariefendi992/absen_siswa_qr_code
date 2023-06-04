@@ -56,6 +56,19 @@ class ApiUserGuru {
     }
   }
 
+  Future<UserGuruModel> updateProfilGuru({Map<String, dynamic>? data}) async {
+    final response = await dio.put('/guru/single-guru', data: data);
+
+    final body = response.data;
+
+    if (response.statusCode == 200) {
+      UserGuruModel userGuru = UserGuruModel.fromJson(body);
+      return userGuru;
+    } else {
+      throw Exception("${body['msg']}");
+    }
+  }
+
   Future<ScanSiswaModel> getSiswaByUsername({required String username}) async {
     final response = await dio.get('/guru/single-siswa?nisn=$username');
 

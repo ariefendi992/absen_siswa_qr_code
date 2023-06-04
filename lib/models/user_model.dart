@@ -56,11 +56,13 @@ class UserGuruModel extends Equatable {
   final String? nip;
   final String? firstName;
   final String? lastName;
+  final String? fullname;
   final String? gender;
   final String? agama;
   final String? alamat;
   final String? telp;
   final String? mapel;
+  final Map<String, dynamic>? additionalData;
 
   const UserGuruModel({
     required this.id,
@@ -72,6 +74,8 @@ class UserGuruModel extends Equatable {
     this.alamat,
     this.telp,
     this.mapel,
+    this.fullname,
+    this.additionalData,
   });
 
   factory UserGuruModel.fromJson(Map<String, dynamic> json) {
@@ -85,8 +89,18 @@ class UserGuruModel extends Equatable {
       alamat: json['alamat'],
       telp: json['telp'],
       mapel: json['mapel'],
+      additionalData: json,
     );
   }
+
+  Map<String, dynamic> toJson() => {
+        "nip": nip,
+        "fullname": fullname,
+        "gender": gender,
+        "agama": agama,
+        "alamat": alamat,
+        "telp": telp
+      };
 
   @override
   List<Object?> get props => [
