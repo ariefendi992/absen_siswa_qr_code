@@ -230,7 +230,7 @@ class _AuthPageState extends State<AuthPage> {
                                     color: kGreyTextColor,
                                     fontSize: 14,
                                   ),
-                                  prefixIcon: Icon(Icons.person),
+                                  prefixIcon: Icon(Icons.lock_rounded),
                                   suffixIcon: true
                                       ? InkWell(
                                           onTap: () {

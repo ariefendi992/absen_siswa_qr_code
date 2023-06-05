@@ -56,6 +56,31 @@ class ApiUserGuru {
     }
   }
 
+  Future<UserGuruModel> checkPasswordGuru({Map<String, dynamic>? data}) async {
+    final response = await dio.get('/guru/check-password', data: data);
+    final body = response.data;
+
+    if (response.statusCode == 200) {
+      UserGuruModel userGuru = UserGuruModel.fromJson(body);
+
+      return userGuru;
+    } else {
+      throw Exception('${body["msg"]}');
+    }
+  }
+
+  Future<UserGuruModel> updatePasswordGuru({Map<String, dynamic>? data}) async {
+    final response = await dio.put('/guru/update-password', data: data);
+    final body = response.data;
+
+    if (response.statusCode == 200) {
+      UserGuruModel userGuru = UserGuruModel.fromJson(body);
+      return userGuru;
+    } else {
+      throw Exception('${body["msg"]}');
+    }
+  }
+
   Future<UserGuruModel> updateProfilGuru({Map<String, dynamic>? data}) async {
     final response = await dio.put('/guru/single-guru', data: data);
 

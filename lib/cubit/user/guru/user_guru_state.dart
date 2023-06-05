@@ -20,6 +20,24 @@ class UserGuruSuccess extends UserGuruState {
   List<Object> get props => [userGuru];
 }
 
+class UserGuruUpdatePassSuccess extends UserGuruState {
+  final UserGuruModel userGuru;
+
+  const UserGuruUpdatePassSuccess(this.userGuru);
+
+  @override
+  List<Object> get props => [userGuru];
+}
+
+class UserGuruUpdateFailed extends UserGuruState {
+  final String error;
+
+  const UserGuruUpdateFailed(this.error);
+
+  @override
+  List<Object> get props => [error];
+}
+
 class UserGuruFailed extends UserGuruState {
   final String error;
 

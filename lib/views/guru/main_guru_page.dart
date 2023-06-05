@@ -2,7 +2,7 @@ import 'package:absen_siswa_qr_code/cubit/page/page_cubit.dart';
 import 'package:absen_siswa_qr_code/utils/theme.dart';
 import 'package:absen_siswa_qr_code/views/guru/menu/guru_home_page.dart';
 import 'package:absen_siswa_qr_code/views/guru/menu/guru_scan_qr_page.dart';
-import 'package:absen_siswa_qr_code/views/guru/menu/profil_guru_page.dart';
+import 'package:absen_siswa_qr_code/views/guru/menu/guru_profil_page.dart';
 import 'package:absen_siswa_qr_code/views/widgets/button_bottom_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

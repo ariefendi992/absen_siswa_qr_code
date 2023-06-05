@@ -31,4 +31,26 @@ class UserGuruCubit extends Cubit<UserGuruState> {
       emit(UserGuruFailed('${e.response?.data["msg"]}'));
     }
   }
+
+  void checkPassGuru({required Map<String, dynamic> data}) async {
+    try {
+      emit(UserGuruLoading());
+
+      final userGuru = await ApiUserGuru().checkPasswordGuru(data: data);
+      emit(UserGuruSuccess(userGuru));
+    } on DioError catch (e) {
+      emit(UserGuruFailed('${e.response?.data["msg"]}'));
+    }
+  }
+
+  void updatePassGuru({required Map<String, dynamic> data}) async {
+    try {
+      emit(UserGuruLoading());
+
+      final userGuru = await ApiUserGuru().updatePasswordGuru(data: data);
+      emit(UserGuruUpdatePassSuccess(userGuru));
+    } on DioError catch (e) {
+      emit(UserGuruUpdateFailed('${e.response?.data["msg"]}'));
+    }
+  }
 }
