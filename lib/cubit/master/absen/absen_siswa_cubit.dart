@@ -31,4 +31,15 @@ class AbsenSiswaCubit extends Cubit<AbsenSiswaState> {
       emit(RiwayatAbsenStateFailure('${e.response?.data["msg"]}'));
     }
   }
+
+  void getRiwayatAbsenbyTgl({required String tglAbsen}) async {
+    try {
+      emit(AbsenSiswaLoading());
+
+      final riwayatAbsen = await ApiUserGuru().getRiwayatByTgl(tglAbsen);
+      emit(RiwayatAbsenStateSuccess(riwayatAbsen));
+    } on DioError catch (e) {
+      emit(RiwayatAbsenStateFailure('${e.response?.data["msg"]}'));
+    }
+  }
 }
