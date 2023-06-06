@@ -4,6 +4,7 @@ import 'package:absen_siswa_qr_code/models/user_model.dart';
 import 'package:absen_siswa_qr_code/utils/theme.dart';
 import 'package:absen_siswa_qr_code/views/guru/sub_menu/guru_get_siswa_kelas.dart';
 import 'package:absen_siswa_qr_code/views/guru/sub_menu/guru_jadwal_mengajar_page.dart';
+import 'package:absen_siswa_qr_code/views/guru/sub_menu/guru_riwayat_absensi.dart';
 import 'package:absen_siswa_qr_code/views/widgets/button_keterangan.dart';
 import 'package:absen_siswa_qr_code/views/widgets/jadwal_mapel_card.dart';
 import 'package:flutter/material.dart';
@@ -235,6 +236,14 @@ class _GuruHomePageState extends State<GuruHomePage> {
                         iconSize: 32,
                         title: 'RiwayatAbsen',
                         fontSize: 12,
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => GuruRiwayatAbsensi(),
+                            ),
+                          );
+                        },
                       ),
                     ],
                   ),

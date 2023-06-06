@@ -311,4 +311,31 @@ class ApiUserGuru {
           'msg ==> $body["msg"].\n status code ==> ${response.statusCode}');
     }
   }
+
+  Future<RiwayatAbsensiModel> getRiwayat() async {
+    final response = await dio.get('/guru/daftar-riwayat-absen');
+    final body = response.data;
+
+    if (response.statusCode == 200) {
+      RiwayatAbsensiModel riwayatAbsensi = RiwayatAbsensiModel.fromJson(body);
+
+      return riwayatAbsensi;
+    } else {
+      throw Exception('${body["msg"]}');
+    }
+  }
+
+  Future<RiwayatAbsensiModel> getRiwayatByTgl(String tglAbsen) async {
+    final response =
+        await dio.get('/guru/daftar-riwayat-absen?tgl_absen=$tglAbsen');
+    final body = response.data;
+
+    if (response.statusCode == 200) {
+      RiwayatAbsensiModel riwayatAbsensi = RiwayatAbsensiModel.fromJson(body);
+
+      return riwayatAbsensi;
+    } else {
+      throw Exception('${body["msg"]}');
+    }
+  }
 }
