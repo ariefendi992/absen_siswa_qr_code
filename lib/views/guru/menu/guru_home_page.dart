@@ -1,5 +1,5 @@
 import 'package:absen_siswa_qr_code/cubit/master/absen/absen_siswa_cubit.dart';
-import 'package:absen_siswa_qr_code/cubit/master/jadwal_mapel_cubit.dart';
+import 'package:absen_siswa_qr_code/cubit/master/daftar_mapel_cubit.dart';
 import 'package:absen_siswa_qr_code/cubit/user/guru/user_guru_cubit.dart';
 import 'package:absen_siswa_qr_code/models/user_model.dart';
 import 'package:absen_siswa_qr_code/utils/theme.dart';
@@ -24,7 +24,7 @@ class _GuruHomePageState extends State<GuruHomePage> {
   @override
   void initState() {
     super.initState();
-    context.read<JadwalMapelCubit>().getJadwalMengajarHarian();
+    context.read<DaftarMapelCubit>().getJadwalMengajarHarian();
   }
 
   @override
@@ -261,9 +261,9 @@ class _GuruHomePageState extends State<GuruHomePage> {
 
     // * JADWAL MENGAJAR VIEW
     Widget jadwalView() {
-      return BlocBuilder<JadwalMapelCubit, JadwalMapelState>(
+      return BlocBuilder<DaftarMapelCubit, DaftarMapelState>(
         builder: (context, state) {
-          if (state is JadwalMapelSuccess) {
+          if (state is DaftarMengajarHarianSuccess) {
             return Container(
               margin: EdgeInsets.only(top: 16),
               width: MediaQuery.of(context).size.width,
@@ -295,7 +295,7 @@ class _GuruHomePageState extends State<GuruHomePage> {
               //   }).toList(),
               // ),
             );
-          } else if (state is JadwalMapelFailed) {
+          } else if (state is DaftarMengajarHarianFailed) {
             return Container(
               width: MediaQuery.of(context).size.width,
               margin: EdgeInsets.only(top: 8),
@@ -344,7 +344,7 @@ class _GuruHomePageState extends State<GuruHomePage> {
     return RefreshIndicator(
       onRefresh: () async {
         context.read<UserGuruCubit>().currenUserGuru();
-        context.read<JadwalMapelCubit>().getJadwalMengajarHarian();
+        context.read<DaftarMapelCubit>().getJadwalMengajarHarian();
       },
       child: SafeArea(
         child: ListView(

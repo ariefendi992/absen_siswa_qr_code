@@ -4,13 +4,13 @@ import 'package:absen_siswa_qr_code/cubit/user/siswa/user_siswa_cubit.dart';
 import 'package:absen_siswa_qr_code/models/master_model.dart';
 import 'package:absen_siswa_qr_code/models/user_model.dart';
 import 'package:absen_siswa_qr_code/utils/theme.dart';
-import 'package:absen_siswa_qr_code/views/siswa/sub_menu/jadwal_page.dart';
-import 'package:absen_siswa_qr_code/views/siswa/sub_menu/mapel_page.dart';
-import 'package:absen_siswa_qr_code/views/widgets/button_keterangan.dart';
+import 'package:absen_siswa_qr_code/views/siswa/sub_menu/siswa_mapel_page.dart';
+import 'package:absen_siswa_qr_code/views/widgets/siswa/button_menu_category_siswa.dart';
 import 'package:absen_siswa_qr_code/views/widgets/siswa/card_jadwal_harian_siswa.dart';
 import 'package:absen_siswa_qr_code/views/widgets/siswa/card_pelanggar_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class HomeSiswaPage extends StatelessWidget {
   const HomeSiswaPage({super.key});
@@ -186,12 +186,12 @@ class HomeSiswaPage extends StatelessWidget {
                               child: Container(
                                 height: 55,
                                 width: 55,
-                                padding: EdgeInsets.all(2),
+                                padding: EdgeInsets.all(3),
                                 decoration: BoxDecoration(color: kWhiteColor),
                                 child: ClipOval(
                                   child: Container(
-                                    decoration:
-                                        BoxDecoration(color: primarySoft),
+                                    decoration: BoxDecoration(
+                                        color: Colors.blue.shade400),
                                     child: Icon(
                                       Icons.person_rounded,
                                       color: kWhiteColor,
@@ -215,7 +215,7 @@ class HomeSiswaPage extends StatelessWidget {
     }
 
     // *NOTE: MENU CONTENT
-    Widget content(String kelasId) {
+    Widget content() {
       return Container(
         margin: EdgeInsets.only(bottom: 24),
         width: MediaQuery.of(context).size.height,
@@ -223,7 +223,7 @@ class HomeSiswaPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Menu',
+              'Kategori',
               style: TextStyle(
                 fontSize: 18,
                 color: allColor[7],
@@ -231,56 +231,57 @@ class HomeSiswaPage extends StatelessWidget {
               ),
             ),
             Container(
-              width: MediaQuery.of(context).size.width,
-              margin: EdgeInsets.only(top: 8),
-              child: Material(
-                elevation: 5,
-                borderRadius: BorderRadius.circular(18),
-                child: Container(
-                  padding: EdgeInsets.symmetric(horizontal: 10, vertical: 12),
-                  decoration: BoxDecoration(
-                    color: kBackgorundScaffold.withAlpha(20),
-                    borderRadius: BorderRadius.circular(18),
+              margin: EdgeInsets.only(top: 16),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  ButtonCardMenuKategori(
+                    title: Text(
+                      'DaftarMapel',
+                      style: TextStyle(
+                        color: allColor[7],
+                        fontWeight: medium,
+                        fontSize: 13,
+                      ),
+                    ),
+                    onTap: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) {
+                        return SiswaMapelPage();
+                      }));
+                    },
                   ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      ButtonMenuKeterangan(
-                        icons: Icons.calendar_month_rounded,
-                        iconColors: allColor.elementAt(9),
-                        height: 48,
-                        width: 48,
-                        iconSize: 32,
-                        title: 'JadwalMengajar',
-                        fontColor: allColor[7],
-                        fontSize: 12,
+                  ButtonCardMenuKategori(
+                    title: Text(
+                      'JadwalBelajar',
+                      style: TextStyle(
+                        color: allColor[7],
+                        fontWeight: medium,
+                        fontSize: 13,
                       ),
-                      ButtonMenuKeterangan(
-                        icons: Icons.people_alt_rounded,
-                        iconColors: allColor[1],
-                        height: 48,
-                        width: 48,
-                        iconSize: 32,
-                        title: 'DaftarKelas',
-                        fontColor: allColor[7],
-                        fontSize: 12,
-                      ),
-                      ButtonMenuKeterangan(
-                        icons: Icons.history_edu_rounded,
-                        iconColors: allColor[4],
-                        height: 48,
-                        width: 48,
-                        iconSize: 32,
-                        title: 'RiwayatAbsen',
-                        fontColor: allColor[7],
-                        fontSize: 12,
-                        onTap: () {},
-                      ),
-                    ],
+                    ),
+                    faIcon: FontAwesomeIcons.calendarWeek,
+                    bgCard: greenBgCardSoft,
+                    bgIconColor: greenBgCardPrimary,
+                    onTap: () {},
                   ),
-                ),
+                  ButtonCardMenuKategori(
+                    title: Text(
+                      'RiwayatAbsen',
+                      style: TextStyle(
+                        color: allColor[7],
+                        fontWeight: medium,
+                        fontSize: 13,
+                      ),
+                    ),
+                    faIcon: FontAwesomeIcons.clockRotateLeft,
+                    bgCard: redBgCardSoft,
+                    bgIconColor: redBgCardPrimary,
+                    onTap: () {},
+                  ),
+                ],
               ),
-            )
+            ),
           ],
         ),
       );
@@ -572,7 +573,7 @@ class HomeSiswaPage extends StatelessWidget {
                 padding: EdgeInsets.symmetric(horizontal: 20),
                 children: [
                   header(user),
-                  content(user.kelasId.toString()),
+                  content(),
                   daftarPelanggar(),
                   jadwalHarian(),
                 ],

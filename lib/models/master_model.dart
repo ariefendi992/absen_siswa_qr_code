@@ -2,21 +2,24 @@ import 'dart:convert';
 
 import 'package:equatable/equatable.dart';
 
-class MapelSiswaModel extends Equatable {
+class DaftarMapelSisaModel extends Equatable {
   final int id;
   final String namaGuru;
   final String mapel;
+  final String kelas;
 
-  const MapelSiswaModel({
+  const DaftarMapelSisaModel({
     required this.id,
     required this.mapel,
+    required this.kelas,
     required this.namaGuru,
   });
 
-  factory MapelSiswaModel.fromJson(Map<String, dynamic> json) {
-    return MapelSiswaModel(
+  factory DaftarMapelSisaModel.fromJson(Map<String, dynamic> json) {
+    return DaftarMapelSisaModel(
       id: json['id'],
       mapel: json['mapel'],
+      kelas: json['kelas'],
       namaGuru: json['nama_guru'],
     );
   }

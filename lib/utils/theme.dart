@@ -8,6 +8,7 @@ Color primary = Color(0xFF266EF1);
 Color primarySoft = Color(0xFF548DF3);
 Color primaryExtraSoft = Color(0xFFEFF3FC);
 Color secondary = Color(0xFF1B1F24);
+Color secondaryPrimary = Color(0XFF1E242E);
 Color secondarySoft = Color(0xFF9D9D9D);
 Color secondaryExtraSoft = Color(0xFFE9E9E9);
 Color errorPrimary = Color(0xFFD00E0E);
@@ -27,6 +28,14 @@ Color kGreyColor = Color(0XFF747D8C);
 // Color kWhiteBlueColor = Color(0XFFE4DCCF);
 Color kErrorColor = Color(0XFFFF4040);
 Color kGreenColor = Color(0XFF03D1A0);
+
+Color primaryBgCard = Colors.blue.shade50;
+Color blueBgCard2 = Color(0XFFEBF1FF);
+Color greenBgCardSoft = Color(0XFFE7F9F2);
+Color greenBgCardPrimary = Color(0XFF71D9B3);
+Color redBgCardPrimary = Color(0XFFF591A9);
+Color redBgCardSoft = Color(0XFFFDEDF1);
+Color primaryColor2 = Color(0XFF87AAFF);
 
 // ColorMenu
 

@@ -3,7 +3,7 @@ import 'package:absen_siswa_qr_code/utils/theme.dart';
 import 'package:flutter/material.dart';
 
 class MapelCardWiget extends StatelessWidget {
-  final MapelSiswaModel mapels;
+  final DaftarMapelSisaModel mapels;
   final Color bgColor;
 
   const MapelCardWiget(

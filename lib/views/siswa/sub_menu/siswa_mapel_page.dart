@@ -1,4 +1,4 @@
-import 'package:absen_siswa_qr_code/cubit/master/jadwal_mapel_cubit.dart';
+import 'package:absen_siswa_qr_code/cubit/master/daftar_mapel_cubit.dart';
 import 'package:absen_siswa_qr_code/cubit/page/page_cubit.dart';
 import 'package:absen_siswa_qr_code/models/master_model.dart';
 import 'package:absen_siswa_qr_code/utils/theme.dart';
@@ -6,25 +6,23 @@ import 'package:absen_siswa_qr_code/views/widgets/mapel_card_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class MapelPage extends StatefulWidget {
-  final String id;
-
-  const MapelPage(this.id, {super.key});
+class SiswaMapelPage extends StatefulWidget {
+  const SiswaMapelPage({super.key});
 
   @override
-  State<MapelPage> createState() => _MapelPageState();
+  State<SiswaMapelPage> createState() => _SiswaMapelPageState();
 }
 
-class _MapelPageState extends State<MapelPage> {
+class _SiswaMapelPageState extends State<SiswaMapelPage> {
   @override
   void initState() {
+    context.read<DaftarMapelCubit>().fetchDaftarMapelSiswa();
     super.initState();
-    context.read<JadwalMapelCubit>().getMapelByKelasId(id: widget.id);
   }
 
   @override
   Widget build(BuildContext context) {
-    Widget mapel(List<MapelSiswaModel> mapels) {
+    Widget mapel(List<DaftarMapelSisaModel> mapels) {
       return Column(
           children: mapels.map((e) {
         return MapelCardWiget(e);
@@ -39,11 +37,12 @@ class _MapelPageState extends State<MapelPage> {
         child: AppBar(
           foregroundColor: kBlackColor,
           backgroundColor: kBackgorundScaffold,
-          elevation: 2,
+          elevation: 0.2,
           title: Text(
             'Daftar MataPelajaran',
             style: TextStyle(
               fontWeight: bold,
+              color: allColor[7],
             ),
           ),
           centerTitle: true,
@@ -58,7 +57,10 @@ class _MapelPageState extends State<MapelPage> {
                 context.read<PageCubit>().setPage(0);
                 Navigator.pushReplacementNamed(context, '/mainSiswa');
               },
-              icon: Icon(Icons.arrow_back_ios_new),
+              icon: Icon(
+                Icons.arrow_back_ios_new,
+                color: allColor[7],
+              ),
             );
           }),
         ),
@@ -72,9 +74,9 @@ class _MapelPageState extends State<MapelPage> {
             right: 10,
             bottom: 10,
           ),
-          child: BlocConsumer<JadwalMapelCubit, JadwalMapelState>(
+          child: BlocConsumer<DaftarMapelCubit, DaftarMapelState>(
             listener: (context, state) {
-              if (state is JadwalMapelFailed) {
+              if (state is DaftarMapelSiswaFailed) {
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
                     content: Text(state.error),
@@ -83,10 +85,10 @@ class _MapelPageState extends State<MapelPage> {
               }
             },
             builder: (context, state) {
-              if (state is JadwalMapelSuccess) {
+              if (state is DaftarMapelSiswaSuccess) {
                 return ListView(
                   children: [
-                    mapel(state.mapels!),
+                    mapel(state.mapels),
                     Container(
                       margin: EdgeInsets.only(
                         bottom: 30,
@@ -139,7 +141,7 @@ class _MapelPageState extends State<MapelPage> {
                                       ),
                                       SizedBox(width: 7),
                                       Text(
-                                        '${state.mapels!.length}',
+                                        '${state.mapels.length}',
                                         style: TextStyle(
                                             fontSize: 18,
                                             color: kWhiteColor,

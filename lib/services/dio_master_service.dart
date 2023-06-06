@@ -40,4 +40,18 @@ class MasterAPI {
       throw Exception('${body["msg"]}');
     }
   }
+
+  Future<List<DaftarMapelSisaModel>> fetchDaftarMapelSiswa() async {
+    final response = await dio.get('/student/daftar-mapel');
+    final body = response.data;
+
+    if (response.statusCode == 200) {
+      List<DaftarMapelSisaModel> mapels = List<DaftarMapelSisaModel>.from(
+          body.map((json) => DaftarMapelSisaModel.fromJson(json)));
+
+      return mapels;
+    } else {
+      throw Exception('${body["msg"]}');
+    }
+  }
 }
