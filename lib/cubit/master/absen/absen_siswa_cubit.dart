@@ -21,6 +21,16 @@ class AbsenSiswaCubit extends Cubit<AbsenSiswaState> {
     }
   }
 
+  void getTanggalAbsen() async {
+    try {
+      emit(AbsenSiswaLoading());
+      final riwayatAbsen = await ApiUserGuru().getTanggalAbsen();
+      emit(RiwayatAbsenStateSuccess(riwayatAbsen));
+    } on DioError catch (e) {
+      emit(RiwayatAbsenStateFailure('${e.response?.data["msg"]}'));
+    }
+  }
+
   void getRiwayatAbsen() async {
     try {
       emit(AbsenSiswaLoading());

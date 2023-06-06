@@ -338,4 +338,17 @@ class ApiUserGuru {
       throw Exception('${body["msg"]}');
     }
   }
+
+  Future<RiwayatAbsensiModel> getTanggalAbsen() async {
+    final response = await dio.get('/guru/daftar-tanggal-absensi');
+    final body = response.data;
+
+    if (response.statusCode == 200) {
+      RiwayatAbsensiModel riwayatAbsensi = RiwayatAbsensiModel.fromJson(body);
+
+      return riwayatAbsensi;
+    } else {
+      throw Exception('${body["msg"]}');
+    }
+  }
 }
