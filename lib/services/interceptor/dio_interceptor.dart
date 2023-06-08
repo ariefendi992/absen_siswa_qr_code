@@ -20,8 +20,8 @@ class DioInterceptor extends QueuedInterceptorsWrapper {
 
   @override
   Future<void> onRequest(options, handler) async {
-    accessToken = await storage.getStorage('access_token');
-    refreshToken = await storage.getStorage('refresh_token');
+    accessToken = await storage.getStorage('token');
+    refreshToken = await storage.getStorage('refreshToken');
     // print('ACCESS TOKEN => $accessToken');
     // print('REFRESH TOKEN => $refreshToken');
     configurationDio(options);
@@ -51,7 +51,7 @@ class DioInterceptor extends QueuedInterceptorsWrapper {
         // print('The token has been expire');
 
         final options = error.requestOptions;
-        refreshToken = await storage.getStorage('refresh_token');
+        refreshToken = await storage.getStorage('refreshToken');
 
         try {
           final responseToken = await dio.post(
@@ -63,9 +63,9 @@ class DioInterceptor extends QueuedInterceptorsWrapper {
           );
 
           await storage.setStorage(
-              'access_token', responseToken.data['access_token']);
+              'token', responseToken.data['access_token']);
           await storage.setStorage(
-              'refresh_token', responseToken.data['refresh_token']);
+              'refreshToken', responseToken.data['refresh_token']);
           accessToken = responseToken.data['access_token'];
 
           setHeaderAuthorization(options, accessToken);

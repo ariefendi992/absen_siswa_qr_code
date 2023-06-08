@@ -30,7 +30,7 @@ class AbsenSiswaFailure extends AbsenSiswaState {
 }
 
 class RiwayatAbsenStateSuccess extends AbsenSiswaState {
-  final RiwayatAbsensiModel riwayatAbsen;
+  final Map<String, List<RAbsensiModel>> riwayatAbsen;
 
   const RiwayatAbsenStateSuccess(this.riwayatAbsen);
 

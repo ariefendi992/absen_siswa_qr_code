@@ -1,11 +1,33 @@
+import 'package:absen_siswa_qr_code/cubit/master/absen/absen_siswa_cubit.dart';
+import 'package:absen_siswa_qr_code/models/absensi_siswa_model.dart';
 import 'package:absen_siswa_qr_code/utils/theme.dart';
+import 'package:absen_siswa_qr_code/views/widgets/Absensi/riwayat_absen_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-class GuruRiwayatAbsensi extends StatelessWidget {
+class GuruRiwayatAbsensi extends StatefulWidget {
   const GuruRiwayatAbsensi({super.key});
 
   @override
+  State<GuruRiwayatAbsensi> createState() => _GuruRiwayatAbsensiState();
+}
+
+class _GuruRiwayatAbsensiState extends State<GuruRiwayatAbsensi> {
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    Widget riwayatAbsensi(Map<String, List<RAbsensiModel>> riwayatAbsen) {
+      return Column(
+        children: riwayatAbsen.entries
+            .map((e) => RiwayatAbsenWidget(e.key, e.value))
+            .toList(),
+      );
+    }
+
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(60),
@@ -35,147 +57,45 @@ class GuruRiwayatAbsensi extends StatelessWidget {
           ),
         ),
       ),
-      body: ListView(
-        // padding: EdgeInsets.symmetric(horizontal: 24),
-        children: [
-          Material(
-            color: secondaryExtraSoft,
-            child: Container(
-              padding: EdgeInsets.only(left: 24, right: 24, top: 12),
-              margin: EdgeInsets.only(bottom: 12),
-              decoration: BoxDecoration(color: kWhiteColor),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Selasa, 06 Juni 2023',
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: medium,
-                      color: allColor[7],
-                    ),
+      body: BlocConsumer<AbsenSiswaCubit, AbsenSiswaState>(
+        listener: (context, state) {
+          if (state is RiwayatAbsenStateFailure) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(
+                  '${state.error}',
+                  style: TextStyle(
+                    color: secondary,
                   ),
-                  SizedBox(height: 12),
-                  Container(
-                    margin: EdgeInsets.only(bottom: 12),
-                    padding: EdgeInsets.only(bottom: 8),
-                    decoration: BoxDecoration(
-                      border: Border(
-                        bottom:
-                            BorderSide(color: secondaryExtraSoft, width: 0.8),
-                      ),
-                    ),
-                    child: Row(
-                      children: [
-                        Container(
-                          padding: EdgeInsets.all(5),
-                          margin: EdgeInsets.only(right: 12),
-                          decoration: BoxDecoration(
-                            color: primarySoft,
-                            borderRadius: BorderRadius.circular(100),
-                          ),
-                          child: Center(
-                            child: Icon(
-                              Icons.person_outline_rounded,
-                              color: kWhiteColor,
-                            ),
-                          ),
-                        ),
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'Nama',
-                                style: TextStyle(
-                                  color: secondary,
-                                  fontSize: 16,
-                                  fontWeight: medium,
-                                ),
-                              ),
-                              SizedBox(height: 2),
-                              Text(
-                                'Kelas',
-                                style: TextStyle(
-                                  color: secondary,
-                                  fontSize: 16,
-                                  fontWeight: medium,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Expanded(
-                            child: Column(
-                          children: [
-                            Text(
-                              ':',
-                              style: TextStyle(
-                                fontWeight: medium,
-                              ),
-                            ),
-                            Text(
-                              ':',
-                              style: TextStyle(
-                                fontWeight: medium,
-                              ),
-                            ),
-                          ],
-                        )),
-                        Expanded(
-                          flex: 5,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            children: [
-                              Text(
-                                'Rijal Dhaffa Nugraha',
-                                style: TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: medium,
-                                ),
-                              ),
-                              Text(
-                                'VIII-1',
-                                style: TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: medium,
-                                ),
-                              ),
-                            ],
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                ],
+                ),
+                backgroundColor: errorSoft,
+                behavior: SnackBarBehavior.floating,
+                duration: Duration(seconds: 2),
+                action: SnackBarAction(
+                  label: 'Dismiss',
+                  disabledTextColor: Colors.white,
+                  textColor: secondary,
+                  onPressed: () {
+                    //Do whatever you want
+                  },
+                ),
               ),
-            ),
-          ),
-          Material(
-            color: secondaryExtraSoft,
-            child: Container(
-              padding: EdgeInsets.only(left: 24, right: 24, top: 12),
-              margin: EdgeInsets.only(bottom: 8),
-              decoration: BoxDecoration(color: kWhiteColor),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Selasa, 06 Juni 2023',
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: medium,
-                      color: allColor[7],
-                    ),
-                  ),
-                  Row(
-                    children: [],
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ],
+            );
+          }
+        },
+        builder: (context, state) {
+          if (state is RiwayatAbsenStateSuccess) {
+            return ListView(
+              // padding: EdgeInsets.symmetric(horizontal: 24),
+              children: [
+                riwayatAbsensi(state.riwayatAbsen),
+              ],
+            );
+          }
+          return Center(
+            child: CircularProgressIndicator(),
+          );
+        },
       ),
     );
   }

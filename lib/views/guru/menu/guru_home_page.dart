@@ -1,3 +1,4 @@
+import 'package:absen_siswa_qr_code/cubit/master/absen/absen_siswa_cubit.dart';
 import 'package:absen_siswa_qr_code/cubit/master/jadwal_mapel_cubit.dart';
 import 'package:absen_siswa_qr_code/cubit/user/guru/user_guru_cubit.dart';
 import 'package:absen_siswa_qr_code/models/user_model.dart';
@@ -243,6 +244,9 @@ class _GuruHomePageState extends State<GuruHomePage> {
                               builder: (context) => GuruRiwayatAbsensi(),
                             ),
                           );
+                          context
+                              .read<AbsenSiswaCubit>()
+                              .getRiwayatAbsenbyTgl();
                         },
                       ),
                     ],

@@ -55,33 +55,30 @@ class ScanSiswaModel extends Equatable {
   List<Object?> get props => [data, status, additionalData];
 }
 
-class RiwayatAbsensiModel extends Equatable {
+
+class RAbsensiModel {
   final int id;
   final String namaSiswa;
-  final String namaGuru;
   final String kelas;
   final String mapel;
+  final String namaGuru;
   final String tglAbsen;
 
-  const RiwayatAbsensiModel({
+  RAbsensiModel({
     required this.id,
-    required this.kelas,
-    required this.mapel,
-    required this.namaGuru,
     required this.namaSiswa,
+    required this.mapel,
+    required this.kelas,
+    required this.namaGuru,
     required this.tglAbsen,
   });
 
-  factory RiwayatAbsensiModel.fromJson(Map<String, dynamic> json) =>
-      RiwayatAbsensiModel(
+  factory RAbsensiModel.fromJson(Map<String, dynamic> json) => RAbsensiModel(
         id: json['id'],
-        kelas: json['kelas'],
-        mapel: json['mapel'],
-        namaGuru: json['nama_guru'],
         namaSiswa: json['nama_siswa'],
+        mapel: json['mapel'],
+        kelas: json['kelas'],
+        namaGuru: json['nama_guru'],
         tglAbsen: json['tgl_absen'],
       );
-
-  @override
-  List<Object> get props => [id, kelas, mapel, namaGuru, namaSiswa, tglAbsen];
 }

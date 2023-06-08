@@ -312,43 +312,35 @@ class ApiUserGuru {
     }
   }
 
-  Future<RiwayatAbsensiModel> getRiwayat() async {
-    final response = await dio.get('/guru/daftar-riwayat-absen');
+  Future<Map<String, List<RAbsensiModel>>> fetchRiwayat() async {
+    final response = await dio.get('/guru/daftar-riwayat');
     final body = response.data;
 
     if (response.statusCode == 200) {
-      RiwayatAbsensiModel riwayatAbsensi = RiwayatAbsensiModel.fromJson(body);
+      Map<String, List<RAbsensiModel>> mapData = Map.from(body.map(
+          (key, value) => MapEntry<String, List<RAbsensiModel>>(
+              key,
+              List<RAbsensiModel>.from(
+                  value.map((e) => RAbsensiModel.fromJson(e))))));
+      // Map<String, dynamic> data = {};
+      // for (var entry in mapData.entries) {
+      //   String key = entry.key;
+      //   List<RAbsensiModel> models = entry.value;
 
-      return riwayatAbsensi;
+      //   data['tgl'] = key;
+
+      //   print(key);
+      //   data['data'] = models;
+
+      //   for (var model in models) {
+      //     print(model.namaSiswa);
+      //   }
+      // }
+
+      // print('DATA===>> [$data]');
+      return mapData;
     } else {
-      throw Exception('${body["msg"]}');
-    }
-  }
-
-  Future<RiwayatAbsensiModel> getRiwayatByTgl(String tglAbsen) async {
-    final response =
-        await dio.get('/guru/daftar-riwayat-absen?tgl_absen=$tglAbsen');
-    final body = response.data;
-
-    if (response.statusCode == 200) {
-      RiwayatAbsensiModel riwayatAbsensi = RiwayatAbsensiModel.fromJson(body);
-
-      return riwayatAbsensi;
-    } else {
-      throw Exception('${body["msg"]}');
-    }
-  }
-
-  Future<RiwayatAbsensiModel> getTanggalAbsen() async {
-    final response = await dio.get('/guru/daftar-tanggal-absensi');
-    final body = response.data;
-
-    if (response.statusCode == 200) {
-      RiwayatAbsensiModel riwayatAbsensi = RiwayatAbsensiModel.fromJson(body);
-
-      return riwayatAbsensi;
-    } else {
-      throw Exception('${body["msg"]}');
+      throw Exception('${response.data["msg"]}');
     }
   }
 }

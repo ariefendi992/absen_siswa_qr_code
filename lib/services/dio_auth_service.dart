@@ -24,10 +24,13 @@ class DioAuthSevice {
 
     final body = response.data;
 
+    // print(body['access_token']);
+
     if (response.statusCode == 200) {
       await storage.setStorage('id', body['id'].toString());
+      await storage.setStorage('token', body['access_token']);
       await storage.setStorage('access_token', body['access_token']);
-      await storage.setStorage('refresh_token', body['refresh_token']);
+      await storage.setStorage('refreshToken', body['refresh_token']);
       await storage.setStorage('group', body['group']);
 
       DateTime setTimeString = DateTime.now().add(
@@ -51,8 +54,8 @@ class DioAuthSevice {
     if (response.statusCode == 200) {
       await storage.deleteKey('group');
       await storage.deleteKey('id');
-      await storage.deleteKey('access_token');
-      await storage.deleteKey('refresh_token');
+      await storage.deleteKey('token');
+      await storage.deleteKey('refreshToken');
       await storage.deleteKey('today');
     }
   }
