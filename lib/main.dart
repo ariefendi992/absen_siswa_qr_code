@@ -2,6 +2,7 @@ import 'package:absen_siswa_qr_code/cubit/auth/auth_cubit.dart';
 import 'package:absen_siswa_qr_code/cubit/master/absen/absen_siswa_cubit.dart';
 import 'package:absen_siswa_qr_code/cubit/master/daftar_kelas_ajar_cubit.dart';
 import 'package:absen_siswa_qr_code/cubit/master/daftar_siswa_cubit.dart';
+import 'package:absen_siswa_qr_code/cubit/master/jadwal/jadwal_siswa/jadwal_siswa_cubit.dart';
 import 'package:absen_siswa_qr_code/cubit/master/jadwal/jumat/jadwal_jumat_cubit.dart';
 import 'package:absen_siswa_qr_code/cubit/master/jadwal/kamis/jadwal_kamis_cubit.dart';
 import 'package:absen_siswa_qr_code/cubit/master/jadwal/rabu/jadwal_rabu_cubit.dart';
@@ -57,6 +58,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => DaftarSiswaCubit()),
         BlocProvider(create: (context) => AbsenSiswaCubit()),
         BlocProvider(create: (context) => DataPelanggaranCubit()),
+        BlocProvider(create: (context) => JadwalSiswaCubit()),
         BlocProvider(
           create: (context) => ScanSiswaCubit(),
         ),

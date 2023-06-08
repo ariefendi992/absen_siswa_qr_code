@@ -1,3 +1,4 @@
+import 'package:absen_siswa_qr_code/cubit/master/jadwal/jadwal_siswa/jadwal_siswa_cubit.dart';
 import 'package:absen_siswa_qr_code/cubit/master/pelanggaran/data_pelanggaran_cubit.dart';
 import 'package:absen_siswa_qr_code/cubit/page/page_cubit.dart';
 import 'package:absen_siswa_qr_code/utils/theme.dart';
@@ -38,6 +39,7 @@ class _MainSiswaPageState extends State<MainSiswaPage> {
   @override
   void initState() {
     context.read<DataPelanggaranCubit>().fetchDataPelanggaran();
+    context.read<JadwalSiswaCubit>().fetchJadwalHarianSiswa();
     super.initState();
   }
 

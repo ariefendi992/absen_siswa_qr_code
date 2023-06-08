@@ -45,7 +45,7 @@ class CardPelanggaranWidget extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    '${pelanggar.poin}',
+                    '${pelanggar.poin} Poin',
                     style: TextStyle(
                       color: allColor[7],
                       fontSize: 24,

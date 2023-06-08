@@ -1,3 +1,4 @@
+import 'package:absen_siswa_qr_code/cubit/master/jadwal/jadwal_siswa/jadwal_siswa_cubit.dart';
 import 'package:absen_siswa_qr_code/cubit/master/pelanggaran/data_pelanggaran_cubit.dart';
 import 'package:absen_siswa_qr_code/cubit/user/siswa/user_siswa_cubit.dart';
 import 'package:absen_siswa_qr_code/models/master_model.dart';
@@ -6,6 +7,7 @@ import 'package:absen_siswa_qr_code/utils/theme.dart';
 import 'package:absen_siswa_qr_code/views/siswa/sub_menu/jadwal_page.dart';
 import 'package:absen_siswa_qr_code/views/siswa/sub_menu/mapel_page.dart';
 import 'package:absen_siswa_qr_code/views/widgets/button_keterangan.dart';
+import 'package:absen_siswa_qr_code/views/widgets/siswa/card_jadwal_harian_siswa.dart';
 import 'package:absen_siswa_qr_code/views/widgets/siswa/card_pelanggar_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -71,7 +73,8 @@ class HomeSiswaPage extends StatelessWidget {
                 elevation: 3,
                 borderRadius: BorderRadius.circular(20),
                 child: Container(
-                  padding: EdgeInsets.symmetric(horizontal: 14, vertical: 18),
+                  padding:
+                      EdgeInsets.only(left: 14, right: 14, top: 12, bottom: 18),
                   width: MediaQuery.of(context).size.width,
                   decoration: BoxDecoration(
                     color: allColor[2],
@@ -85,6 +88,17 @@ class HomeSiswaPage extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      Container(
+                        alignment: Alignment.centerRight,
+                        margin: EdgeInsets.only(bottom: 4),
+                        child: Text(
+                          '${user.additionalData!["hari"]}',
+                          style: TextStyle(
+                              color: kWhiteColor,
+                              fontWeight: medium,
+                              fontSize: 16),
+                        ),
+                      ),
                       Row(
                         children: [
                           Expanded(
@@ -426,208 +440,49 @@ class HomeSiswaPage extends StatelessWidget {
               ),
             ),
             SizedBox(height: 16),
-            Column(
-              children: [
-                Container(
-                  margin: EdgeInsets.only(bottom: 8),
-                  child: Material(
-                    elevation: 1.5,
-                    borderRadius: BorderRadius.circular(18),
-                    child: Container(
-                      width: MediaQuery.of(context).size.width,
-                      padding:
-                          EdgeInsets.symmetric(vertical: 12, horizontal: 12),
-                      decoration: BoxDecoration(
-                        color: Colors.blue.shade50,
-                        borderRadius: BorderRadius.circular(18),
-                      ),
-                      child: Column(
-                        children: [
-                          Text(
-                            'Pendidikan Jasmani. Olahraga dan Kesehatan',
-                            style: TextStyle(
-                              color: allColor[7],
-                              fontWeight: bold,
-                              fontSize: 16,
-                            ),
-                            textAlign: TextAlign.center,
+            BlocBuilder<JadwalSiswaCubit, JadwalSiswaState>(
+              builder: (context, state) {
+                if (state is JadwalHarianSiswaSuccess) {
+                  final jadwal = state.jadwal;
+                  return Column(
+                    children: jadwal.map((JadwalHarianSiswaModel jadwal) {
+                      return CardJadwalHarianSiswa(jadwal);
+                    }).toList(),
+                  );
+                } else if (state is JadwalSiswaFailure) {
+                  return Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      SizedBox(height: 40),
+                      Center(
+                        child: Text(
+                          '${state.error}',
+                          style: TextStyle(
+                            color: allColor[7],
+                            fontWeight: medium,
                           ),
-                          SizedBox(height: 6),
-                          IntrinsicHeight(
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Expanded(
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    children: [
-                                      Text(
-                                        '07.00',
-                                        style: TextStyle(
-                                          color: allColor[7],
-                                          fontSize: 18,
-                                          fontWeight: bold,
-                                          letterSpacing: 1,
-                                        ),
-                                      ),
-                                      Text(
-                                        'Mulai',
-                                        style: TextStyle(
-                                          color: allColor[7],
-                                          fontWeight: medium,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                VerticalDivider(
-                                  color: allColor[7],
-                                  thickness: 2,
-                                ),
-                                Expanded(
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    children: [
-                                      Text(
-                                        '07.00',
-                                        style: TextStyle(
-                                          color: allColor[7],
-                                          fontSize: 18,
-                                          fontWeight: bold,
-                                          letterSpacing: 1,
-                                        ),
-                                      ),
-                                      Text(
-                                        'Selesai',
-                                        style: TextStyle(
-                                          color: allColor[7],
-                                          fontWeight: medium,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          SizedBox(height: 6),
-                          Text(
-                            'Dra. Haslinda',
-                            style: TextStyle(
-                                fontSize: 16,
-                                color: allColor[7],
-                                fontWeight: bold,
-                                letterSpacing: 0.3),
-                          )
-                        ],
+                        ),
+                      )
+                    ],
+                  );
+                }
+                return Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    SizedBox(height: 40),
+                    Center(
+                      child: Text(
+                        'Sedang memproses data...',
+                        style: TextStyle(
+                          color: allColor[7],
+                          fontWeight: medium,
+                        ),
                       ),
-                    ),
-                  ),
-                ),
-                Container(
-                  margin: EdgeInsets.only(bottom: 8),
-                  child: Material(
-                    elevation: 1.5,
-                    borderRadius: BorderRadius.circular(18),
-                    child: Container(
-                      width: MediaQuery.of(context).size.width,
-                      padding:
-                          EdgeInsets.symmetric(vertical: 12, horizontal: 12),
-                      decoration: BoxDecoration(
-                        color: Colors.blue.shade50,
-                        borderRadius: BorderRadius.circular(18),
-                      ),
-                      child: Column(
-                        children: [
-                          Text(
-                            'Pendidikan Jasmani. Olahraga dan Kesehatan',
-                            style: TextStyle(
-                              color: allColor[7],
-                              fontWeight: bold,
-                              fontSize: 16,
-                            ),
-                            textAlign: TextAlign.center,
-                          ),
-                          SizedBox(height: 6),
-                          IntrinsicHeight(
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Expanded(
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    children: [
-                                      Text(
-                                        '07.00',
-                                        style: TextStyle(
-                                          color: allColor[7],
-                                          fontSize: 18,
-                                          fontWeight: bold,
-                                          letterSpacing: 1,
-                                        ),
-                                      ),
-                                      Text(
-                                        'Mulai',
-                                        style: TextStyle(
-                                          color: allColor[7],
-                                          fontWeight: medium,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                VerticalDivider(
-                                  color: allColor[7],
-                                  thickness: 2,
-                                ),
-                                Expanded(
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    children: [
-                                      Text(
-                                        '07.00',
-                                        style: TextStyle(
-                                          color: allColor[7],
-                                          fontSize: 18,
-                                          fontWeight: bold,
-                                          letterSpacing: 1,
-                                        ),
-                                      ),
-                                      Text(
-                                        'Selesai',
-                                        style: TextStyle(
-                                          color: allColor[7],
-                                          fontWeight: medium,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          SizedBox(height: 6),
-                          Text(
-                            'Dra. Haslinda',
-                            style: TextStyle(
-                                fontSize: 16,
-                                color: allColor[7],
-                                fontWeight: bold,
-                                letterSpacing: 0.3),
-                          )
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            )
+                    )
+                  ],
+                );
+              },
+            ),
           ],
         ),
       );
@@ -642,7 +497,7 @@ class HomeSiswaPage extends StatelessWidget {
           // mainAxisSize: MainAxisSize.min,
           children: [
             Text(
-              'Siswa Melanggar',
+              'Data Pelanggar',
               style: TextStyle(
                 fontSize: 18,
                 color: allColor[7],
@@ -696,7 +551,6 @@ class HomeSiswaPage extends StatelessWidget {
                     )
                   ],
                 );
-                ;
               },
             )
           ],
