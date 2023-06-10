@@ -5,7 +5,6 @@ import 'package:absen_siswa_qr_code/views/siswa/sub_menu/jadwal_page.dart';
 import 'package:absen_siswa_qr_code/views/siswa/sub_menu/mapel_page.dart';
 import 'package:absen_siswa_qr_code/views/widgets/button_keterangan.dart';
 import 'package:absen_siswa_qr_code/views/widgets/siswa/card_pelanggar_widget.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
