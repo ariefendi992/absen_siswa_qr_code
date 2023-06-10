@@ -1,4 +1,6 @@
+import 'package:absen_siswa_qr_code/cubit/master/pelanggaran/data_pelanggaran_cubit.dart';
 import 'package:absen_siswa_qr_code/cubit/user/siswa/user_siswa_cubit.dart';
+import 'package:absen_siswa_qr_code/models/master_model.dart';
 import 'package:absen_siswa_qr_code/models/user_model.dart';
 import 'package:absen_siswa_qr_code/utils/theme.dart';
 import 'package:absen_siswa_qr_code/views/siswa/sub_menu/jadwal_page.dart';
@@ -648,11 +650,54 @@ class HomeSiswaPage extends StatelessWidget {
               ),
             ),
             SizedBox(height: 16),
-            SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Row(
-                children: [CardPelanggaranWidget()],
-              ),
+            BlocBuilder<DataPelanggaranCubit, DataPelanggaranState>(
+              builder: (context, state) {
+                if (state is DataPelanggaranSuccess) {
+                  final pelanggar = state.dataPelanggaran;
+                  return SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      children: pelanggar.map((DaftarPelanggarModel pelanggar) {
+                        return CardPelanggaranWidget(pelanggar: pelanggar);
+                      }).toList(),
+                    ),
+                  );
+                } else if (state is DataPelanggaranFailure) {
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Container(
+                        margin: EdgeInsets.only(bottom: 18),
+                        child: Text(
+                          state.error,
+                          style: TextStyle(
+                            color: allColor[7],
+                            fontWeight: medium,
+                          ),
+                        ),
+                      )
+                    ],
+                  );
+                }
+                return Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      margin: EdgeInsets.only(bottom: 18),
+                      child: Text(
+                        'Sementara memproses data...',
+                        style: TextStyle(
+                          color: allColor[7],
+                          fontWeight: medium,
+                        ),
+                      ),
+                    )
+                  ],
+                );
+                ;
+              },
             )
           ],
         ),
@@ -684,6 +729,7 @@ class HomeSiswaPage extends StatelessWidget {
           return RefreshIndicator(
             onRefresh: () async {
               context.read<UserSiswaCubit>().getCurrentUser();
+              context.read<DataPelanggaranCubit>().fetchDataPelanggaran();
             },
             child: ListView(
               shrinkWrap: true,

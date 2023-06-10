@@ -1,3 +1,4 @@
+import 'package:absen_siswa_qr_code/cubit/master/pelanggaran/data_pelanggaran_cubit.dart';
 import 'package:absen_siswa_qr_code/cubit/page/page_cubit.dart';
 import 'package:absen_siswa_qr_code/utils/theme.dart';
 import 'package:absen_siswa_qr_code/views/siswa/menu/home_siswa_page.dart';
@@ -33,6 +34,12 @@ class _MainSiswaPageState extends State<MainSiswaPage> {
   //     context.read<UserSiswaCubit>().getCurrentUser();
   //   }
   // }
+
+  @override
+  void initState() {
+    context.read<DataPelanggaranCubit>().fetchDataPelanggaran();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {

@@ -1,9 +1,14 @@
+import 'package:absen_siswa_qr_code/models/master_model.dart';
 import 'package:absen_siswa_qr_code/utils/theme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class CardPelanggaranWidget extends StatelessWidget {
-  const CardPelanggaranWidget({super.key});
+  final DaftarPelanggarModel pelanggar;
+  const CardPelanggaranWidget({
+    super.key,
+    required this.pelanggar,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +27,7 @@ class CardPelanggaranWidget extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Point Terbanyak Ke-1',
+                'Point Terbanyak Ke-${pelanggar.urut}',
                 style: TextStyle(
                   color: allColor[7],
                   fontWeight: medium,
@@ -40,7 +45,7 @@ class CardPelanggaranWidget extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    '15',
+                    '${pelanggar.poin}',
                     style: TextStyle(
                       color: allColor[7],
                       fontSize: 24,
@@ -51,7 +56,7 @@ class CardPelanggaranWidget extends StatelessWidget {
               ),
               SizedBox(height: 4),
               Text(
-                'Ananda Putri Aurelia Akbar',
+                '${pelanggar.namaSiswa}',
                 style: TextStyle(
                   color: allColor[7],
                   fontWeight: medium,

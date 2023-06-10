@@ -19,7 +19,7 @@ class MasterAPI {
       List<DaftarPelanggarModel> dataPelanggar =
           List<DaftarPelanggarModel>.from(
         body['data'].map(
-          (json) => DaftarKelasAjarModel.fromJson(json),
+          (json) => DaftarPelanggarModel.fromJsno(json),
         ),
       );
       return dataPelanggar;
