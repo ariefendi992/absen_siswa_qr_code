@@ -13,6 +13,8 @@ class UserSiswaModel extends Equatable {
   final String? picture;
   final String? semester;
   final String? today;
+  final String? waliKelas;
+  final Map<String, dynamic>? additionalData;
 
   const UserSiswaModel({
     required this.id,
@@ -27,6 +29,8 @@ class UserSiswaModel extends Equatable {
     this.picture,
     this.semester,
     this.today,
+    this.waliKelas,
+    this.additionalData,
   });
 
   factory UserSiswaModel.fromJson(Map<String, dynamic> json) {
@@ -43,6 +47,8 @@ class UserSiswaModel extends Equatable {
       semester: json['semester'],
       statusLoggedIn: json['status_logged_in'],
       today: json['today'],
+      waliKelas: json['wali_kelas'],
+      additionalData: json,
     );
   }
 

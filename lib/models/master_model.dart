@@ -518,3 +518,28 @@ class DaftarSiswaModel extends Equatable {
   List<Object?> get props =>
       [siswaId, firstName, lastName, kelasId, kelas, waliKelas];
 }
+
+class DaftarPelanggarModel extends Equatable {
+  final int id;
+  final int urut;
+  final String poin;
+  final String namaSiswa;
+
+  const DaftarPelanggarModel({
+    required this.id,
+    required this.urut,
+    required this.poin,
+    required this.namaSiswa,
+  });
+
+  factory DaftarPelanggarModel.fromJsno(Map<String, dynamic> json) =>
+      DaftarPelanggarModel(
+        id: json['id'],
+        urut: json['urut'],
+        poin: json['poin'],
+        namaSiswa: json['nama_siswa'],
+      );
+
+  @override
+  List<Object> get props => [id, urut, poin, namaSiswa];
+}

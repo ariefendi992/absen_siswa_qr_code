@@ -37,7 +37,8 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => AuthCubit()),
         BlocProvider(create: (context) => PageCubit()),
         BlocProvider(create: (context) => UserSiswaCubit()),
-        BlocProvider(create: (context) => JadwalMapelCubit()),
+        BlocProvider(
+            create: (context) => JadwalMapelCubit()..getJadwalMengajarHarian()),
         BlocProvider(
             create: (context) => JadwalSeninCubit()..getJadwalMengajarSenin()),
         BlocProvider(
@@ -54,7 +55,9 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => KelasAjarCubit()..getKelasAjar()),
         BlocProvider(create: (context) => DaftarSiswaCubit()),
         BlocProvider(create: (context) => AbsenSiswaCubit()),
-        BlocProvider(create: (context) => ScanSiswaCubit(),),
+        BlocProvider(
+          create: (context) => ScanSiswaCubit(),
+        ),
       ],
       child: MaterialApp(
         theme: ThemeData(
