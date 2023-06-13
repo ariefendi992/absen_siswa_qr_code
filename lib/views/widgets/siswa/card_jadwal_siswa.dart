@@ -67,19 +67,19 @@ class WidgetJadwalMapelSiswa extends StatelessWidget {
               ],
             ),
             SizedBox(height: 2),
-            Row(
-              children: [
-                Text(
-                  'Jam-Ke',
-                  style: TextStyle(fontWeight: medium, color: allColor[7]),
-                ),
-                Spacer(),
-                Text(
-                  '${jadwal.jamKe}',
-                  style: TextStyle(fontWeight: medium, color: allColor[7]),
-                ),
-              ],
-            ),
+            // Row(
+            //   children: [
+            //     Text(
+            //       'Jam-Ke',
+            //       style: TextStyle(fontWeight: medium, color: allColor[7]),
+            //     ),
+            //     Spacer(),
+            //     Text(
+            //       '${jadwal.jamKe}',
+            //       style: TextStyle(fontWeight: medium, color: allColor[7]),
+            //     ),
+            //   ],
+            // ),
           ],
         ),
       );
