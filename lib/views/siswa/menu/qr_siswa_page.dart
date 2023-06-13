@@ -24,11 +24,12 @@ class _QrSiswaPageState extends State<QrSiswaPage> {
           child: AppBar(
             foregroundColor: kBlackColor,
             backgroundColor: kBackgorundScaffold,
-            elevation: 2,
+            elevation: 0.2,
             title: Text(
               'QR Code Siswa',
               style: TextStyle(
                 fontWeight: medium,
+                color: allColor[7],
               ),
             ),
             centerTitle: true,
@@ -41,13 +42,11 @@ class _QrSiswaPageState extends State<QrSiswaPage> {
               builder: (BuildContext context) {
                 return IconButton(
                     onPressed: () {
-                      context.read<PageCubit>().setPage(0);
-                      // Navigator.pushReplacementNamed(context, '/mainSiswa');
-                      Navigator.pushNamedAndRemoveUntil(
-                          context, '/mainSiswa', (route) => false);
+                      Navigator.pop(context);
                     },
                     icon: Icon(
                       Icons.arrow_back_ios_new,
+                      color: allColor[7],
                     ));
               },
             ),
@@ -107,7 +106,7 @@ class _QrSiswaPageState extends State<QrSiswaPage> {
                                       style: TextStyle(
                                         fontSize: 16,
                                         fontWeight: medium,
-                                        color: kBlackColor.withOpacity(0.7),
+                                        color: allColor[7],
                                       ),
                                     ),
                                     SizedBox(height: 6),
@@ -117,7 +116,11 @@ class _QrSiswaPageState extends State<QrSiswaPage> {
                                     ),
                                     SizedBox(height: 12),
                                     Text(
-                                        'Tunjukkan QR Code ke Guru untuk melakukan absen, sebelum pelajaran')
+                                      'Tunjukkan QR Code ke Guru untuk melakukan absen, sebelum pelajaran',
+                                      style: TextStyle(
+                                        color: allColor[7],
+                                      ),
+                                    )
                                     // SizedBox(height: 2),
                                   ],
                                 ),
@@ -145,7 +148,7 @@ class _QrSiswaPageState extends State<QrSiswaPage> {
                               style: TextStyle(
                                 fontSize: 20,
                                 fontWeight: bold,
-                                color: kBlackColor.withOpacity(0.7),
+                                color: allColor[7],
                               ),
                             ),
                           )
