@@ -66,7 +66,6 @@ class WidgetJadwalMapelSiswa extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(height: 2),
             // Row(
             //   children: [
             //     Text(
