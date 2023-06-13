@@ -547,33 +547,36 @@ class DaftarPelanggarModel extends Equatable {
   List<Object> get props => [id, urut, poin, namaSiswa];
 }
 
-class JadwalHarianSiswaModel extends Equatable {
+class JadwalPelajaranSiswaModel extends Equatable {
   final int id;
   final String mapel;
   final String mulai;
   final String selesai;
   final String jamKe;
   final String guru;
+  final String? hari;
 
-  const JadwalHarianSiswaModel({
+  const JadwalPelajaranSiswaModel({
     required this.id,
     required this.mapel,
     required this.mulai,
     required this.selesai,
     required this.jamKe,
     required this.guru,
+    this.hari,
   });
 
-  factory JadwalHarianSiswaModel.fromJson(Map<String, dynamic> json) =>
-      JadwalHarianSiswaModel(
+  factory JadwalPelajaranSiswaModel.fromJson(Map<String, dynamic> json) =>
+      JadwalPelajaranSiswaModel(
         id: json['id'],
         mapel: json['mapel'],
         mulai: json['mulai'],
         selesai: json['selesai'],
         jamKe: json['jam_ke'],
         guru: json['guru'],
+        hari: json['hari'],
       );
 
   @override
-  List<Object> get props => [id, mapel, jamKe, mulai, selesai, guru];
+  List<Object?> get props => [id, mapel, jamKe, mulai, selesai, guru, hari];
 }

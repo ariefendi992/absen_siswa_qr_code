@@ -28,13 +28,14 @@ class MasterAPI {
     }
   }
 
-  Future<List<JadwalHarianSiswaModel>> fetchJadwalHarianSiswa() async {
+  Future<List<JadwalPelajaranSiswaModel>> fetchJadwalHarianSiswa() async {
     final response = await dio.get('/student/jadwal-harian');
     final body = response.data;
 
     if (response.statusCode == 200) {
-      List<JadwalHarianSiswaModel> jadwal = List<JadwalHarianSiswaModel>.from(
-          body['data'].map((json) => JadwalHarianSiswaModel.fromJson(json)));
+      List<JadwalPelajaranSiswaModel> jadwal =
+          List<JadwalPelajaranSiswaModel>.from(body['data']
+              .map((json) => JadwalPelajaranSiswaModel.fromJson(json)));
       return jadwal;
     } else {
       throw Exception('${body["msg"]}');
@@ -50,6 +51,30 @@ class MasterAPI {
           body.map((json) => DaftarMapelSisaModel.fromJson(json)));
 
       return mapels;
+    } else {
+      throw Exception('${body["msg"]}');
+    }
+  }
+
+  Future<Map<String, List<JadwalPelajaranSiswaModel>>>
+      fetchJadwalPelajaranSiswa() async {
+    final response = await dio.get('/student/jadwal-pelajaran');
+    final body = response.data;
+
+    if (response.statusCode == 200) {
+      Map<String, List<JadwalPelajaranSiswaModel>> jadwal = Map.from(
+        body.map(
+          (key, value) => MapEntry<String, List<JadwalPelajaranSiswaModel>>(
+            key,
+            List<JadwalPelajaranSiswaModel>.from(
+              value.map(
+                (e) => JadwalPelajaranSiswaModel.fromJson(e),
+              ),
+            ),
+          ),
+        ),
+      );
+      return jadwal;
     } else {
       throw Exception('${body["msg"]}');
     }

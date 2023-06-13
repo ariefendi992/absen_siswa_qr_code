@@ -12,11 +12,22 @@ class JadwalSiswaCubit extends Cubit<JadwalSiswaState> {
   void fetchJadwalHarianSiswa() async {
     try {
       emit(JadwalSiswaLoading());
-      List<JadwalHarianSiswaModel> jadwal =
+      List<JadwalPelajaranSiswaModel> jadwal =
           await MasterAPI().fetchJadwalHarianSiswa();
       emit(JadwalHarianSiswaSuccess(jadwal));
     } on DioError catch (e) {
-      emit(JadwalSiswaFailure('${e.response?.data["msg"]}'));
+      emit(JadwalHarianFailure('${e.response?.data["msg"]}'));
+    }
+  }
+
+  void fetchJadwalPelajara() async {
+    try {
+      emit(JadwalSiswaLoading());
+      Map<String, List<JadwalPelajaranSiswaModel>> jadwal =
+          await MasterAPI().fetchJadwalPelajaranSiswa();
+      emit(JadwalPelajaranSiswaSuccess(jadwal));
+    } on DioError catch (e) {
+      emit(JadwalPelajaranSiswaFailure('${e.response?.data["msg"]}'));
     }
   }
 }

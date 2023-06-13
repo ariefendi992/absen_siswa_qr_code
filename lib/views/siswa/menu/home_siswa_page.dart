@@ -4,6 +4,7 @@ import 'package:absen_siswa_qr_code/cubit/user/siswa/user_siswa_cubit.dart';
 import 'package:absen_siswa_qr_code/models/master_model.dart';
 import 'package:absen_siswa_qr_code/models/user_model.dart';
 import 'package:absen_siswa_qr_code/utils/theme.dart';
+import 'package:absen_siswa_qr_code/views/siswa/sub_menu/jadwal_page.dart';
 import 'package:absen_siswa_qr_code/views/siswa/sub_menu/siswa_mapel_page.dart';
 import 'package:absen_siswa_qr_code/views/widgets/siswa/button_menu_category_siswa.dart';
 import 'package:absen_siswa_qr_code/views/widgets/siswa/card_jadwal_harian_siswa.dart';
@@ -12,8 +13,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class HomeSiswaPage extends StatelessWidget {
+class HomeSiswaPage extends StatefulWidget {
   const HomeSiswaPage({super.key});
+
+  @override
+  State<HomeSiswaPage> createState() => _HomeSiswaPageState();
+}
+
+class _HomeSiswaPageState extends State<HomeSiswaPage> {
+  @override
+  void initState() {
+    context.read<JadwalSiswaCubit>().fetchJadwalHarianSiswa();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -142,7 +154,7 @@ class HomeSiswaPage extends StatelessWidget {
                                       'NISN : ',
                                       style: TextStyle(
                                         color: kWhiteColor,
-                                        fontSize: 17,
+                                        fontSize: 14,
                                         fontWeight: medium,
                                       ),
                                     ),
@@ -150,7 +162,7 @@ class HomeSiswaPage extends StatelessWidget {
                                       '${user.nisn}',
                                       style: TextStyle(
                                         color: kWhiteColor,
-                                        fontSize: 18,
+                                        fontSize: 14,
                                         fontWeight: bold,
                                       ),
                                     ),
@@ -163,7 +175,7 @@ class HomeSiswaPage extends StatelessWidget {
                                       'Wali Kelas : ',
                                       style: TextStyle(
                                         color: kWhiteColor,
-                                        fontSize: 17,
+                                        fontSize: 14,
                                         fontWeight: medium,
                                       ),
                                     ),
@@ -171,7 +183,7 @@ class HomeSiswaPage extends StatelessWidget {
                                       '${user.waliKelas}',
                                       style: TextStyle(
                                         color: kWhiteColor,
-                                        fontSize: 18,
+                                        fontSize: 14,
                                         fontWeight: bold,
                                       ),
                                     ),
@@ -225,7 +237,7 @@ class HomeSiswaPage extends StatelessWidget {
             Text(
               'Kategori',
               style: TextStyle(
-                fontSize: 18,
+                fontSize: 16,
                 color: allColor[7],
                 fontWeight: medium,
               ),
@@ -241,7 +253,7 @@ class HomeSiswaPage extends StatelessWidget {
                       style: TextStyle(
                         color: allColor[7],
                         fontWeight: medium,
-                        fontSize: 13,
+                        fontSize: 12,
                       ),
                     ),
                     onTap: () {
@@ -253,17 +265,25 @@ class HomeSiswaPage extends StatelessWidget {
                   ),
                   ButtonCardMenuKategori(
                     title: Text(
-                      'JadwalBelajar',
+                      'JadwalMapel',
                       style: TextStyle(
                         color: allColor[7],
                         fontWeight: medium,
-                        fontSize: 13,
+                        fontSize: 12,
                       ),
                     ),
                     faIcon: FontAwesomeIcons.calendarWeek,
                     bgCard: greenBgCardSoft,
                     bgIconColor: greenBgCardPrimary,
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => JadwalPageSiswa(),
+                        ),
+                      );
+                      context.read<JadwalSiswaCubit>().fetchJadwalPelajara();
+                    },
                   ),
                   ButtonCardMenuKategori(
                     title: Text(
@@ -271,7 +291,7 @@ class HomeSiswaPage extends StatelessWidget {
                       style: TextStyle(
                         color: allColor[7],
                         fontWeight: medium,
-                        fontSize: 13,
+                        fontSize: 12,
                       ),
                     ),
                     faIcon: FontAwesomeIcons.clockRotateLeft,
@@ -435,7 +455,7 @@ class HomeSiswaPage extends StatelessWidget {
             Text(
               'Jadwal Hari Ini',
               style: TextStyle(
-                fontSize: 18,
+                fontSize: 16,
                 color: allColor[7],
                 fontWeight: medium,
               ),
@@ -445,12 +465,15 @@ class HomeSiswaPage extends StatelessWidget {
               builder: (context, state) {
                 if (state is JadwalHarianSiswaSuccess) {
                   final jadwal = state.jadwal;
-                  return Column(
-                    children: jadwal.map((JadwalHarianSiswaModel jadwal) {
-                      return CardJadwalHarianSiswa(jadwal);
-                    }).toList(),
+                  return SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      children: jadwal.map((JadwalPelajaranSiswaModel jadwal) {
+                        return CardJadwalHarianSiswa(jadwal);
+                      }).toList(),
+                    ),
                   );
-                } else if (state is JadwalSiswaFailure) {
+                } else if (state is JadwalHarianFailure) {
                   return Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
@@ -500,7 +523,7 @@ class HomeSiswaPage extends StatelessWidget {
             Text(
               'Data Pelanggar',
               style: TextStyle(
-                fontSize: 18,
+                fontSize: 16,
                 color: allColor[7],
                 fontWeight: medium,
               ),

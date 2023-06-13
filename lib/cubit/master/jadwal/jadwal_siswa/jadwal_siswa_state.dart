@@ -12,7 +12,7 @@ class JadwalSiswaInitial extends JadwalSiswaState {}
 class JadwalSiswaLoading extends JadwalSiswaState {}
 
 class JadwalHarianSiswaSuccess extends JadwalSiswaState {
-  final List<JadwalHarianSiswaModel> jadwal;
+  final List<JadwalPelajaranSiswaModel> jadwal;
 
   const JadwalHarianSiswaSuccess(this.jadwal);
 
@@ -20,10 +20,28 @@ class JadwalHarianSiswaSuccess extends JadwalSiswaState {
   List<Object> get props => [jadwal];
 }
 
-class JadwalSiswaFailure extends JadwalSiswaState {
+class JadwalHarianFailure extends JadwalSiswaState {
   final String error;
 
-  const JadwalSiswaFailure(this.error);
+  const JadwalHarianFailure(this.error);
+
+  @override
+  List<Object> get props => [error];
+}
+
+class JadwalPelajaranSiswaSuccess extends JadwalSiswaState {
+  final Map<String, List<JadwalPelajaranSiswaModel>> jadwal;
+
+  const JadwalPelajaranSiswaSuccess(this.jadwal);
+
+  @override
+  List<Object> get props => [jadwal];
+}
+
+class JadwalPelajaranSiswaFailure extends JadwalSiswaState {
+  final String error;
+
+  const JadwalPelajaranSiswaFailure(this.error);
 
   @override
   List<Object> get props => [error];
