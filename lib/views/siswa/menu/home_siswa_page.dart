@@ -5,10 +5,11 @@ import 'package:absen_siswa_qr_code/models/master_model.dart';
 import 'package:absen_siswa_qr_code/models/user_model.dart';
 import 'package:absen_siswa_qr_code/utils/theme.dart';
 import 'package:absen_siswa_qr_code/views/siswa/sub_menu/jadwal_page.dart';
-import 'package:absen_siswa_qr_code/views/siswa/sub_menu/siswa_mapel_page.dart';
+import 'package:absen_siswa_qr_code/views/siswa/sub_menu/siswa_riwayat_pelanggara,.dart';
 import 'package:absen_siswa_qr_code/views/widgets/siswa/button_menu_category_siswa.dart';
-import 'package:absen_siswa_qr_code/views/widgets/siswa/card_jadwal_harian_siswa.dart';
-import 'package:absen_siswa_qr_code/views/widgets/siswa/card_pelanggar_widget.dart';
+// import 'package:absen_siswa_qr_code/views/widgets/siswa/card_jadwal_harian_siswa.dart';
+// import 'package:absen_siswa_qr_code/views/widgets/siswa/card_pelanggar_widget.dart';
+import 'package:absen_siswa_qr_code/views/widgets/siswa/widget_jadwal_harian_siswa2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -23,7 +24,7 @@ class HomeSiswaPage extends StatefulWidget {
 class _HomeSiswaPageState extends State<HomeSiswaPage> {
   @override
   void initState() {
-    context.read<JadwalSiswaCubit>().fetchJadwalHarianSiswa();
+    // context.read<JadwalSiswaCubit>().fetchJadwalHarianSiswa();
     super.initState();
   }
 
@@ -235,7 +236,7 @@ class _HomeSiswaPageState extends State<HomeSiswaPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Kategori',
+              'Kategori Menu',
               style: TextStyle(
                 fontSize: 16,
                 color: allColor[7],
@@ -247,22 +248,6 @@ class _HomeSiswaPageState extends State<HomeSiswaPage> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  ButtonCardMenuKategori(
-                    title: Text(
-                      'DaftarMapel',
-                      style: TextStyle(
-                        color: allColor[7],
-                        fontWeight: medium,
-                        fontSize: 12,
-                      ),
-                    ),
-                    onTap: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) {
-                        return SiswaMapelPage();
-                      }));
-                    },
-                  ),
                   ButtonCardMenuKategori(
                     title: Text(
                       'JadwalMapel',
@@ -287,6 +272,23 @@ class _HomeSiswaPageState extends State<HomeSiswaPage> {
                   ),
                   ButtonCardMenuKategori(
                     title: Text(
+                      'Pelanggaran',
+                      style: TextStyle(
+                        color: allColor[7],
+                        fontWeight: medium,
+                        fontSize: 12,
+                      ),
+                    ),
+                    faIcon: FontAwesomeIcons.userXmark,
+                    onTap: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) {
+                        return SiswaRiwayatPelanggaranPage();
+                      }));
+                    },
+                  ),
+                  ButtonCardMenuKategori(
+                    title: Text(
                       'RiwayatAbsen',
                       style: TextStyle(
                         color: allColor[7],
@@ -305,198 +307,177 @@ class _HomeSiswaPageState extends State<HomeSiswaPage> {
           ],
         ),
       );
-
-      // return Container(
-      //   margin: EdgeInsets.only(top: 15),
-      //   child: Column(
-      //     crossAxisAlignment: CrossAxisAlignment.start,
-      //     children: [
-      //       // GridView.count(
-      //       //   crossAxisCount: 3,
-      //       //   physics: NeverScrollableScrollPhysics(),
-      //       //   shrinkWrap: true,
-      //       //   childAspectRatio: 1.2,
-      //       //   children: [
-      //       //     InkWell(
-      //       //       borderRadius: BorderRadius.circular(28),
-      //       //       onTap: () {
-      //       //         Navigator.push(
-      //       //           context,
-      //       //           MaterialPageRoute(
-      //       //               builder: (context) => MapelPage(kelasId)),
-      //       //         );
-      //       //       },
-      //       //       child: Column(
-      //       //         mainAxisAlignment: MainAxisAlignment.center,
-      //       //         crossAxisAlignment: CrossAxisAlignment.center,
-      //       //         children: [
-      //       //           Container(
-      //       //             height: 55,
-      //       //             width: 55,
-      //       //             decoration: BoxDecoration(
-      //       //               color: allColor[4],
-      //       //               shape: BoxShape.circle,
-      //       //             ),
-      //       //             child: Center(
-      //       //               child: Icon(
-      //       //                 Icons.menu_book,
-      //       //                 color: kWhiteColor,
-      //       //                 size: 28,
-      //       //               ),
-      //       //             ),
-      //       //           ),
-      //       //           SizedBox(height: 10),
-      //       //           Text(
-      //       //             'MataPelajaran',
-      //       //             style: TextStyle(
-      //       //               fontSize: 14,
-      //       //               fontWeight: medium,
-      //       //               color: Colors.black.withOpacity(0.6),
-      //       //             ),
-      //       //           )
-      //       //         ],
-      //       //       ),
-      //       //     ),
-      //       //     InkWell(
-      //       //       borderRadius: BorderRadius.circular(28),
-      //       //       onTap: () {},
-      //       //       child: Column(
-      //       //         mainAxisAlignment: MainAxisAlignment.center,
-      //       //         crossAxisAlignment: CrossAxisAlignment.center,
-      //       //         children: [
-      //       //           Container(
-      //       //             height: 55,
-      //       //             width: 55,
-      //       //             decoration: BoxDecoration(
-      //       //               color: allColor[6],
-      //       //               shape: BoxShape.circle,
-      //       //             ),
-      //       //             child: Center(
-      //       //               child: Icon(
-      //       //                 Icons.list,
-      //       //                 color: kWhiteColor,
-      //       //                 size: 28,
-      //       //               ),
-      //       //             ),
-      //       //           ),
-      //       //           SizedBox(height: 10),
-      //       //           Text(
-      //       //             'Absensi',
-      //       //             style: TextStyle(
-      //       //               fontSize: 14,
-      //       //               fontWeight: medium,
-      //       //               color: Colors.black.withOpacity(0.6),
-      //       //             ),
-      //       //           )
-      //       //         ],
-      //       //       ),
-      //       //     ),
-      //       //     InkWell(
-      //       //       borderRadius: BorderRadius.circular(28),
-      //       //       onTap: () {
-      //       //         // Navigator.pushReplacement(context,
-      //       //         //     MaterialPageRoute(builder: (context) {
-      //       //         //   return JadwalPageSiswa();
-      //       //         // }));
-      //       //         Navigator.push(
-      //       //           context,
-      //       //           MaterialPageRoute(
-      //       //             builder: (context) {
-      //       //               return JadwalPageSiswa();
-      //       //             },
-      //       //           ),
-      //       //         );
-      //       //       },
-      //       //       child: Column(
-      //       //         mainAxisAlignment: MainAxisAlignment.center,
-      //       //         crossAxisAlignment: CrossAxisAlignment.center,
-      //       //         children: [
-      //       //           Container(
-      //       //             height: 55,
-      //       //             width: 55,
-      //       //             decoration: BoxDecoration(
-      //       //               color: catColors[2],
-      //       //               shape: BoxShape.circle,
-      //       //             ),
-      //       //             child: Center(
-      //       //               child: Icon(
-      //       //                 Icons.more_time,
-      //       //                 color: kWhiteColor,
-      //       //                 size: 28,
-      //       //               ),
-      //       //             ),
-      //       //           ),
-      //       //           SizedBox(height: 10),
-      //       //           Text(
-      //       //             'Jadwal',
-      //       //             style: TextStyle(
-      //       //               fontSize: 14,
-      //       //               fontWeight: medium,
-      //       //               color: Colors.black.withOpacity(0.6),
-      //       //             ),
-      //       //           )
-      //       //         ],
-      //       //       ),
-      //       //     ),
-      //       //   ],
-      //       // ),
-      //     ],
-      //   ),
-      // );
     }
 
     // * CONTENT JADWAL HARI INI:
-    Widget jadwalHarian() {
-      return Container(
-        margin: EdgeInsets.only(bottom: 24),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'Jadwal Hari Ini',
-              style: TextStyle(
-                fontSize: 16,
-                color: allColor[7],
-                fontWeight: medium,
-              ),
+    // Widget jadwalHarian() {
+    //   return Container(
+    //     margin: EdgeInsets.only(bottom: 24),
+    //     child: Column(
+    //       crossAxisAlignment: CrossAxisAlignment.start,
+    //       children: [
+    //         Text(
+    //           'Jadwal Hari Ini',
+    //           style: TextStyle(
+    //             fontSize: 16,
+    //             color: allColor[7],
+    //             fontWeight: medium,
+    //           ),
+    //         ),
+    //         SizedBox(height: 16),
+    //         BlocBuilder<JadwalSiswaCubit, JadwalSiswaState>(
+    //           builder: (context, state) {
+    //             if (state is JadwalHarianSiswaSuccess) {
+    //               final jadwal = state.jadwal;
+    //               return SingleChildScrollView(
+    //                 scrollDirection: Axis.horizontal,
+    //                 child: Row(
+    //                   children: jadwal.map((JadwalPelajaranSiswaModel jadwal) {
+    //                     return CardJadwalHarianSiswa(jadwal);
+    //                   }).toList(),
+    //                 ),
+    //               );
+    //             } else if (state is JadwalHarianFailure) {
+    //               return Column(
+    //                 mainAxisSize: MainAxisSize.min,
+    //                 children: [
+    //                   SizedBox(height: 40),
+    //                   Center(
+    //                     child: Text(
+    //                       '${state.error}',
+    //                       style: TextStyle(
+    //                         color: allColor[7],
+    //                         fontWeight: medium,
+    //                       ),
+    //                     ),
+    //                   )
+    //                 ],
+    //               );
+    //             }
+    //             return Column(
+    //               mainAxisSize: MainAxisSize.min,
+    //               children: [
+    //                 SizedBox(height: 40),
+    //                 Center(
+    //                   child: Text(
+    //                     'Sedang memproses data...',
+    //                     style: TextStyle(
+    //                       color: allColor[7],
+    //                       fontWeight: medium,
+    //                     ),
+    //                   ),
+    //                 )
+    //               ],
+    //             );
+    //           },
+    //         ),
+    //       ],
+    //     ),
+    //   );
+    // }
+
+    // *NOTE : CONTENT PELANGGARAN
+    // Widget daftarPelanggar() {
+    //   return Container(
+    //     margin: EdgeInsets.only(bottom: 6),
+    //     child: Column(
+    //       crossAxisAlignment: CrossAxisAlignment.start,
+    //       // mainAxisSize: MainAxisSize.min,
+    //       children: [
+    //         Text(
+    //           'Data Pelanggar',
+    //           style: TextStyle(
+    //             fontSize: 16,
+    //             color: allColor[7],
+    //             fontWeight: medium,
+    //           ),
+    //         ),
+    //         SizedBox(height: 16),
+    //         BlocBuilder<DataPelanggaranCubit, DataPelanggaranState>(
+    //           builder: (context, state) {
+    //             if (state is DataPelanggaranSuccess) {
+    //               final pelanggar = state.dataPelanggaran;
+    //               return SingleChildScrollView(
+    //                 scrollDirection: Axis.horizontal,
+    //                 child: Row(
+    //                   children: pelanggar.map((DaftarPelanggarModel pelanggar) {
+    //                     return CardPelanggaranWidget(pelanggar: pelanggar);
+    //                   }).toList(),
+    //                 ),
+    //               );
+    //             } else if (state is DataPelanggaranFailure) {
+    //               Row(
+    //                 crossAxisAlignment: CrossAxisAlignment.center,
+    //                 mainAxisAlignment: MainAxisAlignment.center,
+    //                 children: [
+    //                   Container(
+    //                     margin: EdgeInsets.only(bottom: 18),
+    //                     child: Text(
+    //                       state.error,
+    //                       style: TextStyle(
+    //                         color: allColor[7],
+    //                         fontWeight: medium,
+    //                       ),
+    //                     ),
+    //                   )
+    //                 ],
+    //               );
+    //             }
+    //             return Row(
+    //               crossAxisAlignment: CrossAxisAlignment.center,
+    //               mainAxisAlignment: MainAxisAlignment.center,
+    //               children: [
+    //                 Container(
+    //                   margin: EdgeInsets.only(bottom: 18),
+    //                   child: Text(
+    //                     'Sementara memproses data...',
+    //                     style: TextStyle(
+    //                       color: allColor[7],
+    //                       fontWeight: medium,
+    //                     ),
+    //                   ),
+    //                 )
+    //               ],
+    //             );
+    //           },
+    //         )
+    //       ],
+    //     ),
+    //   );
+    // }
+
+    Widget jadwalHarian2() {
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'Jadwal Hari Ini',
+            style: TextStyle(
+              fontSize: 16,
+              color: allColor[7],
+              fontWeight: medium,
             ),
-            SizedBox(height: 16),
-            BlocBuilder<JadwalSiswaCubit, JadwalSiswaState>(
-              builder: (context, state) {
-                if (state is JadwalHarianSiswaSuccess) {
-                  final jadwal = state.jadwal;
-                  return SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: Row(
-                      children: jadwal.map((JadwalPelajaranSiswaModel jadwal) {
-                        return CardJadwalHarianSiswa(jadwal);
-                      }).toList(),
-                    ),
-                  );
-                } else if (state is JadwalHarianFailure) {
-                  return Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      SizedBox(height: 40),
-                      Center(
-                        child: Text(
-                          '${state.error}',
-                          style: TextStyle(
-                            color: allColor[7],
-                            fontWeight: medium,
-                          ),
-                        ),
+          ),
+          SizedBox(height: 16),
+          BlocBuilder<JadwalSiswaCubit, JadwalSiswaState>(
+            builder: (context, state) {
+              if (state is JadwalHarianSiswaSuccess) {
+                return Column(
+                  children: state.jadwal
+                      .map(
+                        (JadwalPelajaranSiswaModel jadwal) =>
+                            WidgetJadwalHarian2(jadwal),
                       )
-                    ],
-                  );
-                }
+                      .toList(),
+                );
+              } else if (state is JadwalHarianFailure) {
                 return Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     SizedBox(height: 40),
                     Center(
                       child: Text(
-                        'Sedang memproses data...',
+                        '${state.error}',
                         style: TextStyle(
                           color: allColor[7],
                           fontWeight: medium,
@@ -505,80 +486,25 @@ class _HomeSiswaPageState extends State<HomeSiswaPage> {
                     )
                   ],
                 );
-              },
-            ),
-          ],
-        ),
-      );
-    }
-
-    // *NOTE : CONTENT PELANGGARAN
-    Widget daftarPelanggar() {
-      return Container(
-        margin: EdgeInsets.only(bottom: 6),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          // mainAxisSize: MainAxisSize.min,
-          children: [
-            Text(
-              'Data Pelanggar',
-              style: TextStyle(
-                fontSize: 16,
-                color: allColor[7],
-                fontWeight: medium,
-              ),
-            ),
-            SizedBox(height: 16),
-            BlocBuilder<DataPelanggaranCubit, DataPelanggaranState>(
-              builder: (context, state) {
-                if (state is DataPelanggaranSuccess) {
-                  final pelanggar = state.dataPelanggaran;
-                  return SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: Row(
-                      children: pelanggar.map((DaftarPelanggarModel pelanggar) {
-                        return CardPelanggaranWidget(pelanggar: pelanggar);
-                      }).toList(),
+              }
+              return Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  SizedBox(height: 40),
+                  Center(
+                    child: Text(
+                      'Sedang memproses data...',
+                      style: TextStyle(
+                        color: allColor[7],
+                        fontWeight: medium,
+                      ),
                     ),
-                  );
-                } else if (state is DataPelanggaranFailure) {
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Container(
-                        margin: EdgeInsets.only(bottom: 18),
-                        child: Text(
-                          state.error,
-                          style: TextStyle(
-                            color: allColor[7],
-                            fontWeight: medium,
-                          ),
-                        ),
-                      )
-                    ],
-                  );
-                }
-                return Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Container(
-                      margin: EdgeInsets.only(bottom: 18),
-                      child: Text(
-                        'Sementara memproses data...',
-                        style: TextStyle(
-                          color: allColor[7],
-                          fontWeight: medium,
-                        ),
-                      ),
-                    )
-                  ],
-                );
-              },
-            )
-          ],
-        ),
+                  )
+                ],
+              );
+            },
+          )
+        ],
       );
     }
 
@@ -597,8 +523,9 @@ class _HomeSiswaPageState extends State<HomeSiswaPage> {
                 children: [
                   header(user),
                   content(),
-                  daftarPelanggar(),
-                  jadwalHarian(),
+                  // daftarPelanggar(),
+                  // jadwalHarian(),
+                  jadwalHarian2(),
                 ],
               ),
             ),
