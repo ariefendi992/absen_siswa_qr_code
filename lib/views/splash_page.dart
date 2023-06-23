@@ -59,13 +59,13 @@ class _SplashPageState extends State<SplashPage> {
 
   void autoLogout() async {
     refTokenExp = await storage.getStorage('refTokenExp');
-
+    // print(refTokenExp);
     if (refTokenExp != null && refTokenExp!.toString().isNotEmpty) {
       stringToDateTime = DateTime.tryParse(refTokenExp!);
       if (now.isAfter(stringToDateTime!.toUtc())) {
         setState(() {
           storage.deleteKey('id');
-          storage.deleteKey('access_token');
+          storage.deleteKey('token');
           storage.deleteKey('refresh_token');
           context.read<PageCubit>().setPage(0);
         });

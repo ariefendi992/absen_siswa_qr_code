@@ -92,40 +92,40 @@ class WidgetRiwayatPelanggaran extends StatelessWidget {
               ),
             ],
           ),
-          Row(
-            children: [
-              Expanded(
-                flex: 2,
-                child: Text(
-                  'Pelanggaran',
-                  style: TextStyle(
-                    fontWeight: medium,
-                    color: allColor[7],
-                  ),
-                ),
-              ),
-              Expanded(
-                child: Text(
-                  ':',
-                  style: TextStyle(
-                    fontWeight: medium,
-                    color: allColor[7],
-                  ),
-                ),
-              ),
-              Expanded(
-                flex: 4,
-                child: Text(
-                  'Tidak mengikuti upacara',
-                  style: TextStyle(
-                    fontWeight: medium,
-                    color: c1,
-                  ),
-                  textAlign: TextAlign.right,
-                ),
-              ),
-            ],
-          ),
+          // Row(
+          //   children: [
+          //     Expanded(
+          //       flex: 2,
+          //       child: Text(
+          //         'Pelanggaran',
+          //         style: TextStyle(
+          //           fontWeight: medium,
+          //           color: allColor[7],
+          //         ),
+          //       ),
+          //     ),
+          //     Expanded(
+          //       child: Text(
+          //         ':',
+          //         style: TextStyle(
+          //           fontWeight: medium,
+          //           color: allColor[7],
+          //         ),
+          //       ),
+          //     ),
+          //     Expanded(
+          //       flex: 4,
+          //       child: Text(
+          //         'Tidak mengikuti upacara',
+          //         style: TextStyle(
+          //           fontWeight: medium,
+          //           color: c1,
+          //         ),
+          //         textAlign: TextAlign.right,
+          //       ),
+          //     ),
+          //   ],
+          // ),
           Container(
             margin: EdgeInsets.only(top: 6),
             width: double.infinity,

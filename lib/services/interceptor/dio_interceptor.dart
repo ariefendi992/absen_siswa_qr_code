@@ -47,7 +47,7 @@ class DioInterceptor extends QueuedInterceptorsWrapper {
       // print(
       //     'ERROR[${error.response?.statusCode}] => PATH: ${error.requestOptions.path}');
 
-      if (error.response!.statusCode == 401) {
+      if (error.response?.statusCode == 401) {
         // print('The token has been expire');
 
         final options = error.requestOptions;
@@ -62,8 +62,7 @@ class DioInterceptor extends QueuedInterceptorsWrapper {
             }),
           );
 
-          await storage.setStorage(
-              'token', responseToken.data['access_token']);
+          await storage.setStorage('token', responseToken.data['access_token']);
           await storage.setStorage(
               'refreshToken', responseToken.data['refresh_token']);
           accessToken = responseToken.data['access_token'];
