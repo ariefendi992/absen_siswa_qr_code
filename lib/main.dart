@@ -20,7 +20,6 @@ import 'package:absen_siswa_qr_code/views/auth/auth_page.dart';
 import 'package:absen_siswa_qr_code/views/guru/main_guru_page.dart';
 import 'package:absen_siswa_qr_code/views/siswa/main_siswa_page.dart';
 import 'package:absen_siswa_qr_code/views/siswa/sub_menu/daftar_siswa.dart';
-import 'package:absen_siswa_qr_code/views/siswa/sub_menu/riwayat_absen.dart';
 import 'package:absen_siswa_qr_code/views/splash_page.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
@@ -73,7 +72,6 @@ class MyApp extends StatelessWidget {
           '/': (context) => const SplashPage(),
           '/auth': (context) => const AuthPage(),
           '/mainSiswa': (context) => const MainSiswaPage(),
-          '/riwayat': (context) => const RiwayatAbsensiSiswaPage(),
           '/daftarSiswa': (context) => const DaftarKelasSiswaPage(),
           // MAIN MENU GURU
           '/mainGuru': (context) => const MainGuruPage(),
