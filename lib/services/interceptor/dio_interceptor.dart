@@ -52,7 +52,8 @@ class DioInterceptor extends QueuedInterceptorsWrapper {
 
         final options = error.requestOptions;
         refreshToken = await storage.getStorage('refreshToken');
-
+        String errorMsg = '${error.response?.data["msg"]}';
+        await storage.setStorage('errorMsg', errorMsg.toLowerCase());
         try {
           final responseToken = await dio.post(
             '$baseUrl/api/v2/auth/refresh-token',
