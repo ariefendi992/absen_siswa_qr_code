@@ -60,12 +60,13 @@ class _SplashPageState extends State<SplashPage> {
   void autoLogout() async {
     refTokenExp = await storage.getStorage('refTokenExp');
     final String? errorMsg = await storage.getStorage('errorMsg');
+    // print(errorMsg);
 
     // print(refTokenExp);
     if (refTokenExp != null && refTokenExp!.toString().isNotEmpty) {
       stringToDateTime = DateTime.tryParse(refTokenExp!);
       if (now.isAfter(stringToDateTime!.toUtc()) &&
-          errorMsg == 'token has expire') {
+          errorMsg == 'token has expired') {
         setState(() {
           storage.deleteKey('id');
           storage.deleteKey('token');
