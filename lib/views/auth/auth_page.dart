@@ -78,7 +78,7 @@ class _AuthPageState extends State<AuthPage> {
       child: Scaffold(
         body: SingleChildScrollView(
           // scrollDirection: Axis.vertical,
-          reverse: true,
+          // reverse: true,
           child: Column(
             children: [
               Container(
