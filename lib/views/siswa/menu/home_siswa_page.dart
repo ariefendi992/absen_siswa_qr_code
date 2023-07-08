@@ -479,20 +479,32 @@ class _HomeSiswaPageState extends State<HomeSiswaPage> {
                       .toList(),
                 );
               } else if (state is JadwalHarianFailure) {
-                return Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    SizedBox(height: 40),
-                    Center(
-                      child: Text(
-                        '${state.error}',
-                        style: TextStyle(
-                          color: allColor[7],
-                          fontWeight: medium,
+                return Center(
+                  child: Column(
+                    children: [
+                      SizedBox(height: 60),
+                      Container(
+                        padding: const EdgeInsets.all(3),
+                        decoration: BoxDecoration(
+                          color: errorExtraSoft,
+                          borderRadius: BorderRadius.circular(100),
+                        ),
+                        child: Icon(
+                          Icons.schedule_rounded,
+                          size: 32,
+                          color: allColor[9],
                         ),
                       ),
-                    )
-                  ],
+                      SizedBox(height: 6),
+                      Text(
+                        'Tidak Ada Jadwal..!',
+                        style: TextStyle(
+                          color: allColor[9],
+                          fontWeight: medium,
+                        ),
+                      )
+                    ],
+                  ),
                 );
               }
               return Column(
