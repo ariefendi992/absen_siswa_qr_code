@@ -28,6 +28,30 @@ class ApiUserSiswa {
       throw (jsonResp['msg']);
     }
   }
+
+  Future<Map<String, List<RiwayatAbsenSiswa>>> fetchRiwayatAbsenSiswa() async {
+    final response = await dio.get('/student/riwayat-absen');
+    final body = response.data;
+
+    if (response.statusCode == 200) {
+      Map<String, List<RiwayatAbsenSiswa>> riwayatAbsen = Map.from(
+        body.map(
+          (key, value) => MapEntry<String, List<RiwayatAbsenSiswa>>(
+            key,
+            List<RiwayatAbsenSiswa>.from(
+              value.map(
+                (e) => RiwayatAbsenSiswa.fromJson(e),
+              ),
+            ),
+          ),
+        ),
+      );
+
+      return riwayatAbsen;
+    } else {
+      throw Exception('${body['msg']}');
+    }
+  }
 }
 
 // *
