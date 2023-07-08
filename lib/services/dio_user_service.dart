@@ -29,18 +29,19 @@ class ApiUserSiswa {
     }
   }
 
-  Future<Map<String, List<RiwayatAbsenSiswa>>> fetchRiwayatAbsenSiswa() async {
+  Future<Map<String, List<RiwayatAbsenSiswaModel>>>
+      fetchRiwayatAbsenSiswa() async {
     final response = await dio.get('/student/riwayat-absen');
     final body = response.data;
 
     if (response.statusCode == 200) {
-      Map<String, List<RiwayatAbsenSiswa>> riwayatAbsen = Map.from(
+      Map<String, List<RiwayatAbsenSiswaModel>> riwayatAbsen = Map.from(
         body.map(
-          (key, value) => MapEntry<String, List<RiwayatAbsenSiswa>>(
+          (key, value) => MapEntry<String, List<RiwayatAbsenSiswaModel>>(
             key,
-            List<RiwayatAbsenSiswa>.from(
+            List<RiwayatAbsenSiswaModel>.from(
               value.map(
-                (e) => RiwayatAbsenSiswa.fromJson(e),
+                (e) => RiwayatAbsenSiswaModel.fromJson(e),
               ),
             ),
           ),
