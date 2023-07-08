@@ -48,7 +48,7 @@ class RiwayatAbsenStateFailure extends AbsenSiswaState {
 }
 
 class RiwayatAbsenSiswaSuccess extends AbsenSiswaState {
-  final Map<String, List<RiwayatAbsenSiswa>> riwayatAbsen;
+  final Map<String, List<RiwayatAbsenSiswaModel>> riwayatAbsen;
 
   const RiwayatAbsenSiswaSuccess(this.riwayatAbsen);
 
