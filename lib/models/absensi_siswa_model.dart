@@ -83,14 +83,14 @@ class RAbsensiModel {
 }
 
 /// * API SISWA
-class RiwayatAbsenSiswa extends Equatable {
+class RiwayatAbsenSiswaModel extends Equatable {
   final int id;
   final String ket;
   final String tglAbsen;
   final int urutan;
   final String? mapel;
 
-  const RiwayatAbsenSiswa({
+  const RiwayatAbsenSiswaModel({
     required this.id,
     required this.ket,
     required this.tglAbsen,
@@ -98,8 +98,8 @@ class RiwayatAbsenSiswa extends Equatable {
     this.mapel,
   });
 
-  factory RiwayatAbsenSiswa.fromJson(Map<String, dynamic> json) {
-    return RiwayatAbsenSiswa(
+  factory RiwayatAbsenSiswaModel.fromJson(Map<String, dynamic> json) {
+    return RiwayatAbsenSiswaModel(
       id: json['id'],
       ket: json['ket'],
       tglAbsen: json['tgl_absen'],
