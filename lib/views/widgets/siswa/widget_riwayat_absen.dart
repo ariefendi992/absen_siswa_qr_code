@@ -88,6 +88,40 @@ class WidgetRiwayatAbsenSiswaCard extends StatelessWidget {
                   ),
                 ],
               ),
+              const SizedBox(height: 4),
+              Row(
+                children: [
+                  Expanded(
+                    child: Text(
+                      'Keterangan',
+                      style: TextStyle(
+                        color: allColor[7],
+                        fontWeight: medium,
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: Text(
+                      ':',
+                      style: TextStyle(
+                        color: allColor[7],
+                        fontWeight: medium,
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    flex: 2,
+                    child: Text(
+                      'H',
+                      style: TextStyle(
+                        color: allColor[7],
+                        fontWeight: medium,
+                      ),
+                      textAlign: TextAlign.right,
+                    ),
+                  ),
+                ],
+              ),
             ],
           ),
         ),

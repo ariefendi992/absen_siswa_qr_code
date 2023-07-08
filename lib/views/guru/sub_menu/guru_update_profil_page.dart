@@ -67,7 +67,12 @@ class _GuruUpdateProfilePageState extends State<GuruUpdateProfilePage> {
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(60),
         child: AppBar(
-          title: Text('Edit Profil'),
+          title: Text(
+            'Edit Profil',
+            style: TextStyle(
+              fontSize: 18,
+            ),
+          ),
           centerTitle: true,
           backgroundColor: kWhiteColor,
           foregroundColor: secondary,

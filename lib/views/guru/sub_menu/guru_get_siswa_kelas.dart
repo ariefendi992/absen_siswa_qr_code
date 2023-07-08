@@ -31,8 +31,8 @@ class _GuruGetSiswaKelasState extends State<GuruGetSiswaKelas> {
           title: Text(
             'Daftar Mengajar',
             style: TextStyle(
-              fontWeight: bold,
               letterSpacing: 0.5,
+              fontSize: 18,
             ),
           ),
           centerTitle: true,

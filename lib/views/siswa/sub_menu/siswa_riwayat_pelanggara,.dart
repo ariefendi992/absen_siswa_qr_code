@@ -19,6 +19,7 @@ class SiswaRiwayatPelanggaranPage extends StatelessWidget {
             style: TextStyle(
               color: allColor[7],
               fontWeight: bold,
+              fontSize: 18,
             ),
           ),
           centerTitle: true,

@@ -15,9 +15,7 @@ class SiswaRiwayatAbsensiPage extends StatelessWidget {
           elevation: 0.2,
           title: Text(
             'Riwayat Absen',
-            style: TextStyle(
-              color: allColor[7],
-            ),
+            style: TextStyle(color: allColor[7], fontSize: 18),
           ),
           centerTitle: true,
           leading: Builder(

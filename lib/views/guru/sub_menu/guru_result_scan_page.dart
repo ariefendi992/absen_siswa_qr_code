@@ -212,10 +212,7 @@ class _GuruResultScanPageState extends State<GuruResultScanPage> {
           elevation: 0.2,
           title: Text(
             'Result Scan',
-            style: TextStyle(
-              fontWeight: bold,
-              letterSpacing: 0.5,
-            ),
+            style: TextStyle(letterSpacing: 0.5, fontSize: 18),
           ),
           leading: Builder(builder: (context) {
             return IconButton(

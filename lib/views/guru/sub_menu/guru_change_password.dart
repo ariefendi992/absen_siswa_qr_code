@@ -86,7 +86,12 @@ class _GuruChangePassPageState extends State<GuruChangePassPage> {
           backgroundColor: kWhiteColor,
           foregroundColor: secondary,
           elevation: 0.2,
-          title: Text('Ubah KataSandi'),
+          title: Text(
+            'Ubah KataSandi',
+            style: TextStyle(
+              fontSize: 18,
+            ),
+          ),
           centerTitle: true,
           leading: Builder(
             builder: (context) {

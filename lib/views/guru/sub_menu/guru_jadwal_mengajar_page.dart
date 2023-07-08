@@ -368,8 +368,8 @@ class _GuruJadwalMengajarPageState extends State<GuruJadwalMengajarPage> {
           title: Text(
             'Jadwal Mengajar',
             style: TextStyle(
-              fontWeight: bold,
               letterSpacing: 0.5,
+              fontSize: 18,
             ),
           ),
           centerTitle: true,

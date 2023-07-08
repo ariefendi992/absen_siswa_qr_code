@@ -37,7 +37,7 @@ class _GuruRiwayatAbsensiState extends State<GuruRiwayatAbsensi> {
           title: Text(
             'Daftar RiwayatAbsensi',
             style: TextStyle(
-              fontWeight: bold,
+              fontSize: 18,
             ),
           ),
           centerTitle: true,

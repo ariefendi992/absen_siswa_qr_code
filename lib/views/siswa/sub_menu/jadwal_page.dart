@@ -37,7 +37,11 @@ class _JadwalPageSiswaState extends State<JadwalPageSiswa> {
           centerTitle: true,
           title: Text(
             'Jadwal Pelajaran',
-            style: TextStyle(fontWeight: bold, color: allColor[7]),
+            style: TextStyle(
+              fontWeight: bold,
+              color: allColor[7],
+              fontSize: 18,
+            ),
           ),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.only(
