@@ -1,12 +1,36 @@
+import 'package:absen_siswa_qr_code/cubit/master/absen/absen_siswa_cubit.dart';
+import 'package:absen_siswa_qr_code/models/absensi_siswa_model.dart';
 import 'package:absen_siswa_qr_code/utils/theme.dart';
 import 'package:absen_siswa_qr_code/views/widgets/siswa/widget_riwayat_absen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-class SiswaRiwayatAbsensiPage extends StatelessWidget {
+class SiswaRiwayatAbsensiPage extends StatefulWidget {
   const SiswaRiwayatAbsensiPage({super.key});
 
   @override
+  State<SiswaRiwayatAbsensiPage> createState() =>
+      _SiswaRiwayatAbsensiPageState();
+}
+
+class _SiswaRiwayatAbsensiPageState extends State<SiswaRiwayatAbsensiPage> {
+  @override
+  void initState() {
+    context.read<AbsenSiswaCubit>().fetchRiwayatAbsenSiswa();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    Widget fetchRiwayatAbsenSiswa(
+        Map<String, List<RiwayatAbsenSiswaModel>> riwayatAbsen) {
+      return Column(
+        children: riwayatAbsen.entries
+            .map((e) => WidgetRiwayatAbsenSiswaCard(e.key, e.value))
+            .toList(),
+      );
+    }
+
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(60),
@@ -33,32 +57,28 @@ class SiswaRiwayatAbsensiPage extends StatelessWidget {
           ),
         ),
       ),
-      body: ListView(
-        shrinkWrap: true,
-        padding: const EdgeInsets.symmetric(horizontal: 22),
-        children: [
-          Container(
-            padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+      body: BlocBuilder<AbsenSiswaCubit, AbsenSiswaState>(
+        builder: (context, state) {
+          if (state is RiwayatAbsenSiswaSuccess) {
+            return ListView(
+              shrinkWrap: true,
+              padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 10),
               children: [
-                Text(
-                  'Bahasa Indonesia',
-                  style: TextStyle(
-                    fontWeight: medium,
-                    color: allColor[7],
-                    fontSize: 16,
-                  ),
-                ),
-                SizedBox(height: 2),
-                WidgetRiwayatAbsenSiswaCard(),
-                WidgetRiwayatAbsenSiswaCard(),
-                WidgetRiwayatAbsenSiswaCard(),
-                WidgetRiwayatAbsenSiswaCard(),
+                fetchRiwayatAbsenSiswa(state.riwayatAbsen),
               ],
-            ),
-          )
-        ],
+            );
+          } else if (state is RiwayatAbsenSiswaFail) {
+            return Center(
+              child: Text(
+                '${state.error}',
+                style: TextStyle(fontSize: 14, color: allColor[9]),
+              ),
+            );
+          }
+          return Center(
+            child: CircularProgressIndicator(),
+          );
+        },
       ),
     );
   }
