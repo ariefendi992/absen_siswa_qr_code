@@ -31,4 +31,14 @@ class AbsenSiswaCubit extends Cubit<AbsenSiswaState> {
       emit(RiwayatAbsenStateFailure('${e.response?.data["msg"]}'));
     }
   }
+
+  void fetchRiwayatAbsenSiswa() async {
+    try {
+      emit(AbsenSiswaLoading());
+      final riwayatAbsen = await ApiUserSiswa().fetchRiwayatAbsenSiswa();
+      emit(RiwayatAbsenSiswaSuccess(riwayatAbsen));
+    } on DioError catch (e) {
+      emit(RiwayatAbsenSiswaFail('${e.response?.data["msg"]}'));
+    }
+  }
 }

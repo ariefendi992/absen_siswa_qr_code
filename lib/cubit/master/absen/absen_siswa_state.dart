@@ -46,3 +46,21 @@ class RiwayatAbsenStateFailure extends AbsenSiswaState {
   @override
   List<Object> get props => [error];
 }
+
+class RiwayatAbsenSiswaSuccess extends AbsenSiswaState {
+  final Map<String, List<RiwayatAbsenSiswa>> riwayatAbsen;
+
+  const RiwayatAbsenSiswaSuccess(this.riwayatAbsen);
+
+  @override
+  List<Object> get props => [riwayatAbsen];
+}
+
+class RiwayatAbsenSiswaFail extends AbsenSiswaState {
+  final String error;
+
+  const RiwayatAbsenSiswaFail(this.error);
+
+  @override
+  List<Object> get props => [error];
+}
