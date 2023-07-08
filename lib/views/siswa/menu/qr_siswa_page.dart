@@ -28,6 +28,7 @@ class _QrSiswaPageState extends State<QrSiswaPage> {
               'QR Code Siswa',
               style: TextStyle(
                 fontWeight: medium,
+                fontSize: 18,
                 color: allColor[7],
               ),
             ),
