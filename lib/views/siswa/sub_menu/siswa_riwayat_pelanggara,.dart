@@ -39,6 +39,76 @@ class SiswaRiwayatPelanggaranPage extends StatelessWidget {
         shrinkWrap: true,
         padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 10),
         children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              Column(
+                children: [
+                  Container(
+                    margin: EdgeInsets.only(bottom: 4),
+                    padding: const EdgeInsets.only(left: 4, right: 4),
+                    decoration: BoxDecoration(
+                      color: errorExtraSoft,
+                      borderRadius: BorderRadius.circular(80),
+                    ),
+                    child: Text(
+                      '0',
+                      style: TextStyle(
+                        fontSize: 32,
+                        color: allColor[9],
+                      ),
+                    ),
+                  ),
+                  Text(
+                    'Dibina',
+                    style: TextStyle(
+                      fontSize: 14,
+                      color: allColor[7],
+                      fontWeight: medium,
+                      letterSpacing: 0.5,
+                    ),
+                  )
+                ],
+              ),
+              Column(
+                children: [
+                  Container(
+                    margin: EdgeInsets.only(bottom: 4),
+                    padding: const EdgeInsets.only(left: 4, right: 4),
+                    decoration: BoxDecoration(
+                      color: allColor[4],
+                      borderRadius: BorderRadius.circular(80),
+                    ),
+                    child: Text(
+                      '0',
+                      style: TextStyle(
+                        fontSize: 32,
+                        color: kWhiteColor,
+                      ),
+                    ),
+                  ),
+                  Text(
+                    'Evaluasi',
+                    style: TextStyle(
+                      fontSize: 14,
+                      color: allColor[7],
+                      fontWeight: medium,
+                      letterSpacing: 0.5,
+                    ),
+                  )
+                ],
+              ),
+            ],
+          ),
+          SizedBox(height: 8),
+          Divider(
+            color: secondaryExtraSoft,
+            height: 4,
+            thickness: 1.6,
+            indent: 4,
+            endIndent: 4,
+          ),
+          SizedBox(height: 16),
           WidgetRiwayatPelanggaran(),
           WidgetRiwayatPelanggaran(),
         ],
