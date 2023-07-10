@@ -6,7 +6,7 @@ import 'package:absen_siswa_qr_code/models/user_model.dart';
 import 'package:absen_siswa_qr_code/utils/theme.dart';
 import 'package:absen_siswa_qr_code/views/siswa/sub_menu/jadwal_page.dart';
 import 'package:absen_siswa_qr_code/views/siswa/sub_menu/riwayat_absen_page.dart';
-import 'package:absen_siswa_qr_code/views/siswa/sub_menu/siswa_riwayat_pelanggara,.dart';
+import 'package:absen_siswa_qr_code/views/siswa/sub_menu/siswa_riwayat_pelanggara,_page.dart';
 import 'package:absen_siswa_qr_code/views/widgets/siswa/button_menu_category_siswa.dart';
 // import 'package:absen_siswa_qr_code/views/widgets/siswa/card_jadwal_harian_siswa.dart';
 // import 'package:absen_siswa_qr_code/views/widgets/siswa/card_pelanggar_widget.dart';
