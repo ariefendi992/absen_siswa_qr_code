@@ -1,21 +1,25 @@
+import 'package:absen_siswa_qr_code/models/pelanggaran_model.dart';
 import 'package:absen_siswa_qr_code/utils/theme.dart';
 import 'package:flutter/material.dart';
 
 class WidgetRiwayatPelanggaran extends StatelessWidget {
-  const WidgetRiwayatPelanggaran({super.key});
+  final RiwayatPelanggaranSiswaModel pelangaran;
+  const WidgetRiwayatPelanggaran(this.pelangaran, {super.key});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 14, vertical: 14),
+      padding: EdgeInsets.symmetric(horizontal: 14, vertical: 12),
       margin: EdgeInsets.only(bottom: 16),
       decoration: BoxDecoration(
-          color: primaryExtraSoft, borderRadius: BorderRadius.circular(18)),
+        color: primaryExtraSoft.withOpacity(0.6),
+        borderRadius: BorderRadius.circular(12),
+      ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Hari : Senin, 14-Juni-2023',
+            'Hari : ${pelangaran.tglMelanggar}',
             style: TextStyle(
               fontSize: 16,
               fontWeight: bold,
@@ -24,126 +28,45 @@ class WidgetRiwayatPelanggaran extends StatelessWidget {
             ),
           ),
           SizedBox(height: 4),
-          Row(
-            children: [
-              Expanded(
-                flex: 2,
-                child: Text(
-                  'Nama',
-                  style: TextStyle(
-                    fontWeight: medium,
-                    color: allColor[7],
-                  ),
-                ),
-              ),
-              Expanded(
-                child: Text(
-                  ':',
-                  style: TextStyle(
-                    fontWeight: medium,
-                    color: allColor[7],
-                  ),
-                ),
-              ),
-              Expanded(
-                flex: 4,
-                child: Text(
-                  'Ari Efendi Like Coding Tech',
-                  style: TextStyle(
-                    fontWeight: medium,
-                    color: allColor[7],
-                  ),
-                  textAlign: TextAlign.right,
-                ),
-              ),
-            ],
-          ),
-          Row(
-            children: [
-              Expanded(
-                flex: 2,
-                child: Text(
-                  'NISN',
-                  style: TextStyle(
-                    fontWeight: medium,
-                    color: allColor[7],
-                  ),
-                ),
-              ),
-              Expanded(
-                child: Text(
-                  ':',
-                  style: TextStyle(
-                    fontWeight: medium,
-                    color: allColor[7],
-                  ),
-                ),
-              ),
-              Expanded(
-                flex: 4,
-                child: Text(
-                  '1234567890',
-                  style: TextStyle(
-                    fontWeight: medium,
-                    color: allColor[7],
-                  ),
-                  textAlign: TextAlign.right,
-                ),
-              ),
-            ],
-          ),
-          // Row(
-          //   children: [
-          //     Expanded(
-          //       flex: 2,
-          //       child: Text(
-          //         'Pelanggaran',
-          //         style: TextStyle(
-          //           fontWeight: medium,
-          //           color: allColor[7],
-          //         ),
-          //       ),
-          //     ),
-          //     Expanded(
-          //       child: Text(
-          //         ':',
-          //         style: TextStyle(
-          //           fontWeight: medium,
-          //           color: allColor[7],
-          //         ),
-          //       ),
-          //     ),
-          //     Expanded(
-          //       flex: 4,
-          //       child: Text(
-          //         'Tidak mengikuti upacara',
-          //         style: TextStyle(
-          //           fontWeight: medium,
-          //           color: c1,
-          //         ),
-          //         textAlign: TextAlign.right,
-          //       ),
-          //     ),
-          //   ],
-          // ),
           Container(
-            margin: EdgeInsets.only(top: 6),
             width: double.infinity,
-            padding: EdgeInsets.only(
-              top: 10,
-              bottom: 10,
-              left: 10,
-              right: 10,
-            ),
             decoration: BoxDecoration(
-                color: primaryColor2, borderRadius: BorderRadius.circular(12)),
-            child: Center(
-              child: Text(
-                'Terlambat dalam mengadiri upacara bendera pada hari senin',
-                style: TextStyle(
-                  color: secondary,
+              color: errorExtraSoft,
+              borderRadius: BorderRadius.circular(12),
+            ),
+            child: Column(
+              children: [
+                Container(
+                  width: double.infinity,
+                  padding: EdgeInsets.symmetric(vertical: 3),
+                  decoration: BoxDecoration(
+                    color: errorPrimary,
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(11),
+                      topRight: Radius.circular(11),
+                    ),
+                  ),
+                  child: Center(
+                    child: Text(
+                      'Keterangan',
+                      style: TextStyle(
+                          color: kWhiteColor,
+                          fontWeight: bold,
+                          letterSpacing: 0.7),
+                    ),
+                  ),
                 ),
-              ),
+                Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Text(
+                    '${pelangaran.note}',
+                    style: TextStyle(
+                      color: errorPrimary,
+                    ),
+                    textAlign: TextAlign.justify,
+                  ),
+                ),
+              ],
             ),
           )
         ],
