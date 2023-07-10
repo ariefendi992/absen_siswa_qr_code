@@ -61,7 +61,7 @@ class ApiUserSiswa {
     final body = response.data;
 
     if (response.statusCode == 200) {
-      List<RiwayatPelanggaranSiswaModel> pelanggaran = List.from(body)
+      List<RiwayatPelanggaranSiswaModel> pelanggaran = List.from(body['data'])
           .map((e) => RiwayatPelanggaranSiswaModel.fromJson(e))
           .toList();
 
