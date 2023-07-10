@@ -1,13 +1,13 @@
 import 'package:equatable/equatable.dart';
 
-class PelanggaranSiswaModel extends Equatable {
+class RiwayatPelanggaranSiswaModel extends Equatable {
   final int id;
   final String namaSiswa;
   final String pelapor;
   final String note;
   final String tglMelanggar;
 
-  const PelanggaranSiswaModel({
+  const RiwayatPelanggaranSiswaModel({
     required this.id,
     required this.namaSiswa,
     required this.pelapor,
@@ -15,8 +15,8 @@ class PelanggaranSiswaModel extends Equatable {
     required this.tglMelanggar,
   });
 
-  factory PelanggaranSiswaModel.fromJson(Map<String, dynamic> json) {
-    return PelanggaranSiswaModel(
+  factory RiwayatPelanggaranSiswaModel.fromJson(Map<String, dynamic> json) {
+    return RiwayatPelanggaranSiswaModel(
       id: json['id'],
       namaSiswa: json['nama_siswa'],
       pelapor: json['pelapor'],
