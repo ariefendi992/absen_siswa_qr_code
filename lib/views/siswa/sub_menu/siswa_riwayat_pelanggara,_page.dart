@@ -1,12 +1,34 @@
+import 'package:absen_siswa_qr_code/cubit/master/pelanggaran/data_pelanggaran_cubit.dart';
+import 'package:absen_siswa_qr_code/models/pelanggaran_model.dart';
 import 'package:absen_siswa_qr_code/utils/theme.dart';
 import 'package:absen_siswa_qr_code/views/widgets/siswa/wiget_riwayat_pelanggaran.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-class SiswaRiwayatPelanggaranPage extends StatelessWidget {
+class SiswaRiwayatPelanggaranPage extends StatefulWidget {
   const SiswaRiwayatPelanggaranPage({super.key});
 
   @override
+  State<SiswaRiwayatPelanggaranPage> createState() =>
+      _SiswaRiwayatPelanggaranPageState();
+}
+
+class _SiswaRiwayatPelanggaranPageState
+    extends State<SiswaRiwayatPelanggaranPage> {
+  @override
+  void initState() {
+    context.read<DataPelanggaranCubit>().fetchRiwayatPelanggaranSiswa();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    Widget riwayatPelanggaran(List<RiwayatPelanggaranSiswaModel> pelanggaran) {
+      return Column(
+        children: pelanggaran.map((e) => WidgetRiwayatPelanggaran(e)).toList(),
+      );
+    }
+
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(60),
@@ -109,8 +131,46 @@ class SiswaRiwayatPelanggaranPage extends StatelessWidget {
             endIndent: 4,
           ),
           SizedBox(height: 16),
-          WidgetRiwayatPelanggaran(),
-          WidgetRiwayatPelanggaran(),
+          // WidgetRiwayatPelanggaran(),
+          // WidgetRiwayatPelanggaran(),
+          BlocBuilder<DataPelanggaranCubit, DataPelanggaranState>(
+            builder: (context, state) {
+              if (state is RiwayatPelanggaranSiswaSuccess) {
+                final pelanggaran = state.pelanggaran;
+                return riwayatPelanggaran(pelanggaran);
+              } else if (state is RiwayatPelanggaranSiswaFail) {
+                return Container(
+                  height: MediaQuery.of(context).size.height / 2,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Icon(
+                        Icons.history_rounded,
+                        size: 32,
+                        color: allColor[10],
+                      ),
+                      SizedBox(height: 6),
+                      Text(
+                        '${state.error}',
+                        style: TextStyle(
+                          fontSize: 14,
+                          color: allColor[10],
+                          fontWeight: medium,
+                        ),
+                      ),
+                    ],
+                  ),
+                );
+              }
+              return Container(
+                height: MediaQuery.of(context).size.height / 2,
+                child: Center(
+                  child: CircularProgressIndicator(),
+                ),
+              );
+            },
+          )
         ],
       ),
     );
