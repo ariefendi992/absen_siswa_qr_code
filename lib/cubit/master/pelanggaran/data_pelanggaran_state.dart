@@ -28,3 +28,21 @@ class DataPelanggaranFailure extends DataPelanggaranState {
   @override
   List<Object> get props => [error];
 }
+
+class RiwayatPelanggaranSiswaSuccess extends DataPelanggaranState {
+  final List<RiwayatPelanggaranSiswaModel> pelanggaran;
+
+  const RiwayatPelanggaranSiswaSuccess(this.pelanggaran);
+
+  @override
+  List<Object> get props => [pelanggaran];
+}
+
+class RiwayatPelanggaranSiswaFail extends DataPelanggaranState {
+  final String error;
+
+  const RiwayatPelanggaranSiswaFail(this.error);
+
+  @override
+  List<Object> get props => [error];
+}
