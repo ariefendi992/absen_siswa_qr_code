@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:absen_siswa_qr_code/models/absensi_siswa_model.dart';
 import 'package:absen_siswa_qr_code/models/master_model.dart';
+import 'package:absen_siswa_qr_code/models/pelanggaran_model.dart';
 import 'package:absen_siswa_qr_code/models/user_model.dart';
 import 'package:absen_siswa_qr_code/services/interceptor/dio_interceptor.dart';
 import 'package:absen_siswa_qr_code/utils/secure_storage.dart';
@@ -51,6 +52,22 @@ class ApiUserSiswa {
       return riwayatAbsen;
     } else {
       throw Exception('${body['msg']}');
+    }
+  }
+
+  Future<List<RiwayatPelanggaranSiswaModel>>
+      fetchRiwayatPelaggaranSiswa() async {
+    final response = await dio.get('/student/riwayat-pelanggaran');
+    final body = response.data;
+
+    if (response.statusCode == 200) {
+      List<RiwayatPelanggaranSiswaModel> pelanggaran = List.from(body)
+          .map((e) => RiwayatPelanggaranSiswaModel.fromJson(e))
+          .toList();
+
+      return pelanggaran;
+    } else {
+      throw Exception('${body["msg"]}');
     }
   }
 }
