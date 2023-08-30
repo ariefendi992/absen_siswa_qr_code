@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:absen_siswa_qr_code/cubit/auth/auth_cubit.dart';
 import 'package:absen_siswa_qr_code/cubit/page/page_cubit.dart';
 import 'package:absen_siswa_qr_code/utils/theme.dart';
-import 'package:absen_siswa_qr_code/views/widgets/button_widget.dart';
+// import 'package:absen_siswa_qr_code/views/widgets/button_widget.dart';
 import 'package:absen_siswa_qr_code/views/widgets/card_with_border_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

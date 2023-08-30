@@ -16,7 +16,7 @@ class ScanSiswaCubit extends Cubit<ScanSiswaState> {
           await ApiUserGuru().getSiswaByUsername(username: username);
       emit(ScanSiswaSuccess(siswaData: userSiswa));
     } on DioError catch (e) {
-      emit(ScanSiswaFailure('${e.response?.data['msg'].toString()}'));
+      emit(ScanSiswaFailure('${e.response?.data["msg"].toString()}'));
     }
   }
 }

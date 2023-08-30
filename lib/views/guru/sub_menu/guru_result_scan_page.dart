@@ -355,6 +355,8 @@ class _GuruResultScanPageState extends State<GuruResultScanPage> {
                                         setState(() {
                                           ket = 'I';
                                         });
+                                        print(
+                                            '${data.additionalData!["data"]["siswa_id"]}');
                                         context
                                             .read<AbsenSiswaCubit>()
                                             .absenSiswa(
