@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:absen_siswa_qr_code/cubit/user/guru/user_guru_cubit.dart';
 import 'package:absen_siswa_qr_code/models/user_model.dart';
 import 'package:absen_siswa_qr_code/utils/theme.dart';
@@ -268,20 +270,18 @@ class _GuruUpdateProfilePageState extends State<GuruUpdateProfilePage> {
                           Map<String, dynamic> data = {
                             "nip": nipController.text,
                             "fullname": fullnameController.text,
-                            "gender":
-                                widget.userGuru.gender ?? selectedGenderValue,
-                            "agama":
-                                widget.userGuru.agama ?? selectedAgamaValue,
+                            "gender": selectedGenderValue,
+                            "agama": selectedAgamaValue,
                             "alamat": alamatController.text,
                             "telp": telpController.text,
                           };
-                          context
-                              .read<UserGuruCubit>()
-                              .updateUserGuru(data: data);
 
                           setState(() {
-                            setState(() {
-                              showSnackBar = !showSnackBar;
+                            Timer(Duration(seconds: 2), () {
+                              context
+                                  .read<UserGuruCubit>()
+                                  .updateUserGuru(data: data);
+                              showSnackBar;
                             });
                           });
                         },

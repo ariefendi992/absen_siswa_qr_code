@@ -62,6 +62,7 @@ class RAbsensiModel {
   final String mapel;
   final String namaGuru;
   final String tglAbsen;
+  final String keterangan;
 
   RAbsensiModel({
     required this.id,
@@ -70,6 +71,7 @@ class RAbsensiModel {
     required this.kelas,
     required this.namaGuru,
     required this.tglAbsen,
+    required this.keterangan,
   });
 
   factory RAbsensiModel.fromJson(Map<String, dynamic> json) => RAbsensiModel(
@@ -79,6 +81,7 @@ class RAbsensiModel {
         kelas: json['kelas'],
         namaGuru: json['nama_guru'],
         tglAbsen: json['tgl_absen'],
+        keterangan: json['ket'],
       );
 }
 

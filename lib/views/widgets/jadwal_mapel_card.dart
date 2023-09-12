@@ -92,6 +92,7 @@ class JadwalMapelCard extends StatelessWidget {
                     color: kWhiteColor.withAlpha(100),
                   ),
                   Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Expanded(
                         child: Container(

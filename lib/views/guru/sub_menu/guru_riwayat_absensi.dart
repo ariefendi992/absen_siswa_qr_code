@@ -35,7 +35,7 @@ class _GuruRiwayatAbsensiState extends State<GuruRiwayatAbsensi> {
           backgroundColor: kWhiteColor,
           foregroundColor: secondary,
           title: Text(
-            'Daftar RiwayatAbsensi',
+            'Riwayat Absensi',
             style: TextStyle(
               fontSize: 18,
             ),
@@ -86,7 +86,7 @@ class _GuruRiwayatAbsensiState extends State<GuruRiwayatAbsensi> {
         builder: (context, state) {
           if (state is RiwayatAbsenStateSuccess) {
             return ListView(
-              // padding: EdgeInsets.symmetric(horizontal: 24),
+              // padding: EdgeInsets.symmetric(horizontal: 0),
               children: [
                 riwayatAbsensi(state.riwayatAbsen),
               ],
