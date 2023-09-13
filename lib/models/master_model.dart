@@ -535,7 +535,7 @@ class DaftarPelanggarModel extends Equatable {
     required this.namaSiswa,
   });
 
-  factory DaftarPelanggarModel.fromJsno(Map<String, dynamic> json) =>
+  factory DaftarPelanggarModel.fromJson(Map<String, dynamic> json) =>
       DaftarPelanggarModel(
         id: json['id'],
         urut: json['urut'],

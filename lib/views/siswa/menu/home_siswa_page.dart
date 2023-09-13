@@ -1,15 +1,13 @@
 import 'package:absen_siswa_qr_code/cubit/master/jadwal/jadwal_siswa/jadwal_siswa_cubit.dart';
-import 'package:absen_siswa_qr_code/cubit/master/pelanggaran/data_pelanggaran_cubit.dart';
 import 'package:absen_siswa_qr_code/cubit/user/siswa/user_siswa_cubit.dart';
 import 'package:absen_siswa_qr_code/models/master_model.dart';
 import 'package:absen_siswa_qr_code/models/user_model.dart';
 import 'package:absen_siswa_qr_code/utils/theme.dart';
+import 'package:absen_siswa_qr_code/utils/url.dart';
 import 'package:absen_siswa_qr_code/views/siswa/sub_menu/jadwal_page.dart';
 import 'package:absen_siswa_qr_code/views/siswa/sub_menu/riwayat_absen_page.dart';
 import 'package:absen_siswa_qr_code/views/siswa/sub_menu/siswa_riwayat_pelanggara,_page.dart';
 import 'package:absen_siswa_qr_code/views/widgets/siswa/button_menu_category_siswa.dart';
-// import 'package:absen_siswa_qr_code/views/widgets/siswa/card_jadwal_harian_siswa.dart';
-// import 'package:absen_siswa_qr_code/views/widgets/siswa/card_pelanggar_widget.dart';
 import 'package:absen_siswa_qr_code/views/widgets/siswa/widget_jadwal_harian_siswa2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -33,6 +31,29 @@ class _HomeSiswaPageState extends State<HomeSiswaPage> {
   Widget build(BuildContext context) {
     // NOTE : HEADER
     Widget header(UserSiswaModel user) {
+      Widget imageDialog() {
+        return Dialog(
+          alignment: Alignment.center,
+          clipBehavior: Clip.hardEdge,
+          elevation: 6,
+          child: Container(
+            height: 250,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(20),
+              // borderRadius: BorderRadius.circular(50),
+              // image: DecorationImage(
+              //   fit: BoxFit.cover,
+              //   image: NetworkImage('${baseUrl}${user.picture}'),
+              // ),
+            ),
+            child: Image.network(
+              '${baseUrl}${user.picture}',
+              // fit: BoxFit.cover,
+            ),
+          ),
+        );
+      }
+
       return Container(
         margin: EdgeInsets.only(bottom: 24),
         width: MediaQuery.of(context).size.width,
@@ -198,19 +219,36 @@ class _HomeSiswaPageState extends State<HomeSiswaPage> {
                             margin: EdgeInsets.only(right: 6),
                             child: ClipOval(
                               child: Container(
-                                height: 55,
-                                width: 55,
+                                height: 70,
+                                width: 70,
                                 padding: EdgeInsets.all(3),
                                 decoration: BoxDecoration(color: kWhiteColor),
                                 child: ClipOval(
                                   child: Container(
                                     decoration: BoxDecoration(
                                         color: Colors.blue.shade400),
-                                    child: Icon(
-                                      Icons.person_rounded,
-                                      color: kWhiteColor,
-                                      size: 44,
-                                    ),
+                                    child: user.picture != null
+                                        ? GestureDetector(
+                                            onTap: () async {
+                                              await showDialog(
+                                                  context: context,
+                                                  builder: (_) {
+                                                    return imageDialog();
+                                                  });
+                                            },
+                                            child: Image.network(
+                                              '${baseUrl}${user.picture}',
+                                              fit: BoxFit.cover,
+                                              height: 150,
+                                            ),
+                                          )
+                                        : Image.asset(
+                                            'assets/images/siswa.png'),
+                                    // child: Icon(
+                                    //   Icons.person_rounded,
+                                    //   color: kWhiteColor,
+                                    //   size: 44,
+                                    // ),
                                   ),
                                 ),
                               ),
@@ -281,6 +319,8 @@ class _HomeSiswaPageState extends State<HomeSiswaPage> {
                       ),
                     ),
                     faIcon: FontAwesomeIcons.userXmark,
+                    bgCard: redBgCardSoft,
+                    bgIconColor: redBgCardPrimary,
                     onTap: () {
                       Navigator.push(context,
                           MaterialPageRoute(builder: (context) {
@@ -298,8 +338,8 @@ class _HomeSiswaPageState extends State<HomeSiswaPage> {
                       ),
                     ),
                     faIcon: FontAwesomeIcons.clockRotateLeft,
-                    bgCard: redBgCardSoft,
-                    bgIconColor: redBgCardPrimary,
+                    // bgCard: redBgCardSoft,
+                    // bgIconColor: redBgCardPrimary,
                     onTap: () {
                       Navigator.push(
                         context,
@@ -554,7 +594,6 @@ class _HomeSiswaPageState extends State<HomeSiswaPage> {
           return RefreshIndicator(
             onRefresh: () async {
               context.read<UserSiswaCubit>().getCurrentUser();
-              context.read<DataPelanggaranCubit>().fetchDataPelanggaran();
             },
             child: ListView(
               shrinkWrap: true,

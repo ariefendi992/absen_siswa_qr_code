@@ -1,5 +1,4 @@
 import 'package:absen_siswa_qr_code/cubit/master/jadwal/jadwal_siswa/jadwal_siswa_cubit.dart';
-import 'package:absen_siswa_qr_code/cubit/master/pelanggaran/data_pelanggaran_cubit.dart';
 import 'package:absen_siswa_qr_code/cubit/page/page_cubit.dart';
 import 'package:absen_siswa_qr_code/utils/theme.dart';
 import 'package:absen_siswa_qr_code/views/siswa/menu/home_siswa_page.dart';
@@ -20,23 +19,9 @@ class MainSiswaPage extends StatefulWidget {
 class _MainSiswaPageState extends State<MainSiswaPage> {
   String? id;
 
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   // getUserById();
-  // }
-
-  // void getUserById() async {
-  //   final id = await CustomStorage().getStorage('id');
-  //   if (id != null) {
-  //     // context.read<UserSiswaCubit>().getCurrentUser(id: id.toString());
-  //     context.read<UserSiswaCubit>().getCurrentUser();
-  //   }
-  // }
 
   @override
   void initState() {
-    context.read<DataPelanggaranCubit>().fetchDataPelanggaran();
     context.read<JadwalSiswaCubit>().fetchJadwalHarianSiswa();
     super.initState();
   }
@@ -56,44 +41,7 @@ class _MainSiswaPageState extends State<MainSiswaPage> {
       }
     }
 
-    // Widget bottomNavigationBar() {
-    //   return Container(
-    //     height: 65,
-    //     child: Container(
-    //       alignment: Alignment.center,
-    //       child: Row(
-    //         mainAxisAlignment: MainAxisAlignment.spaceAround,
-    //         children: [
-    //           ButtonAppBarWidget(
-    //             index: 0,
-    //             title: 'Beranda',
-    //             iconPrimary: Icons.home,
-    //             iconSecondary: Icons.home_outlined,
-    //           ),
-    //           ButtonAppBarWidget(
-    //             index: 1,
-    //             title: 'Riwayat',
-    //             iconPrimary: Icons.history,
-    //             iconSecondary: Icons.history_outlined,
-    //           ),
-    //           ButtonAppBarWidget(
-    //             index: 2,
-    //             title: 'DaftarSiswa',
-    //             iconPrimary: Icons.people,
-    //             iconSecondary: Icons.people_outline,
-    //           ),
-    //           ButtonAppBarWidget(
-    //             index: 3,
-    //             title: 'Akun',
-    //             iconPrimary: Icons.account_circle,
-    //             iconSecondary: Icons.account_circle_outlined,
-    //           ),
-    //         ],
-    //       ),
-    //     ),
-    //   );
-    // }
-
+  
     Widget newBottomNavigationBar() {
       return Container(
         height: 58,

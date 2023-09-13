@@ -43,6 +43,7 @@ class _QrSiswaPageState extends State<QrSiswaPage> {
                 return IconButton(
                     onPressed: () {
                       Navigator.pop(context);
+                      context.read<UserSiswaCubit>().getCurrentUser();
                     },
                     icon: Icon(
                       Icons.arrow_back_ios_new,

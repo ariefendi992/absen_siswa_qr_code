@@ -23,10 +23,12 @@ class _SiswaRiwayatPelanggaranPageState
 
   @override
   Widget build(BuildContext context) {
-    Widget riwayatPelanggaran(List<RiwayatPelanggaranSiswaModel> pelanggaran) {
+    Widget riwayatPelanggaran(RiwayatPelanggaranSiswaModel pelanggaran) {
+      List pel = pelanggaran.data;
       return Column(
-        children: pelanggaran.map((e) => WidgetRiwayatPelanggaran(e)).toList(),
-      );
+          children:
+              // pelanggaran.data.map((e) => WidgetRiwayatPelanggaran(e)).toList(),
+              pel.map((e) => WidgetRiwayatPelanggaran(e)).toList());
     }
 
     return Scaffold(
@@ -61,66 +63,133 @@ class _SiswaRiwayatPelanggaranPageState
         shrinkWrap: true,
         padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 10),
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              Column(
+          BlocBuilder<DataPelanggaranCubit, DataPelanggaranState>(
+            builder: (context, state) {
+              if (state is RiwayatPelanggaranSiswaSuccess) {
+                return Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Column(
+                      children: [
+                        Container(
+                          margin: EdgeInsets.only(bottom: 4),
+                          padding: const EdgeInsets.only(left: 12, right: 12),
+                          decoration: BoxDecoration(
+                            color: errorExtraSoft,
+                            borderRadius: BorderRadius.circular(80),
+                          ),
+                          child: Text(
+                            '${state.pelanggaran.additionalData!["countPelanggaran"]}',
+                            style: TextStyle(
+                              fontSize: 32,
+                              color: allColor[9],
+                            ),
+                          ),
+                        ),
+                        Text(
+                          'Pelanggaran',
+                          style: TextStyle(
+                            fontSize: 14,
+                            color: allColor[7],
+                            fontWeight: medium,
+                            letterSpacing: 0.5,
+                          ),
+                        )
+                      ],
+                    ),
+                    Column(
+                      children: [
+                        Container(
+                          margin: EdgeInsets.only(bottom: 4),
+                          padding: const EdgeInsets.only(left: 12, right: 12),
+                          decoration: BoxDecoration(
+                            color: allColor[4],
+                            borderRadius: BorderRadius.circular(80),
+                          ),
+                          child: Text(
+                            "${state.pelanggaran.additionalData?['countPembinaan']}",
+                            style: TextStyle(
+                              fontSize: 32,
+                              color: kWhiteColor,
+                            ),
+                          ),
+                        ),
+                        Text(
+                          'Dibina',
+                          style: TextStyle(
+                            fontSize: 14,
+                            color: allColor[7],
+                            fontWeight: medium,
+                            letterSpacing: 0.5,
+                          ),
+                        )
+                      ],
+                    ),
+                  ],
+                );
+              }
+              return Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  Container(
-                    margin: EdgeInsets.only(bottom: 4),
-                    padding: const EdgeInsets.only(left: 4, right: 4),
-                    decoration: BoxDecoration(
-                      color: errorExtraSoft,
-                      borderRadius: BorderRadius.circular(80),
-                    ),
-                    child: Text(
-                      '0',
-                      style: TextStyle(
-                        fontSize: 32,
-                        color: allColor[9],
+                  Column(
+                    children: [
+                      Container(
+                        margin: EdgeInsets.only(bottom: 4),
+                        padding: const EdgeInsets.only(left: 12, right: 12),
+                        decoration: BoxDecoration(
+                          color: errorExtraSoft,
+                          borderRadius: BorderRadius.circular(80),
+                        ),
+                        child: Text(
+                          '0',
+                          style: TextStyle(
+                            fontSize: 32,
+                            color: allColor[9],
+                          ),
+                        ),
                       ),
-                    ),
+                      Text(
+                        'Pelanggaran',
+                        style: TextStyle(
+                          fontSize: 14,
+                          color: allColor[7],
+                          fontWeight: medium,
+                          letterSpacing: 0.5,
+                        ),
+                      )
+                    ],
                   ),
-                  Text(
-                    'Dibina',
-                    style: TextStyle(
-                      fontSize: 14,
-                      color: allColor[7],
-                      fontWeight: medium,
-                      letterSpacing: 0.5,
-                    ),
-                  )
-                ],
-              ),
-              Column(
-                children: [
-                  Container(
-                    margin: EdgeInsets.only(bottom: 4),
-                    padding: const EdgeInsets.only(left: 4, right: 4),
-                    decoration: BoxDecoration(
-                      color: allColor[4],
-                      borderRadius: BorderRadius.circular(80),
-                    ),
-                    child: Text(
-                      '0',
-                      style: TextStyle(
-                        fontSize: 32,
-                        color: kWhiteColor,
+                  Column(
+                    children: [
+                      Container(
+                        margin: EdgeInsets.only(bottom: 4),
+                        padding: const EdgeInsets.only(left: 12, right: 12),
+                        decoration: BoxDecoration(
+                          color: allColor[4],
+                          borderRadius: BorderRadius.circular(80),
+                        ),
+                        child: Text(
+                          '0',
+                          style: TextStyle(
+                            fontSize: 32,
+                            color: kWhiteColor,
+                          ),
+                        ),
                       ),
-                    ),
+                      Text(
+                        'Dibina',
+                        style: TextStyle(
+                          fontSize: 14,
+                          color: allColor[7],
+                          fontWeight: medium,
+                          letterSpacing: 0.5,
+                        ),
+                      )
+                    ],
                   ),
-                  Text(
-                    'Evaluasi',
-                    style: TextStyle(
-                      fontSize: 14,
-                      color: allColor[7],
-                      fontWeight: medium,
-                      letterSpacing: 0.5,
-                    ),
-                  )
                 ],
-              ),
-            ],
+              );
+            },
           ),
           SizedBox(height: 8),
           Divider(

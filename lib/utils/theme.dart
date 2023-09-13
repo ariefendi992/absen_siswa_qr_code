@@ -14,6 +14,7 @@ Color secondaryExtraSoft = Color(0xFFE9E9E9);
 Color errorPrimary = Color(0xFFD00E0E);
 Color errorSoft = Color(0xFFE34648);
 Color errorExtraSoft = Color(0xFFFFD9D8);
+Color errorAlt = Color(0xffBD2E3B);
 Color successPrimary = Color(0xFF16AE26);
 Color successSoft = Color(0xFF21B69D);
 Color successExtraSoft = Color(0xFFD6F8F1);

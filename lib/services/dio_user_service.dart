@@ -55,15 +55,16 @@ class ApiUserSiswa {
     }
   }
 
-  Future<List<RiwayatPelanggaranSiswaModel>>
-      fetchRiwayatPelaggaranSiswa() async {
+  Future<RiwayatPelanggaranSiswaModel> fetchRiwayatPelaggaranSiswa() async {
     final response = await dio.get('/student/riwayat-pelanggaran');
     final body = response.data;
 
     if (response.statusCode == 200) {
-      List<RiwayatPelanggaranSiswaModel> pelanggaran = List.from(body['data'])
-          .map((e) => RiwayatPelanggaranSiswaModel.fromJson(e))
-          .toList();
+      // List<RiwayatPelanggaranSiswaModel> pelanggaran = List.from(body)
+      //     .map((e) => RiwayatPelanggaranSiswaModel.fromJson(e))
+      //     .toList();
+      RiwayatPelanggaranSiswaModel pelanggaran =
+          RiwayatPelanggaranSiswaModel.fromJson(body);
 
       return pelanggaran;
     } else {

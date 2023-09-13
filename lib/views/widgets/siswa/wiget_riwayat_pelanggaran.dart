@@ -3,7 +3,7 @@ import 'package:absen_siswa_qr_code/utils/theme.dart';
 import 'package:flutter/material.dart';
 
 class WidgetRiwayatPelanggaran extends StatelessWidget {
-  final RiwayatPelanggaranSiswaModel pelangaran;
+  final DataRiwayatPelanggaranSiswaModel pelangaran;
   const WidgetRiwayatPelanggaran(this.pelangaran, {super.key});
 
   @override
@@ -18,29 +18,142 @@ class WidgetRiwayatPelanggaran extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            'Hari : ${pelangaran.tglMelanggar}',
-            style: TextStyle(
-              fontSize: 16,
-              fontWeight: bold,
-              color: allColor[7],
-              letterSpacing: 0.5,
-            ),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Expanded(
+                flex: 3,
+                child: Text(
+                  'Hari',
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: bold,
+                    color: allColor[7],
+                    letterSpacing: 0.5,
+                  ),
+                ),
+              ),
+              Expanded(
+                child: Text(
+                  ':',
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: bold,
+                    color: allColor[7],
+                    letterSpacing: 0.5,
+                  ),
+                ),
+              ),
+              Expanded(
+                flex: 8,
+                child: Text(
+                  '${pelangaran.tglMelanggar}',
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: bold,
+                    color: allColor[7],
+                    letterSpacing: 0.5,
+                  ),
+                ),
+              ),
+            ],
+          ),
+          SizedBox(height: 2),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Expanded(
+                flex: 3,
+                child: Text(
+                  'Status',
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: bold,
+                    color: allColor[7],
+                    letterSpacing: 0.5,
+                  ),
+                ),
+              ),
+              Expanded(
+                child: Text(
+                  ':',
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: bold,
+                    color: allColor[7],
+                    letterSpacing: 0.5,
+                  ),
+                ),
+              ),
+              Expanded(
+                flex: 8,
+                child: Text(
+                  '${pelangaran.status}',
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: bold,
+                    color: errorAlt,
+                    letterSpacing: 0.5,
+                  ),
+                ),
+              ),
+            ],
+          ),
+          SizedBox(height: 2),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Expanded(
+                flex: 3,
+                child: Text(
+                  'JenisPel',
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: bold,
+                    color: allColor[7],
+                    letterSpacing: 0.5,
+                  ),
+                ),
+              ),
+              Expanded(
+                child: Text(
+                  ':',
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: bold,
+                    color: allColor[7],
+                    letterSpacing: 0.5,
+                  ),
+                ),
+              ),
+              Expanded(
+                flex: 8,
+                child: Text(
+                  '${pelangaran.jenisPelanggaran}',
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: bold,
+                    color: errorAlt,
+                    letterSpacing: 0.5,
+                  ),
+                ),
+              ),
+            ],
           ),
           SizedBox(height: 4),
           Container(
             width: double.infinity,
             decoration: BoxDecoration(
-              color: errorExtraSoft,
+              color: errorSoft,
               borderRadius: BorderRadius.circular(12),
             ),
             child: Column(
               children: [
                 Container(
                   width: double.infinity,
-                  padding: EdgeInsets.symmetric(vertical: 3),
+                  padding: EdgeInsets.symmetric(vertical: 4),
                   decoration: BoxDecoration(
-                    color: errorPrimary,
+                    color: errorAlt,
                     borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(11),
                       topRight: Radius.circular(11),
@@ -48,11 +161,13 @@ class WidgetRiwayatPelanggaran extends StatelessWidget {
                   ),
                   child: Center(
                     child: Text(
-                      'Keterangan',
+                      'Keterangan'.toUpperCase(),
                       style: TextStyle(
-                          color: kWhiteColor,
-                          fontWeight: bold,
-                          letterSpacing: 0.7),
+                        fontSize: 16,
+                        color: kWhiteColor,
+                        fontWeight: bold,
+                        letterSpacing: 0.7,
+                      ),
                     ),
                   ),
                 ),
@@ -60,10 +175,8 @@ class WidgetRiwayatPelanggaran extends StatelessWidget {
                   padding: const EdgeInsets.all(10.0),
                   child: Text(
                     '${pelangaran.note}',
-                    style: TextStyle(
-                      color: errorPrimary,
-                    ),
-                    textAlign: TextAlign.justify,
+                    style: TextStyle(color: kWhiteColor, fontWeight: medium),
+                    textAlign: TextAlign.left,
                   ),
                 ),
               ],

@@ -30,7 +30,7 @@ class DataPelanggaranFailure extends DataPelanggaranState {
 }
 
 class RiwayatPelanggaranSiswaSuccess extends DataPelanggaranState {
-  final List<RiwayatPelanggaranSiswaModel> pelanggaran;
+  final RiwayatPelanggaranSiswaModel pelanggaran;
 
   const RiwayatPelanggaranSiswaSuccess(this.pelanggaran);
 
