@@ -2,6 +2,8 @@
     package="com.example.absen_siswa_qr_code">
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <application
         android:label="absen_siswa_qr_code"
         android:name="${applicationName}"

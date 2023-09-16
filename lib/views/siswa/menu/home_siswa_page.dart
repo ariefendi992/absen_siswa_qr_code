@@ -4,6 +4,7 @@ import 'package:absen_siswa_qr_code/models/master_model.dart';
 import 'package:absen_siswa_qr_code/models/user_model.dart';
 import 'package:absen_siswa_qr_code/utils/theme.dart';
 import 'package:absen_siswa_qr_code/utils/url.dart';
+import 'package:absen_siswa_qr_code/views/siswa/sub_menu/id_card_page.dart';
 import 'package:absen_siswa_qr_code/views/siswa/sub_menu/jadwal_page.dart';
 import 'package:absen_siswa_qr_code/views/siswa/sub_menu/riwayat_absen_page.dart';
 import 'package:absen_siswa_qr_code/views/siswa/sub_menu/siswa_riwayat_pelanggara,_page.dart';
@@ -284,71 +285,136 @@ class _HomeSiswaPageState extends State<HomeSiswaPage> {
             ),
             Container(
               margin: EdgeInsets.only(top: 16),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
+              child: Column(
                 children: [
-                  ButtonCardMenuKategori(
-                    title: Text(
-                      'JadwalMapel',
-                      style: TextStyle(
-                        color: allColor[7],
-                        fontWeight: medium,
-                        fontSize: 12,
-                      ),
-                    ),
-                    faIcon: FontAwesomeIcons.calendarWeek,
-                    bgCard: greenBgCardSoft,
-                    bgIconColor: greenBgCardPrimary,
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => JadwalPageSiswa(),
+                  Row(
+                    children: [
+                      Expanded(
+                        flex: 1,
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 8),
+                          child: ButtonCardMenuKategori(
+                            title: Text(
+                              'JadwalMapel',
+                              style: TextStyle(
+                                color: allColor[7],
+                                fontWeight: medium,
+                                fontSize: 12,
+                              ),
+                            ),
+                            faIcon: FontAwesomeIcons.calendarWeek,
+                            bgCard: greenBgCardSoft,
+                            bgIconColor: greenBgCardPrimary,
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => JadwalPageSiswa(),
+                                ),
+                              );
+                              context
+                                  .read<JadwalSiswaCubit>()
+                                  .fetchJadwalPelajara();
+                            },
+                          ),
                         ),
-                      );
-                      context.read<JadwalSiswaCubit>().fetchJadwalPelajara();
-                    },
-                  ),
-                  ButtonCardMenuKategori(
-                    title: Text(
-                      'Pelanggaran',
-                      style: TextStyle(
-                        color: allColor[7],
-                        fontWeight: medium,
-                        fontSize: 12,
                       ),
-                    ),
-                    faIcon: FontAwesomeIcons.userXmark,
-                    bgCard: redBgCardSoft,
-                    bgIconColor: redBgCardPrimary,
-                    onTap: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) {
-                        return SiswaRiwayatPelanggaranPage();
-                      }));
-                    },
-                  ),
-                  ButtonCardMenuKategori(
-                    title: Text(
-                      'RiwayatAbsen',
-                      style: TextStyle(
-                        color: allColor[7],
-                        fontWeight: medium,
-                        fontSize: 12,
-                      ),
-                    ),
-                    faIcon: FontAwesomeIcons.clockRotateLeft,
-                    // bgCard: redBgCardSoft,
-                    // bgIconColor: redBgCardPrimary,
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => SiswaRiwayatAbsensiPage(),
+                      Expanded(
+                        flex: 1,
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 8),
+                          child: ButtonCardMenuKategori(
+                            title: Text(
+                              'Pelanggaran',
+                              style: TextStyle(
+                                color: allColor[7],
+                                fontWeight: medium,
+                                fontSize: 12,
+                              ),
+                            ),
+                            faIcon: FontAwesomeIcons.userXmark,
+                            bgCard: redBgCardSoft,
+                            bgIconColor: redBgCardPrimary,
+                            onTap: () {
+                              Navigator.push(context,
+                                  MaterialPageRoute(builder: (context) {
+                                return SiswaRiwayatPelanggaranPage();
+                              }));
+                            },
+                          ),
                         ),
-                      );
-                    },
+                      ),
+                      Expanded(
+                        flex: 1,
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 8),
+                          child: ButtonCardMenuKategori(
+                            title: Text(
+                              'RiwayatAbsen',
+                              style: TextStyle(
+                                color: allColor[7],
+                                fontWeight: medium,
+                                fontSize: 12,
+                              ),
+                            ),
+                            faIcon: FontAwesomeIcons.clockRotateLeft,
+                            // bgCard: redBgCardSoft,
+                            // bgIconColor: redBgCardPrimary,
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      SiswaRiwayatAbsensiPage(),
+                                ),
+                              );
+                            },
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
+                  SizedBox(height: 10),
+                  Row(
+                    children: [
+                      Expanded(
+                        flex: 1,
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 8),
+                          child: ButtonCardMenuKategori(
+                            title: Text(
+                              'ID Card',
+                              style: TextStyle(
+                                fontSize: 12,
+                                fontWeight: medium,
+                              ),
+                            ),
+                            faIcon: FontAwesomeIcons.idCard,
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) {
+                                    return IDCardPage();
+                                  },
+                                ),
+                              );
+                            },
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 8),
+                        ),
+                      ),
+                      Expanded(
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 8),
+                        ),
+                      ),
+                    ],
+                  )
                 ],
               ),
             ),

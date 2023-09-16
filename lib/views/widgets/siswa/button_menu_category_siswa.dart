@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class ButtonCardMenuKategori extends StatelessWidget {
-  final Widget title; // * Text()
+  final Text? title; // * Text()
   final IconData? faIcon; // * FontAwesome
+  final IconData? icon; // * ICON
   final Color? iconColor;
   final Color? bgIconColor;
   final Color? bgCard;
@@ -18,6 +19,7 @@ class ButtonCardMenuKategori extends StatelessWidget {
     this.bgIconColor,
     this.bgCard,
     this.onTap,
+    this.icon,
   });
 
   @override
@@ -44,11 +46,17 @@ class ButtonCardMenuKategori extends StatelessWidget {
                 color: bgIconColor ?? primaryColor2.withOpacity(0.7),
               ),
               child: Center(
-                child: FaIcon(
-                  faIcon ?? FontAwesomeIcons.book,
-                  size: 26,
-                  color: iconColor ?? secondaryPrimary,
-                ),
+                child: faIcon != null
+                    ? FaIcon(
+                        faIcon,
+                        size: 26,
+                        color: iconColor ?? secondaryPrimary,
+                      )
+                    : Icon(
+                        icon,
+                        size: 26,
+                        color: iconColor ?? secondaryPrimary,
+                      ),
               ),
             ),
             Container(
