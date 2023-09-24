@@ -2,7 +2,7 @@ import 'package:absen_siswa_qr_code/cubit/master/jadwal/jadwal_siswa/jadwal_sisw
 import 'package:absen_siswa_qr_code/cubit/page/page_cubit.dart';
 import 'package:absen_siswa_qr_code/utils/theme.dart';
 import 'package:absen_siswa_qr_code/views/siswa/menu/home_siswa_page.dart';
-import 'package:absen_siswa_qr_code/views/siswa/menu/profil_siswa_page.dart';
+import 'package:absen_siswa_qr_code/views/siswa/menu/akun_siswa_page.dart';
 import 'package:absen_siswa_qr_code/views/siswa/menu/qr_siswa_page.dart';
 import 'package:absen_siswa_qr_code/views/widgets/button_bottom_app_bar.dart';
 import 'package:flutter/cupertino.dart';
@@ -19,7 +19,6 @@ class MainSiswaPage extends StatefulWidget {
 class _MainSiswaPageState extends State<MainSiswaPage> {
   String? id;
 
-
   @override
   void initState() {
     context.read<JadwalSiswaCubit>().fetchJadwalHarianSiswa();
@@ -34,14 +33,13 @@ class _MainSiswaPageState extends State<MainSiswaPage> {
           return HomeSiswaPage();
 
         case 3:
-          return ProfilSiswaPage();
+          return AkunSiswaPage();
 
         default:
           return HomeSiswaPage();
       }
     }
 
-  
     Widget newBottomNavigationBar() {
       return Container(
         height: 58,

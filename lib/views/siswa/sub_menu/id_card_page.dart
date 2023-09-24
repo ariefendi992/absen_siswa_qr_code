@@ -84,8 +84,10 @@ class IDCardPage extends StatelessWidget {
                       onTap: () {
                         // print('OK Brooo');
                         DownloadFromAPI().downloadIDCard(
-                            "${state.userSiswa.idCard}",
-                            '${state.userSiswa.firstName}.png');
+                          // "${state.userSiswa.idCard}",
+                          '${state.userSiswa.id}',
+                          '${state.userSiswa.firstName} ${state.userSiswa.lastName}.png',
+                        );
                       },
                       child: Container(
                         padding: EdgeInsets.symmetric(vertical: 6),

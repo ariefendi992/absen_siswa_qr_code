@@ -2,7 +2,6 @@ import 'package:absen_siswa_qr_code/services/interceptor/dio_interceptor.dart';
 import 'package:absen_siswa_qr_code/utils/secure_storage.dart';
 import 'package:absen_siswa_qr_code/utils/url.dart';
 import 'package:dio/dio.dart';
-import 'package:external_path/external_path.dart';
 import 'package:path_provider/path_provider.dart';
 
 class DownloadFromAPI {
@@ -13,15 +12,20 @@ class DownloadFromAPI {
     dio.interceptors.add(DioInterceptor());
   }
 
-  Future<void> downloadIDCard(String url, String filename) async {
-    final directory = await getApplicationDocumentsDirectory();
+  Future<void> downloadIDCard(
+    // String url,
+    String userID,
+    String filename,
+  ) async {
+    final directory = await getExternalStorageDirectory();
+    final url = "${baseUrl}/api/v2/download/idcard?siswa=${userID}";
 
     final response = await dio.download(
-      "${baseUrl}/${url}",
-      '${directory.path}/${filename}',
+      url,
+      '${directory?.path}/${filename}',
     );
 
-    print(response.statusCode);
-    // print(directory.path);
+    // print(response.statusCode);
+    response.statusCode;
   }
 }

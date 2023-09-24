@@ -4,7 +4,6 @@ import 'package:absen_siswa_qr_code/models/master_model.dart';
 import 'package:absen_siswa_qr_code/models/user_model.dart';
 import 'package:absen_siswa_qr_code/utils/theme.dart';
 import 'package:absen_siswa_qr_code/utils/url.dart';
-import 'package:absen_siswa_qr_code/views/siswa/sub_menu/id_card_page.dart';
 import 'package:absen_siswa_qr_code/views/siswa/sub_menu/jadwal_page.dart';
 import 'package:absen_siswa_qr_code/views/siswa/sub_menu/riwayat_absen_page.dart';
 import 'package:absen_siswa_qr_code/views/siswa/sub_menu/siswa_riwayat_pelanggara,_page.dart';
@@ -374,47 +373,47 @@ class _HomeSiswaPageState extends State<HomeSiswaPage> {
                       ),
                     ],
                   ),
-                  SizedBox(height: 10),
-                  Row(
-                    children: [
-                      Expanded(
-                        flex: 1,
-                        child: Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 8),
-                          child: ButtonCardMenuKategori(
-                            title: Text(
-                              'ID Card',
-                              style: TextStyle(
-                                fontSize: 12,
-                                fontWeight: medium,
-                              ),
-                            ),
-                            faIcon: FontAwesomeIcons.idCard,
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) {
-                                    return IDCardPage();
-                                  },
-                                ),
-                              );
-                            },
-                          ),
-                        ),
-                      ),
-                      Expanded(
-                        child: Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 8),
-                        ),
-                      ),
-                      Expanded(
-                        child: Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 8),
-                        ),
-                      ),
-                    ],
-                  )
+                  // SizedBox(height: 10),
+                  // Row(
+                  //   children: [
+                  //     Expanded(
+                  //       flex: 1,
+                  //       child: Padding(
+                  //         padding: EdgeInsets.symmetric(horizontal: 8),
+                  //         child: ButtonCardMenuKategori(
+                  //           title: Text(
+                  //             'ID Card',
+                  //             style: TextStyle(
+                  //               fontSize: 12,
+                  //               fontWeight: medium,
+                  //             ),
+                  //           ),
+                  //           faIcon: FontAwesomeIcons.idCard,
+                  //           onTap: () {
+                  //             Navigator.push(
+                  //               context,
+                  //               MaterialPageRoute(
+                  //                 builder: (context) {
+                  //                   return IDCardPage();
+                  //                 },
+                  //               ),
+                  //             );
+                  //           },
+                  //         ),
+                  //       ),
+                  //     ),
+                  //     Expanded(
+                  //       child: Padding(
+                  //         padding: EdgeInsets.symmetric(horizontal: 8),
+                  //       ),
+                  //     ),
+                  //     Expanded(
+                  //       child: Padding(
+                  //         padding: EdgeInsets.symmetric(horizontal: 8),
+                  //       ),
+                  //     ),
+                  //   ],
+                  // )
                 ],
               ),
             ),

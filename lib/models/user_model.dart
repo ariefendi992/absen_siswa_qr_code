@@ -15,6 +15,7 @@ class UserSiswaModel extends Equatable {
   final String? today;
   final String? waliKelas;
   final String? idCard;
+  final String? tempatLahir;
   final Map<String, dynamic>? additionalData;
 
   const UserSiswaModel({
@@ -33,6 +34,7 @@ class UserSiswaModel extends Equatable {
     this.waliKelas,
     this.additionalData,
     this.idCard,
+    this.tempatLahir,
   });
 
   factory UserSiswaModel.fromJson(Map<String, dynamic> json) {
@@ -51,6 +53,7 @@ class UserSiswaModel extends Equatable {
       today: json['today'],
       waliKelas: json['wali_kelas'],
       idCard: json['idCard'],
+      tempatLahir: json['tempat_lahir'],
       additionalData: json,
     );
   }

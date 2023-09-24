@@ -13,6 +13,7 @@ class TextFormWidget extends StatelessWidget {
   final TextStyle? hintStyle;
   final bool readOnly;
   final TextInputType? textInputType;
+  final Function()? onTap;
 
   const TextFormWidget({
     super.key,
@@ -27,6 +28,7 @@ class TextFormWidget extends StatelessWidget {
     this.hintStyle,
     this.readOnly = false,
     this.textInputType,
+    this.onTap,
   });
 
   @override
@@ -42,7 +44,7 @@ class TextFormWidget extends StatelessWidget {
             child: Text(
               label,
               style: TextStyle(
-                fontSize: 16,
+                fontSize: 14,
                 fontWeight: medium,
                 color: labelColor ?? secondary.withOpacity(0.5),
               ),
@@ -77,9 +79,10 @@ class TextFormWidget extends StatelessWidget {
               readOnly: readOnly,
               keyboardType: textInputType,
               style: TextStyle(
-                fontSize: 18,
+                fontSize: 14,
                 color: readOnly ? secondary.withOpacity(0.5) : secondary,
               ),
+              onTap: onTap,
             ),
           )
         ],

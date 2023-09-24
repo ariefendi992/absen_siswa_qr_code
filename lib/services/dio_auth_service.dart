@@ -28,7 +28,7 @@ class DioAuthSevice {
 
     if (response.statusCode == 200) {
       await storage.setStorage('id', body['id'].toString());
-      await storage.setStorage('token', body['access_token']);
+      // await storage.setStorage('token', body['access_token']);
       await storage.setStorage('access_token', body['access_token']);
       await storage.setStorage('refreshToken', body['refresh_token']);
       await storage.setStorage('group', body['group']);

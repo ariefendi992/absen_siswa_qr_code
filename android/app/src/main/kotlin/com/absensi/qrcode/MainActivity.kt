@@ -1,4 +1,4 @@
-package com.example.absen_siswa_qr_code
+package com.absensi.qrcode
 
 import io.flutter.embedding.android.FlutterActivity
 
