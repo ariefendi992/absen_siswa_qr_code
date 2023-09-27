@@ -12,6 +12,7 @@ class ButtonWidget extends StatelessWidget {
   final Color? colors;
   final double borderRadiusCircular;
   final double elevation;
+  final IconData? icons;
 
   const ButtonWidget({
     super.key,
@@ -25,6 +26,7 @@ class ButtonWidget extends StatelessWidget {
     this.colors,
     this.borderRadiusCircular = 10,
     this.elevation = 5,
+    this.icons,
   });
 
   @override
@@ -41,16 +43,24 @@ class ButtonWidget extends StatelessWidget {
           child: Container(
             width: width,
             height: height,
-            child: Center(
-              child: Text(
-                title,
-                style: TextStyle(
-                  fontSize: fontSize,
-                  color: kWhiteColor,
-                  fontWeight: medium,
-                  letterSpacing: 1,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  title,
+                  style: TextStyle(
+                    fontSize: fontSize,
+                    color: kWhiteColor,
+                    fontWeight: medium,
+                    letterSpacing: 0.5,
+                  ),
                 ),
-              ),
+                SizedBox(width: 6),
+                Icon(
+                  icons,
+                  color: kWhiteColor,
+                )
+              ],
             ),
           ),
         ),

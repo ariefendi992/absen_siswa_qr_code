@@ -11,8 +11,19 @@ import 'package:absen_siswa_qr_code/views/widgets/card_with_border_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class AkunSiswaPage extends StatelessWidget {
+class AkunSiswaPage extends StatefulWidget {
   const AkunSiswaPage({super.key});
+
+  @override
+  State<AkunSiswaPage> createState() => _AkunSiswaPageState();
+}
+
+class _AkunSiswaPageState extends State<AkunSiswaPage> {
+  @override
+  void initState() {
+    super.initState();
+    context.read<UserSiswaCubit>().getCurrentUser();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -162,7 +173,7 @@ class AkunSiswaPage extends StatelessWidget {
                               topBorder: BorderSide.none,
                             ),
                             CardWithBorDerWidget(
-                              title: 'ID Card',
+                              title: 'Kartu Pelajar',
                               topBorder: BorderSide.none,
                               leftIcon: Icons.card_membership,
                               onTap: () {

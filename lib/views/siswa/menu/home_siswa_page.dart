@@ -659,6 +659,7 @@ class _HomeSiswaPageState extends State<HomeSiswaPage> {
           return RefreshIndicator(
             onRefresh: () async {
               context.read<UserSiswaCubit>().getCurrentUser();
+              context.read<JadwalSiswaCubit>().fetchJadwalHarianSiswa();
             },
             child: ListView(
               shrinkWrap: true,

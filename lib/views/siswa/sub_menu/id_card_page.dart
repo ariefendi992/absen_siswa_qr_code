@@ -19,7 +19,7 @@ class IDCardPage extends StatelessWidget {
           backgroundColor: kBackgorundScaffold,
           elevation: 0.2,
           title: Text(
-            'ID Card',
+            'Kartu Pelajar',
             style: TextStyle(
               fontWeight: medium,
               fontSize: 18,
@@ -65,8 +65,11 @@ class IDCardPage extends StatelessWidget {
                     child: Material(
                       elevation: 7,
                       borderRadius: BorderRadius.circular(12),
-                      child:
-                          Image.network('${baseUrl}${state.userSiswa.idCard}'),
+                      child: Image.network(
+                        '${baseUrl}${state.userSiswa.idCard}',
+                        height: 335,
+                        width: 205,
+                      ),
                     ),
                   ),
                   Material(

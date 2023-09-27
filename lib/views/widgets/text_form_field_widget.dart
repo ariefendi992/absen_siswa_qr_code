@@ -11,7 +11,9 @@ class TextFormWidget extends StatelessWidget {
   final Color? borderColor;
   final String? hintText;
   final TextStyle? hintStyle;
+  final String? labelText;
   final bool readOnly;
+  final Widget? suffixIcon;
   final TextInputType? textInputType;
   final Function()? onTap;
 
@@ -26,7 +28,9 @@ class TextFormWidget extends StatelessWidget {
     this.borderColor,
     this.hintText,
     this.hintStyle,
+    this.labelText,
     this.readOnly = false,
+    this.suffixIcon,
     this.textInputType,
     this.onTap,
   });
@@ -69,18 +73,23 @@ class TextFormWidget extends StatelessWidget {
                 borderRadius: BorderRadius.circular(borderRadius)),
             child: TextFormField(
               controller: controller,
+              textAlignVertical: TextAlignVertical.center,
               decoration: InputDecoration(
                 border: InputBorder.none,
                 contentPadding: EdgeInsets.zero,
                 isDense: true,
                 hintText: hintText,
                 hintStyle: hintStyle,
+                labelText: labelText,
+                // icon: Icon(Icons.),
+                suffixIcon: suffixIcon,
               ),
               readOnly: readOnly,
               keyboardType: textInputType,
               style: TextStyle(
                 fontSize: 14,
-                color: readOnly ? secondary.withOpacity(0.5) : secondary,
+                color: readOnly ? secondary : secondary,
+                // color: readOnly ? secondary.withOpacity(0.5) : secondary,
               ),
               onTap: onTap,
             ),

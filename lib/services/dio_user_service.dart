@@ -71,6 +71,19 @@ class ApiUserSiswa {
       throw Exception('${body["msg"]}');
     }
   }
+
+  Future<UserSiswaModel> updateSiswa(Map<String, dynamic> data) async {
+    final response = await dio.put('student/single', data: data);
+    final body = response.data;
+
+    if (response.statusCode == 200) {
+      UserSiswaModel siswa = UserSiswaModel.fromJson(body);
+
+      return siswa;
+    } else {
+      throw Exception('${body["msg"].toString()}');
+    }
+  }
 }
 
 // *
