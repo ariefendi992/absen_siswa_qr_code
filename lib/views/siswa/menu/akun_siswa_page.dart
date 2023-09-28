@@ -6,6 +6,7 @@ import 'package:absen_siswa_qr_code/cubit/user/siswa/user_siswa_cubit.dart';
 import 'package:absen_siswa_qr_code/utils/theme.dart';
 import 'package:absen_siswa_qr_code/views/siswa/sub_menu/id_card_page.dart';
 import 'package:absen_siswa_qr_code/views/siswa/sub_menu/siswa_profil_page.dart';
+import 'package:absen_siswa_qr_code/views/siswa/sub_menu/siswa_update_password.dart';
 // import 'package:absen_siswa_qr_code/views/widgets/button_widget.dart';
 import 'package:absen_siswa_qr_code/views/widgets/card_with_border_widget.dart';
 import 'package:flutter/material.dart';
@@ -171,6 +172,12 @@ class _AkunSiswaPageState extends State<AkunSiswaPage> {
                             CardWithBorDerWidget(
                               title: 'Ganti Kata Sandi',
                               topBorder: BorderSide.none,
+                              onTap: () {
+                                Navigator.push(context,
+                                    MaterialPageRoute(builder: ((context) {
+                                  return SiswaUpdatePassPage();
+                                })));
+                              },
                             ),
                             CardWithBorDerWidget(
                               title: 'Kartu Pelajar',
@@ -195,6 +202,7 @@ class _AkunSiswaPageState extends State<AkunSiswaPage> {
                               leftIcon: Icons.logout_rounded,
                               onTap: () {
                                 context.read<AuthCubit>().logOut();
+                                context.read<PageCubit>().setPage(0);
                               },
                             ),
                           ],

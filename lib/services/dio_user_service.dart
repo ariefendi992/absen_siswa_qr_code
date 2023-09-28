@@ -84,6 +84,33 @@ class ApiUserSiswa {
       throw Exception('${body["msg"].toString()}');
     }
   }
+
+  Future<UserSiswaModel> checkPasswordSiswa(
+      {Map<String, dynamic>? data}) async {
+    final response = await dio.get('/student/check-password', data: data);
+    final body = response.data;
+
+    if (response.statusCode == 200) {
+      UserSiswaModel siswa = UserSiswaModel.fromJson(body);
+
+      return siswa;
+    } else {
+      throw Exception('${body["msg"]}');
+    }
+  }
+
+  Future<UserSiswaModel> updatePasswordSiswa(
+      {Map<String, dynamic>? data}) async {
+    final response = await dio.put('/student/update-password', data: data);
+    final body = response.data;
+
+    if (response.statusCode == 200) {
+      UserSiswaModel siswa = UserSiswaModel.fromJson(body);
+      return siswa;
+    } else {
+      throw Exception('${body["msg"]}');
+    }
+  }
 }
 
 // *

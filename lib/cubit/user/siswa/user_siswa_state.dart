@@ -19,6 +19,24 @@ class UserSiswaSuccess extends UserSiswaState {
   List<Object> get props => [userSiswa];
 }
 
+class UserSiswaUpdatePassSuccess extends UserSiswaState {
+  final UserSiswaModel siswa;
+
+  const UserSiswaUpdatePassSuccess(this.siswa);
+
+  @override
+  List<Object> get props => [siswa];
+}
+
+class UsersiswaUpdatePassFail extends UserSiswaState {
+  final String error;
+
+  const UsersiswaUpdatePassFail(this.error);
+
+  @override
+  List<Object> get props => [error];
+}
+
 class UserSiswaFailed extends UserSiswaState {
   final String error;
   const UserSiswaFailed(this.error);

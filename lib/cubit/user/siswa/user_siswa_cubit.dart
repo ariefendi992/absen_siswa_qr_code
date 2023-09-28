@@ -44,4 +44,26 @@ class UserSiswaCubit extends Cubit<UserSiswaState> {
       emit(UserSiswaFailed('${e.response?.data["msg"].toString()}'));
     }
   }
+
+  void checkPassSiswa({required Map<String, dynamic> data}) async {
+    try {
+      emit(UserSiswaLoading());
+
+      final siswa = await ApiUserSiswa().checkPasswordSiswa(data: data);
+      emit(UserSiswaSuccess(siswa));
+    } on DioError catch (e) {
+      emit(UserSiswaFailed('${e.response?.data["msg"]}'));
+    }
+  }
+
+  void updatePassSiswa({required Map<String, dynamic> data}) async {
+    try {
+      emit(UserSiswaLoading());
+
+      final siswa = await ApiUserSiswa().updatePasswordSiswa(data: data);
+      emit(UserSiswaUpdatePassSuccess(siswa));
+    } on DioError catch (e) {
+      emit(UsersiswaUpdatePassFail('${e.response?.data["msg"]}'));
+    }
+  }
 }
