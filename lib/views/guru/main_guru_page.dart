@@ -5,6 +5,7 @@ import 'package:absen_siswa_qr_code/views/guru/menu/guru_scan_qr_page.dart';
 import 'package:absen_siswa_qr_code/views/guru/menu/guru_profil_page.dart';
 import 'package:absen_siswa_qr_code/views/widgets/button_bottom_app_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class MainGuruPage extends StatelessWidget {
@@ -38,7 +39,7 @@ class MainGuruPage extends StatelessWidget {
               iconSecondary: Icons.home_outlined,
               colors: primary,
             ),
-            ButtonAppBarWidget(title: 'Scan QR'),
+            ButtonAppBarWidget(title: 'Absen QR'),
             ButtonAppBarWidget(
               title: 'Akun',
               index: 1,
@@ -68,14 +69,16 @@ class MainGuruPage extends StatelessWidget {
           ),
           floatingActionButton: FloatingActionButton.small(
             onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) {
-                    return GuruScanPage();
-                  },
-                ),
-              );
+              SchedulerBinding.instance.addPostFrameCallback((_) {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return GuruScanPage();
+                    },
+                  ),
+                );
+              });
             },
             backgroundColor: primary,
             child: Icon(Icons.qr_code_scanner_rounded),

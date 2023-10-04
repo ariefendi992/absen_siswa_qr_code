@@ -52,14 +52,9 @@ class ButtonWidget extends StatelessWidget {
                     fontSize: fontSize,
                     color: kWhiteColor,
                     fontWeight: medium,
-                    letterSpacing: 0.5,
+                    // letterSpacing: 0.5,
                   ),
                 ),
-                SizedBox(width: 6),
-                Icon(
-                  icons,
-                  color: kWhiteColor,
-                )
               ],
             ),
           ),

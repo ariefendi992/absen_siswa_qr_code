@@ -111,9 +111,14 @@ class _AuthPageState extends State<AuthPage> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: [
-                                Image.asset(
-                                  'assets/images/logo.png',
-                                  width: 65,
+                                Container(
+                                  decoration: BoxDecoration(
+                                      color: kWhiteColor,
+                                      borderRadius: BorderRadius.circular(50)),
+                                  child: Image.asset(
+                                    'assets/images/logo.png',
+                                    width: 80,
+                                  ),
                                 ),
                                 SizedBox(height: 5),
                                 Text(

@@ -38,9 +38,9 @@ class ProfilGuruPage extends StatelessWidget {
               ),
             );
           } else if (state is AuthInitial) {
-            context.read<PageCubit>().setPage(0);
             Navigator.pushNamedAndRemoveUntil(
                 context, '/auth', (route) => false);
+            context.read<PageCubit>().setPage(0);
           }
         },
         builder: (context, state) {

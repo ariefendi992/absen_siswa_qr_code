@@ -94,8 +94,8 @@ class _SplashPageState extends State<SplashPage> {
               children: [
                 Image.asset(
                   'assets/images/logo.png',
-                  width: 150,
-                  height: 150,
+                  width: 180,
+                  height: 180,
                 ),
                 SizedBox(height: 20),
                 Text(
@@ -121,14 +121,14 @@ class _SplashPageState extends State<SplashPage> {
                   ),
                 ),
                 SizedBox(height: 10),
-                Text(
-                  'Versi Aplikasi 1.0.0',
-                  style: TextStyle(
-                    color: Colors.black.withOpacity(
-                      0.7,
-                    ),
-                  ),
-                )
+                // Text(
+                //   'Versi Aplikasi 1.0.0',
+                //   style: TextStyle(
+                //     color: Colors.black.withOpacity(
+                //       0.7,
+                //     ),
+                //   ),
+                // )
               ],
             ),
           ],

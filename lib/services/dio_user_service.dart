@@ -374,10 +374,11 @@ class ApiUserGuru {
   }
 
   Future<AbsenSiswaModel> absenSiswaGuruMapel(
-      {mengajarID, siswaID, keterangan}) async {
+      {mengajarID, siswaID, keterangan, mapelID}) async {
     Map<String, dynamic> data = {
       'mengajar_id': mengajarID,
       'siswa_id': siswaID,
+      'mapel_id': mapelID,
       'keterangan': keterangan
     };
 

@@ -7,6 +7,7 @@ class AbsenSiswaModel extends Equatable {
   final int? siswaID;
   final String? tglAbsen;
   final String? keterangan;
+  final int? mapelID;
 
   const AbsenSiswaModel({
     this.id,
@@ -14,15 +15,18 @@ class AbsenSiswaModel extends Equatable {
     this.siswaID,
     this.keterangan,
     this.tglAbsen,
+    this.mapelID,
   });
 
   factory AbsenSiswaModel.fromJson(Map<String, dynamic> json) =>
       AbsenSiswaModel(
-          id: json['id'] ?? null,
-          mengajarID: json['mengajar_id'],
-          siswaID: json['siswa_id'],
-          keterangan: json['keterangan'],
-          tglAbsen: json['tgl_absen']);
+        id: json['id'] ?? null,
+        mengajarID: json['mengajar_id'],
+        siswaID: json['siswa_id'],
+        keterangan: json['keterangan'],
+        tglAbsen: json['tgl_absen'],
+        mapelID: json['mapel_id'],
+      );
 
   Map<String, dynamic> toJson() => {
         'mengajar_id': mengajarID,
@@ -38,17 +42,20 @@ class ScanSiswaModel extends Equatable {
   final UserSiswaModel? data;
   final String? status;
   final Map<String, dynamic>? additionalData;
+  final DataRiwayat? dataRiwayat;
 
   ScanSiswaModel({
     this.data,
     this.status,
     this.additionalData,
+    this.dataRiwayat,
   });
 
   factory ScanSiswaModel.fromJson(Map<String, dynamic> json) => ScanSiswaModel(
         data: UserSiswaModel.fromJson(json['data']),
         status: json['status'],
         additionalData: json,
+        dataRiwayat: DataRiwayat.fromJson(json['data']),
       );
 
   @override
@@ -113,4 +120,46 @@ class RiwayatAbsenSiswaModel extends Equatable {
 
   @override
   List<Object?> get props => [id, ket, tglAbsen, urutan, mapel];
+}
+
+class RiwayatAbsenSiswaMapelModel extends Equatable {
+  final String tglAbsen;
+  final String keterangan;
+  final int pertemuan;
+
+  const RiwayatAbsenSiswaMapelModel({
+    required this.tglAbsen,
+    required this.keterangan,
+    required this.pertemuan,
+  });
+
+  factory RiwayatAbsenSiswaMapelModel.fromJson(Map<String, dynamic> json) {
+    return RiwayatAbsenSiswaMapelModel(
+      tglAbsen: json['tgl_absen'],
+      keterangan: json['keterangan'],
+      pertemuan: json['pertemuan'],
+    );
+  }
+
+  @override
+  List<Object> get props => [tglAbsen, keterangan, pertemuan];
+}
+
+class DataRiwayat extends Equatable {
+  final List<RiwayatAbsenSiswaMapelModel> data;
+
+  const DataRiwayat({required this.data});
+
+  factory DataRiwayat.fromJson(Map<String, dynamic> json) {
+    return DataRiwayat(
+      data: List<RiwayatAbsenSiswaMapelModel>.from(
+        json['riwayat_absen'].map(
+          (x) => RiwayatAbsenSiswaMapelModel.fromJson(x),
+        ),
+      ),
+    );
+  }
+
+  @override
+  List<Object> get props => [data];
 }

@@ -10,11 +10,17 @@ class AbsenSiswaCubit extends Cubit<AbsenSiswaState> {
   AbsenSiswaCubit() : super(AbsenSiswaInital());
 
   void absenSiswa(
-      {required mengajarID, required siswaID, required keterangan}) async {
+      {required mengajarID,
+      required siswaID,
+      required keterangan,
+      required mapelID}) async {
     try {
       emit(AbsenSiswaLoading());
       final absenSiswa = await ApiUserGuru().absenSiswaGuruMapel(
-          mengajarID: mengajarID, siswaID: siswaID, keterangan: keterangan);
+          mengajarID: mengajarID,
+          siswaID: siswaID,
+          keterangan: keterangan,
+          mapelID: mapelID);
       emit(AbsenSiswaSuccess(absenSiswa));
     } on DioError catch (e) {
       emit(AbsenSiswaFailure('${e.response?.data["msg"]}'));

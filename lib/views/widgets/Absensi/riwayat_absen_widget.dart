@@ -135,7 +135,7 @@ class RiwayatAbsenWidget extends StatelessWidget {
                                 '${riwayat.namaSiswa}',
                                 style: TextStyle(
                                     fontWeight: medium,
-                                    fontSize: 18,
+                                    fontSize: 16,
                                     color: kBlackColor),
                               )
                             ],
@@ -157,7 +157,9 @@ class RiwayatAbsenWidget extends StatelessWidget {
                               Text(
                                 '${riwayat.kelas}',
                                 style: TextStyle(
-                                    fontWeight: bold, color: kBlackColor),
+                                  fontWeight: bold,
+                                  color: kBlackColor,
+                                ),
                               )
                             ],
                           ),
@@ -235,7 +237,7 @@ class RiwayatAbsenWidget extends StatelessWidget {
                   Text(
                     '$tgl',
                     style: TextStyle(
-                        fontSize: 18,
+                        fontSize: 16,
                         fontWeight: bold,
                         color: primary,
                         letterSpacing: 0.6),

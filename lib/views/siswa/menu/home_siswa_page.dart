@@ -294,7 +294,7 @@ class _HomeSiswaPageState extends State<HomeSiswaPage> {
                           padding: EdgeInsets.symmetric(horizontal: 8),
                           child: ButtonCardMenuKategori(
                             title: Text(
-                              'JadwalMapel',
+                              'Jadwal',
                               style: TextStyle(
                                 color: allColor[7],
                                 fontWeight: medium,

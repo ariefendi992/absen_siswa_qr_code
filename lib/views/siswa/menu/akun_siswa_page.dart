@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:absen_siswa_qr_code/cubit/auth/auth_cubit.dart';
 import 'package:absen_siswa_qr_code/cubit/page/page_cubit.dart';
 import 'package:absen_siswa_qr_code/cubit/user/siswa/user_siswa_cubit.dart';
@@ -7,7 +5,6 @@ import 'package:absen_siswa_qr_code/utils/theme.dart';
 import 'package:absen_siswa_qr_code/views/siswa/sub_menu/id_card_page.dart';
 import 'package:absen_siswa_qr_code/views/siswa/sub_menu/siswa_profil_page.dart';
 import 'package:absen_siswa_qr_code/views/siswa/sub_menu/siswa_update_password.dart';
-// import 'package:absen_siswa_qr_code/views/widgets/button_widget.dart';
 import 'package:absen_siswa_qr_code/views/widgets/card_with_border_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -95,9 +92,7 @@ class _AkunSiswaPageState extends State<AkunSiswaPage> {
           } else if (state is AuthInitial) {
             Navigator.pushNamedAndRemoveUntil(
                 context, '/auth', (route) => false);
-            Timer(Duration(seconds: 2), () {
-              context.read<PageCubit>().setPage(0);
-            });
+            context.read<PageCubit>().setPage(0);
           }
         },
         builder: (context, state) {
@@ -170,7 +165,7 @@ class _AkunSiswaPageState extends State<AkunSiswaPage> {
                               },
                             ),
                             CardWithBorDerWidget(
-                              title: 'Ganti Kata Sandi',
+                              title: 'Ubah Kata Sandi',
                               topBorder: BorderSide.none,
                               onTap: () {
                                 Navigator.push(context,
@@ -202,7 +197,8 @@ class _AkunSiswaPageState extends State<AkunSiswaPage> {
                               leftIcon: Icons.logout_rounded,
                               onTap: () {
                                 context.read<AuthCubit>().logOut();
-                                context.read<PageCubit>().setPage(0);
+                                // Timer(Duration(), callback)
+                                // context.read<PageCubit>().setPage(0);
                               },
                             ),
                           ],

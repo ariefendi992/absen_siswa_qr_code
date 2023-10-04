@@ -43,11 +43,11 @@ class _JadwalPageSiswaState extends State<JadwalPageSiswa> {
               fontSize: 18,
             ),
           ),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.only(
-              bottomRight: Radius.circular(30),
-            ),
-          ),
+          // shape: RoundedRectangleBorder(
+          //   borderRadius: BorderRadius.only(
+          //     bottomRight: Radius.circular(30),
+          //   ),
+          // ),
           leading: Builder(builder: (context) {
             return IconButton(
               onPressed: () {

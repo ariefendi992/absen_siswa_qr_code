@@ -49,12 +49,13 @@ class DioAuthSevice {
   }
 
   Future<void> logOut() async {
-    final response = await dio.delete('auth/logout');
+    final response = await dio.get('auth/logout');
 
     if (response.statusCode == 200) {
       await storage.deleteKey('group');
       await storage.deleteKey('id');
       await storage.deleteKey('token');
+      await storage.deleteKey('access_token');
       await storage.deleteKey('refreshToken');
       await storage.deleteKey('today');
     }

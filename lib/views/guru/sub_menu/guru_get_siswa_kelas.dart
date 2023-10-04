@@ -29,7 +29,7 @@ class _GuruGetSiswaKelasState extends State<GuruGetSiswaKelas> {
           foregroundColor: secondary,
           elevation: 0.2,
           title: Text(
-            'Daftar Mengajar',
+            'Daftar Kelas Ajar',
             style: TextStyle(
               letterSpacing: 0.5,
               fontSize: 18,

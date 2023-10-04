@@ -68,11 +68,11 @@ class _GuruHomePageState extends State<GuruHomePage> {
           margin: EdgeInsets.only(bottom: 24),
           child: Material(
             elevation: 5,
-            borderRadius: BorderRadius.circular(18),
+            borderRadius: BorderRadius.circular(16),
             child: Container(
               decoration: BoxDecoration(
                 color: primary,
-                borderRadius: BorderRadius.circular(18),
+                borderRadius: BorderRadius.circular(16),
                 image: DecorationImage(
                   image: AssetImage('assets/images/pattern-1.png'),
                   fit: BoxFit.cover,
@@ -93,7 +93,7 @@ class _GuruHomePageState extends State<GuruHomePage> {
                   Text(
                     '${userGuru.nip}',
                     style: TextStyle(
-                      fontSize: 18,
+                      fontSize: 16,
                       color: kWhiteColor,
                       fontWeight: bold,
                       letterSpacing: 1.5,
@@ -177,9 +177,9 @@ class _GuruHomePageState extends State<GuruHomePage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Pilihan',
+              'Kategori Menu',
               style: TextStyle(
-                fontSize: 18,
+                fontSize: 16,
                 color: secondary,
                 fontWeight: medium,
               ),
@@ -189,12 +189,12 @@ class _GuruHomePageState extends State<GuruHomePage> {
               margin: EdgeInsets.only(top: 8),
               child: Material(
                 elevation: 5,
-                borderRadius: BorderRadius.circular(18),
+                borderRadius: BorderRadius.circular(16),
                 child: Container(
                   padding: EdgeInsets.symmetric(horizontal: 10, vertical: 12),
                   decoration: BoxDecoration(
                     color: kBackgorundScaffold.withAlpha(20),
-                    borderRadius: BorderRadius.circular(18),
+                    borderRadius: BorderRadius.circular(16),
                   ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -205,7 +205,7 @@ class _GuruHomePageState extends State<GuruHomePage> {
                         height: 48,
                         width: 48,
                         iconSize: 32,
-                        title: 'JadwalMengajar',
+                        title: 'Jadwal',
                         fontSize: 12,
                         onTap: () {
                           Navigator.push(context,
@@ -220,7 +220,7 @@ class _GuruHomePageState extends State<GuruHomePage> {
                         height: 48,
                         width: 48,
                         iconSize: 32,
-                        title: 'DaftarKelas',
+                        title: 'KelasAjar',
                         fontSize: 12,
                         onTap: () => Navigator.push(
                           context,
@@ -303,15 +303,15 @@ class _GuruHomePageState extends State<GuruHomePage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Container(
-                    height: MediaQuery.of(context).size.height / 3,
+                    height: MediaQuery.of(context).size.height / 3.6,
                     width: double.infinity,
                     // color: errorPrimary,
                     alignment: Alignment.center,
                     child: Text(
                       '${state.error}',
                       style: TextStyle(
-                        fontSize: 16,
-                        color: secondary.withOpacity(0.5),
+                        // fontSize: 16,
+                        color: errorSoft.withOpacity(0.7),
                         fontWeight: medium,
                       ),
                     ),
@@ -348,15 +348,15 @@ class _GuruHomePageState extends State<GuruHomePage> {
       },
       child: SafeArea(
         child: ListView(
-          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 30),
+          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
           shrinkWrap: true,
           children: [
             header(),
             menuView(),
             Text(
-              'Jadwal mengajar hari ini',
+              'Jadwal Harian',
               style: TextStyle(
-                fontSize: 18,
+                fontSize: 16,
                 color: secondary,
                 fontWeight: medium,
               ),
