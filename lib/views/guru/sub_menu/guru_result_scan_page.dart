@@ -346,25 +346,26 @@ class _GuruResultScanPageState extends State<GuruResultScanPage> {
             );
           } else if (state is AbsenSiswaFailure) {
             QuickAlert.show(
-                title: 'Gaga!',
-                text: 'Absen telah dilakukan!',
-                textAlignment: TextAlign.center,
-                context: context,
-                type: QuickAlertType.error,
-                confirmBtnText: 'Scan',
-                cancelBtnText: 'Tutup',
-                onConfirmBtnTap: () {
-                  Navigator.pushAndRemoveUntil(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => GuruScanPage(),
-                      ),
-                      (route) => false);
-                },
-                showCancelBtn: true,
-                onCancelBtnTap: () {
-                  Navigator.pop(context);
-                });
+              title: 'Gaga!',
+              text: 'Absen telah dilakukan!',
+              textAlignment: TextAlign.center,
+              context: context,
+              type: QuickAlertType.error,
+              confirmBtnText: 'Scan',
+              cancelBtnText: 'Tutup',
+              onConfirmBtnTap: () {
+                Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => GuruScanPage(),
+                    ),
+                    (route) => false);
+              },
+              showCancelBtn: true,
+              onCancelBtnTap: () {
+                Navigator.pop(context);
+              },
+            );
           }
         },
         builder: (context, state) {
@@ -398,7 +399,7 @@ class _GuruResultScanPageState extends State<GuruResultScanPage> {
       bottomNavigationBar: BottomAppBar(
         shape: CircularNotchedRectangle(),
         clipBehavior: Clip.hardEdge,
-        elevation: 0,
+        elevation: 0.3,
         color: kWhiteColor,
         child: IconTheme(
           data: IconThemeData(
@@ -473,7 +474,7 @@ class _GuruResultScanPageState extends State<GuruResultScanPage> {
                         highlightColor: primaryBgCard,
                         splashColor: primaryExtraSoft,
                         icon: Icon(
-                          showRiwayat
+                          showRiwayat == false
                               ? Icons.arrow_right_outlined
                               : Icons.arrow_drop_down_outlined,
                           // size: 24,
@@ -481,7 +482,7 @@ class _GuruResultScanPageState extends State<GuruResultScanPage> {
                       )
                     ],
                   ),
-                  showRiwayat
+                  showRiwayat == false
                       ? SizedBox()
                       : cardRiwayatAbsen(widget.resulScanData),
                 ],

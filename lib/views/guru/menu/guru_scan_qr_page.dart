@@ -68,7 +68,7 @@ class _GuruScanPageState extends State<GuruScanPage> {
           foregroundColor: kWhiteColor,
           elevation: 0,
           title: Text(
-            'Scan QR Code',
+            'Pindai Kode QR',
             style: TextStyle(
               fontWeight: bold,
               letterSpacing: 0.5,
@@ -119,7 +119,10 @@ class _GuruScanPageState extends State<GuruScanPage> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => GuruScanErrorPage(),
+                  builder: (context) => GuruScanErrorPage(
+                    closeCamera: closeCameraScreen,
+                    error: state.error,
+                  ),
                 ),
               );
             }
@@ -147,7 +150,7 @@ class _GuruScanPageState extends State<GuruScanPage> {
                                 bottom:
                                     MediaQuery.of(context).size.height / 6.0),
                             child: Text(
-                              'Scan QR Code di sini',
+                              'Pindai Kode QR di sini',
                               style: TextStyle(
                                 color: kWhiteColor,
                                 fontSize: 16,

@@ -68,9 +68,14 @@ class CardDaftarSiswaWidget extends StatelessWidget {
           ),
           IconButton(
             onPressed: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) {
-                return GuruGetSiswaAbsen();
-              }));
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) {
+                  return GuruGetSiswaAbsen(
+                    username: daftarSiswa.username!,
+                  );
+                }),
+              );
             },
             icon: Icon(
               Icons.arrow_forward_ios_rounded,

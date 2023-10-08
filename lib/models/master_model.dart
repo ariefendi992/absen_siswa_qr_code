@@ -492,6 +492,7 @@ class DaftarSiswaModel extends Equatable {
   final String kelas;
   final String? waliKelas;
   final String? foto;
+  final String? username;
 
   const DaftarSiswaModel({
     required this.siswaId,
@@ -501,6 +502,7 @@ class DaftarSiswaModel extends Equatable {
     required this.kelas,
     this.waliKelas,
     this.foto,
+    this.username,
   });
 
   DaftarSiswaModel copyWith({
@@ -531,6 +533,7 @@ class DaftarSiswaModel extends Equatable {
         kelas: json['kelas'],
         waliKelas: json['wali_kelas'],
         foto: json['foto'],
+        username: json['username'],
       );
 
   @override
