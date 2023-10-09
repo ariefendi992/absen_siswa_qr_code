@@ -1,13 +1,19 @@
 import 'package:absen_siswa_qr_code/cubit/master/daftar_siswa_cubit.dart';
-import 'package:absen_siswa_qr_code/models/master_model.dart';
 import 'package:absen_siswa_qr_code/utils/theme.dart';
 import 'package:absen_siswa_qr_code/views/widgets/card_daftar_siswa.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class GuruGetDaftarSiswa extends StatefulWidget {
-  final DaftarKelasAjarModel kelas;
-  const GuruGetDaftarSiswa(this.kelas, {super.key});
+  final int kelasID;
+  final String? kelas;
+  final String? waliKelas;
+  const GuruGetDaftarSiswa({
+    super.key,
+    required this.kelasID,
+    this.waliKelas,
+    this.kelas,
+  });
 
   @override
   State<GuruGetDaftarSiswa> createState() => _GuruGetDaftarSiswaState();
@@ -19,8 +25,7 @@ class _GuruGetDaftarSiswaState extends State<GuruGetDaftarSiswa> {
   @override
   void initState() {
     super.initState();
-    context.read<DaftarSiswaCubit>()
-      ..getDataSiswa(kelasId: widget.kelas.kelasId);
+    context.read<DaftarSiswaCubit>().getDataSiswa(kelasId: widget.kelasID);
   }
 
   @override
@@ -53,7 +58,11 @@ class _GuruGetDaftarSiswaState extends State<GuruGetDaftarSiswa> {
         ),
       ),
       body: RefreshIndicator(
-        onRefresh: () async {},
+        onRefresh: () async {
+          context
+              .read<DaftarSiswaCubit>()
+              .getDataSiswa(kelasId: widget.kelasID);
+        },
         child: Container(
           padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
           child: Column(
@@ -154,19 +163,19 @@ class _GuruGetDaftarSiswaState extends State<GuruGetDaftarSiswa> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  '${widget.kelas.kelas}',
+                  'Wali Kelas ${widget.kelas!}',
                   style: TextStyle(
-                    fontSize: 14,
+                    fontSize: 16,
                     fontWeight: bold,
                     color: kWhiteColor,
-                    letterSpacing: 2,
+                    // letterSpacing: 2,
                   ),
                 ),
                 SizedBox(height: 2),
                 Text(
-                  '${widget.kelas.waliKelas}',
+                  '${widget.waliKelas!}',
                   style: TextStyle(
-                    fontSize: 20,
+                    fontSize: 16,
                     fontWeight: bold,
                     color: kWhiteColor,
                     letterSpacing: 1,

@@ -38,8 +38,11 @@ class JadwalMengajarHarianModel extends Equatable {
   final String? jamSelesai;
   final String? semester;
   final String? kelas;
+  final int? kelasID;
   final String? hari;
   final String? today;
+  final String? waliKelas;
+  final Map<String, dynamic>? additionalData;
 
   const JadwalMengajarHarianModel({
     required this.id,
@@ -51,8 +54,11 @@ class JadwalMengajarHarianModel extends Equatable {
     this.jamSelesai,
     this.semester,
     this.kelas,
+    this.kelasID,
     this.hari,
     this.today,
+    this.waliKelas,
+    this.additionalData,
   });
 
   factory JadwalMengajarHarianModel.fromJson(Map<String, dynamic> json) {
@@ -66,8 +72,11 @@ class JadwalMengajarHarianModel extends Equatable {
       jamSelesai: json['jam_selesai'],
       semester: json['semester'],
       kelas: json['kelas'],
+      kelasID: json['kelas_id'],
       hari: json['hari'],
       today: json['today'],
+      waliKelas: json['wali_kelas'],
+      additionalData: json,
     );
   }
 
@@ -450,6 +459,7 @@ class DaftarKelasAjarModel extends Equatable {
   final String kelas;
   final String semester;
   final String waliKelas;
+  final String? foto;
 
   const DaftarKelasAjarModel({
     required this.mengajarId,
@@ -457,6 +467,7 @@ class DaftarKelasAjarModel extends Equatable {
     required this.kelas,
     required this.semester,
     required this.waliKelas,
+    this.foto,
   });
 
   factory DaftarKelasAjarModel.fromJson(Map<String, dynamic> json) =>
@@ -466,6 +477,7 @@ class DaftarKelasAjarModel extends Equatable {
         kelas: json['kelas'],
         semester: json['semester'],
         waliKelas: json['wali_kelas'],
+        foto: json['foto'],
       );
 
   @override
@@ -479,6 +491,7 @@ class DaftarSiswaModel extends Equatable {
   final String kelasId;
   final String kelas;
   final String? waliKelas;
+  final String? foto;
 
   const DaftarSiswaModel({
     required this.siswaId,
@@ -487,6 +500,7 @@ class DaftarSiswaModel extends Equatable {
     required this.kelasId,
     required this.kelas,
     this.waliKelas,
+    this.foto,
   });
 
   DaftarSiswaModel copyWith({
@@ -510,12 +524,14 @@ class DaftarSiswaModel extends Equatable {
 
   factory DaftarSiswaModel.fromJson(Map<String, dynamic> json) =>
       DaftarSiswaModel(
-          siswaId: json['siswa_id'],
-          firstName: json['first_name'],
-          lastName: json['last_name'],
-          kelasId: json['kelas_id'].toString(),
-          kelas: json['kelas'],
-          waliKelas: json['wali_kelas']);
+        siswaId: json['siswa_id'],
+        firstName: json['first_name'],
+        lastName: json['last_name'],
+        kelasId: json['kelas_id'].toString(),
+        kelas: json['kelas'],
+        waliKelas: json['wali_kelas'],
+        foto: json['foto'],
+      );
 
   @override
   List<Object?> get props =>
@@ -555,6 +571,7 @@ class JadwalPelajaranSiswaModel extends Equatable {
   final String jamKe;
   final String guru;
   final String? hari;
+  final String? kelasID;
 
   const JadwalPelajaranSiswaModel({
     required this.id,
@@ -563,19 +580,20 @@ class JadwalPelajaranSiswaModel extends Equatable {
     required this.selesai,
     required this.jamKe,
     required this.guru,
+    this.kelasID,
     this.hari,
   });
 
   factory JadwalPelajaranSiswaModel.fromJson(Map<String, dynamic> json) =>
       JadwalPelajaranSiswaModel(
-        id: json['id'],
-        mapel: json['mapel'],
-        mulai: json['mulai'],
-        selesai: json['selesai'],
-        jamKe: json['jam_ke'],
-        guru: json['guru'],
-        hari: json['hari'],
-      );
+          id: json['id'],
+          mapel: json['mapel'],
+          mulai: json['mulai'],
+          selesai: json['selesai'],
+          jamKe: json['jam_ke'],
+          guru: json['guru'],
+          hari: json['hari'],
+          kelasID: json['kelas_id']);
 
   @override
   List<Object?> get props => [id, mapel, jamKe, mulai, selesai, guru, hari];

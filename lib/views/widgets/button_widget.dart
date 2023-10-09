@@ -13,6 +13,7 @@ class ButtonWidget extends StatelessWidget {
   final double borderRadiusCircular;
   final double elevation;
   final IconData? icons;
+  final double? letterSpacing;
 
   const ButtonWidget({
     super.key,
@@ -27,6 +28,7 @@ class ButtonWidget extends StatelessWidget {
     this.borderRadiusCircular = 10,
     this.elevation = 5,
     this.icons,
+    this.letterSpacing = 0.5,
   });
 
   @override
@@ -52,7 +54,7 @@ class ButtonWidget extends StatelessWidget {
                     fontSize: fontSize,
                     color: kWhiteColor,
                     fontWeight: medium,
-                    // letterSpacing: 0.5,
+                    letterSpacing: letterSpacing,
                   ),
                 ),
               ],

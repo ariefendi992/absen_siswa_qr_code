@@ -1,24 +1,27 @@
 import 'package:absen_siswa_qr_code/cubit/master/absen/absen_siswa_cubit.dart';
 import 'package:absen_siswa_qr_code/cubit/page/page_cubit.dart';
-import 'package:absen_siswa_qr_code/cubit/user/guru/scan_siswa_cubit.dart';
+// import 'package:absen_siswa_qr_code/cubit/user/guru/scan_siswa_cubit.dart';
 import 'package:absen_siswa_qr_code/models/absensi_siswa_model.dart';
 import 'package:absen_siswa_qr_code/utils/secure_storage.dart';
 import 'package:absen_siswa_qr_code/utils/theme.dart';
 import 'package:absen_siswa_qr_code/utils/url.dart';
+import 'package:absen_siswa_qr_code/views/guru/menu/guru_scan_qr_page.dart';
 import 'package:absen_siswa_qr_code/views/widgets/Absensi/widget_riwayat_absen_mapel.dart';
-import 'package:absen_siswa_qr_code/views/widgets/button_keterangan.dart';
 import 'package:absen_siswa_qr_code/views/widgets/button_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:quickalert/quickalert.dart';
 
 class GuruResultScanPage extends StatefulWidget {
+  final ScanSiswaModel resulScanData;
   final String username;
   final Function() closeCameraScreen;
 
   const GuruResultScanPage({
     required this.username,
     required this.closeCameraScreen,
+    required this.resulScanData,
     super.key,
   });
 
@@ -31,19 +34,19 @@ class _GuruResultScanPageState extends State<GuruResultScanPage> {
   bool shouldPop = true;
   String ket = '';
   bool showSnackBar = true;
+  bool showRiwayat = false;
 
   @override
   void initState() {
     super.initState();
-    context.read<ScanSiswaCubit>().getSiswaByUsername(
-          username: widget.username,
-        );
+    // context.read<ScanSiswaCubit>().getSiswaByUsername(
+    //       username: widget.username,
+    //     );
   }
 
   @override
   Widget build(BuildContext context) {
     Widget cardRiwayatAbsen(ScanSiswaModel siswaData) {
-      print('DATA ==> ${siswaData}');
       return Column(
         children: siswaData.dataRiwayat!.data
             .map((e) => WidgetCardRiwayatAbsenMapel(e))
@@ -286,15 +289,24 @@ class _GuruResultScanPageState extends State<GuruResultScanPage> {
                               ),
                               SizedBox(height: 6),
                               Container(
-                                padding: EdgeInsets.symmetric(horizontal: 4),
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: 4, vertical: 2),
                                 decoration: BoxDecoration(
-                                  color: allColor[8],
+                                  color: siswaData.data!.additionalData![
+                                              "status_absen"] ==
+                                          'Telah Absen'
+                                      ? newColorList[0]
+                                      : allColor[8],
                                   borderRadius: BorderRadius.circular(4),
                                 ),
                                 child: Text(
                                   '${siswaData.data!.additionalData!["status_absen"]}',
                                   style: TextStyle(
-                                    color: secondary,
+                                    color: siswaData.data!.additionalData![
+                                                "status_absen"] !=
+                                            'Telah Absen'
+                                        ? secondary
+                                        : kWhiteColor,
                                     fontWeight: medium,
                                     fontSize: 14,
                                   ),
@@ -306,108 +318,6 @@ class _GuruResultScanPageState extends State<GuruResultScanPage> {
                       )
                     ],
                   )
-                  // Row(
-                  //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  //   children: [
-                  //     Expanded(
-                  //       child: Container(
-                  //         width: MediaQuery.of(context).size.width / 4.5,
-                  //         // decoration: BoxDecoration(
-                  //         //   color: primarySoft,
-                  //         // ),
-                  //         child: Text(
-                  //           'Nama',
-                  //           style: TextStyle(
-                  //             color: kWhiteColor,
-                  //             fontWeight: medium,
-                  //             fontSize: 14,
-                  //           ),
-                  //         ),
-                  //       ),
-                  //     ),
-                  //     Expanded(child: Text(':')),
-                  //     Expanded(
-                  //       flex: 3,
-                  //       child: Container(
-                  //         alignment: Alignment.centerRight,
-                  //         child: Text(
-                  //           '${siswaData.data!.firstName} ${siswaData.data!.lastName}',
-                  //           style: TextStyle(
-                  //             color: kWhiteColor,
-                  //             fontWeight: medium,
-                  //             fontSize: 14,
-                  //           ),
-                  //         ),
-                  //       ),
-                  //     ),
-                  //   ],
-                  // ),
-                  // SizedBox(height: 12),
-                  // Row(
-                  //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  //   children: [
-                  //     Text(
-                  //       'Kelas',
-                  //       style: TextStyle(
-                  //         color: kWhiteColor,
-                  //         fontWeight: medium,
-                  //         fontSize: 14,
-                  //       ),
-                  //     ),
-                  //     Text(
-                  //       '${siswaData.data!.kelas}',
-                  //       style: TextStyle(
-                  //         color: kWhiteColor,
-                  //         fontWeight: medium,
-                  //         fontSize: 14,
-                  //       ),
-                  //     ),
-                  //   ],
-                  // ),
-                  // SizedBox(height: 12),
-                  // Row(
-                  //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  //   children: [
-                  //     Text(
-                  //       'Semester',
-                  //       style: TextStyle(
-                  //         color: kWhiteColor,
-                  //         fontWeight: medium,
-                  //         fontSize: 14,
-                  //       ),
-                  //     ),
-                  //     Text(
-                  //       '${siswaData.data!.semester}',
-                  //       style: TextStyle(
-                  //         color: kWhiteColor,
-                  //         fontWeight: medium,
-                  //         fontSize: 14,
-                  //       ),
-                  //     ),
-                  //   ],
-                  // ),
-                  // SizedBox(height: 12),
-                  // Row(
-                  //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  //   children: [
-                  //     Text(
-                  //       'Pertemuan',
-                  //       style: TextStyle(
-                  //         color: kWhiteColor,
-                  //         fontWeight: medium,
-                  //         fontSize: 14,
-                  //       ),
-                  //     ),
-                  //     Text(
-                  //       'Ke-${siswaData.data!.additionalData!['count_pertemuan']}',
-                  //       style: TextStyle(
-                  //         color: kWhiteColor,
-                  //         fontWeight: medium,
-                  //         fontSize: 14,
-                  //       ),
-                  //     ),
-                  //   ],
-                  // ),
                 ],
               ),
             )
@@ -418,8 +328,73 @@ class _GuruResultScanPageState extends State<GuruResultScanPage> {
 
     /// * END WIDGET CARD
 
+    Widget btnKonfirmasi() {
+      return BlocConsumer<AbsenSiswaCubit, AbsenSiswaState>(
+        listener: (context, state) {
+          if (state is AbsenSiswaSuccess) {
+            QuickAlert.show(
+              title: 'Sukses',
+              text: 'Absen Berhasil...!',
+              context: context,
+              type: QuickAlertType.success,
+              confirmBtnText: 'Lanjutkan',
+              onConfirmBtnTap: () {
+                context.read<PageCubit>().setPage(0);
+                Navigator.pushNamedAndRemoveUntil(
+                    context, '/mainGuru', (route) => false);
+              },
+            );
+          } else if (state is AbsenSiswaFailure) {
+            QuickAlert.show(
+                title: 'Gaga!',
+                text: 'Absen telah dilakukan!',
+                textAlignment: TextAlign.center,
+                context: context,
+                type: QuickAlertType.error,
+                confirmBtnText: 'Scan',
+                cancelBtnText: 'Tutup',
+                onConfirmBtnTap: () {
+                  Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => GuruScanPage(),
+                      ),
+                      (route) => false);
+                },
+                showCancelBtn: true,
+                onCancelBtnTap: () {
+                  Navigator.pop(context);
+                });
+          }
+        },
+        builder: (context, state) {
+          return Container(
+            height: 44,
+            margin: EdgeInsets.only(bottom: 18),
+            child: ButtonWidget(
+              padding: EdgeInsets.symmetric(horizontal: 30),
+              title: 'Konfirmasi',
+              colors: primary,
+              fontSize: 17,
+              letterSpacing: 0.3,
+              onTap: () {
+                context.read<AbsenSiswaCubit>().absenSiswa(
+                      mengajarID: widget.resulScanData.additionalData!['data']
+                          ['mengajar_id'],
+                      siswaID: widget.resulScanData.additionalData!['data']
+                          ['siswa_id'],
+                      keterangan: 'H',
+                      mapelID: widget.resulScanData.additionalData!['data']
+                          ['mapel_id'],
+                    );
+              },
+            ),
+          );
+        },
+      );
+    }
+
     return Scaffold(
-      // extendBodyBehindAppBar: true,
       bottomNavigationBar: BottomAppBar(
         shape: CircularNotchedRectangle(),
         clipBehavior: Clip.hardEdge,
@@ -429,16 +404,7 @@ class _GuruResultScanPageState extends State<GuruResultScanPage> {
           data: IconThemeData(
             color: Theme.of(context).colorScheme.onPrimary,
           ),
-          child: Container(
-              height: 44,
-              margin: EdgeInsets.only(bottom: 18),
-              child: ButtonWidget(
-                padding: EdgeInsets.symmetric(horizontal: 30),
-                title: 'Konfirmasi',
-                colors: allColor[7],
-                fontSize: 17,
-                onTap: () {},
-              )),
+          child: btnKonfirmasi(),
         ),
       ),
       backgroundColor: kBackgorundScaffold,
@@ -471,267 +437,57 @@ class _GuruResultScanPageState extends State<GuruResultScanPage> {
           widget.closeCameraScreen();
           return shouldPop;
         },
-        child: BlocBuilder<ScanSiswaCubit, ScanSiswaState>(
-          builder: (context, state) {
-            if (state is ScanSiswaSuccess) {
-              final data = state.siswaData;
-              print('Status ==> ${state.siswaData.status}');
-              return RefreshIndicator(
-                onRefresh: () async {
-                  context
-                      .read<ScanSiswaCubit>()
-                      .getSiswaByUsername(username: widget.username);
-                },
-                child: ListView(
-                  // padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                  padding: EdgeInsets.only(
-                    left: 20,
-                    right: 20,
-                    top: 10,
-                    bottom: 20,
-                  ),
-                  shrinkWrap: true,
-                  // physics: BouncingScrollPhysics(),
-                  children: [
-                    /// * NOTE: CARD WIDGET
-                    cardWidget(data),
-                    Container(
-                      margin: EdgeInsets.only(top: 30),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Keterangan Kehadiran',
-                            style: TextStyle(
-                              fontWeight: medium,
-                              fontSize: 18,
-                            ),
-                          ),
-
-                          cardRiwayatAbsen(data),
-
-                          // Container(
-                          //   margin: EdgeInsets.only(top: 16),
-                          //   padding: EdgeInsets.symmetric(vertical: 10),
-                          //   decoration: BoxDecoration(
-                          //     color: primaryExtraSoft,
-                          //     borderRadius: BorderRadius.circular(18),
-                          //   ),
-                          //   child:
-                          //       BlocConsumer<AbsenSiswaCubit, AbsenSiswaState>(
-                          //     listener: (context, state) {
-                          //       if (state is AbsenSiswaSuccess) {
-                          //         context.read<PageCubit>().setPage(0);
-                          //         Navigator.pushNamedAndRemoveUntil(
-                          //             context, '/mainGuru', (route) => false);
-                          //       } else if (state is AbsenSiswaFailure) {
-                          //         ScaffoldMessenger.of(context).showSnackBar(
-                          //           SnackBar(
-                          //             content: Text(
-                          //               '${state.error}',
-                          //               style: TextStyle(
-                          //                 color: secondary,
-                          //               ),
-                          //             ),
-                          //             backgroundColor: allColor[1],
-                          //             behavior: SnackBarBehavior.floating,
-                          //             action: SnackBarAction(
-                          //               label: 'Dismiss',
-                          //               disabledTextColor: Colors.white,
-                          //               textColor: secondary,
-                          //               onPressed: () {
-                          //                 //Do whatever you want
-                          //               },
-                          //             ),
-                          //           ),
-                          //         );
-                          //       }
-                          //     },
-                          //     builder: (context, state) {
-                          //       return Row(
-                          //         mainAxisAlignment:
-                          //             MainAxisAlignment.spaceAround,
-                          //         children: [
-
-                          //           // ButtonMenuKeterangan(
-                          //           //   icons: Icons.check,
-                          //           //   iconColors: successPrimary,
-                          //           //   title: 'Siswa Hadir',
-                          //           //   onTap: () {
-                          //           //     setState(() {
-                          //           //       ket = 'H';
-                          //           //     });
-                          //           //     context
-                          //           //         .read<AbsenSiswaCubit>()
-                          //           //         .absenSiswa(
-                          //           //           mengajarID:
-                          //           //               data.additionalData!['data']
-                          //           //                   ['mengajar_id'],
-                          //           //           siswaID:
-                          //           //               data.additionalData!['data']
-                          //           //                   ['siswa_id'],
-                          //           //           keterangan: ket,
-                          //           //           mapelID:
-                          //           //               data.additionalData!['data']
-                          //           //                   ['mapel_id'],
-                          //           //         );
-                          //           //   },
-                          //           // ),
-                          //           // ButtonMenuKeterangan(
-                          //           //   icons: Icons.close,
-                          //           //   iconColors: kErrorColor,
-                          //           //   bgColors: errorExtraSoft,
-                          //           //   title: 'Siswa Absen',
-                          //           //   onTap: () {
-                          //           //     setState(() {
-                          //           //       ket = 'A';
-                          //           //     });
-                          //           //     context
-                          //           //         .read<AbsenSiswaCubit>()
-                          //           //         .absenSiswa(
-                          //           //           mengajarID:
-                          //           //               data.additionalData!['data']
-                          //           //                   ['mengajar_id'],
-                          //           //           siswaID:
-                          //           //               data.additionalData!['data']
-                          //           //                   ['siswa_id'],
-                          //           //           keterangan: ket,
-                          //           //           mapelID:
-                          //           //               data.additionalData!['data']
-                          //           //                   ['mapel_id'],
-                          //           //         );
-                          //           //   },
-                          //           // ),
-                          //           // ButtonMenuKeterangan(
-                          //           //   icons: Icons.notes,
-                          //           //   iconColors: primary,
-                          //           //   bgColors: primaryExtraSoft,
-                          //           //   title: 'Siswa Izin',
-                          //           //   onTap: () {
-                          //           //     setState(() {
-                          //           //       ket = 'I';
-                          //           //     });
-                          //           //     print(
-                          //           //         '${data.additionalData!["data"]["siswa_id"]}');
-                          //           //     context
-                          //           //         .read<AbsenSiswaCubit>()
-                          //           //         .absenSiswa(
-                          //           //           mengajarID:
-                          //           //               data.additionalData!['data']
-                          //           //                   ['mengajar_id'],
-                          //           //           siswaID:
-                          //           //               data.additionalData!['data']
-                          //           //                   ['siswa_id'],
-                          //           //           keterangan: ket,
-                          //           //           mapelID:
-                          //           //               data.additionalData!['data']
-                          //           //                   ['mapel_id'],
-                          //           //         );
-                          //           //   },
-                          //           // ),
-                          //           // ButtonMenuKeterangan(
-                          //           //   icons: Icons.add_box,
-                          //           //   iconColors: successSoft,
-                          //           //   bgColors: successExtraSoft,
-                          //           //   title: 'Siswa Sakit',
-                          //           //   onTap: () {
-                          //           //     setState(() {
-                          //           //       ket = 'S';
-                          //           //     });
-                          //           //     context
-                          //           //         .read<AbsenSiswaCubit>()
-                          //           //         .absenSiswa(
-                          //           //           mengajarID:
-                          //           //               data.additionalData!['data']
-                          //           //                   ['mengajar_id'],
-                          //           //           siswaID:
-                          //           //               data.additionalData!['data']
-                          //           //                   ['siswa_id'],
-                          //           //           keterangan: ket,
-                          //           //           mapelID:
-                          //           //               data.additionalData!['data']
-                          //           //                   ['mapel_id'],
-                          //           //         );
-                          //           //   },
-                          //           // ),
-                          //         ],
-                          //       );
-                          //     },
-                          //   ),
-                          // )
-                        ],
-                      ),
-                    )
-                  ],
-                ),
-              );
-            } else if (state is ScanSiswaFailure) {
-              ///
-              /// * NOTE: ERROR VIEW ON PAGE
-              ///
-              return ListView(
-                // mainAxisAlignment: MainAxisAlignment.center,
+        child: ListView(
+          padding: EdgeInsets.only(
+            left: 20,
+            right: 20,
+            top: 10,
+            bottom: 20,
+          ),
+          shrinkWrap: true,
+          // physics: BouncingScrollPhysics(),
+          children: [
+            /// * NOTE: CARD WIDGET
+            cardWidget(widget.resulScanData),
+            Container(
+              margin: EdgeInsets.only(top: 16),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Container(
-                    margin: EdgeInsets.only(
-                        bottom: 80,
-                        top: MediaQuery.of(context).size.height / 6),
-                    width: double.infinity,
-                    child: Container(
-                      alignment: Alignment.center,
-                      width: 48,
-                      height: 48,
-                      child: Icon(
-                        Icons.qr_code_scanner,
-                        size: 100,
-                        color: kGreyColor,
+                  Row(
+                    children: [
+                      Text(
+                        'Riwayat Absen',
+                        style: TextStyle(
+                          fontWeight: medium,
+                          fontSize: 16,
+                        ),
                       ),
-                    ),
+                      Spacer(),
+                      IconButton(
+                        onPressed: () {
+                          setState(() {
+                            showRiwayat = !showRiwayat;
+                          });
+                        },
+                        highlightColor: primaryBgCard,
+                        splashColor: primaryExtraSoft,
+                        icon: Icon(
+                          showRiwayat
+                              ? Icons.arrow_right_outlined
+                              : Icons.arrow_drop_down_outlined,
+                          // size: 24,
+                        ),
+                      )
+                    ],
                   ),
-                  Container(
-                    padding: EdgeInsets.symmetric(horizontal: 20),
-                    child: Column(
-                      children: [
-                        Text(
-                          'QR Code tidak sah',
-                          style: TextStyle(
-                            fontSize: 24,
-                            fontWeight: medium,
-                          ),
-                        ),
-                        SizedBox(height: 14),
-                        Text(
-                          '${state.error}',
-                          style: TextStyle(
-                            color: kGreyColor,
-                            fontSize: 16,
-                            fontWeight: medium,
-                          ),
-                        ),
-                        SizedBox(height: 18),
-                        ButtonWidget(
-                          title: 'Scan Ulang',
-                          onTap: () {
-                            widget.closeCameraScreen();
-                            Navigator.pop(context);
-                          },
-                          height: 44,
-                          width: MediaQuery.of(context).size.width / 1.5,
-                          colors: primary,
-                          fontSize: 20,
-                          borderRadiusCircular: 12,
-                        ),
-                      ],
-                    ),
-                  )
+                  showRiwayat
+                      ? SizedBox()
+                      : cardRiwayatAbsen(widget.resulScanData),
                 ],
-              );
-            } else {
-              return Center(
-                child: CircularProgressIndicator(),
-              );
-            }
-          },
+              ),
+            )
+          ],
         ),
       ),
     );

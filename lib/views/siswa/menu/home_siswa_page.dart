@@ -275,7 +275,7 @@ class _HomeSiswaPageState extends State<HomeSiswaPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Kategori Menu',
+              'Menu Kategori',
               style: TextStyle(
                 fontSize: 16,
                 color: allColor[7],

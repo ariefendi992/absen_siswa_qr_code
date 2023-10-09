@@ -12,7 +12,7 @@ class WidgetCardRiwayatAbsenMapel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(top: 14),
+      margin: EdgeInsets.only(bottom: 14),
       padding: EdgeInsets.symmetric(horizontal: 6),
       child: Material(
         elevation: 4,
@@ -33,7 +33,7 @@ class WidgetCardRiwayatAbsenMapel extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Tanggal Absen',
+                          'Tgl Absen',
                           style: TextStyle(
                             // color: allColor[7],
                             fontWeight: medium,
@@ -85,24 +85,43 @@ class WidgetCardRiwayatAbsenMapel extends StatelessWidget {
                     ),
                   ),
                   Expanded(
+                    flex: 2,
                     child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
                         Text(
-                          ':',
+                          '${riwayatMapel.tglAbsen}',
                           style: TextStyle(
                             fontWeight: medium,
                           ),
                         ),
                         SizedBox(height: 4),
-                        Text(
-                          ':',
-                          style: TextStyle(
-                            fontWeight: medium,
+                        Container(
+                          padding:
+                              EdgeInsets.symmetric(horizontal: 6, vertical: 1),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(4),
+                            color: riwayatMapel.ketCharacter == 'H'
+                                ? successPrimary2
+                                : riwayatMapel.ketCharacter == 'S'
+                                    ? warning2
+                                    : riwayatMapel.ketCharacter == 'I'
+                                        ? allColor[6]
+                                        : c1,
+                          ),
+                          child: Text(
+                            '${riwayatMapel.keterangan}',
+                            style: TextStyle(
+                              fontWeight: medium,
+                              color: riwayatMapel.ketCharacter == 'S'
+                                  ? secondary
+                                  : kWhiteColor,
+                            ),
                           ),
                         ),
                         SizedBox(height: 4),
                         Text(
-                          ':',
+                          'Ke-${riwayatMapel.pertemuan}',
                           style: TextStyle(
                             fontWeight: medium,
                           ),

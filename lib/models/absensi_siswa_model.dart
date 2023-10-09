@@ -126,11 +126,13 @@ class RiwayatAbsenSiswaMapelModel extends Equatable {
   final String tglAbsen;
   final String keterangan;
   final int pertemuan;
+  final String ketCharacter;
 
   const RiwayatAbsenSiswaMapelModel({
     required this.tglAbsen,
     required this.keterangan,
     required this.pertemuan,
+    required this.ketCharacter,
   });
 
   factory RiwayatAbsenSiswaMapelModel.fromJson(Map<String, dynamic> json) {
@@ -138,6 +140,7 @@ class RiwayatAbsenSiswaMapelModel extends Equatable {
       tglAbsen: json['tgl_absen'],
       keterangan: json['keterangan'],
       pertemuan: json['pertemuan'],
+      ketCharacter: json['ket_char'],
     );
   }
 

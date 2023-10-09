@@ -74,6 +74,7 @@ class UserGuruModel extends Equatable {
   final String? alamat;
   final String? telp;
   final String? mapel;
+  final String? tgl;
   final Map<String, dynamic>? additionalData;
 
   const UserGuruModel({
@@ -88,6 +89,7 @@ class UserGuruModel extends Equatable {
     this.mapel,
     this.fullname,
     this.additionalData,
+    this.tgl,
   });
 
   factory UserGuruModel.fromJson(Map<String, dynamic> json) {
@@ -101,6 +103,7 @@ class UserGuruModel extends Equatable {
       alamat: json['alamat'],
       telp: json['telp'],
       mapel: json['mapel'],
+      tgl: json['tgl'],
       additionalData: json,
     );
   }

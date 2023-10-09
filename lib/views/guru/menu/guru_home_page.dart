@@ -33,30 +33,37 @@ class _GuruHomePageState extends State<GuruHomePage> {
       // * HEADER VIEW
       Widget headerView(UserGuruModel userGuru) {
         return Container(
-          margin: EdgeInsets.only(bottom: 24, top: 8),
+          margin: EdgeInsets.only(bottom: 16, top: 8),
           width: MediaQuery.of(context).size.width,
-          child: Row(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'selamat datang',
-                    style: TextStyle(
-                      fontSize: 15,
-                      color: secondarySoft,
-                    ),
-                  ),
-                  Text(
-                    '${userGuru.firstName} ${userGuru.lastName}',
-                    style: TextStyle(
-                      fontWeight: medium,
-                      fontSize: 20,
-                      letterSpacing: 0.5,
-                    ),
-                  )
-                ],
+              // Container(
+              //   alignment: Alignment.topRight,
+              //   child: Text(
+              //     '${userGuru.tgl}',
+              //     style: TextStyle(
+              //       fontWeight: medium,
+              //       color: secondarySoft,
+              //       fontSize: 14,
+              //     ),
+              //   ),
+              // ),
+              Text(
+                'selamat datang',
+                style: TextStyle(
+                  fontSize: 15,
+                  color: secondarySoft,
+                ),
               ),
+              Text(
+                '${userGuru.firstName} ${userGuru.lastName}',
+                style: TextStyle(
+                  fontWeight: medium,
+                  fontSize: 20,
+                  letterSpacing: 0.5,
+                ),
+              )
             ],
           ),
         );
@@ -68,11 +75,11 @@ class _GuruHomePageState extends State<GuruHomePage> {
           margin: EdgeInsets.only(bottom: 24),
           child: Material(
             elevation: 5,
-            borderRadius: BorderRadius.circular(16),
+            borderRadius: BorderRadius.circular(18),
             child: Container(
               decoration: BoxDecoration(
                 color: primary,
-                borderRadius: BorderRadius.circular(16),
+                borderRadius: BorderRadius.circular(18),
                 image: DecorationImage(
                   image: AssetImage('assets/images/pattern-1.png'),
                   fit: BoxFit.cover,
@@ -93,7 +100,7 @@ class _GuruHomePageState extends State<GuruHomePage> {
                   Text(
                     '${userGuru.nip}',
                     style: TextStyle(
-                      fontSize: 16,
+                      fontSize: 18,
                       color: kWhiteColor,
                       fontWeight: bold,
                       letterSpacing: 1.5,
@@ -177,24 +184,24 @@ class _GuruHomePageState extends State<GuruHomePage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Kategori Menu',
+              'Menu Katgori',
               style: TextStyle(
-                fontSize: 16,
+                fontSize: 17,
                 color: secondary,
                 fontWeight: medium,
               ),
             ),
             Container(
               width: MediaQuery.of(context).size.width,
-              margin: EdgeInsets.only(top: 8),
+              margin: EdgeInsets.only(top: 10),
               child: Material(
                 elevation: 5,
-                borderRadius: BorderRadius.circular(16),
+                borderRadius: BorderRadius.circular(18),
                 child: Container(
                   padding: EdgeInsets.symmetric(horizontal: 10, vertical: 12),
                   decoration: BoxDecoration(
                     color: kBackgorundScaffold.withAlpha(20),
-                    borderRadius: BorderRadius.circular(16),
+                    borderRadius: BorderRadius.circular(18),
                   ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -205,7 +212,7 @@ class _GuruHomePageState extends State<GuruHomePage> {
                         height: 48,
                         width: 48,
                         iconSize: 32,
-                        title: 'Jadwal',
+                        title: 'JadwalMengajar',
                         fontSize: 12,
                         onTap: () {
                           Navigator.push(context,
@@ -220,7 +227,7 @@ class _GuruHomePageState extends State<GuruHomePage> {
                         height: 48,
                         width: 48,
                         iconSize: 32,
-                        title: 'KelasAjar',
+                        title: 'DaftarKelas',
                         fontSize: 12,
                         onTap: () => Navigator.push(
                           context,
@@ -265,7 +272,7 @@ class _GuruHomePageState extends State<GuruHomePage> {
         builder: (context, state) {
           if (state is DaftarMengajarHarianSuccess) {
             return Container(
-              margin: EdgeInsets.only(top: 16),
+              margin: EdgeInsets.only(top: 10),
               width: MediaQuery.of(context).size.width,
               child: ListView.builder(
                   padding: EdgeInsets.all(0),
@@ -303,15 +310,15 @@ class _GuruHomePageState extends State<GuruHomePage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Container(
-                    height: MediaQuery.of(context).size.height / 3.6,
+                    height: MediaQuery.of(context).size.height / 3,
                     width: double.infinity,
                     // color: errorPrimary,
                     alignment: Alignment.center,
                     child: Text(
                       '${state.error}',
                       style: TextStyle(
-                        // fontSize: 16,
-                        color: errorSoft.withOpacity(0.7),
+                        fontSize: 16,
+                        color: secondary.withOpacity(0.5),
                         fontWeight: medium,
                       ),
                     ),
@@ -348,7 +355,7 @@ class _GuruHomePageState extends State<GuruHomePage> {
       },
       child: SafeArea(
         child: ListView(
-          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 30),
           shrinkWrap: true,
           children: [
             header(),
@@ -356,7 +363,7 @@ class _GuruHomePageState extends State<GuruHomePage> {
             Text(
               'Jadwal Harian',
               style: TextStyle(
-                fontSize: 16,
+                fontSize: 17,
                 color: secondary,
                 fontWeight: medium,
               ),

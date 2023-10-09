@@ -1,5 +1,6 @@
 import 'package:absen_siswa_qr_code/models/master_model.dart';
 import 'package:absen_siswa_qr_code/utils/theme.dart';
+import 'package:absen_siswa_qr_code/utils/url.dart';
 import 'package:flutter/material.dart';
 
 class CardDaftarSiswaWidget extends StatelessWidget {
@@ -19,18 +20,27 @@ class CardDaftarSiswaWidget extends StatelessWidget {
         ),
       ),
       child: Row(
+        // mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Container(
             margin: EdgeInsets.only(right: 12),
             height: 48,
             width: 48,
-            child: Image.asset(
-              'assets/images/reading-book.png',
-              color: allColor[4],
-            ),
+            child: daftarSiswa.foto != null
+                ? Image.network(
+                    '${baseUrl}/${daftarSiswa.foto}',
+                    height: 48,
+                    width: 48,
+                    // fit: BoxFit.fitHeigh,
+                  )
+                : Image.asset(
+                    'assets/images/reading-book.png',
+                    color: allColor[4],
+                  ),
           ),
           Expanded(
-            flex: 1,
+            flex: 7,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -38,7 +48,7 @@ class CardDaftarSiswaWidget extends StatelessWidget {
                   '${daftarSiswa.firstName} ${daftarSiswa.lastName}',
                   style: TextStyle(
                     fontWeight: bold,
-                    fontSize: 17,
+                    fontSize: 16,
                     color: allColor[7],
                     letterSpacing: 0.3,
                   ),
@@ -53,6 +63,14 @@ class CardDaftarSiswaWidget extends StatelessWidget {
                       letterSpacing: 1),
                 ),
               ],
+            ),
+          ),
+          IconButton(
+            onPressed: () {},
+            icon: Icon(
+              Icons.arrow_forward_ios_rounded,
+              color: primary,
+              size: 22,
             ),
           ),
           // Container(
