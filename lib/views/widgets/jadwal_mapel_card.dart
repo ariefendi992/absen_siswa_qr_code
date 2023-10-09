@@ -16,13 +16,18 @@ class JadwalMapelCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Navigator.push(context, MaterialPageRoute(builder: (context) {
-          return GuruGetDaftarSiswa(
-            kelasID: jadwal!.kelasID!,
-            waliKelas: jadwal!.additionalData!['wali_kelas'],
-            kelas: jadwal!.kelas,
-          );
-        }));
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) {
+              return GuruGetDaftarSiswa(
+                kelasID: jadwal!.kelasID!,
+                waliKelas: jadwal!.additionalData!['wali_kelas'],
+                kelas: jadwal!.kelas,
+              );
+            },
+          ),
+        );
       },
       child: Container(
         margin: EdgeInsets.only(bottom: 16),
