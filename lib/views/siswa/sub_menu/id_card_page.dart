@@ -85,11 +85,24 @@ class IDCardPage extends StatelessWidget {
                       focusColor: Colors.green.withOpacity(0.0),
                       hoverColor: Colors.blue.withOpacity(0.8),
                       onTap: () {
-                        // print('OK Brooo');
                         DownloadFromAPI().downloadIDCard(
                           // "${state.userSiswa.idCard}",
                           '${state.userSiswa.id}',
                           '${state.userSiswa.firstName} ${state.userSiswa.lastName}.png',
+                        );
+
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(
+                              'Unduh Kartu Pelajar...',
+                              style: TextStyle(
+                                color: secondary,
+                              ),
+                            ),
+                            backgroundColor: successExtraSoft,
+                            behavior: SnackBarBehavior.floating,
+                            // duration: Duration(seconds: 2),
+                          ),
                         );
                       },
                       child: Container(
