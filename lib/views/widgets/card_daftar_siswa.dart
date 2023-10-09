@@ -1,6 +1,7 @@
 import 'package:absen_siswa_qr_code/models/master_model.dart';
 import 'package:absen_siswa_qr_code/utils/theme.dart';
 import 'package:absen_siswa_qr_code/utils/url.dart';
+import 'package:absen_siswa_qr_code/views/guru/sub_menu/guru_get_siswa_absen.dart';
 import 'package:flutter/material.dart';
 
 class CardDaftarSiswaWidget extends StatelessWidget {
@@ -66,7 +67,11 @@ class CardDaftarSiswaWidget extends StatelessWidget {
             ),
           ),
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) {
+                return GuruGetSiswaAbsen();
+              }));
+            },
             icon: Icon(
               Icons.arrow_forward_ios_rounded,
               color: primary,
