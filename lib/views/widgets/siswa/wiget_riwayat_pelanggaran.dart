@@ -26,10 +26,9 @@ class WidgetRiwayatPelanggaran extends StatelessWidget {
                 child: Text(
                   'Hari',
                   style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: bold,
+                    fontSize: 14,
+                    fontWeight: medium,
                     color: allColor[7],
-                    letterSpacing: 0.5,
                   ),
                 ),
               ),
@@ -37,10 +36,9 @@ class WidgetRiwayatPelanggaran extends StatelessWidget {
                 child: Text(
                   ':',
                   style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: bold,
+                    fontSize: 14,
+                    fontWeight: medium,
                     color: allColor[7],
-                    letterSpacing: 0.5,
                   ),
                 ),
               ),
@@ -49,10 +47,9 @@ class WidgetRiwayatPelanggaran extends StatelessWidget {
                 child: Text(
                   '${pelangaran.tglMelanggar}',
                   style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: bold,
+                    fontSize: 14,
+                    fontWeight: medium,
                     color: allColor[7],
-                    letterSpacing: 0.5,
                   ),
                 ),
               ),
@@ -67,10 +64,9 @@ class WidgetRiwayatPelanggaran extends StatelessWidget {
                 child: Text(
                   'Status',
                   style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: bold,
+                    fontSize: 14,
+                    fontWeight: medium,
                     color: allColor[7],
-                    letterSpacing: 0.5,
                   ),
                 ),
               ),
@@ -78,10 +74,9 @@ class WidgetRiwayatPelanggaran extends StatelessWidget {
                 child: Text(
                   ':',
                   style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: bold,
+                    fontSize: 14,
+                    fontWeight: medium,
                     color: allColor[7],
-                    letterSpacing: 0.5,
                   ),
                 ),
               ),
@@ -90,10 +85,9 @@ class WidgetRiwayatPelanggaran extends StatelessWidget {
                 child: Text(
                   '${pelangaran.status}',
                   style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: bold,
+                    fontSize: 14,
+                    fontWeight: medium,
                     color: errorAlt,
-                    letterSpacing: 0.5,
                   ),
                 ),
               ),
@@ -108,10 +102,9 @@ class WidgetRiwayatPelanggaran extends StatelessWidget {
                 child: Text(
                   'JenisPel',
                   style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: bold,
+                    fontSize: 14,
+                    fontWeight: medium,
                     color: allColor[7],
-                    letterSpacing: 0.5,
                   ),
                 ),
               ),
@@ -119,10 +112,9 @@ class WidgetRiwayatPelanggaran extends StatelessWidget {
                 child: Text(
                   ':',
                   style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: bold,
+                    fontSize: 14,
+                    fontWeight: medium,
                     color: allColor[7],
-                    letterSpacing: 0.5,
                   ),
                 ),
               ),
@@ -131,20 +123,19 @@ class WidgetRiwayatPelanggaran extends StatelessWidget {
                 child: Text(
                   '${pelangaran.jenisPelanggaran}',
                   style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: bold,
+                    fontSize: 14,
+                    fontWeight: medium,
                     color: errorAlt,
-                    letterSpacing: 0.5,
                   ),
                 ),
               ),
             ],
           ),
-          SizedBox(height: 4),
+          SizedBox(height: 6),
           Container(
             width: double.infinity,
             decoration: BoxDecoration(
-              color: errorSoft,
+              color: errorSoft.withAlpha(170),
               borderRadius: BorderRadius.circular(12),
             ),
             child: Column(
@@ -153,7 +144,7 @@ class WidgetRiwayatPelanggaran extends StatelessWidget {
                   width: double.infinity,
                   padding: EdgeInsets.symmetric(vertical: 4),
                   decoration: BoxDecoration(
-                    color: errorAlt,
+                    color: errorAlt.withAlpha(180),
                     borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(11),
                       topRight: Radius.circular(11),
@@ -163,10 +154,9 @@ class WidgetRiwayatPelanggaran extends StatelessWidget {
                     child: Text(
                       'Keterangan'.toUpperCase(),
                       style: TextStyle(
-                        fontSize: 16,
+                        fontSize: 14,
                         color: kWhiteColor,
-                        fontWeight: bold,
-                        letterSpacing: 0.7,
+                        fontWeight: medium,
                       ),
                     ),
                   ),

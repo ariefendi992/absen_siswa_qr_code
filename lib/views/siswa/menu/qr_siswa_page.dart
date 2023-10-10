@@ -25,7 +25,7 @@ class _QrSiswaPageState extends State<QrSiswaPage> {
             backgroundColor: kBackgorundScaffold,
             elevation: 0.2,
             title: Text(
-              'QR Code Siswa',
+              'Kode QR Siswa',
               style: TextStyle(
                 fontWeight: medium,
                 fontSize: 18,
@@ -117,7 +117,7 @@ class _QrSiswaPageState extends State<QrSiswaPage> {
                                     ),
                                     SizedBox(height: 12),
                                     Text(
-                                      'Tunjukkan QR Code ke Guru untuk melakukan absen, sebelum pelajaran',
+                                      'Tunjukkan Kode QR ke Guru untuk melakukan absen, sebelum pelajaran',
                                       style: TextStyle(
                                         color: allColor[7],
                                       ),
@@ -145,9 +145,9 @@ class _QrSiswaPageState extends State<QrSiswaPage> {
                         ? Container(
                             margin: EdgeInsets.only(top: 12),
                             child: Text(
-                              'SCAN ME!',
+                              'PINDAI KODE!',
                               style: TextStyle(
-                                fontSize: 20,
+                                fontSize: 18,
                                 fontWeight: bold,
                                 color: allColor[7],
                               ),

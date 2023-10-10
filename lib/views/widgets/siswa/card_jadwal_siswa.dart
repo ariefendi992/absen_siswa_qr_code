@@ -26,7 +26,7 @@ class WidgetJadwalMapelSiswa extends StatelessWidget {
             Text(
               '${jadwal.mapel}',
               style: TextStyle(
-                  color: allColor[7], fontWeight: medium, fontSize: 20),
+                  color: allColor[7], fontWeight: medium, fontSize: 16),
             ),
             SizedBox(height: 4),
             Row(
@@ -101,12 +101,12 @@ class WidgetJadwalMapelSiswa extends StatelessWidget {
             Text(
               'Hari : $hari',
               style: TextStyle(
-                fontSize: 18,
+                fontSize: 17,
                 color: secondaryPrimary,
                 fontWeight: bold,
               ),
             ),
-            SizedBox(height: 4),
+            // SizedBox(height: 4),
             Column(
               children: jadwal.map((e) => detailData(e)).toList(),
             )

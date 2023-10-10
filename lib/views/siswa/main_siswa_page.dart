@@ -55,7 +55,7 @@ class _MainSiswaPageState extends State<MainSiswaPage> {
                 iconSecondary: Icons.home_outlined,
               ),
               ButtonAppBarWidget(
-                title: 'QR Code',
+                title: 'Kode QR',
               ),
               ButtonAppBarWidget(
                 index: 3,
