@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:absen_siswa_qr_code/cubit/master/absen/absen_siswa_cubit.dart';
 import 'package:absen_siswa_qr_code/cubit/master/daftar_mapel_cubit.dart';
 import 'package:absen_siswa_qr_code/cubit/user/guru/user_guru_cubit.dart';
@@ -21,10 +23,14 @@ class GuruHomePage extends StatefulWidget {
 
 class _GuruHomePageState extends State<GuruHomePage> {
   var count = 0;
+
   @override
   void initState() {
     super.initState();
     context.read<DaftarMapelCubit>().getJadwalMengajarHarian();
+    Timer(Duration(seconds: 2), () {
+      context.read<DaftarMapelCubit>().getJadwalMengajarHarian();
+    });
   }
 
   @override

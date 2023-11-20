@@ -1,5 +1,4 @@
 import 'package:absen_siswa_qr_code/cubit/auth/auth_cubit.dart';
-import 'package:absen_siswa_qr_code/cubit/page/page_cubit.dart';
 import 'package:absen_siswa_qr_code/cubit/user/siswa/user_siswa_cubit.dart';
 import 'package:absen_siswa_qr_code/utils/theme.dart';
 import 'package:absen_siswa_qr_code/views/siswa/sub_menu/id_card_page.dart';
@@ -25,50 +24,6 @@ class _AkunSiswaPageState extends State<AkunSiswaPage> {
 
   @override
   Widget build(BuildContext context) {
-    // return Scaffold(
-    //   body: Center(
-    //     child: Column(
-    //       mainAxisAlignment: MainAxisAlignment.center,
-    //       children: [
-    //         Text(
-    //           'Profil Page',
-    //           style: TextStyle(fontSize: 32),
-    //         ),
-    //         BlocConsumer<AuthCubit, AuthState>(
-    //           listener: (context, state) {
-    //             if (state is AuthFailed) {
-    //               ScaffoldMessenger.of(context).showSnackBar(
-    //                 SnackBar(
-    //                   backgroundColor: kErrorColor,
-    //                   content: Text(
-    //                     state.error,
-    //                     style: TextStyle(
-    //                       fontWeight: medium,
-    //                       fontSize: 14,
-    //                     ),
-    //                   ),
-    //                 ),
-    //               );
-    //             } else if (state is AuthInitial) {
-    //               context.read<PageCubit>().setPage(0);
-    //               Navigator.pushNamedAndRemoveUntil(
-    //                   context, '/auth', (route) => false);
-    //             }
-    //           },
-    //           builder: (context, state) {
-    //             return ButtonWidget(
-    //               title: 'Keluar',
-    //               onTap: () {
-    //                 context.read<AuthCubit>().logOut();
-    //               },
-    //             );
-    //           },
-    //         )
-    //       ],
-    //     ),
-    //   ),
-    // );
-
     return Scaffold(
       body: BlocConsumer<AuthCubit, AuthState>(
         listener: (context, state) {
@@ -92,7 +47,6 @@ class _AkunSiswaPageState extends State<AkunSiswaPage> {
           } else if (state is AuthInitial) {
             Navigator.pushNamedAndRemoveUntil(
                 context, '/auth', (route) => false);
-            context.read<PageCubit>().setPage(0);
           }
         },
         builder: (context, state) {
@@ -116,35 +70,6 @@ class _AkunSiswaPageState extends State<AkunSiswaPage> {
                         ),
                       ),
                     ),
-                    // Expanded(
-                    //   child: Container(
-                    //     margin: EdgeInsets.only(bottom: 40),
-                    //     padding: EdgeInsets.symmetric(horizontal: 24),
-                    //     child: Material(
-                    //       borderRadius: BorderRadius.circular(18),
-                    //       elevation: 6,
-                    //       child: Container(
-                    //         width: MediaQuery.of(context).size.width,
-                    //         decoration: BoxDecoration(
-                    //           gradient: LinearGradient(
-                    //             colors: [
-                    //               allColor[2],
-                    //               allColor[14],
-                    //               allColor[7].withAlpha(185),
-                    //               // allColor[4]
-                    //             ],
-                    //             begin: Alignment.topLeft,
-                    //             end: Alignment.bottomRight,
-                    //           ),
-                    //           borderRadius: BorderRadius.circular(18),
-                    //         ),
-                    //         child: Column(
-                    //           children: [],
-                    //         ),
-                    //       ),
-                    //     ),
-                    //   ),
-                    // ),
                     Expanded(
                       flex: 3,
                       child: Container(
@@ -197,8 +122,6 @@ class _AkunSiswaPageState extends State<AkunSiswaPage> {
                               leftIcon: Icons.logout_rounded,
                               onTap: () {
                                 context.read<AuthCubit>().logOut();
-                                // Timer(Duration(), callback)
-                                // context.read<PageCubit>().setPage(0);
                               },
                             ),
                           ],

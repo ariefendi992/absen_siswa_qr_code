@@ -21,13 +21,14 @@ class AuthCubit extends Cubit<AuthState> {
 
       emit(AuthSuccess(userAuth));
     } on DioError catch (e) {
+      print('DDD ==> ${e.toString()}');
       emit(AuthFailed('${e.response?.data["msg"].toString()}'));
     }
   }
 
   Future<void> logOut() async {
     try {
-      emit(AuthLoading()); 
+      emit(AuthLoading());
       // await AuthService().logOut();
       await DioAuthSevice().logOut();
 

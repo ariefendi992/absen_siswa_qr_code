@@ -1,9 +1,12 @@
 import 'dart:async';
+import 'dart:io';
 import 'package:absen_siswa_qr_code/cubit/page/page_cubit.dart';
 import 'package:absen_siswa_qr_code/cubit/user/guru/user_guru_cubit.dart';
 import 'package:absen_siswa_qr_code/cubit/user/siswa/user_siswa_cubit.dart';
 import 'package:absen_siswa_qr_code/utils/secure_storage.dart';
 import 'package:absen_siswa_qr_code/utils/theme.dart';
+import 'package:absen_siswa_qr_code/utils/url.dart';
+import 'package:absen_siswa_qr_code/views/auth/auth_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -22,16 +25,35 @@ class _SplashPageState extends State<SplashPage> {
   DateTime? stringToDateTime;
   final DateTime now = DateTime.now();
   final storage = CustomStorage();
+  String body = '';
+  bool? koneksi;
 
   @override
   void initState() {
     super.initState();
-    // defaultToken();
-    // context.read<JadwalMapelCubit>().getJadwalMengajarHarian();
     autoLogout();
+    checkConnection();
+
     Timer(Duration(seconds: 3), () {
       autoSkipLogin();
     });
+  }
+
+  void checkConnection() async {
+    try {
+      final result = await InternetAddress.lookup(url_);
+
+      if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
+        // print('Konseksi ---> Baik');
+      }
+    } on SocketException {
+      // print('Tidak ada koneksi');
+      setState(() {
+        storage.deleteKey('access_token');
+        storage.deleteKey('token');
+        koneksi = false;
+      });
+    }
   }
 
   void autoSkipLogin() async {
@@ -54,7 +76,13 @@ class _SplashPageState extends State<SplashPage> {
         context.read<UserGuruCubit>().currenUserGuru();
       }
     } else {
-      Navigator.pushNamedAndRemoveUntil(context, '/auth', (route) => false);
+      // Navigator.pushNamedAndRemoveUntil(context, '/auth', (route) => false);
+      Navigator.pushAndRemoveUntil(context,
+          MaterialPageRoute(builder: (context) {
+        return AuthPage(
+          koneksi: koneksi,
+        );
+      }), (route) => false);
     }
   }
 

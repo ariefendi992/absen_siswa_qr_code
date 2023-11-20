@@ -1,4 +1,7 @@
+import 'dart:async';
+
 import 'package:absen_siswa_qr_code/cubit/auth/auth_cubit.dart';
+import 'package:absen_siswa_qr_code/cubit/page/page_cubit.dart';
 import 'package:absen_siswa_qr_code/cubit/user/guru/user_guru_cubit.dart';
 import 'package:absen_siswa_qr_code/cubit/user/siswa/user_siswa_cubit.dart';
 import 'package:absen_siswa_qr_code/utils/secure_storage.dart';
@@ -8,18 +11,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AuthPage extends StatefulWidget {
-  // final bool? isLogOut;
-  const AuthPage({
-    super.key,
-    // this.isLogOut = false,
-  });
+  final bool? koneksi;
+  const AuthPage({super.key, this.koneksi});
 
   @override
   State<AuthPage> createState() => _AuthPageState();
 }
 
 class _AuthPageState extends State<AuthPage> {
-  // final _formKey = GlobalKey<FormState>();
   final usernameController = TextEditingController();
   final passwordController = TextEditingController();
   bool passToggle = true;
@@ -31,24 +30,34 @@ class _AuthPageState extends State<AuthPage> {
   void initState() {
     super.initState();
     userPass();
-    // print('IS LOGOUT ==>> ${widget.isLogOut}');
-    // widget.isLogOut == true ? showSnackBar() : false;
+    Timer(Duration(seconds: 2), () {
+      cekKoneksi();
+    });
   }
 
-  void showSnackBar() {
+  void cekKoneksi() {
+    if (widget.koneksi == false) {
+      WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+        showSnackBar(msg: 'Gagal terhubung ke sever!');
+      });
+    }
+  }
+
+  void showSnackBar({required String msg}) {
     final snackBar = SnackBar(
       content: Text(
-        'Log',
+        msg,
         style: TextStyle(
-          color: secondary,
+          color: kWhiteColor,
         ),
       ),
+      duration: Duration(seconds: 3),
       backgroundColor: errorSoft,
       behavior: SnackBarBehavior.floating,
       action: SnackBarAction(
         label: 'Dismiss',
         disabledTextColor: Colors.white,
-        textColor: secondary,
+        textColor: kWhiteColor,
         onPressed: () {
           //Do whatever you want
         },
@@ -291,13 +300,17 @@ class _AuthPageState extends State<AuthPage> {
                             BlocConsumer<AuthCubit, AuthState>(
                               listener: (context, state) {
                                 if (state is AuthSuccess) {
+                                  
                                   if (state.userAuth.group == 'siswa') {
-                                    Navigator.pushReplacementNamed(
-                                        context, '/mainSiswa');
+                                    context.read<PageCubit>().setPage(0);
+                                    Navigator.pushNamedAndRemoveUntil(context,
+                                        '/mainSiswa', (route) => false);
                                     context
                                         .read<UserSiswaCubit>()
                                         .getCurrentUser();
                                   } else if (state.userAuth.group == 'guru') {
+                                    context.read<PageCubit>().setPage(0);
+
                                     Navigator.pushNamedAndRemoveUntil(
                                         context, '/mainGuru', (route) => false);
                                     context
@@ -307,6 +320,7 @@ class _AuthPageState extends State<AuthPage> {
                                 } else if (state is AuthFailed) {
                                   ScaffoldMessenger.of(context).showSnackBar(
                                     SnackBar(
+                                      behavior: SnackBarBehavior.floating,
                                       backgroundColor: kErrorColor,
                                       content: Text(
                                         state.error,

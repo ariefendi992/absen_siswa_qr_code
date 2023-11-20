@@ -24,17 +24,15 @@ class GuruGetSiswaAbsen extends StatefulWidget {
 
 class _GuruGetSiswaAbsenState extends State<GuruGetSiswaAbsen> {
   bool showRiwayat = false;
+  bool? jadwalHari;
 
   @override
   void initState() {
     super.initState();
 
-    context
-        .read<ScanSiswaCubit>()
-        .getSiswaByUsername(username: widget.username);
-
     setState(() {
       showRiwayat = false;
+      jadwalHari = true;
     });
   }
 
@@ -443,60 +441,61 @@ class _GuruGetSiswaAbsenState extends State<GuruGetSiswaAbsen> {
                   ),
                 );
               }
-              return Container(
-                height: 66,
-                margin: EdgeInsets.only(bottom: 24, left: 20, right: 20),
-                decoration: BoxDecoration(
-                  // color: primaryBgCard,
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                child: Material(
-                  elevation: 2,
-                  // color: primaryExtraSoft,
-                  borderRadius: BorderRadius.circular(12),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      ButtonMenuKeterangan(
-                        icons: Icons.notes,
-                        iconColors: primary,
-                        bgColors: primaryExtraSoft,
-                        iconSize: 20,
-                        title: 'IZIN',
-                        height: 32,
-                        width: 32,
-                        fontSize: 13,
-                        fontWeight: bold,
-                        onTap: () {},
-                      ),
-                      ButtonMenuKeterangan(
-                        icons: Icons.add_box,
-                        iconColors: successSoft,
-                        bgColors: successExtraSoft,
-                        iconSize: 20,
-                        title: 'SAKIT',
-                        height: 32,
-                        width: 32,
-                        fontSize: 13,
-                        fontWeight: bold,
-                        onTap: () {},
-                      ),
-                      ButtonMenuKeterangan(
-                        icons: Icons.close,
-                        iconColors: kErrorColor,
-                        bgColors: errorExtraSoft,
-                        iconSize: 20,
-                        title: 'ALPA',
-                        height: 32,
-                        width: 32,
-                        fontSize: 13,
-                        fontWeight: bold,
-                        onTap: () {},
-                      ),
-                    ],
-                  ),
-                ),
-              );
+              // return Container(
+              //   height: 66,
+              //   margin: EdgeInsets.only(bottom: 24, left: 20, right: 20),
+              //   decoration: BoxDecoration(
+              //     // color: primaryBgCard,
+              //     borderRadius: BorderRadius.circular(12),
+              //   ),
+              //   child: Material(
+              //     elevation: 2,
+              //     // color: primaryExtraSoft,
+              //     borderRadius: BorderRadius.circular(12),
+              //     child: Row(
+              //       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              //       children: [
+              //         ButtonMenuKeterangan(
+              //           icons: Icons.notes,
+              //           iconColors: primary,
+              //           bgColors: primaryExtraSoft,
+              //           iconSize: 20,
+              //           title: 'IZIN',
+              //           height: 32,
+              //           width: 32,
+              //           fontSize: 13,
+              //           fontWeight: bold,
+              //           onTap: () {},
+              //         ),
+              //         ButtonMenuKeterangan(
+              //           icons: Icons.add_box,
+              //           iconColors: successSoft,
+              //           bgColors: successExtraSoft,
+              //           iconSize: 20,
+              //           title: 'SAKIT',
+              //           height: 32,
+              //           width: 32,
+              //           fontSize: 13,
+              //           fontWeight: bold,
+              //           onTap: () {},
+              //         ),
+              //         ButtonMenuKeterangan(
+              //           icons: Icons.close,
+              //           iconColors: kErrorColor,
+              //           bgColors: errorExtraSoft,
+              //           iconSize: 20,
+              //           title: 'ALPA',
+              //           height: 32,
+              //           width: 32,
+              //           fontSize: 13,
+              //           fontWeight: bold,
+              //           onTap: () {},
+              //         ),
+              //       ],
+              //     ),
+              //   ),
+              // );
+              return SizedBox();
             },
           );
         },
@@ -521,7 +520,7 @@ class _GuruGetSiswaAbsenState extends State<GuruGetSiswaAbsen> {
           data: IconThemeData(
             color: Theme.of(context).colorScheme.onPrimary,
           ),
-          child: btnAbsen(),
+          child: jadwalHari == true ? btnAbsen() : SizedBox(),
         ),
       ),
       backgroundColor: kBackgorundScaffold,
@@ -549,7 +548,59 @@ class _GuruGetSiswaAbsenState extends State<GuruGetSiswaAbsen> {
       ),
       body: BlocBuilder<ScanSiswaCubit, ScanSiswaState>(
         builder: (context, state) {
-          if (state is ScanSiswaSuccess) {
+          if (state is ScanSiswaFailure) {
+            jadwalHari = false;
+            return Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Container(
+                  alignment: Alignment.center,
+                  child: Stack(
+                    children: [
+                      Container(
+                        child: Icon(
+                          Icons.calendar_month_rounded,
+                          size: 100,
+                          color: errorSoft.withAlpha(180),
+                        ),
+                      ),
+                      Positioned(
+                        bottom: 5,
+                        left: 55,
+                        child: Container(
+                          padding: EdgeInsets.all(6),
+                          decoration: BoxDecoration(
+                            color: kErrorColor,
+                            borderRadius: BorderRadius.circular(100),
+                          ),
+                          child: Icon(
+                            Icons.close_rounded,
+                            size: 28,
+                            color: kWhiteColor,
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+                Container(
+                  margin: EdgeInsets.only(
+                    top: 12,
+                    bottom: MediaQuery.of(context).size.height / 6,
+                  ),
+                  child: Text(
+                    '${state.error}',
+                    style: TextStyle(
+                      fontWeight: medium,
+                      color: errorPrimary,
+                      fontSize: 16,
+                    ),
+                  ),
+                ),
+              ],
+            );
+          } else if (state is ScanSiswaSuccess) {
             return ListView(
               padding:
                   EdgeInsets.only(top: 10, right: 20, bottom: 20, left: 20),

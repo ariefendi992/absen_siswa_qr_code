@@ -1,1 +1,2 @@
-String baseUrl = 'http://180.242.55.85:5000';
+String url_ = 'smpn2-mks.my.id';
+var baseUrl = 'https://smpn2-mks.my.id';

@@ -1,5 +1,4 @@
 import 'package:absen_siswa_qr_code/cubit/auth/auth_cubit.dart';
-import 'package:absen_siswa_qr_code/cubit/page/page_cubit.dart';
 import 'package:absen_siswa_qr_code/cubit/user/guru/user_guru_cubit.dart';
 import 'package:absen_siswa_qr_code/utils/theme.dart';
 import 'package:absen_siswa_qr_code/views/guru/sub_menu/guru_change_password.dart';
@@ -40,7 +39,6 @@ class ProfilGuruPage extends StatelessWidget {
           } else if (state is AuthInitial) {
             Navigator.pushNamedAndRemoveUntil(
                 context, '/auth', (route) => false);
-            context.read<PageCubit>().setPage(0);
           }
         },
         builder: (context, state) {

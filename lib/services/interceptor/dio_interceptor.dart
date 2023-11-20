@@ -4,6 +4,7 @@ import 'package:dio/dio.dart';
 
 class DioInterceptor extends QueuedInterceptorsWrapper {
   String? accessToken;
+  String? accessToken2;
   String? refreshToken;
   CustomStorage storage = CustomStorage();
   final Dio dio = Dio();
@@ -21,13 +22,14 @@ class DioInterceptor extends QueuedInterceptorsWrapper {
   @override
   Future<void> onRequest(options, handler) async {
     accessToken = await storage.getStorage('token');
+    accessToken2 = await storage.deleteKey('access_token');
     refreshToken = await storage.getStorage('refreshToken');
     // print('ACCESS TOKEN => $accessToken');
     // print('REFRESH TOKEN => $refreshToken');
     configurationDio(options);
     // print('BASE URL => ${options.baseUrl}');
     if (accessToken != null) {
-      setHeaderAuthorization(options, accessToken);
+      setHeaderAuthorization(options, accessToken ?? accessToken2);
     }
     options.headers['Content-Type'] = 'application/json';
 
