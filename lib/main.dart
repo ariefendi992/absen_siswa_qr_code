@@ -1,4 +1,4 @@
-import 'dart:io';
+// import 'dart:io';
 import 'package:absen_siswa_qr_code/cubit/auth/auth_cubit.dart';
 import 'package:absen_siswa_qr_code/cubit/master/absen/absen_siswa_cubit.dart';
 import 'package:absen_siswa_qr_code/cubit/master/daftar_kelas_ajar_cubit.dart';
@@ -21,16 +21,16 @@ import 'package:absen_siswa_qr_code/views/auth/auth_page.dart';
 import 'package:absen_siswa_qr_code/views/guru/main_guru_page.dart';
 import 'package:absen_siswa_qr_code/views/siswa/main_siswa_page.dart';
 import 'package:absen_siswa_qr_code/views/splash_page.dart';
-import 'package:flutter/services.dart';
+// import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  ByteData data =
-      await PlatformAssetBundle().load('assets/cert/certificate.crt');
-  SecurityContext.defaultContext
-      .setTrustedCertificatesBytes(data.buffer.asUint8List());
+  // ByteData data =
+  //     await PlatformAssetBundle().load('assets/cert/certificate.crt');
+  // SecurityContext.defaultContext
+  //     .setTrustedCertificatesBytes(data.buffer.asUint8List());
   runApp(const MyApp());
 }
 
